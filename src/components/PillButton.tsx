@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { Link } from "react-router-dom"
 
 type Size = "sm" | "md"
 type Variant = "onBlue" | "onLight" | "primary"
@@ -28,6 +29,15 @@ export const pillVariantStyles: Record<Variant, string> = {
 export const pillBaseStyles =
   "font-body font-semibold inline-flex items-center justify-center gap-2 rounded-full border-2 tracking-wide transition"
 
+// PillButton is used for both in-app routes ("/about") and links that need a
+// real browser navigation — downloadable files ("/info-pack.pdf"), external
+// URLs, and same-page hash anchors ("/#workshops"). Only the former should go
+// through React Router's Link; the rest need a plain <a> so the browser
+// handles the request (or hash scroll) itself.
+function isInternalRoute(href: string) {
+  return href.startsWith("/") && !href.includes("#") && !/\.[a-z0-9]+$/i.test(href)
+}
+
 export default function PillButton({
   href,
   variant = "onBlue",
@@ -35,11 +45,18 @@ export default function PillButton({
   className = "",
   children,
 }: PillButtonProps) {
+  const sharedClassName = `${pillBaseStyles} ${pillSizeStyles[size]} ${pillVariantStyles[variant]} ${className}`
+
+  if (isInternalRoute(href)) {
+    return (
+      <Link to={href} className={sharedClassName}>
+        {children}
+      </Link>
+    )
+  }
+
   return (
-    <a
-      href={href}
-      className={`${pillBaseStyles} ${pillSizeStyles[size]} ${pillVariantStyles[variant]} ${className}`}
-    >
+    <a href={href} className={sharedClassName}>
       {children}
     </a>
   )

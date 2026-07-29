@@ -1,7 +1,10 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import PillButton from "./PillButton"
 import logo from "../assets/logo/good-noise-logo.png"
 
+// "Home" is a same-page hash anchor (scrolls to id="home" on the homepage),
+// so it stays a plain <a> — the rest are real routes and use Link.
 const links = [
   { label: "Home", href: "/#home" },
   { label: "Workshops", href: "/workshops" },
@@ -19,15 +22,25 @@ export default function Header() {
           <img src={logo} alt="Good Noise" className="h-12 w-auto md:h-16" />
         </a>
         <nav className="hidden items-center gap-9 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="font-body font-semibold text-base text-white/85 transition hover:text-white"
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.href.startsWith("/#") ? (
+              <a
+                key={link.label}
+                href={link.href}
+                className="font-body font-semibold text-base text-white/85 transition hover:text-white"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="font-body font-semibold text-base text-white/85 transition hover:text-white"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </nav>
         <div className="flex items-center gap-3">
           <PillButton href="/booking" variant="primary" size="sm">
@@ -55,16 +68,27 @@ export default function Header() {
 
       {open && (
         <nav className="flex flex-col border-t border-white/20 bg-brand-dark md:hidden">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="font-body font-semibold border-b border-white/10 px-5 py-4 text-base text-white/85 last:border-b-0"
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.href.startsWith("/#") ? (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="font-body font-semibold border-b border-white/10 px-5 py-4 text-base text-white/85 last:border-b-0"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.label}
+                to={link.href}
+                onClick={() => setOpen(false)}
+                className="font-body font-semibold border-b border-white/10 px-5 py-4 text-base text-white/85 last:border-b-0"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </nav>
       )}
     </header>

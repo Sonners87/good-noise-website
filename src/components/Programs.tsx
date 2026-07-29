@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import PhotoImage from "./PhotoImage"
 import Eyebrow from "./Eyebrow"
 import { pillBaseStyles, pillSizeStyles, pillVariantStyles } from "./PillButton"
@@ -18,8 +19,8 @@ export default function Programs() {
           guitar again — more Good Noise programs are on the way.
         </p>
 
-        <a
-          href="/workshops"
+        <Link
+          to="/workshops"
           className="group relative mt-10 block overflow-hidden border-2 border-ink"
           aria-label="Explore Good Noise workshops"
         >
@@ -39,7 +40,7 @@ export default function Programs() {
             Explore workshops
             <span aria-hidden="true">&rarr;</span>
           </span>
-        </a>
+        </Link>
       </div>
     </section>
   )

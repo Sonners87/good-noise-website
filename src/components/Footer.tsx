@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import logo from "../assets/logo/good-noise-logo.png"
 
 export default function Footer() {
@@ -8,24 +9,24 @@ export default function Footer() {
           Perth, WA
         </span>
         <nav className="flex flex-wrap justify-center gap-6 md:gap-8">
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
           >
             Contact
-          </a>
-          <a
-            href="/workshops"
+          </Link>
+          <Link
+            to="/workshops"
             className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
           >
             Workshops
-          </a>
-          <a
-            href="/child-safety-policy"
+          </Link>
+          <Link
+            to="/child-safety-policy"
             className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
           >
             Child Safety Policy
-          </a>
+          </Link>
         </nav>
         <span className="font-body font-semibold text-xs tracking-wide text-cream/60">
           Good Noise Project © 2026

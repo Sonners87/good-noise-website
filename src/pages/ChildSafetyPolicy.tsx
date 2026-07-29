@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 
@@ -216,9 +217,9 @@ export default function ChildSafetyPolicy() {
                   8.1 If you have a concern about the safety or wellbeing of
                   a child or young person in connection with Good Noise,
                   please{" "}
-                  <a href="/contact" className={linkClass}>
+                  <Link to="/contact" className={linkClass}>
                     contact us
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

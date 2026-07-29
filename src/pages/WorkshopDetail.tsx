@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Eyebrow from "../components/Eyebrow"
@@ -166,12 +166,12 @@ export default function WorkshopDetail() {
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-ink/80 md:text-lg">
               {workshop.facilitatorBio}{" "}
-              <a
-                href={workshop.facilitatorLinkHref}
+              <Link
+                to={workshop.facilitatorLinkHref}
                 className="font-semibold text-terracotta underline decoration-2 underline-offset-4 hover:text-ink"
               >
                 {workshop.facilitatorLinkLabel} &rarr;
-              </a>
+              </Link>
             </p>
           </div>
         </div>
