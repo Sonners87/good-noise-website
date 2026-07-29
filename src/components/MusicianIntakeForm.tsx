@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react"
 import { pillBaseStyles, pillSizeStyles, pillVariantStyles } from "./PillButton"
+import { submitNetlifyForm } from "../lib/submitNetlifyForm"
 
 const inputClass =
   "border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
@@ -7,10 +8,17 @@ const labelClass = "font-body font-semibold text-xs tracking-wide text-white/80"
 
 export default function MusicianIntakeForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    setError(false)
+    try {
+      await submitNetlifyForm(e.currentTarget)
+      setSubmitted(true)
+    } catch {
+      setError(true)
+    }
   }
 
   if (submitted) {
@@ -24,7 +32,13 @@ export default function MusicianIntakeForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-10 grid max-w-lg grid-cols-1 gap-5">
+    <form
+      onSubmit={handleSubmit}
+      name="musician-intake"
+      data-netlify="true"
+      className="mt-10 grid max-w-lg grid-cols-1 gap-5"
+    >
+      <input type="hidden" name="form-name" value="musician-intake" />
       <label className="flex flex-col gap-2">
         <span className={labelClass}>Participant's name</span>
         <input required type="text" name="participantName" className={inputClass} placeholder="Their full name" />
@@ -100,6 +114,13 @@ export default function MusicianIntakeForm() {
         </span>
         <textarea name="accessNeeds" rows={3} className={inputClass} />
       </label>
+
+      {error && (
+        <p className="text-sm font-semibold text-terracotta">
+          Something went wrong sending that — please try again, or email us
+          directly.
+        </p>
+      )}
 
       <button
         type="submit"

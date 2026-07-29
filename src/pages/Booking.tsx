@@ -85,14 +85,11 @@ export default function Booking() {
       <section className="bg-brand">
         <div className="mx-auto max-w-[1400px] px-5 py-16 text-center md:px-10 md:py-20">
           {/*
-            TODO(dave): Replace "STRIPE_PAYMENT_LINK_HERE" below with the
-            real Stripe Payment Link once it's created — this is a
-            placeholder and does not currently lead anywhere.
-            When setting up the Payment Link in Stripe, set its post-payment
-            redirect to /musician-intake so buyers land straight on the
-            intake form after paying.
+            Confirm in the Stripe dashboard that this Payment Link's
+            post-payment redirect is set to /musician-intake, so buyers land
+            straight on the intake form after paying.
           */}
-          <PillButton href="STRIPE_PAYMENT_LINK_HERE" variant="primary">
+          <PillButton href="https://buy.stripe.com/cNi28r4m2cd28Pc5BN3F600" variant="primary">
             Book &amp; pay
           </PillButton>
         </div>

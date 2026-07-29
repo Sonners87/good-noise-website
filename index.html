@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Good Noise Project — Community music for young people</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,6 +34,35 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      Static, hidden duplicates of the forms rendered by ContactForm.tsx and
+      MusicianIntakeForm.tsx. Netlify Forms only detects forms present in the
+      raw HTML at build time — it never runs our JS — so without a plain
+      HTML copy of each form somewhere in the site, Netlify has no record of
+      them and silently drops real submissions. Keep field names here in
+      sync with those two components if either changes.
+    -->
+    <form name="contact" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <form name="musician-intake" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="musician-intake" />
+      <input type="text" name="participantName" />
+      <input type="text" name="ageAndYear" />
+      <input type="text" name="guardianContact" />
+      <input type="text" name="instruments" />
+      <input type="text" name="yearsPlayed" />
+      <textarea name="hopes"></textarea>
+      <textarea name="nerves"></textarea>
+      <textarea name="aboutThem"></textarea>
+      <textarea name="accessNeeds"></textarea>
+    </form>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
