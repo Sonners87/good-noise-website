@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Baloo 2", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Forest — primary */
+  --color-brand: #1f3d2e;
+  --color-brand-dark: #15291d;
+  --color-brand-light: #4a6b57;
+  /* Sage — secondary */
+  --color-sage: #a7bfa4;
+  /* Warm cream — background */
+  --color-cream: #f2ede4;
+  /* Terracotta — accent, used sparingly */
+  --color-terracotta: #e46a3a;
+  /* Charcoal — near-black alt */
+  --color-ink: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Matches the left/right inset of the shared mx-auto max-w-[1400px] page
+     container, so full-bleed elements can align their text/content edge
+     to the same grid without themselves being width-constrained. */
+  --edge-pad: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --edge-pad: max(2.5rem, calc((100vw - 1400px) / 2 + 2.5rem));
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,52 @@
+import PillButton from "./PillButton"
+
+type InfoRow = { label: string; value: string }
+
+type WorkshopInfoCardProps = {
+  title?: string
+  rows: InfoRow[]
+  ctaLabel?: string
+  ctaHref?: string
+  className?: string
+}
+
+export default function WorkshopInfoCard({
+  title,
+  rows,
+  ctaLabel,
+  ctaHref,
+  className = "",
+}: WorkshopInfoCardProps) {
+  return (
+    <div className={`border-2 border-ink bg-cream ${className}`}>
+      {title && (
+        <div className="border-b-2 border-ink px-6 py-4">
+          <span className="font-body font-bold text-lg text-ink">{title}</span>
+        </div>
+      )}
+      <div className="space-y-4 px-6 py-6">
+        {rows.map((row, i) => (
+          <div
+            key={row.label}
+            className={`flex items-start justify-between gap-4 ${i === rows.length - 1 ? "pb-1" : "border-b border-ink/15 pb-3"}`}
+          >
+            <span className="shrink-0 font-body font-semibold text-xs tracking-wide text-ink/60">
+              {row.label}
+            </span>
+            <span className="font-body font-semibold text-sm text-ink text-right">
+              {row.value}
+            </span>
+          </div>
+        ))}
+      </div>
+      {ctaLabel && ctaHref && (
+        <div className="border-t-2 border-ink px-6 py-6">
+          <PillButton href={ctaHref} variant="primary" className="w-full">
+            {ctaLabel}
+            <span aria-hidden="true">&rarr;</span>
+          </PillButton>
+        </div>
+      )}
+    </div>
+  )
+}
