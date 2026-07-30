@@ -6,7 +6,7 @@ import recordStore from "../assets/images/strip-record-store.webp"
 const pillars = [
   {
     title: "No Judgement",
-    body: "Every participant is treated the same, regardless of skill, background, or how long they've been playing.",
+    body: "We embrace mistakes — that's where the good stuff comes from.",
     photo: buskingGirl,
     alt: "A young girl singing passionately while playing a pink guitar",
   },
@@ -18,7 +18,7 @@ const pillars = [
   },
   {
     title: "No Pressure",
-    body: "No pressure to share before you're ready.",
+    body: "Share when you're ready — not a moment before.",
     photo: recordStore,
     alt: "A teenager browsing vinyl records in a record store",
   },
@@ -30,12 +30,13 @@ export default function SafetyFirst() {
       <div className="mx-auto max-w-[1400px] px-5 md:px-10">
         <div className="py-16 md:py-24">
           <h2 className="font-display max-w-4xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
-            Nobody's Here to Perform, Prove Themselves, or Hit a Benchmark.
+            Here to Play, Not to Prove.
           </h2>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-cream/75 md:text-lg">
-            Every participant is treated the same, regardless of skill,
-            background, or how long they've been playing. No judgement. No
-            hierarchy. No pressure to share before you're ready.
+            Every participant of a Good Noise workshop is treated the same,
+            regardless of skill, background, or how long they've been
+            playing. No judgement. No hierarchy. And no pressure to share
+            before you're ready.
           </p>
         </div>
 

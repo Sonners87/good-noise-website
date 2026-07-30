@@ -53,11 +53,12 @@ export type Workshop = {
 export const workshops: Record<string, Workshop> = {
   "songwriting-sep-2026": {
     slug: "songwriting-sep-2026",
-    title: "Good Noise Project: September 2026 Songwriting Workshop",
-    shortTitle: "Good Noise Songwriting Workshop",
+    title: "Good Noise Project: September 2026 Songwriting Camp",
+    shortTitle: "Good Noise Songwriting Camp",
+    eyebrow: "Camp",
     teaser:
-      "Good Noise, our debut workshop, runs this September school holidays in North Perth — a two-day songwriting experience for Year 9–12 musos.",
-    dates: "30 Sep – 1 Oct 2026",
+      "Our next workshop runs this September school holidays in North Perth, giving Year 9–12 musos the chance to write, compose and perform a song together over two days.",
+    dates: "30 Sep – 1 Oct 2026 (9am – 3pm each day)",
     location: "North Perth",
     price: "$195",
     infoRows: [

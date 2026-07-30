@@ -15,7 +15,7 @@ export default function Facilitator() {
           </h2>
 
           <p className="mt-6 max-w-md text-base leading-relaxed text-ink/80 md:text-lg">
-            Good Noise is run by Dave Sonntag — a drummer of thirty years, a
+            Good Noise Project is run by Dave Sonntag — a drummer of thirty years, a
             self-taught singer-songwriter, and a dedicated mentor to young
             people.
           </p>

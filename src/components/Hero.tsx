@@ -22,7 +22,8 @@ export default function Hero() {
             </h1>
 
             <p className="font-body font-semibold mt-3 text-terracotta text-base md:text-lg">
-              Play music. Make connection. Belong.
+              Inspiring young people to connect, project and be happy through
+              musical <em>play</em> — not theory.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">

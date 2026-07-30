@@ -16,7 +16,7 @@ export default function Programs() {
 
         <p className="mt-5 max-w-lg text-base leading-relaxed text-white/85 md:text-lg">
           From high schoolers writing their first song to dads picking up a
-          guitar again — more Good Noise programs are on the way.
+          guitar again — we hope to cater to every aged muso.
         </p>
 
         <Link

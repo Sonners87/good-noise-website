@@ -13,7 +13,7 @@ export default function UpcomingWorkshop() {
         <Eyebrow tone="onBlue">What's coming up</Eyebrow>
 
         <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-          Songwriting Workshop | Sep 2026
+          Good Noise Songwriting Camp | Sep 2026
         </h2>
 
         <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">

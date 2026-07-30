@@ -2,8 +2,8 @@ import PhotoImage from "./PhotoImage"
 import headphonesPhoto from "../assets/images/why-we-exist-headphones.webp"
 
 const commitments = [
-  "Playing beats listening. Every time.",
-  "Safety doesn't happen by accident. We build it in.",
+  "Playing beats listening, every time.",
+  "Safety doesn't happen by accident. We build it into every workshop.",
   "The best growth happens through freedom and play — not instruction.",
 ]
 
@@ -27,10 +27,12 @@ export default function WhyWeExist() {
 
             <p className="mt-6 text-base leading-relaxed text-white/85 md:text-lg">
               A 2025 University of Sydney report found 43% of young
-              Australians feel lonely. Music won't fix that on its own. But
-              playing it together, with other people who get it — that's
-              one of the most reliable ways humans have ever found their
-              people.
+              Australians feel lonely<sup>1</sup>. Music won't fix that on
+              its own. But playing music together is one of the most
+              reliable ways humans have ever connected with others.
+            </p>
+            <p className="mt-2 text-xs text-white/50">
+              1. https://www.sydney.edu.au/news-opinion/news/2025/08/04/more-than-40-percent-of-young-aussies-are-lonely-as-experts-call-for-national-loneliness-strategy.html
             </p>
 
             <div className="mt-10">

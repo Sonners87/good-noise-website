@@ -15,7 +15,7 @@ export default function Booking() {
         <Header />
         <div className="mx-auto max-w-[1400px] px-5 pb-16 pt-4 md:px-10 md:pb-24">
           <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-            Good Noise Workshop
+            Good Noise Songwriting Camp
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
             Two days. One song. A room full of young musos who've never met
