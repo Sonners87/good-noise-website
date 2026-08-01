@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import PhotoImage from "./PhotoImage"
 import Eyebrow from "./Eyebrow"
 import { pillBaseStyles, pillSizeStyles, pillVariantStyles } from "./PillButton"
-import programsPhoto from "../assets/images/hero-crowd-singer.webp"
+import programsPhoto from "../assets/images/hero-band-practice.webp"
 
 export default function Programs() {
   return (
@@ -26,8 +26,9 @@ export default function Programs() {
         >
           <PhotoImage
             src={programsPhoto}
-            alt="A young performer singing into a microphone in front of a cheering crowd"
+            alt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
             aspect="aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9]"
+            objectPosition="center 55%"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent transition group-hover:from-ink/95"

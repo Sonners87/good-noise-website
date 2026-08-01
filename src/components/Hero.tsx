@@ -2,7 +2,7 @@ import PhotoImage from "./PhotoImage"
 import PillButton from "./PillButton"
 import Eyebrow from "./Eyebrow"
 import Header from "./Header"
-import heroPhoto from "../assets/images/hero-band-practice.webp"
+import heroPhoto from "../assets/images/hero-sunset-friends.webp"
 
 export default function Hero() {
   return (
@@ -37,10 +37,10 @@ export default function Hero() {
         <div className="relative min-h-[320px] md:min-h-0">
           <PhotoImage
             src={heroPhoto}
-            alt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
+            alt="A group of young musicians laughing together outdoors at sunset, one holding an acoustic guitar"
             aspect="aspect-auto"
             className="h-full rounded-tl-[10rem] border-2 border-ink/20 md:rounded-tl-[14rem]"
-            objectPosition="center 40%"
+            objectPosition="center 45%"
             tint
           />
         </div>

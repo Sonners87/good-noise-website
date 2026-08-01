@@ -1,14 +1,14 @@
 import PhotoImage from "./PhotoImage"
-import buskingGirl from "../assets/images/strip-busking-girl.webp"
+import concertFriends from "../assets/images/strip-concert-friends.webp"
 import drummer from "../assets/images/strip-drummer.webp"
-import recordStore from "../assets/images/strip-record-store.webp"
+import busker from "../assets/images/strip-busker.webp"
 
 const pillars = [
   {
     title: "No Judgement",
     body: "We embrace mistakes — that's where the good stuff comes from.",
-    photo: buskingGirl,
-    alt: "A young girl singing passionately while playing a pink guitar",
+    photo: concertFriends,
+    alt: "A group of teenage girls laughing together in a crowd",
   },
   {
     title: "No Hierarchy",
@@ -19,8 +19,8 @@ const pillars = [
   {
     title: "No Pressure",
     body: "Share when you're ready — not a moment before.",
-    photo: recordStore,
-    alt: "A teenager browsing vinyl records in a record store",
+    photo: busker,
+    alt: "A young woman singing into a microphone while playing acoustic guitar",
   },
 ]
 

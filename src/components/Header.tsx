@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import PillButton from "./PillButton"
 import logo from "../assets/logo/good-noise-logo.png"
+import { upcomingWorkshopSlug } from "../content/workshops"
 
 // "Home" is a same-page hash anchor (scrolls to id="home" on the homepage),
 // so it stays a plain <a> — the rest are real routes and use Link.
@@ -43,8 +44,12 @@ export default function Header() {
           )}
         </nav>
         <div className="flex items-center gap-3">
-          <PillButton href="/booking" variant="primary" size="sm">
-            Book
+          <PillButton
+            href={`/workshops/${upcomingWorkshopSlug}`}
+            variant="primary"
+            size="sm"
+          >
+            Our next workshop
           </PillButton>
           <button
             type="button"
