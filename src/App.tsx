@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import ScrollToTop from "./components/ScrollToTop"
 import Home from "./pages/Home"
 import Workshops from "./pages/Workshops"
 import WorkshopDetail from "./pages/WorkshopDetail"
@@ -12,6 +13,7 @@ import NotFound from "./pages/NotFound"
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="overflow-x-hidden">
         <Routes>
           <Route path="/" element={<Home />} />
