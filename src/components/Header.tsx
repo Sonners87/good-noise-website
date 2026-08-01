@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import PillButton from "./PillButton"
-import logo from "../assets/logo/good-noise-logo.png"
+import logo from "../assets/logo/good-noise-logo.svg"
 import { upcomingWorkshopSlug } from "../content/workshops"
 
 // "Home" is a same-page hash anchor (scrolls to id="home" on the homepage),
