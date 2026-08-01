@@ -49,29 +49,28 @@ const qrViewBox = qrSvg.match(/viewBox="([^"]+)"/)[1].split(' ').map(Number);
 const [, , QR_VB_W, QR_VB_H] = qrViewBox;
 
 // --- Layout constants (mm), tuned to fit the safe area -------------------
-const LOGO_W = 28;
-const LOGO_H = (LOGO_W * LOGO_VB_H) / LOGO_VB_W;
-const LOGO_TOP = SAFE_Y0 + 1;
+// CTA and email removed per request; logo/tagline/QR all scaled to 80% of
+// their previous size (v1: logo 28mm, tagline 3.8mm, QR 25mm) and the
+// resulting shorter stack is centered in the safe area rather than
+// top-anchored, since there's now much more vertical room to work with.
+const SCALE = 0.8;
+const GAP = 6;
 
-const TAGLINE_SIZE = 3.8;
+const LOGO_W = 28 * SCALE;
+const LOGO_H = (LOGO_W * LOGO_VB_H) / LOGO_VB_W;
+
+const TAGLINE_SIZE = 3.8 * SCALE;
 const TAGLINE_LINES = ['Youth music programs', 'in Perth.'];
 const TAGLINE_PITCH = TAGLINE_SIZE * 1.2;
-const TAGLINE_TOP = LOGO_TOP + LOGO_H + 1.8;
-
-const CTA_SIZE = 3.6;
-const CTA_LINES = ['Scan for upcoming', 'workshops'];
-const CTA_PITCH = CTA_SIZE * 1.2;
 const TAGLINE_BLOCK_H = TAGLINE_SIZE * (ASCENT_RATIO + DESCENT_RATIO) + TAGLINE_PITCH * (TAGLINE_LINES.length - 1);
-const CTA_TOP = TAGLINE_TOP + TAGLINE_BLOCK_H + 1.8;
 
-const QR_SIZE = 25; // required: ~25mm square, do not shrink
-const CTA_BLOCK_H = CTA_SIZE * (ASCENT_RATIO + DESCENT_RATIO) + CTA_PITCH * (CTA_LINES.length - 1);
-const QR_TOP = CTA_TOP + CTA_BLOCK_H + 1.8;
+const QR_SIZE = 25 * SCALE; // 20mm
 
-const EMAIL_SIZE = 3.5;
-const EMAIL_LINES = ['dave@', 'goodnoiseproject.com.au'];
-const EMAIL_PITCH = EMAIL_SIZE * 1.2;
-const EMAIL_TOP = QR_TOP + QR_SIZE + 1.8;
+const SAFE_HEIGHT = SAFE_Y1 - SAFE_Y0;
+const TOTAL_H = LOGO_H + GAP + TAGLINE_BLOCK_H + GAP + QR_SIZE;
+const LOGO_TOP = SAFE_Y0 + (SAFE_HEIGHT - TOTAL_H) / 2;
+const TAGLINE_TOP = LOGO_TOP + LOGO_H + GAP;
+const QR_TOP = TAGLINE_TOP + TAGLINE_BLOCK_H + GAP;
 
 function textBlock({ id, lines, size, pitch, top, color, weight }) {
   const ascent = size * ASCENT_RATIO;
@@ -96,14 +95,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${CANVAS_W}mm" heigh
   <g id="tagline">
     ${textBlock({ id: 'tagline', lines: TAGLINE_LINES, size: TAGLINE_SIZE, pitch: TAGLINE_PITCH, top: TAGLINE_TOP, color: COLOR_TERRACOTTA, weight: 600 })}
   </g>
-  <g id="cta">
-    ${textBlock({ id: 'cta', lines: CTA_LINES, size: CTA_SIZE, pitch: CTA_PITCH, top: CTA_TOP, color: COLOR_BRAND, weight: 600 })}
-  </g>
   <g id="qr" transform="translate(${qrX.toFixed(3)},${QR_TOP.toFixed(3)}) scale(${qrScale.toFixed(6)})">
     <path fill="none" stroke="${COLOR_BRAND}" d="${qrPathD}"/>
-  </g>
-  <g id="email">
-    ${textBlock({ id: 'email', lines: EMAIL_LINES, size: EMAIL_SIZE, pitch: EMAIL_PITCH, top: EMAIL_TOP, color: COLOR_BRAND, weight: 600 })}
   </g>
 </svg>`;
 
@@ -157,7 +150,7 @@ const report = await page.evaluate(
       const y1 = (r.bottom - rootRect.top) / pxPerMmY;
       return { x0, y0, x1, y1, w: x1 - x0, h: y1 - y0 };
     }
-    const ids = ['logo', 'tagline', 'cta', 'qr', 'email'];
+    const ids = ['logo', 'tagline', 'qr'];
     const boxes = {};
     for (const id of ids) boxes[id] = bboxOf(id);
     const bg = bboxOf('bg');
@@ -176,7 +169,8 @@ const report = await page.evaluate(
 console.log('--- Layout verification ---');
 console.log('Safe area:', { SAFE_X0, SAFE_Y0, SAFE_X1, SAFE_Y1 });
 console.log(JSON.stringify(report, null, 2));
-console.log('Cap heights (mm): tagline', (TAGLINE_SIZE * CAP_RATIO).toFixed(2), 'cta', (CTA_SIZE * CAP_RATIO).toFixed(2), 'email', (EMAIL_SIZE * CAP_RATIO).toFixed(2));
+console.log('Cap height (mm): tagline', (TAGLINE_SIZE * CAP_RATIO).toFixed(2));
+console.log('Logo width (mm):', LOGO_W.toFixed(2), '(was 28mm, x0.8)');
 
 const BG_TOL = 0.02; // mm, sub-pixel float rounding from getBoundingClientRect
 if (
