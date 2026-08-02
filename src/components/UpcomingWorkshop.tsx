@@ -3,7 +3,7 @@ import Eyebrow from "./Eyebrow"
 import WorkshopInfoCard from "./WorkshopInfoCard"
 import { workshops, upcomingWorkshopSlugs } from "../content/workshops"
 import workshopPhoto from "../assets/images/workshop-band-trio.webp"
-import headphonesPhoto from "../assets/images/why-we-exist-headphones.webp"
+import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 
 // Per-slug hero imagery for this section — mirrors the map in
 // WorkshopDetail.tsx since these are the same photos, just shown smaller.
@@ -13,8 +13,8 @@ const heroPhotos: Record<string, { src: string; alt: string }> = {
     alt: "Three young musicians performing together, two playing guitar and one singing into a microphone",
   },
   "songwriting-oct-2026": {
-    src: headphonesPhoto,
-    alt: "A young musician holding headphones, with an acoustic guitar in the background",
+    src: bandPracticePhoto,
+    alt: "Two young musicians at band practice, one playing electric guitar and singing into a microphone",
   },
 }
 

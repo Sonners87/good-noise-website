@@ -5,7 +5,7 @@ import WorkshopCard from "../components/WorkshopCard"
 import { workshops } from "../content/workshops"
 import workshopPhoto from "../assets/images/workshop-band-trio.webp"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
-import headphonesPhoto from "../assets/images/why-we-exist-headphones.webp"
+import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 
 function whoFor(slug: string): string {
   return workshops[slug].infoRows.find((row) => row.label === "Who")?.value ?? ""
@@ -71,8 +71,8 @@ export default function Workshops() {
               title={songwritingOct.title}
               blurb={songwritingOct.teaser}
               whoFor={whoFor(songwritingOct.slug)}
-              photoSrc={headphonesPhoto}
-              photoAlt="A young musician holding headphones, with an acoustic guitar in the background"
+              photoSrc={bandPracticePhoto}
+              photoAlt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
             />
 
             <WorkshopCard

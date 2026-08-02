@@ -87,11 +87,11 @@ export default function BookingOctCamp() {
       <section className="bg-brand">
         <div className="mx-auto max-w-[1400px] px-5 py-16 text-center md:px-10 md:py-20">
           {/*
-            No Stripe Payment Link exists for this camp yet — wire one up
-            here (with its post-payment redirect set to /musician-intake,
-            matching the September camp's setup) once it's created.
+            Confirm in the Stripe dashboard that this Payment Link's
+            post-payment redirect is set to /musician-intake, so buyers land
+            straight on the intake form after paying.
           */}
-          <PillButton href="#" variant="primary">
+          <PillButton href="https://buy.stripe.com/aFa6oH6ua1yoaXk8NZ3F601" variant="primary">
             Book &amp; pay
           </PillButton>
         </div>
