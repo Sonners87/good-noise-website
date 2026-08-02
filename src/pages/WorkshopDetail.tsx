@@ -203,9 +203,12 @@ export default function WorkshopDetail() {
             )}
 
             {workshop.refundPolicy && (
-              <p className="mt-8 max-w-2xl text-xs leading-relaxed text-ink/60">
-                {linkifyEmail(workshop.refundPolicy)}
-              </p>
+              <div className="mt-8 max-w-md">
+                <WorkshopInfoCard
+                  title="Cancellations & Refunds"
+                  rows={workshop.refundPolicy}
+                />
+              </div>
             )}
           </div>
         </section>

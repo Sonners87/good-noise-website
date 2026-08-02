@@ -44,10 +44,12 @@ export type Workshop = {
   facilitatorLinkLabel: string
   facilitatorLinkHref: string
 
-  // Trailing fine-print block — each renders only if present.
+  // Trailing fine-print block — each renders only if present. refundPolicy
+  // is a tiered label/value list (rendered as a compact WorkshopInfoCard),
+  // matching the format used on each camp's booking page.
   prerequisites?: string
   scholarshipNote?: string
-  refundPolicy?: string
+  refundPolicy?: WorkshopInfoRow[]
 }
 
 export const workshops: Record<string, Workshop> = {
@@ -68,7 +70,7 @@ export const workshops: Record<string, Workshop> = {
       { label: "How much", value: "$195" },
     ],
     ctaLabel: "Book your place",
-    ctaHref: "/booking",
+    ctaHref: "/booking-sep-camp",
     introParagraphs: [
       "There's a time to strum alone in your bedroom. Then there's a time to share that riff, that vocal melody, that drum fill with others.",
       "Music's better shared. A 2025 University of Sydney report found 43% of young Australians feel lonely — Good Noise Project exists to make that number a little smaller.",
@@ -86,7 +88,7 @@ export const workshops: Record<string, Workshop> = {
     ],
     limitedSpotsNote:
       "Spots are limited to a small group to ensure everyone feels comfortable, included and has their voice heard (if they want it to be!).",
-    refundShortNote: "Refund for cancellations 2+ weeks before.*",
+    refundShortNote: "Refund for cancellations 2+ weeks before.",
     facilitatorHeading: "About your facilitator",
     facilitatorBio:
       "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",
@@ -96,8 +98,11 @@ export const workshops: Record<string, Workshop> = {
       "While we prefer each participant has prior music experience, exceptions can be made for those with a big interest in starting to play. We don't focus on music theory, but a willingness to learn about songwriting, composition and playing together is a must.",
     scholarshipNote:
       "We have a no-questions-asked scholarship policy to ensure our workshops are accessible to everyone who wants to participate. If the cost of workshop presents a significant financial barrier, please reach out to dave@goodnoiseproject.com.au for a partial or full scholarship.",
-    refundPolicy:
-      "*We will issue a refund minus 20% for cancellations received two weeks in advance of the camp start date. There will be no refunds of cancellation notices received within two weeks, as it is difficult for us to fill the spots on such close notice, and we operate within a narrow budget. We will waive this policy in the event of an emergency or hardship — please email dave@goodnoiseproject.com.au should you need to request this.",
+    refundPolicy: [
+      { label: "More than two weeks' notice", value: "Full refund" },
+      { label: "1–2 weeks' notice", value: "50% refund" },
+      { label: "Less than one week's notice", value: "No refund" },
+    ],
   },
 
   "songwriting-oct-2026": {
@@ -117,10 +122,7 @@ export const workshops: Record<string, Workshop> = {
       { label: "How much", value: "$195" },
     ],
     ctaLabel: "Book your place",
-    // No booking page exists for this camp yet — a dedicated one will be
-    // built and linked here separately. Do not point this at /booking,
-    // which is specific to the September camp.
-    ctaHref: "#",
+    ctaHref: "/booking-oct-camp",
     introParagraphs: [
       "There's a time to hum a tune in your bedroom. Then there's a time to bring it to life with a room full of other kids who love music just as much as you do.",
       "A 2025 University of Sydney report found 43% of young Australians feel lonely — and making friends through a shared passion, especially before high school, is one of the best ways to build real, lasting connection.",
@@ -138,7 +140,7 @@ export const workshops: Record<string, Workshop> = {
     ],
     limitedSpotsNote:
       "Spots are limited to a small group, so every child feels comfortable, included, and genuinely part of the group.",
-    refundShortNote: "Refund for cancellations 2+ weeks before.*",
+    refundShortNote: "Refund for cancellations 2+ weeks before.",
     facilitatorHeading: "About your facilitator",
     facilitatorBio:
       "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",
@@ -148,8 +150,11 @@ export const workshops: Record<string, Workshop> = {
       "While we prefer each participant has some prior interest in music, no experience is necessary — enthusiasm matters far more than skill. We don't focus on music theory; just a willingness to give things a go and play alongside others.",
     scholarshipNote:
       "We have a no-questions-asked scholarship policy to ensure our workshops are accessible to everyone who wants to participate. If the cost of the camp presents a significant financial barrier, please reach out to dave@goodnoiseproject.com.au for a partial or full scholarship.",
-    refundPolicy:
-      "*We will issue a refund minus 20% for cancellations received two weeks in advance of the camp start date. There will be no refunds of cancellation notices received within two weeks, as it is difficult for us to fill the spots on such close notice, and we operate within a narrow budget. We will waive this policy in the event of an emergency or hardship — please email dave@goodnoiseproject.com.au should you need to request this.",
+    refundPolicy: [
+      { label: "More than two weeks' notice", value: "Full refund" },
+      { label: "1–2 weeks' notice", value: "50% refund" },
+      { label: "Less than one week's notice", value: "No refund" },
+    ],
   },
 
   "in-school-songwriting": {

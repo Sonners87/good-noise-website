@@ -4,9 +4,9 @@ import Footer from "../components/Footer"
 import PillButton from "../components/PillButton"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 
-export default function Booking() {
+export default function BookingSepCamp() {
   useEffect(() => {
-    document.title = "Book — Good Noise Project"
+    document.title = "Book — September Songwriting Camp — Good Noise Project"
   }, [])
 
   return (

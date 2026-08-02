@@ -3,7 +3,8 @@ import ScrollToTop from "./components/ScrollToTop"
 import Home from "./pages/Home"
 import Workshops from "./pages/Workshops"
 import WorkshopDetail from "./pages/WorkshopDetail"
-import Booking from "./pages/Booking"
+import BookingSepCamp from "./pages/BookingSepCamp"
+import BookingOctCamp from "./pages/BookingOctCamp"
 import MusicianIntake from "./pages/MusicianIntake"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -19,8 +20,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
-          <Route path="/booking" element={<Booking />} />
-          {/* Not linked in nav — reached via the Stripe payment redirect. See Booking.tsx. */}
+          <Route path="/booking-sep-camp" element={<BookingSepCamp />} />
+          <Route path="/booking-oct-camp" element={<BookingOctCamp />} />
+          {/* Not linked in nav — reached via the Stripe payment redirect. See BookingSepCamp.tsx. */}
           <Route path="/musician-intake" element={<MusicianIntake />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
