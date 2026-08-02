@@ -100,6 +100,58 @@ export const workshops: Record<string, Workshop> = {
       "*We will issue a refund minus 20% for cancellations received two weeks in advance of the camp start date. There will be no refunds of cancellation notices received within two weeks, as it is difficult for us to fill the spots on such close notice, and we operate within a narrow budget. We will waive this policy in the event of an emergency or hardship — please email dave@goodnoiseproject.com.au should you need to request this.",
   },
 
+  "songwriting-oct-2026": {
+    slug: "songwriting-oct-2026",
+    title: "Good Noise Project: October 2026 Songwriting Camp",
+    shortTitle: "Good Noise Songwriting Camp",
+    eyebrow: "Camp",
+    teaser:
+      "Our next workshop runs this October school holidays in North Perth, giving Years 6–8 musos the chance to write, compose and perform a song together over two days.",
+    dates: "6 – 7 Oct 2026 (9am – 3pm each day)",
+    location: "North Perth",
+    price: "$195",
+    infoRows: [
+      { label: "When", value: "October school holidays (6–7 Oct 2026)" },
+      { label: "Where", value: "5 Woodville Lane, North Perth WA 6006" },
+      { label: "Who", value: "Ages 11–14 (Years 6–8)" },
+      { label: "How much", value: "$195" },
+    ],
+    ctaLabel: "Book your place",
+    // No booking page exists for this camp yet — a dedicated one will be
+    // built and linked here separately. Do not point this at /booking,
+    // which is specific to the September camp.
+    ctaHref: "#",
+    introParagraphs: [
+      "There's a time to hum a tune in your bedroom. Then there's a time to bring it to life with a room full of other kids who love music just as much as you do.",
+      "A 2025 University of Sydney report found 43% of young Australians feel lonely — and making friends through a shared passion, especially before high school, is one of the best ways to build real, lasting connection.",
+      "Good Noise Project presents a two-day songwriting camp in Perth, set inside a room full of instruments just waiting to be picked up. Your child will join a small group of other young musos, help write an original song together, and perform it to family and friends at the end of day two. There's no judgement and no pressure to be the best — just a genuinely fun, supported space to explore music, make friends, and create something they're proud of.",
+      "There's no need for years of lessons. They might be picking up an instrument for the very first time, or they might already play and want to try something new. All they need to bring is curiosity, a willingness to give things a go, and an openness to make some noise with new friends.",
+    ],
+    highlightsHeading: "What happens over two days:",
+    highlights: [
+      {
+        body: "Day one is all about getting comfortable — with the space, with each other, and with the instruments in the room. There's no sitting and listening to theory. Kids get hands-on straight away, trying instruments, meeting the group, and starting to shape the song they'll write together. Everyone contributes in their own way, and there's no rush.",
+      },
+      {
+        body: "By day two, the group is refining their song — sharpening lyrics, practising parts — before performing it together for family and friends, right in the same room where they've spent two days building it.",
+      },
+    ],
+    limitedSpotsNote:
+      "Spots are limited to a small group, so every child feels comfortable, included, and genuinely part of the group.",
+    refundShortNote: "Refund for cancellations 2+ weeks before.*",
+    facilitatorHeading: "About your facilitator",
+    facilitatorBio:
+      "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",
+    facilitatorLinkLabel: "More about Dave",
+    facilitatorLinkHref: "/about",
+    prerequisites:
+      "While we prefer each participant has some prior interest in music, no experience is necessary — enthusiasm matters far more than skill. We don't focus on music theory; just a willingness to give things a go and play alongside others.",
+    scholarshipNote:
+      "We have a no-questions-asked scholarship policy to ensure our workshops are accessible to everyone who wants to participate. If the cost of the camp presents a significant financial barrier, please reach out to dave@goodnoiseproject.com.au for a partial or full scholarship.",
+    refundPolicy:
+      "*We will issue a refund minus 20% for cancellations received two weeks in advance of the camp start date. There will be no refunds of cancellation notices received within two weeks, as it is difficult for us to fill the spots on such close notice, and we operate within a narrow budget. We will waive this policy in the event of an emergency or hardship — please email dave@goodnoiseproject.com.au should you need to request this.",
+  },
+
   "in-school-songwriting": {
     slug: "in-school-songwriting",
     title: "Good Noise Project: In-School Song and Lyric Writing Workshop",
@@ -148,4 +200,10 @@ export const workshops: Record<string, Workshop> = {
   },
 }
 
+// Used by the header's single "Our next workshop" CTA — the chronologically
+// nearest camp.
 export const upcomingWorkshopSlug = "songwriting-sep-2026"
+
+// Used by the homepage "What's coming up" section, which features every
+// currently-open camp side by side.
+export const upcomingWorkshopSlugs = ["songwriting-sep-2026", "songwriting-oct-2026"]

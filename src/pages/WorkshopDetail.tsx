@@ -11,6 +11,7 @@ import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import workshopPhoto from "../assets/images/workshop-band-trio.webp"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
+import headphonesPhoto from "../assets/images/why-we-exist-headphones.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
 
 // Per-slug hero imagery. Content data stays plain (no image imports), so
@@ -19,6 +20,10 @@ const heroImages: Record<string, { src: string; alt: string }> = {
   "songwriting-sep-2026": {
     src: workshopPhoto,
     alt: "Three young musicians performing together, two playing guitar and one singing into a microphone",
+  },
+  "songwriting-oct-2026": {
+    src: headphonesPhoto,
+    alt: "A young musician holding headphones, with an acoustic guitar in the background",
   },
   "in-school-songwriting": {
     src: acousticBoyPhoto,

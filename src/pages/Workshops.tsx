@@ -5,6 +5,7 @@ import WorkshopCard from "../components/WorkshopCard"
 import { workshops } from "../content/workshops"
 import workshopPhoto from "../assets/images/workshop-band-trio.webp"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
+import headphonesPhoto from "../assets/images/why-we-exist-headphones.webp"
 
 function whoFor(slug: string): string {
   return workshops[slug].infoRows.find((row) => row.label === "Who")?.value ?? ""
@@ -32,7 +33,8 @@ export default function Workshops() {
     document.title = "Workshops — Good Noise Project"
   }, [])
 
-  const songwriting = workshops["songwriting-sep-2026"]
+  const songwritingSep = workshops["songwriting-sep-2026"]
+  const songwritingOct = workshops["songwriting-oct-2026"]
   const inSchool = workshops["in-school-songwriting"]
 
   return (
@@ -55,12 +57,22 @@ export default function Workshops() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <WorkshopCard
               status="live"
-              href={`/workshops/${songwriting.slug}`}
-              title={songwriting.title}
-              blurb={songwriting.teaser}
-              whoFor={whoFor(songwriting.slug)}
+              href={`/workshops/${songwritingSep.slug}`}
+              title={songwritingSep.title}
+              blurb={songwritingSep.teaser}
+              whoFor={whoFor(songwritingSep.slug)}
               photoSrc={workshopPhoto}
               photoAlt="Three young musicians performing together, two playing guitar and one singing into a microphone"
+            />
+
+            <WorkshopCard
+              status="live"
+              href={`/workshops/${songwritingOct.slug}`}
+              title={songwritingOct.title}
+              blurb={songwritingOct.teaser}
+              whoFor={whoFor(songwritingOct.slug)}
+              photoSrc={headphonesPhoto}
+              photoAlt="A young musician holding headphones, with an acoustic guitar in the background"
             />
 
             <WorkshopCard
