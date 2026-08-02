@@ -39,12 +39,14 @@ export default function UpcomingWorkshop() {
                   {workshop.teaser}
                 </p>
 
-                <div className="mt-6 grid grid-cols-1 gap-6">
+                <div className="mt-6 grid grid-cols-1 gap-5">
                   {photo && (
                     <PhotoImage
                       src={photo.src}
                       alt={photo.alt}
-                      aspect="aspect-[4/5]"
+                      aspect="aspect-[16/9]"
+                      objectPosition="center 30%"
+                      className="border-2 border-white/15"
                     />
                   )}
 
