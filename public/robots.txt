@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /musician-intake
+
+Sitemap: https://goodnoiseproject.com.au/sitemap.xml
