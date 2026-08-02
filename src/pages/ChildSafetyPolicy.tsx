@@ -22,7 +22,6 @@ export default function ChildSafetyPolicy() {
           <h1 className="font-display text-4xl leading-[0.98] text-ink sm:text-5xl">
             Child Safety Policy
           </h1>
-          <p className="mt-4 text-sm text-ink/60">Good Noise, 36 Park St, Como WA 6152</p>
 
           <div className="mt-12 space-y-10 text-base leading-relaxed text-ink/80 md:text-lg">
             <div>

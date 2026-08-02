@@ -6,6 +6,7 @@ import Eyebrow from "../components/Eyebrow"
 import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
+import FacilitatorContact from "../components/FacilitatorContact"
 import NotFound from "./NotFound"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
@@ -178,6 +179,8 @@ export default function WorkshopDetail() {
                 {workshop.facilitatorLinkLabel} &rarr;
               </Link>
             </p>
+
+            <FacilitatorContact className="mt-6" />
           </div>
         </div>
       </section>

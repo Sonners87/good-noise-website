@@ -4,6 +4,7 @@ import Footer from "../components/Footer"
 import Eyebrow from "../components/Eyebrow"
 import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
+import FacilitatorContact from "../components/FacilitatorContact"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
 
 const bioParagraphs = [
@@ -51,6 +52,8 @@ export default function About() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+
+            <FacilitatorContact className="mt-8" />
 
             <p className="mt-8 border-t border-ink/15 pt-6 text-sm leading-relaxed text-ink/65">
               {credentialsLine}

@@ -1,6 +1,7 @@
 import PhotoImage from "./PhotoImage"
 import PillButton from "./PillButton"
 import Eyebrow from "./Eyebrow"
+import FacilitatorContact from "./FacilitatorContact"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
 
 export default function Facilitator() {
@@ -19,6 +20,8 @@ export default function Facilitator() {
             self-taught singer-songwriter, and a dedicated mentor to young
             people.
           </p>
+
+          <FacilitatorContact className="mt-6" />
 
           <PillButton href="/about" variant="onLight" className="mt-9">
             Read Dave's story
