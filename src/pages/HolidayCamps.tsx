@@ -80,7 +80,7 @@ export default function HolidayCamps() {
                 According to research
               </Eyebrow>
 
-              <h1 className="font-display order-2 mt-3 text-3xl leading-[1.06] text-white sm:text-4xl md:text-5xl">
+              <h1 className="font-display order-2 mt-3 text-4xl leading-[1.05] text-white md:text-5xl">
                 Making music together breaks down social barriers faster than
                 almost any other shared activity
                 <sup className="text-base font-normal md:text-lg">1</sup>.
@@ -93,7 +93,7 @@ export default function HolidayCamps() {
                   </span>
                   <UnlinkedButton
                     variant="sage"
-                    sizeClassName="px-5 py-2.5 text-sm md:px-9 md:py-4 md:text-lg"
+                    sizeClassName="px-7 py-3.5 text-base md:px-9 md:py-4 md:text-lg"
                   >
                     Book Now
                   </UnlinkedButton>
@@ -108,7 +108,7 @@ export default function HolidayCamps() {
                   </span>
                   <UnlinkedButton
                     variant="primary"
-                    sizeClassName="px-5 py-2.5 text-sm md:px-9 md:py-4 md:text-lg"
+                    sizeClassName="px-7 py-3.5 text-base md:px-9 md:py-4 md:text-lg"
                   >
                     Book Now
                   </UnlinkedButton>
@@ -123,24 +123,28 @@ export default function HolidayCamps() {
                 kids together to make music — and make friends faster than
                 almost anything else can.
               </p>
-
-              <p className="order-5 mt-8 text-xs text-white/50">
-                1. Pearce, E., Launay, J., &amp; Dunbar, R.I.M. (2015). "The
-                ice-breaker effect: singing mediates fast social bonding."
-                Royal Society Open Science, 2(10), 150221. University of
-                Oxford, Department of Experimental Psychology.
-              </p>
             </div>
 
-            {/* Right column: placeholder image */}
+            {/* Right column: placeholder image — offset down so its top
+                lines up with the headline, not the kicker above it. */}
             <PhotoImage
               src={heroSunsetFriends}
               alt="A group of young musicians laughing together outdoors at sunset, one holding an acoustic guitar"
               aspect="aspect-[4/3]"
               objectPosition="center 45%"
-              className="rounded-xl border-2 border-white/15"
+              className="border-2 border-white/15 md:mt-14"
             />
           </div>
+
+          {/* Citation for the headline's claim — deliberately centered and
+              pushed below the typical fold (still within this section's
+              green background), rather than competing with the CTAs above. */}
+          <p className="mx-auto mt-16 max-w-2xl text-center text-xs text-white/50 md:mt-24">
+            1. Pearce, E., Launay, J., &amp; Dunbar, R.I.M. (2015). "The
+            ice-breaker effect: singing mediates fast social bonding." Royal
+            Society Open Science, 2(10), 150221. University of Oxford,
+            Department of Experimental Psychology.
+          </p>
         </div>
       </section>
 
