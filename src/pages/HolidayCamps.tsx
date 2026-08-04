@@ -24,28 +24,29 @@ const variantStyles = {
   sage: "bg-sage text-ink border-sage hover:bg-white hover:text-ink hover:border-ink",
 }
 
-// Both "Book Now" and "Explore" CTAs are intentionally unlinked — the two
-// dedicated camp pages aren't finalised yet. Rendered as inert buttons
-// (not links) so they're fully styled and ready to wire up once the real
-// destination URLs are provided.
-function UnlinkedButton({
+// Both "Book Now" and "Explore" CTAs route to each camp's workshop detail
+// page (booking itself happens from there). Not using the shared
+// PillButton since it doesn't have the page-local "sage" variant.
+function CampButton({
+  href,
   variant,
   sizeClassName = pillSizeStyles.md,
   className = "",
   children,
 }: {
+  href: string
   variant: keyof typeof variantStyles
   sizeClassName?: string
   className?: string
   children: ReactNode
 }) {
   return (
-    <button
-      type="button"
+    <Link
+      to={href}
       className={`${pillBaseStyles} ${sizeClassName} ${variantStyles[variant]} ${className}`}
     >
       {children}
-    </button>
+    </Link>
   )
 }
 
@@ -91,12 +92,13 @@ export default function HolidayCamps() {
                   <span className="font-display text-xl font-bold text-sage md:text-2xl">
                     Ages 11–14
                   </span>
-                  <UnlinkedButton
+                  <CampButton
+                    href="/workshops/songwriting-oct-2026"
                     variant="sage"
                     sizeClassName="px-7 py-3.5 text-base md:px-9 md:py-4 md:text-lg"
                   >
                     Book Now
-                  </UnlinkedButton>
+                  </CampButton>
                   <span className="font-body font-semibold text-xs text-white/70">
                     Full refunds available
                   </span>
@@ -106,12 +108,13 @@ export default function HolidayCamps() {
                   <span className="font-display text-xl font-bold text-terracotta md:text-2xl">
                     Ages 15–18
                   </span>
-                  <UnlinkedButton
+                  <CampButton
+                    href="/workshops/songwriting-sep-2026"
                     variant="primary"
                     sizeClassName="px-7 py-3.5 text-base md:px-9 md:py-4 md:text-lg"
                   >
                     Book Now
-                  </UnlinkedButton>
+                  </CampButton>
                   <span className="font-body font-semibold text-xs text-white/70">
                     Full refunds available
                   </span>
@@ -182,9 +185,13 @@ export default function HolidayCamps() {
                   just as much as they do. This could be the start of
                   something they carry with them for years.
                 </p>
-                <UnlinkedButton variant="sage" className="mt-8 self-start">
+                <CampButton
+                  href="/workshops/songwriting-oct-2026"
+                  variant="sage"
+                  className="mt-8 self-start"
+                >
                   Explore Ages 11–14 Camp &rarr;
-                </UnlinkedButton>
+                </CampButton>
               </div>
             </div>
 
@@ -217,9 +224,13 @@ export default function HolidayCamps() {
                   they've never met. No pressure to be great — just to play,
                   and maybe do something they've never done before.
                 </p>
-                <UnlinkedButton variant="primary" className="mt-8 self-start">
+                <CampButton
+                  href="/workshops/songwriting-sep-2026"
+                  variant="primary"
+                  className="mt-8 self-start"
+                >
                   Explore Ages 15–18 Camp &rarr;
-                </UnlinkedButton>
+                </CampButton>
               </div>
             </div>
           </div>
