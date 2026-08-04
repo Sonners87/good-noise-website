@@ -30,17 +30,19 @@ const variantStyles = {
 // destination URLs are provided.
 function UnlinkedButton({
   variant,
+  sizeClassName = pillSizeStyles.md,
   className = "",
   children,
 }: {
   variant: keyof typeof variantStyles
+  sizeClassName?: string
   className?: string
   children: ReactNode
 }) {
   return (
     <button
       type="button"
-      className={`${pillBaseStyles} ${pillSizeStyles.md} ${variantStyles[variant]} ${className}`}
+      className={`${pillBaseStyles} ${sizeClassName} ${variantStyles[variant]} ${className}`}
     >
       {children}
     </button>
@@ -56,57 +58,77 @@ export default function HolidayCamps() {
     <>
       {/* Header + hero */}
       <section className="bg-brand">
-        <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10 md:pt-10">
+        <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10 md:pt-8">
           <Link to="/" className="mx-auto block w-fit">
             <img src={logo} alt="Good Noise" className="h-14 w-auto md:h-16" />
           </Link>
-          <p className="font-body font-bold mx-auto mt-3 max-w-[19rem] text-center text-sm text-terracotta md:text-base">
+          <p className="font-body font-bold mx-auto mt-3 max-w-[19rem] text-center text-sm text-white md:text-base">
             Two-day songwriting camps in North Perth, for two different age
             groups.
           </p>
         </div>
 
-        <div className="mx-auto max-w-[1400px] px-5 pb-14 pt-8 md:px-10 md:pb-20 md:pt-8">
+        <div className="mx-auto max-w-[1400px] px-5 pb-14 pt-8 md:px-10 md:pb-20 md:pt-6">
           <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-12">
             {/* Left column: copy + CTAs. Order utilities put the CTA row
                 right after the headline on mobile (above the fold), but
-                after the subheadline on desktop, where there's more room. */}
-            <div className="flex flex-col">
+                after the subheadline on desktop, where there's more room.
+                Centered as a block on mobile; left-aligned on desktop next
+                to the image. */}
+            <div className="flex flex-col items-center text-center md:items-start md:text-left">
               <Eyebrow tone="onBlue" className="order-1 w-fit">
-                According to researchers —
+                According to research
               </Eyebrow>
 
-              <h1 className="font-display order-2 mt-3 text-3xl leading-[1.06] text-white sm:text-4xl md:text-4xl">
+              <h1 className="font-display order-2 mt-3 text-3xl leading-[1.06] text-white sm:text-4xl md:text-5xl">
                 Making music together breaks down social barriers faster than
-                almost any other shared activity.
+                almost any other shared activity
+                <sup className="text-base font-normal md:text-lg">1</sup>.
               </h1>
 
-              <div className="order-3 mt-6 flex flex-wrap items-start gap-x-10 gap-y-6 md:order-4 md:mt-6">
-                <div className="flex flex-col items-start gap-3">
+              <div className="order-3 mt-6 grid grid-cols-2 gap-4 md:order-4 md:flex md:flex-wrap md:items-start md:gap-x-10 md:gap-y-6 md:mt-5">
+                <div className="flex flex-col items-center gap-3 text-center md:items-start md:text-left">
                   <span className="font-display text-xl font-bold text-sage md:text-2xl">
                     Ages 11–14
                   </span>
-                  <UnlinkedButton variant="sage">Book Now</UnlinkedButton>
+                  <UnlinkedButton
+                    variant="sage"
+                    sizeClassName="px-5 py-2.5 text-sm md:px-9 md:py-4 md:text-lg"
+                  >
+                    Book Now
+                  </UnlinkedButton>
                   <span className="font-body font-semibold text-xs text-white/70">
                     Full refunds available
                   </span>
                 </div>
 
-                <div className="flex flex-col items-start gap-3">
+                <div className="flex flex-col items-center gap-3 text-center md:items-start md:text-left">
                   <span className="font-display text-xl font-bold text-terracotta md:text-2xl">
                     Ages 15–18
                   </span>
-                  <UnlinkedButton variant="primary">Book Now</UnlinkedButton>
+                  <UnlinkedButton
+                    variant="primary"
+                    sizeClassName="px-5 py-2.5 text-sm md:px-9 md:py-4 md:text-lg"
+                  >
+                    Book Now
+                  </UnlinkedButton>
                   <span className="font-body font-semibold text-xs text-white/70">
                     Full refunds available
                   </span>
                 </div>
               </div>
 
-              <p className="order-4 mt-8 text-base leading-relaxed text-white/85 md:order-3 md:mt-6 md:text-lg">
+              <p className="order-4 mt-8 text-base leading-relaxed text-white/85 md:order-3 md:mt-5 md:text-lg">
                 This September school holidays, Good Noise Project brings
                 kids together to make music — and make friends faster than
                 almost anything else can.
+              </p>
+
+              <p className="order-5 mt-8 text-xs text-white/50">
+                1. Pearce, E., Launay, J., &amp; Dunbar, R.I.M. (2015). "The
+                ice-breaker effect: singing mediates fast social bonding."
+                Royal Society Open Science, 2(10), 150221. University of
+                Oxford, Department of Experimental Psychology.
               </p>
             </div>
 
@@ -114,9 +136,9 @@ export default function HolidayCamps() {
             <PhotoImage
               src={heroSunsetFriends}
               alt="A group of young musicians laughing together outdoors at sunset, one holding an acoustic guitar"
-              aspect="aspect-[4/5]"
+              aspect="aspect-[4/3]"
               objectPosition="center 45%"
-              className="border-2 border-white/15"
+              className="rounded-xl border-2 border-white/15"
             />
           </div>
         </div>
@@ -127,18 +149,29 @@ export default function HolidayCamps() {
         <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="flex flex-col overflow-hidden border-2 border-sage shadow-md">
-              <PhotoImage
-                src={heroBandPractice}
-                alt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
-                aspect="aspect-[16/9]"
-                objectPosition="center 55%"
-              />
+              <div className="relative">
+                <PhotoImage
+                  src={heroBandPractice}
+                  alt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
+                  aspect="aspect-[16/9]"
+                  objectPosition="center 55%"
+                />
+                <div
+                  className="absolute inset-0 bg-sage/60 mix-blend-color"
+                  aria-hidden="true"
+                />
+              </div>
               <div className="flex flex-1 flex-col bg-sage/20 p-8 md:p-10">
-                <span className="font-body font-bold inline-block w-fit rounded-full bg-sage px-4 py-1.5 text-sm uppercase tracking-wide text-ink">
-                  Ages 11–14
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-body font-bold inline-block w-fit rounded-full bg-sage px-4 py-1.5 text-sm uppercase tracking-wide text-ink">
+                    Ages 11–14
+                  </span>
+                  <span className="font-body font-bold inline-block w-fit rounded-full bg-sage px-4 py-1.5 text-sm uppercase tracking-wide text-ink">
+                    Two-Day Songwriting Camp
+                  </span>
+                </div>
                 <h2 className="font-display mt-4 text-3xl leading-[1.02] text-ink sm:text-4xl">
-                  Somewhere to Belong, For Life
+                  Music They'll Carry Home With Them.
                 </h2>
                 <p className="mt-5 flex-1 text-base leading-relaxed text-ink/80 md:text-lg">
                   A room full of instruments, and other kids who love music
@@ -152,15 +185,26 @@ export default function HolidayCamps() {
             </div>
 
             <div className="flex flex-col overflow-hidden border-2 border-terracotta shadow-md">
-              <PhotoImage
-                src={workshopBandTrio}
-                alt="Three young musicians performing together, two playing guitar and one singing into a microphone"
-                aspect="aspect-[16/9]"
-              />
+              <div className="relative">
+                <PhotoImage
+                  src={workshopBandTrio}
+                  alt="Three young musicians performing together, two playing guitar and one singing into a microphone"
+                  aspect="aspect-[16/9]"
+                />
+                <div
+                  className="absolute inset-0 bg-terracotta/50 mix-blend-color"
+                  aria-hidden="true"
+                />
+              </div>
               <div className="flex flex-1 flex-col bg-terracotta/10 p-8 md:p-10">
-                <span className="font-body font-bold inline-block w-fit rounded-full bg-terracotta px-4 py-1.5 text-sm uppercase tracking-wide text-white">
-                  Ages 15–18
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-body font-bold inline-block w-fit rounded-full bg-terracotta px-4 py-1.5 text-sm uppercase tracking-wide text-white">
+                    Ages 15–18
+                  </span>
+                  <span className="font-body font-bold inline-block w-fit rounded-full bg-terracotta px-4 py-1.5 text-sm uppercase tracking-wide text-white">
+                    Two-Day Songwriting Camp
+                  </span>
+                </div>
                 <h2 className="font-display mt-4 text-3xl leading-[1.02] text-ink sm:text-4xl">
                   Find Your People. Maybe Even Your First Band.
                 </h2>
