@@ -4,6 +4,33 @@ import Footer from "../components/Footer"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import CampSignupForm from "../components/CampSignupForm"
 
+const whatToExpect = [
+  {
+    bold: "Day 1 is all exploration",
+    rest: " — trying instruments, finding a role in the group, shaping ideas together. No theory lessons, no sitting and listening.",
+  },
+  {
+    bold: "Day 2 builds toward one thing",
+    rest: ": performing the song they've written, together, for family and friends — in the same room they've spent two days in, not a formal stage.",
+  },
+  {
+    bold: "No solo pressure",
+    rest: " — nobody's singled out to perform alone or judged individually. It's a group effort from start to finish.",
+  },
+  {
+    bold: "Small group size",
+    rest: " — kept deliberately small so every voice actually gets heard, not lost in a crowd.",
+  },
+  {
+    bold: "Facilitated the whole way through",
+    rest: " by Dave — a working musician, not a classroom teacher running a lesson plan.",
+  },
+  {
+    bold: "Parents/family are welcome for the final performance",
+    rest: " at the end of day 2.",
+  },
+]
+
 const whatToBring = [
   "Your instrument (range of instruments available)",
   "Water bottle",
@@ -68,6 +95,28 @@ export default function BookingSepCamp() {
                   isn't working. Some of the best moments come from what
                   wasn't scripted.
                 </p>
+              </div>
+
+              <div>
+                <h2 className="font-display max-w-2xl text-3xl leading-[0.98] text-ink sm:text-4xl">
+                  What to Expect
+                </h2>
+                <ul className="mt-6 max-w-2xl space-y-3">
+                  {whatToExpect.map((item) => (
+                    <li
+                      key={item.bold}
+                      className="flex items-start gap-3 border-b border-ink/15 pb-3 font-body text-base leading-relaxed text-ink/80 last:border-b-0 md:text-lg"
+                    >
+                      <span className="mt-1 text-terracotta" aria-hidden="true">
+                        &#9679;
+                      </span>
+                      <span>
+                        <strong className="font-semibold text-ink">{item.bold}</strong>
+                        {item.rest}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div>

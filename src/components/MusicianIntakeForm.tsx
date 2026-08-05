@@ -45,41 +45,6 @@ export default function MusicianIntakeForm() {
       </label>
 
       <label className="flex flex-col gap-2">
-        <span className={labelClass}>Age / school year</span>
-        <input required type="text" name="ageAndYear" className={inputClass} placeholder="e.g. 16 / Year 11" />
-      </label>
-
-      <label className="flex flex-col gap-2">
-        <span className={labelClass}>Parent/guardian name and contact details</span>
-        <input
-          required
-          type="text"
-          name="guardianContact"
-          className={inputClass}
-          placeholder="Name, phone and/or email"
-        />
-      </label>
-
-      <label className="flex flex-col gap-2">
-        <span className={labelClass}>
-          Preferred instrument(s) — including any they'd like to try for the
-          first time
-        </span>
-        <input
-          required
-          type="text"
-          name="instruments"
-          className={inputClass}
-          placeholder="e.g. guitar and vocals, keen to try drums"
-        />
-      </label>
-
-      <label className="flex flex-col gap-2">
-        <span className={labelClass}>Years played (if any)</span>
-        <input type="text" name="yearsPlayed" className={inputClass} placeholder="e.g. 2 years, or none yet" />
-      </label>
-
-      <label className="flex flex-col gap-2">
         <span className={labelClass}>
           In their own words: what are they hoping to get out of these two
           days?
