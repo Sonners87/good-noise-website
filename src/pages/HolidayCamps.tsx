@@ -78,14 +78,18 @@ export default function HolidayCamps() {
                 to the image. */}
             <div className="flex flex-col items-center text-center md:items-start md:text-left">
               <Eyebrow tone="onBlue" className="order-1 w-fit">
-                According to research
+                September 2026: Youth songwriting camps
               </Eyebrow>
 
-              <h1 className="font-display order-2 mt-3 text-4xl leading-[1.05] text-white md:text-5xl">
+              <h1 className="font-display order-2 mt-3 text-5xl leading-[1.05] text-white md:text-6xl">
+                Two Days. One Original Song.
+              </h1>
+
+              <h2 className="font-display order-2 mt-4 text-xl leading-snug text-white/90 md:text-2xl">
                 Making music together breaks down social barriers faster than
                 almost any other shared activity
-                <sup className="text-base font-normal md:text-lg">1</sup>.
-              </h1>
+                <sup className="text-sm font-normal md:text-base">1</sup>.
+              </h2>
 
               <div className="order-3 mt-6 grid grid-cols-2 gap-4 md:order-4 md:flex md:flex-wrap md:items-start md:gap-x-10 md:gap-y-6 md:mt-5">
                 <div className="flex flex-col items-center gap-3 text-center md:items-start md:text-left">
