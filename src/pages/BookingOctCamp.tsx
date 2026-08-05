@@ -1,8 +1,15 @@
 import { useEffect } from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import PillButton from "../components/PillButton"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
+import CampSignupForm from "../components/CampSignupForm"
+
+const whatToBring = [
+  "Your instrument (range of instruments available)",
+  "Water bottle",
+  "Packed lunch & snacks each day",
+  "Earplugs (if sensitive to noise)",
+]
 
 export default function BookingOctCamp() {
   useEffect(() => {
@@ -42,58 +49,92 @@ export default function BookingOctCamp() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-          <h2 className="font-display max-w-2xl text-3xl leading-[0.98] text-ink sm:text-4xl">
-            A Quick Note Before You Book
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/80 md:text-lg">
-            We give kids genuine choices throughout the two days — what they
-            play, what they contribute, how involved they want to be —
-            always within a structure Dave's actively guiding. That means
-            the exact shape of each day can shift a little depending on the
-            group. What we can promise is a safe, well-supported experience
-            the whole way through, with Dave keeping things on track while
-            still leaving room for kids to make it their own. Some of the
-            best moments come from those small, unplanned bits of
-            creativity.
-          </p>
-        </div>
-      </section>
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 md:items-start">
+            {/* Left column: what to expect, what to bring, and cancellation
+                terms — everything a parent needs to read before filling in
+                the form on the right. */}
+            <div className="flex flex-col gap-14">
+              <div>
+                <h2 className="font-display max-w-2xl text-3xl leading-[0.98] text-ink sm:text-4xl">
+                  A Quick Note Before You Book
+                </h2>
+                <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/80 md:text-lg">
+                  We give kids genuine choices throughout the two days — what
+                  they play, what they contribute, how involved they want to
+                  be — always within a structure Dave's actively guiding.
+                  That means the exact shape of each day can shift a little
+                  depending on the group. What we can promise is a safe,
+                  well-supported experience the whole way through, with Dave
+                  keeping things on track while still leaving room for kids
+                  to make it their own. Some of the best moments come from
+                  those small, unplanned bits of creativity.
+                </p>
+              </div>
 
-      <section className="bg-cream">
-        <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
-          <h2 className="font-display max-w-2xl text-3xl leading-[0.98] text-ink sm:text-4xl">
-            Cancellations &amp; Refunds
-          </h2>
+              <div>
+                <h2 className="font-display max-w-2xl text-3xl leading-[0.98] text-ink sm:text-4xl">
+                  What to Bring
+                </h2>
+                <ul className="mt-6 max-w-md space-y-3">
+                  {whatToBring.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 border-b border-ink/15 pb-3 font-body text-base text-ink/80 last:border-b-0 md:text-lg"
+                    >
+                      <span className="mt-1 text-terracotta" aria-hidden="true">
+                        &#9679;
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div className="mt-8 max-w-md">
-            <WorkshopInfoCard
-              rows={[
-                { label: "More than two weeks' notice", value: "Full refund" },
-                { label: "1–2 weeks' notice", value: "50% refund" },
-                { label: "Less than one week's notice", value: "No refund" },
-              ]}
-            />
+              <div>
+                <h2 className="font-display max-w-2xl text-3xl leading-[0.98] text-ink sm:text-4xl">
+                  Cancellations &amp; Refunds
+                </h2>
+
+                <div className="mt-8 max-w-md">
+                  <WorkshopInfoCard
+                    rows={[
+                      { label: "More than two weeks' notice", value: "Full refund" },
+                      { label: "1–2 weeks' notice", value: "50% refund" },
+                      { label: "Less than one week's notice", value: "No refund" },
+                    ]}
+                  />
+                </div>
+
+                <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink/80 md:text-lg">
+                  Small-group workshops like this are hard to backfill on
+                  short notice — once someone drops out close to the date,
+                  there's rarely time to find a replacement. We appreciate
+                  your understanding.
+                </p>
+              </div>
+            </div>
+
+            {/* Right column: signup form. Submitting saves the participant
+                and parent details via Netlify Forms, then sends the buyer on
+                to Stripe to pay. */}
+            <div className="md:sticky md:top-8">
+              <h2 className="font-display max-w-2xl text-3xl leading-[0.98] text-ink sm:text-4xl">
+                Sign Up
+              </h2>
+              <div className="mt-6">
+                {/*
+                  Confirm in the Stripe dashboard that this Payment Link's
+                  post-payment redirect no longer points to /musician-intake
+                  — that intake info is now collected by this form before
+                  payment.
+                */}
+                <CampSignupForm
+                  campLabel="October 2026 (6–7 Oct)"
+                  stripeUrl="https://buy.stripe.com/aFa6oH6ua1yoaXk8NZ3F601"
+                />
+              </div>
+            </div>
           </div>
-
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink/80 md:text-lg">
-            Small-group workshops like this are hard to backfill on short
-            notice — once someone drops out close to the date, there's
-            rarely time to find a replacement. We appreciate your
-            understanding.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-brand">
-        <div className="mx-auto max-w-[1400px] px-5 py-16 text-center md:px-10 md:py-20">
-          {/*
-            Confirm in the Stripe dashboard that this Payment Link's
-            post-payment redirect is set to /musician-intake, so buyers land
-            straight on the intake form after paying.
-          */}
-          <PillButton href="https://buy.stripe.com/aFa6oH6ua1yoaXk8NZ3F601" variant="primary">
-            Book &amp; pay
-          </PillButton>
         </div>
       </section>
 
