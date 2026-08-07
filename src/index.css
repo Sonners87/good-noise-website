@@ -2,6 +2,7 @@
 
 @theme {
   --font-display: "Baloo 2", sans-serif;
+  --font-heading: "Fjalla One", sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
 
   /* Forest — primary */
@@ -45,4 +46,25 @@ body {
   background: var(--color-cream);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
+}
+
+/*
+  Overrides the .font-display utility (Baloo 2) specifically on <h1>/<h2>
+  headings, without touching the h3/span/blockquote elements elsewhere that
+  also use .font-display. The extra element-selector specificity (h1.font-display
+  beats .font-display alone) is needed to win over the utility class.
+
+  Fjalla One is condensed and Regular-weight only, so at the same font-size
+  it reads narrower/lighter than the Baloo 2 800-weight it replaces here.
+  font-size-adjust re-targets its rendered x-height to match Baloo 2's
+  (measured ratio ~0.691) at whatever font-size each heading already uses,
+  and the positive letter-spacing widens its narrower glyph width back
+  toward Baloo 2's — both corrections apply uniformly across every
+  h1/h2 instance regardless of its Tailwind text-size class.
+*/
+h1.font-display,
+h2.font-display {
+  font-family: var(--font-heading);
+  font-size-adjust: 0.691;
+  letter-spacing: 0.03em;
 }
