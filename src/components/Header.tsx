@@ -49,7 +49,7 @@ export default function Header() {
             variant="primary"
             size="sm"
           >
-            Our next workshop
+            See workshops
           </PillButton>
           <button
             type="button"
