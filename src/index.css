@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Baloo 2", sans-serif;
+  --font-display: "Work Sans", sans-serif;
   --font-heading: "Anton", sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-body: "Work Sans", system-ui, sans-serif;
 
   /* Forest — primary */
   --color-brand: #1f3d2e;
@@ -40,19 +40,35 @@ html {
   scroll-behavior: smooth;
 }
 
+/*
+  Work Sans reads noticeably smaller and narrower than Inter at the same
+  font-size (measured across 73 real body paragraphs: median ink height
+  ~7% shorter, median width ~17% narrower). font-size-adjust re-targets
+  its x-height to match Inter's (measured ratio ~0.556) so it fills the
+  same vertical space regardless of which Tailwind text-size a given
+  paragraph/label uses, and the letter-spacing makes up the width that
+  remains after that size correction. Both are inherited from body, so
+  every font-body element (and any plain text with no font utility class
+  at all) picks them up automatically.
+*/
 body {
   margin: 0;
   font-family: var(--font-body);
+  font-size-adjust: 0.556;
+  letter-spacing: 0.035em;
   background: var(--color-cream);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }
 
 /*
-  Overrides the .font-display utility (Baloo 2) specifically on <h1>/<h2>
-  headings, without touching the h3/span/blockquote elements elsewhere that
-  also use .font-display. The extra element-selector specificity (h1.font-display
+  Overrides the .font-display utility specifically on <h1>/<h2> headings,
+  without touching the h3/span/blockquote elements elsewhere that also use
+  .font-display. The extra element-selector specificity (h1.font-display
   beats .font-display alone) is needed to win over the utility class.
+  font-size-adjust is explicitly reset here so h1/h2 don't inherit the
+  body rule's Work-Sans-tuned value above, which would wrongly rescale
+  Anton (a different font with different metrics).
 
   Anton is heavy and condensed. Measuring actual heading text (not just a
   sample string) at each Tailwind size in use across the site, its ink
@@ -66,5 +82,26 @@ body {
 h1.font-display,
 h2.font-display {
   font-family: var(--font-heading);
+  font-size-adjust: none;
   letter-spacing: 0.04em;
+}
+
+/*
+  Everything else that uses .font-display — h3s (e.g. workshop card
+  titles), the price/date callout spans, and the pull-quote blockquote —
+  picks up the base --font-display token (Work Sans) above. Weight is
+  forced to 600 uniformly here because most of these elements previously
+  had no explicit font-weight class at all and only looked bold because
+  Baloo 2's font files only shipped at 700/800; Work Sans ships every
+  weight, so without this they'd render at an unintended thin 400.
+  font-size-adjust is reset to none — measuring the actual text of these
+  5 elements, Work Sans-600's ink height already matches Baloo 2's within
+  ~1%, so no correction is needed (and it must not inherit body's, which
+  was tuned for a different font/weight pairing). The small letter-spacing
+  closes the ~2% width gap that remains.
+*/
+.font-display:not(h1):not(h2) {
+  font-weight: 600;
+  font-size-adjust: none;
+  letter-spacing: 0.01em;
 }
