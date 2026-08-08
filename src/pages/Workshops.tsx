@@ -3,7 +3,8 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import WorkshopCard from "../components/WorkshopCard"
 import { workshops } from "../content/workshops"
-import workshopPhoto from "../assets/images/workshop-band-trio.webp"
+import { SHOW_OCT_2026_CAMP } from "../content/featureFlags"
+import guitaristSagePhoto from "../assets/images/workshop-guitarist-sage.webp"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 
@@ -33,8 +34,8 @@ export default function Workshops() {
     document.title = "Workshops — Good Noise Project"
   }, [])
 
-  const songwritingSep = workshops["songwriting-sep-2026"]
-  const songwritingOct = workshops["songwriting-oct-2026"]
+  const musicMakersSpring = workshops["music-makers-spring-2026"]
+  const songwritingOct = SHOW_OCT_2026_CAMP ? workshops["songwriting-oct-2026"] : undefined
   const inSchool = workshops["in-school-songwriting"]
 
   return (
@@ -57,23 +58,25 @@ export default function Workshops() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <WorkshopCard
               status="live"
-              href={`/workshops/${songwritingSep.slug}`}
-              title={songwritingSep.title}
-              blurb={songwritingSep.teaser}
-              whoFor={whoFor(songwritingSep.slug)}
-              photoSrc={workshopPhoto}
-              photoAlt="Three young musicians performing together, two playing guitar and one singing into a microphone"
+              href={`/workshops/${musicMakersSpring.slug}`}
+              title={musicMakersSpring.title}
+              blurb={musicMakersSpring.teaser}
+              whoFor={whoFor(musicMakersSpring.slug)}
+              photoSrc={guitaristSagePhoto}
+              photoAlt="Silhouette of a teenage musician holding an electric guitar and singing into a microphone, lit sage-green on stage"
             />
 
-            <WorkshopCard
-              status="live"
-              href={`/workshops/${songwritingOct.slug}`}
-              title={songwritingOct.title}
-              blurb={songwritingOct.teaser}
-              whoFor={whoFor(songwritingOct.slug)}
-              photoSrc={bandPracticePhoto}
-              photoAlt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
-            />
+            {songwritingOct && (
+              <WorkshopCard
+                status="live"
+                href={`/workshops/${songwritingOct.slug}`}
+                title={songwritingOct.title}
+                blurb={songwritingOct.teaser}
+                whoFor={whoFor(songwritingOct.slug)}
+                photoSrc={bandPracticePhoto}
+                photoAlt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
+              />
+            )}
 
             <WorkshopCard
               status="live"

@@ -10,17 +10,20 @@ import FacilitatorContact from "../components/FacilitatorContact"
 import NotFound from "./NotFound"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
-import workshopPhoto from "../assets/images/workshop-band-trio.webp"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
+import guitaristSagePhoto from "../assets/images/workshop-guitarist-sage.webp"
 
 // Per-slug hero imagery. Content data stays plain (no image imports), so
 // each new workshop just needs an entry here alongside its content entry.
-const heroImages: Record<string, { src: string; alt: string }> = {
-  "songwriting-sep-2026": {
-    src: workshopPhoto,
-    alt: "Three young musicians performing together, two playing guitar and one singing into a microphone",
+// `aspect` defaults to portrait (4/5) when omitted; landscape photos should
+// set it explicitly so PhotoImage's object-cover crop doesn't lose the sides.
+const heroImages: Record<string, { src: string; alt: string; aspect?: string }> = {
+  "music-makers-spring-2026": {
+    src: guitaristSagePhoto,
+    alt: "Silhouette of a teenage musician holding an electric guitar and singing into a microphone, lit sage-green on stage",
+    aspect: "aspect-[4/3]",
   },
   "songwriting-oct-2026": {
     src: bandPracticePhoto,
@@ -71,7 +74,7 @@ export default function WorkshopDetail() {
             <PhotoImage
               src={heroImage.src}
               alt={heroImage.alt}
-              aspect="aspect-[4/5]"
+              aspect={heroImage.aspect ?? "aspect-[4/5]"}
             />
           )}
         </div>

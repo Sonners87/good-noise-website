@@ -11,6 +11,7 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import ChildSafetyPolicy from "./pages/ChildSafetyPolicy"
 import NotFound from "./pages/NotFound"
+import { SHOW_OCT_2026_CAMP } from "./content/featureFlags"
 
 function App() {
   return (
@@ -22,9 +23,17 @@ function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
           <Route path="/booking-sep-camp" element={<BookingSepCamp />} />
-          <Route path="/booking-oct-camp" element={<BookingOctCamp />} />
+          {/* October 2026 camp is paused — see SHOW_OCT_2026_CAMP in
+              content/featureFlags.ts. Flip it to `true` to restore this
+              route (and the /holiday-camps route below) without touching
+              any other code. */}
+          {SHOW_OCT_2026_CAMP && (
+            <Route path="/booking-oct-camp" element={<BookingOctCamp />} />
+          )}
           {/* Standalone flyer/QR-code landing page — not linked from primary nav. */}
-          <Route path="/holiday-camps" element={<HolidayCamps />} />
+          {SHOW_OCT_2026_CAMP && (
+            <Route path="/holiday-camps" element={<HolidayCamps />} />
+          )}
           {/* Not linked in nav — reached via the Stripe payment redirect. See BookingSepCamp.tsx. */}
           <Route path="/musician-intake" element={<MusicianIntake />} />
           <Route path="/about" element={<About />} />

@@ -40,7 +40,7 @@ const whatToBring = [
 
 export default function BookingSepCamp() {
   useEffect(() => {
-    document.title = "Book — September Songwriting Camp — Good Noise Project"
+    document.title = "Book — Music Makers: Spring Holidays Music Program — Good Noise Project"
   }, [])
 
   return (
@@ -49,7 +49,7 @@ export default function BookingSepCamp() {
         <Header />
         <div className="mx-auto max-w-[1400px] px-5 pb-16 pt-4 md:px-10 md:pb-24">
           <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-            Good Noise Songwriting Camp
+            Music Makers: Spring Holidays Music Program
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
             Two days. One song. A room full of young musos who've never met
@@ -62,7 +62,7 @@ export default function BookingSepCamp() {
                 { label: "Cost", value: "$195" },
                 {
                   label: "Dates",
-                  value: "30 September – 1 October (September school holidays)",
+                  value: "30 September – 1 October (2026 Spring School Holidays)",
                 },
                 {
                   label: "Location",

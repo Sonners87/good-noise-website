@@ -2,6 +2,8 @@
 // each workshop's own detail page both read from here — add a new object to
 // `workshops` for a new workshop rather than hardcoding copy into a page.
 
+import { SHOW_OCT_2026_CAMP } from "./featureFlags"
+
 export type WorkshopInfoRow = { label: string; value: string }
 export type WorkshopHighlight = { title?: string; body: string }
 export type WorkshopDirectContact = { prompt: string; email: string; phone: string }
@@ -52,21 +54,21 @@ export type Workshop = {
   refundPolicy?: WorkshopInfoRow[]
 }
 
-export const workshops: Record<string, Workshop> = {
-  "songwriting-sep-2026": {
-    slug: "songwriting-sep-2026",
-    title: "Good Noise Project: September 2026 Songwriting Camp",
-    shortTitle: "Good Noise Songwriting Camp",
-    eyebrow: "Camp",
+const allWorkshops: Record<string, Workshop> = {
+  "music-makers-spring-2026": {
+    slug: "music-makers-spring-2026",
+    title: "Music Makers: Spring Holidays Music Program",
+    shortTitle: "Music Makers: Spring Holidays",
+    eyebrow: "School Holiday Music Program",
     teaser:
-      "Our next workshop runs this September school holidays in North Perth, giving Year 9–12 musos the chance to write, compose and perform a song together over two days.",
+      "Our next workshop runs this Spring school holidays in North Perth, giving teen musos aged 14–17 the chance to write, compose and perform a song together over two days.",
     dates: "30 Sep – 1 Oct 2026 (9am – 3pm each day)",
     location: "North Perth",
     price: "$195",
     infoRows: [
-      { label: "When", value: "September school holidays (30 Sep – 1 Oct 2026)" },
+      { label: "When", value: "2026 Spring School Holidays (30 Sep – 1 Oct 2026)" },
       { label: "Where", value: "5 Woodville Lane, North Perth WA 6006" },
-      { label: "Who", value: "Ages 15-18" },
+      { label: "Who", value: "Ages 14-17" },
       { label: "How much", value: "$195" },
     ],
     ctaLabel: "Book your place",
@@ -159,7 +161,7 @@ export const workshops: Record<string, Workshop> = {
 
   "in-school-songwriting": {
     slug: "in-school-songwriting",
-    title: "Good Noise Project: In-School Song and Lyric Writing Workshop",
+    title: "In-School Song and Lyric Writing Workshop",
     shortTitle: "In-School Song and Lyric Writing Workshop",
     teaser:
       "A term-long, in-class songwriting program for Years 9–12 English classes, delivered entirely by Good Noise.",
@@ -205,10 +207,15 @@ export const workshops: Record<string, Workshop> = {
   },
 }
 
+// The October 2026 camp is paused (see SHOW_OCT_2026_CAMP) — filtered out of
+// the exported map so its detail page (looked up by slug) 404s via the
+// normal "unknown workshop" path, without deleting its content above.
+export const workshops: Record<string, Workshop> = SHOW_OCT_2026_CAMP
+  ? allWorkshops
+  : Object.fromEntries(
+      Object.entries(allWorkshops).filter(([slug]) => slug !== "songwriting-oct-2026"),
+    )
+
 // Used by the header's single "Our next workshop" CTA — the chronologically
 // nearest camp.
-export const upcomingWorkshopSlug = "songwriting-sep-2026"
-
-// Used by the homepage "What's coming up" section, which features every
-// currently-open camp side by side.
-export const upcomingWorkshopSlugs = ["songwriting-sep-2026", "songwriting-oct-2026"]
+export const upcomingWorkshopSlug = "music-makers-spring-2026"
