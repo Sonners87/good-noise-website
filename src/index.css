@@ -2,7 +2,7 @@
 
 @theme {
   --font-display: "Baloo 2", sans-serif;
-  --font-heading: "Fjalla One", sans-serif;
+  --font-heading: "Anton", sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
 
   /* Forest — primary */
@@ -54,17 +54,17 @@ body {
   also use .font-display. The extra element-selector specificity (h1.font-display
   beats .font-display alone) is needed to win over the utility class.
 
-  Fjalla One is condensed and Regular-weight only, so at the same font-size
-  it reads narrower/lighter than the Baloo 2 800-weight it replaces here.
-  font-size-adjust re-targets its rendered x-height to match Baloo 2's
-  (measured ratio ~0.691) at whatever font-size each heading already uses,
-  and the positive letter-spacing widens its narrower glyph width back
-  toward Baloo 2's — both corrections apply uniformly across every
-  h1/h2 instance regardless of its Tailwind text-size class.
+  Anton is heavy and condensed. Measuring actual heading text (not just a
+  sample string) at each Tailwind size in use across the site, its ink
+  height already matches Baloo 2's 800-weight almost exactly at the same
+  font-size (median ratio ~1.0), so no font-size-adjust is needed. It is
+  narrower though (median ~9% less width for the same text), so the
+  positive letter-spacing widens it back toward Baloo 2's footprint —
+  this applies uniformly across every h1/h2 instance regardless of its
+  Tailwind text-size class.
 */
 h1.font-display,
 h2.font-display {
   font-family: var(--font-heading);
-  font-size-adjust: 0.691;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
