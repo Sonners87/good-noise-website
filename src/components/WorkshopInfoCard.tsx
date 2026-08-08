@@ -18,17 +18,17 @@ export default function WorkshopInfoCard({
   className = "",
 }: WorkshopInfoCardProps) {
   return (
-    <div className={`border-2 border-ink bg-cream ${className}`}>
+    <div className={`flex flex-col border-2 border-ink bg-cream ${className}`}>
       {title && (
-        <div className="border-b-2 border-ink px-6 py-4">
+        <div className="border-b-2 border-ink px-6 py-4 md:py-5">
           <span className="font-body font-bold text-lg text-ink">{title}</span>
         </div>
       )}
-      <div className="space-y-4 px-6 py-6">
+      <div className="flex flex-1 flex-col justify-center gap-4 px-6 py-6">
         {rows.map((row, i) => (
           <div
             key={row.label}
-            className={`flex items-start justify-between gap-4 ${i === rows.length - 1 ? "pb-1" : "border-b border-ink/15 pb-3"}`}
+            className={`flex items-start justify-between gap-4 ${i === rows.length - 1 ? "" : "border-b border-ink/15 pb-4"}`}
           >
             <span className="shrink-0 font-body font-semibold text-xs tracking-wide text-ink/60">
               {row.label}
@@ -40,7 +40,7 @@ export default function WorkshopInfoCard({
         ))}
       </div>
       {ctaLabel && ctaHref && (
-        <div className="border-t-2 border-ink px-6 py-6">
+        <div className="border-t-2 border-ink px-6 py-6 md:py-8">
           <PillButton href={ctaHref} variant="primary" className="w-full">
             {ctaLabel}
             <span aria-hidden="true">&rarr;</span>

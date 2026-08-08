@@ -10,15 +10,17 @@ export default function UpcomingWorkshop() {
   return (
     <section id="workshops" className="relative overflow-hidden bg-brand">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-        <Eyebrow tone="onBlue">What's coming up</Eyebrow>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.15fr_1fr] md:items-stretch md:gap-12">
+          <div className="flex flex-col">
+            <Eyebrow tone="onBlue" className="mb-4">
+              What's coming up
+            </Eyebrow>
 
-        <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-          Spring Holidays Music Program
-        </h2>
+            <h2 className="font-display mb-6 text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
+              Spring Holidays Music Program
+            </h2>
 
-        <div className="mt-12 grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-12">
-          <div className="flex flex-col gap-6">
-            <p className="text-base leading-relaxed text-white/85 md:text-lg">
+            <p className="mb-8 text-base leading-relaxed text-white/85 md:text-lg">
               {workshop.teaser}
             </p>
 
@@ -40,6 +42,7 @@ export default function UpcomingWorkshop() {
             ]}
             ctaLabel="View workshop details"
             ctaHref={`/workshops/${workshop.slug}`}
+            className="md:h-full"
           />
         </div>
       </div>
