@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import Header from "../components/Header"
+import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import CampSignupForm from "../components/CampSignupForm"
@@ -45,34 +45,31 @@ export default function BookingOctCamp() {
 
   return (
     <>
-      <section className="bg-brand">
-        <Header />
-        <div className="mx-auto max-w-[1400px] px-5 pb-16 pt-4 md:px-10 md:pb-24">
-          <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-            Good Noise Songwriting Camp
-          </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
-            Two days. One song. A room full of young musos meeting for the
-            first time.
-          </p>
+      <PageHero>
+        <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
+          Good Noise Songwriting Camp
+        </h1>
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+          Two days. One song. A room full of young musos meeting for the
+          first time.
+        </p>
 
-          <div className="mt-10 max-w-md">
-            <WorkshopInfoCard
-              rows={[
-                { label: "Cost", value: "$195" },
-                {
-                  label: "Dates",
-                  value: "6–7 October (October school holidays)",
-                },
-                {
-                  label: "Location",
-                  value: "5 Woodville Lane, North Perth WA 6006",
-                },
-              ]}
-            />
-          </div>
+        <div className="mt-10 max-w-md">
+          <WorkshopInfoCard
+            rows={[
+              { label: "Cost", value: "$195" },
+              {
+                label: "Dates",
+                value: "6–7 October (October school holidays)",
+              },
+              {
+                label: "Location",
+                value: "5 Woodville Lane, North Perth WA 6006",
+              },
+            ]}
+          />
         </div>
-      </section>
+      </PageHero>
 
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">

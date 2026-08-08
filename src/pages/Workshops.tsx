@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import Header from "../components/Header"
+import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import WorkshopCard from "../components/WorkshopCard"
 import { workshops } from "../content/workshops"
@@ -40,18 +40,15 @@ export default function Workshops() {
 
   return (
     <>
-      <section className="bg-brand">
-        <Header />
-        <div className="mx-auto max-w-[1400px] px-5 pb-16 pt-4 md:px-10 md:pb-24">
-          <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-            A Few Ways to Make Good Noise
-          </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
-            From weekend workshops to in-school programs — here's what's on,
-            and what's coming.
-          </p>
-        </div>
-      </section>
+      <PageHero>
+        <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
+          A Few Ways to Make Good Noise
+        </h1>
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+          From weekend workshops to in-school programs — here's what's on,
+          and what's coming.
+        </p>
+      </PageHero>
 
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">

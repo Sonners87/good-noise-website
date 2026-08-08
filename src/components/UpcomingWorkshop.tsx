@@ -16,12 +16,12 @@ export default function UpcomingWorkshop() {
           Spring Holidays Music Program
         </h2>
 
-        <div className="mt-12 grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
-          <p className="text-base leading-relaxed text-white/85 md:text-lg">
-            {workshop.teaser}
-          </p>
+        <div className="mt-12 grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-12">
+          <div className="flex flex-col gap-6">
+            <p className="text-base leading-relaxed text-white/85 md:text-lg">
+              {workshop.teaser}
+            </p>
 
-          <div className="grid grid-cols-1 gap-5">
             <PhotoImage
               src={guitaristSagePhoto}
               alt="Silhouette of a teenage musician holding an electric guitar and singing into a microphone, lit sage-green on stage"
@@ -29,18 +29,18 @@ export default function UpcomingWorkshop() {
               objectPosition="center 30%"
               className="border-2 border-white/15"
             />
-
-            <WorkshopInfoCard
-              title={workshop.shortTitle}
-              rows={[
-                { label: "Dates", value: workshop.dates ?? "" },
-                { label: "Cost", value: workshop.price ?? "" },
-                { label: "Location", value: workshop.location ?? "" },
-              ]}
-              ctaLabel="View workshop details"
-              ctaHref={`/workshops/${workshop.slug}`}
-            />
           </div>
+
+          <WorkshopInfoCard
+            title={workshop.shortTitle}
+            rows={[
+              { label: "Dates", value: workshop.dates ?? "" },
+              { label: "Cost", value: workshop.price ?? "" },
+              { label: "Location", value: workshop.location ?? "" },
+            ]}
+            ctaLabel="View workshop details"
+            ctaHref={`/workshops/${workshop.slug}`}
+          />
         </div>
       </div>
     </section>
