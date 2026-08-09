@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
-          <Route path="/book" element={<Book />} />
+          <Route path="/book-2026-spring-holidays" element={<Book />} />
           {/* October 2026 camp is paused — see SHOW_OCT_2026_CAMP in
               content/featureFlags.ts. Flip it to `true` to restore this
               route (and the /holiday-camps route below) without touching

@@ -31,12 +31,15 @@ export type Workshop = {
   ctaLabel: string
   ctaHref: string
 
+  /** Heading rendered above `introParagraphs`. Omit for no heading. */
+  introHeading?: string
   introParagraphs: string[]
   /** Rendered above `highlights`, as its own "What to Expect" list — general-vibe expectations rather than a day-by-day schedule. */
   whatToExpect?: WorkshopExpectItem[]
   /** Rendered above `highlights`, as its own "What to Bring" list, right after `whatToExpect`. */
   whatToBring?: string[]
   highlightsHeading: string
+  /** Day-by-day highlight cards. Leave empty to skip this section entirely (e.g. while an itinerary isn't finalised yet). */
   highlights: WorkshopHighlight[]
   /** Short note inviting people outside the workshop's target age range to get in touch. Rendered under the hero info card. */
   ageRangeNote?: string
@@ -44,6 +47,8 @@ export type Workshop = {
   // Closing section — a workshop has EITHER a booking-style closing
   // (limitedSpotsNote/refundShortNote) OR a direct-contact closing
   // (directContact), not both.
+  /** Heading rendered above `limitedSpotsNote`. Omit for no heading. */
+  limitedSpotsHeading?: string
   limitedSpotsNote?: string
   refundShortNote?: string
   directContact?: WorkshopDirectContact
@@ -76,15 +81,15 @@ const allWorkshops: Record<string, Workshop> = {
       { label: "When", value: "2026 Spring School Holidays (30 Sep – 1 Oct 2026)" },
       { label: "Where", value: "5 Woodville Lane, North Perth WA 6006" },
       { label: "Who", value: "Ages 14-17" },
+      { label: "Experience level", value: "Some prior experience preferred" },
       { label: "How much", value: "$195" },
     ],
     ctaLabel: "Book your place",
-    ctaHref: "/book",
+    ctaHref: "/book-2026-spring-holidays",
+    introHeading: "Music's Better Shared!",
     introParagraphs: [
-      "There's a time to strum alone in your bedroom. Then there's a time to share that riff, that vocal melody, that drum fill with others.",
-      "Music's better shared. A 2025 University of Sydney report found 43% of young Australians feel lonely — Good Noise Project exists to make that number a little smaller.",
       "Good Noise Project presents a two-day songwriting workshop in Perth, set inside a room full of instruments begging to be picked up. You'll join several other young musos in a safe space and write your very own song together! There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band.",
-      "There's no need to be awesome at your instrument. You might've only just picked it up for the first time. You might even be a gun at your musical tool but want to give another one a go. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something awesome.",
+      "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might even be a gun at your musical tool but want to give another one a go. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something awesome.",
     ],
     whatToExpect: [
       {
@@ -115,21 +120,13 @@ const allWorkshops: Record<string, Workshop> = {
       "Earplugs (if sensitive to noise)",
     ],
     highlightsHeading: "What happens over two days:",
-    highlights: [
-      {
-        title: "Day 1",
-        body: "Details coming soon.",
-      },
-      {
-        title: "Day 2",
-        body: "Details coming soon.",
-      },
-    ],
+    highlights: [],
+    limitedSpotsHeading: "Kept Small On Purpose",
     limitedSpotsNote:
       "Spots are limited to a small group to ensure everyone feels comfortable, included and has their voice heard (if they want it to be!).",
     refundShortNote: "Refund for cancellations 2+ weeks before.",
     ageRangeNote:
-      "Outside ages 14–17? Get in touch directly at dave@goodnoiseproject.com.au and we'll sort something out.",
+      "Outside ages 14–17? Get in touch directly at dave@goodnoiseproject.com.au.",
     facilitatorHeading: "About your facilitator",
     facilitatorBio:
       "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",
