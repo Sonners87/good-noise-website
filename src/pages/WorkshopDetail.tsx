@@ -76,6 +76,12 @@ export default function WorkshopDetail() {
                 ctaHref={workshop.ctaHref}
               />
             </div>
+
+            {workshop.ageRangeNote && (
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                {linkifyEmail(workshop.ageRangeNote)}
+              </p>
+            )}
           </div>
 
           {heroImage && (
@@ -106,9 +112,9 @@ export default function WorkshopDetail() {
             {workshop.highlightsHeading}
           </h2>
           <div className={`mt-10 grid grid-cols-1 gap-6 ${highlightsColumns}`}>
-            {workshop.highlights.map((highlight) => (
+            {workshop.highlights.map((highlight, i) => (
               <div
-                key={highlight.body}
+                key={`${highlight.title ?? ""}-${i}`}
                 className="border-2 border-ink bg-sage/25 p-6 text-base leading-relaxed text-ink/85 md:text-lg"
               >
                 {highlight.title && (

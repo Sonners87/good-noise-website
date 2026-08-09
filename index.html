@@ -37,26 +37,17 @@
 
     <!--
       Static, hidden duplicates of the forms rendered by ContactForm.tsx and
-      MusicianIntakeForm.tsx. Netlify Forms only detects forms present in the
+      CampSignupForm.tsx. Netlify Forms only detects forms present in the
       raw HTML at build time — it never runs our JS — so without a plain
       HTML copy of each form somewhere in the site, Netlify has no record of
       them and silently drops real submissions. Keep field names here in
-      sync with those two components if either changes.
+      sync with those components if any of them change.
     -->
     <form name="contact" data-netlify="true" hidden>
       <input type="hidden" name="form-name" value="contact" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
-    </form>
-
-    <form name="musician-intake" data-netlify="true" hidden>
-      <input type="hidden" name="form-name" value="musician-intake" />
-      <input type="text" name="participantName" />
-      <textarea name="hopes"></textarea>
-      <textarea name="nerves"></textarea>
-      <textarea name="aboutThem"></textarea>
-      <textarea name="accessNeeds"></textarea>
     </form>
 
     <form name="camp-signup" data-netlify="true" hidden>
@@ -71,6 +62,25 @@
       <input type="text" name="parentLastName" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
+      <input type="text" name="supportNeeds" />
+      <textarea name="supportNeedsDetails"></textarea>
+    </form>
+
+    <!--
+      Submitted alongside "camp-signup" only when a booking's support-needs
+      screening question is answered "yes" — kept as its own named form so a
+      dedicated email notification can be set up for it in the Netlify
+      dashboard (Site settings -> Forms -> Form notifications), separate from
+      the notification (if any) on every ordinary "camp-signup" booking.
+    -->
+    <form name="support-needs-flag" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="support-needs-flag" />
+      <input type="text" name="camp" />
+      <input type="text" name="participantName" />
+      <input type="text" name="parentName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="details"></textarea>
     </form>
 
     <script type="module" src="/src/main.tsx"></script>
