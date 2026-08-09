@@ -78,15 +78,19 @@ const allWorkshops: Record<string, Workshop> = {
     location: "North Perth",
     price: "$195",
     infoRows: [
-      { label: "When", value: "2026 Spring School Holidays (30 Sep – 1 Oct 2026)" },
-      { label: "Where", value: "5 Woodville Lane, North Perth WA 6006" },
+      { label: "When", value: "Wed, 30 Sep – 1 Oct" },
+      { label: "Time", value: "9am – 3pm each day" },
+      {
+        label: "Where",
+        value: "Player 1 Music School\n5 Woodville Lane, North Perth WA 6006",
+      },
       { label: "Who", value: "Ages 14-17" },
       { label: "Experience level", value: "Some prior experience preferred" },
       { label: "How much", value: "$195" },
     ],
     ctaLabel: "Book your place",
     ctaHref: "/book-2026-spring-holidays",
-    introHeading: "Music's Better Shared!",
+    introHeading: "Music's Better Shared",
     introParagraphs: [
       "Good Noise Project presents a two-day songwriting workshop in Perth, set inside a room full of instruments begging to be picked up. You'll join several other young musos in a safe space and write your very own song together! There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band.",
       "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might even be a gun at your musical tool but want to give another one a go. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something awesome.",

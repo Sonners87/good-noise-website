@@ -119,7 +119,7 @@ export default function WorkshopDetail() {
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
           {workshop.introHeading && (
-            <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+            <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
               {workshop.introHeading}
             </h2>
           )}
@@ -142,7 +142,7 @@ export default function WorkshopDetail() {
           <div className="mx-auto flex max-w-[1400px] flex-col gap-14 px-5 pb-16 md:px-10 md:pb-24">
             {workshop.whatToExpect && (
               <div>
-                <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+                <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
                   What to Expect
                 </h2>
                 <ul className="mt-8 max-w-2xl space-y-3">
@@ -166,7 +166,7 @@ export default function WorkshopDetail() {
 
             {workshop.whatToBring && (
               <div>
-                <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+                <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
                   What to Bring
                 </h2>
                 <ul className="mt-8 max-w-md space-y-3">
@@ -219,7 +219,7 @@ export default function WorkshopDetail() {
         <section className="bg-brand">
           <div className="mx-auto max-w-[1400px] px-5 py-16 text-center md:px-10 md:py-20">
             {workshop.limitedSpotsHeading && (
-              <h2 className="font-display mx-auto max-w-xl text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
+              <h2 className="font-display mx-auto max-w-xl text-4xl leading-[0.98] text-white sm:text-5xl">
                 {workshop.limitedSpotsHeading}
               </h2>
             )}
