@@ -6,6 +6,7 @@ import { SHOW_OCT_2026_CAMP } from "./featureFlags"
 
 export type WorkshopInfoRow = { label: string; value: string }
 export type WorkshopHighlight = { title?: string; body: string }
+export type WorkshopExpectItem = { bold: string; rest: string }
 export type WorkshopDirectContact = { prompt: string; email: string; phone: string }
 
 export type Workshop = {
@@ -31,6 +32,10 @@ export type Workshop = {
   ctaHref: string
 
   introParagraphs: string[]
+  /** Rendered above `highlights`, as its own "What to Expect" list — general-vibe expectations rather than a day-by-day schedule. */
+  whatToExpect?: WorkshopExpectItem[]
+  /** Rendered above `highlights`, as its own "What to Bring" list, right after `whatToExpect`. */
+  whatToBring?: string[]
   highlightsHeading: string
   highlights: WorkshopHighlight[]
   /** Short note inviting people outside the workshop's target age range to get in touch. Rendered under the hero info card. */
@@ -80,6 +85,34 @@ const allWorkshops: Record<string, Workshop> = {
       "Music's better shared. A 2025 University of Sydney report found 43% of young Australians feel lonely — Good Noise Project exists to make that number a little smaller.",
       "Good Noise Project presents a two-day songwriting workshop in Perth, set inside a room full of instruments begging to be picked up. You'll join several other young musos in a safe space and write your very own song together! There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band.",
       "There's no need to be awesome at your instrument. You might've only just picked it up for the first time. You might even be a gun at your musical tool but want to give another one a go. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something awesome.",
+    ],
+    whatToExpect: [
+      {
+        bold: "Day 1 is all exploration",
+        rest: " — trying instruments, finding a role in the group, shaping ideas together. No theory lessons, no sitting and listening.",
+      },
+      {
+        bold: "Day 2 builds toward one thing",
+        rest: ": bringing the song they've written to life, together, as a group.",
+      },
+      {
+        bold: "No solo pressure",
+        rest: " — nobody's singled out to perform alone or judged individually. It's a group effort from start to finish.",
+      },
+      {
+        bold: "Small group size",
+        rest: " — kept deliberately small so every voice actually gets heard, not lost in a crowd.",
+      },
+      {
+        bold: "Facilitated the whole way through",
+        rest: " by Dave — a working musician, not a classroom teacher running a lesson plan.",
+      },
+    ],
+    whatToBring: [
+      "Your instrument (range of instruments available)",
+      "Water bottle",
+      "Packed lunch & snacks each day",
+      "Earplugs (if sensitive to noise)",
     ],
     highlightsHeading: "What happens over two days:",
     highlights: [

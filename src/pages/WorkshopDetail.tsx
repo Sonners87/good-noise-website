@@ -105,6 +105,59 @@ export default function WorkshopDetail() {
         </div>
       </section>
 
+      {/* What to Expect / What to Bring — general-vibe expectations, shown
+          above the day-by-day highlights below. */}
+      {(workshop.whatToExpect || workshop.whatToBring) && (
+        <section className="bg-cream">
+          <div className="mx-auto flex max-w-[1400px] flex-col gap-14 px-5 pb-16 md:px-10 md:pb-24">
+            {workshop.whatToExpect && (
+              <div>
+                <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+                  What to Expect
+                </h2>
+                <ul className="mt-8 max-w-2xl space-y-3">
+                  {workshop.whatToExpect.map((item) => (
+                    <li
+                      key={item.bold}
+                      className="flex items-start gap-3 border-b border-ink/15 pb-3 font-body text-base leading-relaxed text-ink/80 last:border-b-0 md:text-lg"
+                    >
+                      <span className="mt-1 text-terracotta" aria-hidden="true">
+                        &#9679;
+                      </span>
+                      <span>
+                        <strong className="font-semibold text-ink">{item.bold}</strong>
+                        {item.rest}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {workshop.whatToBring && (
+              <div>
+                <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+                  What to Bring
+                </h2>
+                <ul className="mt-8 max-w-md space-y-3">
+                  {workshop.whatToBring.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 border-b border-ink/15 pb-3 font-body text-base text-ink/80 last:border-b-0 md:text-lg"
+                    >
+                      <span className="mt-1 text-terracotta" aria-hidden="true">
+                        &#9679;
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Highlights / schedule */}
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
@@ -179,7 +232,7 @@ export default function WorkshopDetail() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
           <PhotoImage
             src={facilitatorPhoto}
-            alt="Dave Sonntag smiling, sitting on a rooftop ledge in Perth"
+            alt="Dave Sonntag playing acoustic guitar and singing into a microphone outdoors"
             aspect="aspect-[4/5]"
             objectPosition="center 20%"
           />

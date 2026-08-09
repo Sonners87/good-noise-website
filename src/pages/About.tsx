@@ -41,7 +41,7 @@ export default function About() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-20">
           <PhotoImage
             src={facilitatorPhoto}
-            alt="Dave Sonntag smiling, sitting on a rooftop ledge in Perth"
+            alt="Dave Sonntag playing acoustic guitar and singing into a microphone outdoors"
             aspect="aspect-[4/5]"
             objectPosition="center 20%"
           />
