@@ -29,6 +29,9 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
   const [error, setError] = useState(false)
   const [supportNeeds, setSupportNeeds] = useState<"yes" | "no" | "">("")
   const [flagged, setFlagged] = useState(false)
+  const [participantAddress, setParticipantAddress] = useState("")
+  const [sameAddress, setSameAddress] = useState(true)
+  const [parentAddressManual, setParentAddressManual] = useState("")
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -127,25 +130,51 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         </label>
 
         <label className="flex flex-col gap-2">
+          <span className={labelClass}>Address</span>
+          <input
+            required
+            type="text"
+            name="participantAddress"
+            autoComplete="street-address"
+            className={inputClass}
+            value={participantAddress}
+            onChange={(e) => setParticipantAddress(e.target.value)}
+          />
+        </label>
+
+        <label className="flex flex-col gap-2">
           <span className={labelClass}>Preferred instrument</span>
           <input
             required
             type="text"
             name="instrument"
             className={inputClass}
-            placeholder="e.g. guitar, vocals, drums"
+            placeholder="e.g. vocals, guitar, saxophone"
           />
         </label>
 
-        <label className="flex flex-col gap-2">
-          <span className={labelClass}>Tell us a bit about yourself</span>
-          <textarea
-            name="aboutYou"
-            rows={3}
-            className={inputClass}
-            placeholder="What music are you into? Have you played in bands before?"
-          />
-        </label>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Emergency contact name</span>
+            <input
+              required
+              type="text"
+              name="emergencyContactName"
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Emergency contact number</span>
+            <input
+              required
+              type="tel"
+              name="emergencyContactPhone"
+              inputMode="tel"
+              autoComplete="tel"
+              className={inputClass}
+            />
+          </label>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-5 border-t-2 border-white/25 pt-6">
@@ -197,6 +226,35 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
             className={inputClass}
           />
         </label>
+
+        <div className="flex flex-col gap-3">
+          <label className="flex cursor-pointer items-center gap-2">
+            <input
+              type="checkbox"
+              className="h-4 w-4 accent-ink"
+              checked={sameAddress}
+              onChange={(e) => setSameAddress(e.target.checked)}
+            />
+            <span className={labelClass}>Same as participant address</span>
+          </label>
+
+          {sameAddress ? (
+            <input type="hidden" name="parentAddress" value={participantAddress} />
+          ) : (
+            <label className="flex flex-col gap-2">
+              <span className={labelClass}>Address</span>
+              <input
+                required
+                type="text"
+                name="parentAddress"
+                autoComplete="street-address"
+                className={inputClass}
+                value={parentAddressManual}
+                onChange={(e) => setParentAddressManual(e.target.value)}
+              />
+            </label>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-4 border-t-2 border-white/25 pt-6">
