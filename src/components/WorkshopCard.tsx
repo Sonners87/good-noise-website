@@ -14,6 +14,7 @@ type LiveWorkshopCardProps = CardBody & {
   href: string
   photoSrc: string
   photoAlt: string
+  photoObjectPosition?: string
 }
 
 type ComingSoonWorkshopCardProps = CardBody & {
@@ -54,7 +55,12 @@ export default function WorkshopCard(props: WorkshopCardProps) {
       >
         <Title title={props.title} />
 
-        <PhotoImage src={props.photoSrc} alt={props.photoAlt} aspect="aspect-[16/9]" />
+        <PhotoImage
+          src={props.photoSrc}
+          alt={props.photoAlt}
+          aspect="aspect-[16/9]"
+          objectPosition={props.photoObjectPosition}
+        />
 
         <Details blurb={props.blurb} whoFor={props.whoFor} />
 

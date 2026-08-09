@@ -55,11 +55,11 @@ export type Workshop = {
 }
 
 const allWorkshops: Record<string, Workshop> = {
-  "music-makers-spring-2026": {
-    slug: "music-makers-spring-2026",
-    title: "Music Makers: Spring Holidays Music Program",
-    shortTitle: "Music Makers: Spring Holidays",
-    eyebrow: "School Holiday Music Program",
+  "2026-spring-holidays": {
+    slug: "2026-spring-holidays",
+    title: "2026 Spring Holidays Jam Program",
+    shortTitle: "2026 Spring Holidays Jam Program",
+    eyebrow: "CREATE | PLAY | EXPERIMENT",
     teaser:
       "Our next workshop runs this Spring school holidays in North Perth, giving teen musos aged 14–17 the chance to write, compose and perform a song together over two days.",
     dates: "30 Sep – 1 Oct 2026 (9am – 3pm each day)",
@@ -218,4 +218,4 @@ export const workshops: Record<string, Workshop> = SHOW_OCT_2026_CAMP
 
 // Used by the header's single "Our next workshop" CTA — the chronologically
 // nearest camp.
-export const upcomingWorkshopSlug = "music-makers-spring-2026"
+export const upcomingWorkshopSlug = "2026-spring-holidays"

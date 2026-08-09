@@ -24,7 +24,7 @@ export default function WorkshopInfoCard({
           <span className="font-body font-bold text-lg text-ink">{title}</span>
         </div>
       )}
-      <div className="flex flex-1 flex-col justify-center gap-4 px-6 py-6">
+      <div className="flex flex-1 flex-col justify-start gap-4 px-6 py-6">
         {rows.map((row, i) => (
           <div
             key={row.label}

@@ -40,14 +40,14 @@ const whatToBring = [
 
 export default function BookingSepCamp() {
   useEffect(() => {
-    document.title = "Book — Music Makers: Spring Holidays Music Program — Good Noise Project"
+    document.title = "Book — 2026 Spring Holidays Jam Program — Good Noise Project"
   }, [])
 
   return (
     <>
       <PageHero>
         <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-          Music Makers: Spring Holidays Music Program
+          2026 Spring Holidays Jam Program
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
           Two days. One song. A room full of young musos who've never met

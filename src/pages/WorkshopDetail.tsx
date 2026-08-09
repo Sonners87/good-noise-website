@@ -13,17 +13,19 @@ import { linkifyEmail } from "../lib/linkifyEmail"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
-import guitaristSagePhoto from "../assets/images/workshop-guitarist-sage.webp"
+import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
 
 // Per-slug hero imagery. Content data stays plain (no image imports), so
 // each new workshop just needs an entry here alongside its content entry.
-// `aspect` defaults to portrait (4/5) when omitted; landscape photos should
-// set it explicitly so PhotoImage's object-cover crop doesn't lose the sides.
-const heroImages: Record<string, { src: string; alt: string; aspect?: string }> = {
-  "music-makers-spring-2026": {
-    src: guitaristSagePhoto,
-    alt: "Silhouette of a teenage musician holding an electric guitar and singing into a microphone, lit sage-green on stage",
-    aspect: "aspect-[4/3]",
+// PhotoImage always renders these in its portrait (4/5) box with object-cover,
+// so any source photo — landscape or portrait — auto-crops to fit without
+// needing to pre-crop the file. Use `objectPosition` to steer the crop toward
+// the subject if the default center crop cuts off what matters.
+const heroImages: Record<string, { src: string; alt: string; objectPosition?: string }> = {
+  "2026-spring-holidays": {
+    src: jamInstrumentsPhoto,
+    alt: "Silhouetted hands holding guitars, a bass, a keyboard, a cymbal and microphones up against the sky",
+    objectPosition: "center 80%",
   },
   "songwriting-oct-2026": {
     src: bandPracticePhoto,
@@ -57,7 +59,13 @@ export default function WorkshopDetail() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-14 md:grid-cols-2 md:px-10 md:py-20">
           <div>
             <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
-            <h1 className="font-display max-w-2xl text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl">
+            <h1
+              className={`font-display max-w-2xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl ${
+                workshop.slug === "2026-spring-holidays"
+                  ? "uppercase text-terracotta"
+                  : "text-white"
+              }`}
+            >
               {workshop.title}
             </h1>
 
@@ -74,7 +82,7 @@ export default function WorkshopDetail() {
             <PhotoImage
               src={heroImage.src}
               alt={heroImage.alt}
-              aspect={heroImage.aspect ?? "aspect-[4/5]"}
+              objectPosition={heroImage.objectPosition}
             />
           )}
         </div>
