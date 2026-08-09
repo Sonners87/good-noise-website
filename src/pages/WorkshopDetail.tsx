@@ -13,7 +13,7 @@ import { linkifyEmail } from "../lib/linkifyEmail"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
-import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
+import heroInstrumentsBw from "../assets/images/hero-instruments-bw.png"
 
 // Per-slug hero imagery. Content data stays plain (no image imports), so
 // each new workshop just needs an entry here alongside its content entry.
@@ -22,11 +22,6 @@ import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
 // needing to pre-crop the file. Use `objectPosition` to steer the crop toward
 // the subject if the default center crop cuts off what matters.
 const heroImages: Record<string, { src: string; alt: string; objectPosition?: string }> = {
-  "2026-spring-holidays": {
-    src: jamInstrumentsPhoto,
-    alt: "Silhouetted hands holding guitars, a bass, a keyboard, a cymbal and microphones up against the sky",
-    objectPosition: "center 80%",
-  },
   "songwriting-oct-2026": {
     src: bandPracticePhoto,
     alt: "Two young musicians at band practice, one playing electric guitar and singing into a microphone",
@@ -34,6 +29,16 @@ const heroImages: Record<string, { src: string; alt: string; objectPosition?: st
   "in-school-songwriting": {
     src: acousticBoyPhoto,
     alt: "A teenage boy playing acoustic guitar on stage",
+  },
+}
+
+// Workshops that use a full-bleed decorative background image behind the
+// hero copy instead of a side-by-side photo (see `heroImages` above) — the
+// hero collapses to a single column when a slug has one of these.
+const heroBackgroundImages: Record<string, { src: string; alt: string }> = {
+  "2026-spring-holidays": {
+    src: heroInstrumentsBw,
+    alt: "",
   },
 }
 
@@ -48,56 +53,81 @@ export default function WorkshopDetail() {
   if (!workshop) return <NotFound />
 
   const heroImage = heroImages[workshop.slug]
+  const heroBackground = heroBackgroundImages[workshop.slug]
   const highlightsColumns =
     workshop.highlights.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
 
   return (
     <>
       {/* Intro / info summary */}
-      <section className="bg-brand">
-        <Header />
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-14 md:grid-cols-2 md:px-10 md:py-20">
-          <div>
-            <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
-            <h1
-              className={`font-display max-w-2xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl ${
-                workshop.slug === "2026-spring-holidays"
-                  ? "uppercase text-terracotta"
-                  : "text-white"
-              }`}
-            >
-              {workshop.title}
-            </h1>
+      <section className="relative overflow-hidden bg-brand">
+        {heroBackground && (
+          <img
+            src={heroBackground.src}
+            alt={heroBackground.alt}
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full opacity-20"
+          />
+        )}
 
-            <div className="mt-8 max-w-md">
-              <WorkshopInfoCard
-                rows={workshop.infoRows}
-                ctaLabel={workshop.ctaLabel}
-                ctaHref={workshop.ctaHref}
-              />
+        <div className="relative z-10">
+          <Header />
+          <div
+            className={`mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-14 md:px-10 md:py-20 ${
+              heroImage ? "md:grid-cols-2" : ""
+            }`}
+          >
+            <div>
+              <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
+              <h1
+                className={`font-display max-w-2xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl ${
+                  workshop.slug === "2026-spring-holidays"
+                    ? "uppercase text-terracotta"
+                    : "text-white"
+                }`}
+              >
+                {workshop.title}
+              </h1>
+
+              <div className="mt-8 max-w-md">
+                <WorkshopInfoCard
+                  rows={workshop.infoRows}
+                  ctaLabel={workshop.ctaLabel}
+                  ctaHref={workshop.ctaHref}
+                />
+              </div>
+
+              {workshop.ageRangeNote && (
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                  {linkifyEmail(workshop.ageRangeNote)}
+                </p>
+              )}
             </div>
 
-            {workshop.ageRangeNote && (
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
-                {linkifyEmail(workshop.ageRangeNote)}
-              </p>
+            {heroImage && (
+              <PhotoImage
+                src={heroImage.src}
+                alt={heroImage.alt}
+                objectPosition={heroImage.objectPosition}
+              />
             )}
           </div>
-
-          {heroImage && (
-            <PhotoImage
-              src={heroImage.src}
-              alt={heroImage.alt}
-              objectPosition={heroImage.objectPosition}
-            />
-          )}
         </div>
       </section>
 
       {/* Intro copy */}
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-          <div className="max-w-2xl space-y-5 text-base leading-relaxed text-ink/80 md:text-lg">
+          {workshop.introHeading && (
+            <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+              {workshop.introHeading}
+            </h2>
+          )}
+          <div
+            className={`max-w-2xl space-y-5 text-base leading-relaxed text-ink/80 md:text-lg ${
+              workshop.introHeading ? "mt-8" : ""
+            }`}
+          >
             {workshop.introParagraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -159,34 +189,45 @@ export default function WorkshopDetail() {
       )}
 
       {/* Highlights / schedule */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
-          <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
-            {workshop.highlightsHeading}
-          </h2>
-          <div className={`mt-10 grid grid-cols-1 gap-6 ${highlightsColumns}`}>
-            {workshop.highlights.map((highlight, i) => (
-              <div
-                key={`${highlight.title ?? ""}-${i}`}
-                className="border-2 border-ink bg-sage/25 p-6 text-base leading-relaxed text-ink/85 md:text-lg"
-              >
-                {highlight.title && (
-                  <p className="font-body font-bold mb-2 text-ink">
-                    {highlight.title}
-                  </p>
-                )}
-                <p>{highlight.body}</p>
-              </div>
-            ))}
+      {workshop.highlights.length > 0 && (
+        <section className="bg-cream">
+          <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
+            <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+              {workshop.highlightsHeading}
+            </h2>
+            <div className={`mt-10 grid grid-cols-1 gap-6 ${highlightsColumns}`}>
+              {workshop.highlights.map((highlight, i) => (
+                <div
+                  key={`${highlight.title ?? ""}-${i}`}
+                  className="border-2 border-ink bg-sage/25 p-6 text-base leading-relaxed text-ink/85 md:text-lg"
+                >
+                  {highlight.title && (
+                    <p className="font-body font-bold mb-2 text-ink">
+                      {highlight.title}
+                    </p>
+                  )}
+                  <p>{highlight.body}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Closing — either a booking-style CTA band or direct-contact details */}
       {workshop.limitedSpotsNote && (
         <section className="bg-brand">
           <div className="mx-auto max-w-[1400px] px-5 py-16 text-center md:px-10 md:py-20">
-            <p className="mx-auto max-w-xl text-base leading-relaxed text-white/90 md:text-lg">
+            {workshop.limitedSpotsHeading && (
+              <h2 className="font-display mx-auto max-w-xl text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
+                {workshop.limitedSpotsHeading}
+              </h2>
+            )}
+            <p
+              className={`mx-auto max-w-xl text-base leading-relaxed text-white/90 md:text-lg ${
+                workshop.limitedSpotsHeading ? "mt-6" : ""
+              }`}
+            >
               {workshop.limitedSpotsNote}
             </p>
             <div className="mt-8 flex flex-col items-center gap-3">

@@ -17,7 +17,7 @@ export default function Book() {
         <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
           Book Your Place
         </h1>
-        <p className="mt-5 max-w-md text-base leading-relaxed text-white/85 md:text-lg">
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
           Fill this out with your young person — a few details about them,
           a few about you, then through to payment.
         </p>

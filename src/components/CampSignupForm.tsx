@@ -6,7 +6,7 @@ const inputClass =
   "border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
 const labelClass = "font-body font-semibold text-xs tracking-wide text-white/85"
 const sectionHeadingClass =
-  "font-body font-bold text-sm uppercase tracking-wide text-white"
+  "font-body font-bold text-base md:text-lg uppercase tracking-wide text-white"
 // The card is on the terracotta accent color, so buttons need to be their
 // own dark variant rather than reusing PillButton's terracotta "primary" —
 // that would blend straight into the background.
