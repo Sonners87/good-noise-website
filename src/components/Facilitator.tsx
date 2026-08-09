@@ -30,7 +30,7 @@ export default function Facilitator() {
 
         <PhotoImage
           src={facilitatorPhoto}
-          alt="Dave Sonntag smiling, sitting on a rooftop ledge in Perth"
+          alt="Dave Sonntag playing acoustic guitar and singing into a microphone outdoors"
           aspect="aspect-[4/5]"
           objectPosition="center 20%"
         />
