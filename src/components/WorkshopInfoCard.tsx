@@ -33,7 +33,7 @@ export default function WorkshopInfoCard({
             <span className="shrink-0 font-body font-semibold text-xs tracking-wide text-ink/60">
               {row.label}
             </span>
-            <span className="font-body font-semibold text-sm text-ink text-right">
+            <span className="whitespace-pre-line font-body font-semibold text-sm text-ink text-right">
               {row.value}
             </span>
           </div>
