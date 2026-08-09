@@ -4,7 +4,7 @@ import Footer from "../components/Footer"
 import WorkshopCard from "../components/WorkshopCard"
 import { workshops } from "../content/workshops"
 import { SHOW_OCT_2026_CAMP } from "../content/featureFlags"
-import guitaristSagePhoto from "../assets/images/workshop-guitarist-sage.webp"
+import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 
@@ -34,7 +34,7 @@ export default function Workshops() {
     document.title = "Workshops — Good Noise Project"
   }, [])
 
-  const musicMakersSpring = workshops["music-makers-spring-2026"]
+  const musicMakersSpring = workshops["2026-spring-holidays"]
   const songwritingOct = SHOW_OCT_2026_CAMP ? workshops["songwriting-oct-2026"] : undefined
   const inSchool = workshops["in-school-songwriting"]
 
@@ -59,8 +59,9 @@ export default function Workshops() {
               title={musicMakersSpring.title}
               blurb={musicMakersSpring.teaser}
               whoFor={whoFor(musicMakersSpring.slug)}
-              photoSrc={guitaristSagePhoto}
-              photoAlt="Silhouette of a teenage musician holding an electric guitar and singing into a microphone, lit sage-green on stage"
+              photoSrc={jamInstrumentsPhoto}
+              photoAlt="Silhouetted hands holding guitars, a bass, a keyboard, a cymbal and microphones up against the sky"
+              photoObjectPosition="center 80%"
             />
 
             {songwritingOct && (
