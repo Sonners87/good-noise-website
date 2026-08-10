@@ -78,7 +78,7 @@ const allWorkshops: Record<string, Workshop> = {
     location: "North Perth",
     price: "$195",
     infoRows: [
-      { label: "When", value: "Wed, 30 Sep – 1 Oct" },
+      { label: "When", value: "Wed, 30 Sep – Thu, 1 Oct 2026" },
       { label: "Time", value: "9am – 3pm each day" },
       {
         label: "Where",
