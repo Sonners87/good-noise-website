@@ -85,7 +85,6 @@ const allWorkshops: Record<string, Workshop> = {
         value: "Player 1 Music School\n5 Woodville Lane, North Perth WA 6006",
       },
       { label: "Who", value: "Ages 14-17" },
-      { label: "Experience level", value: "Some prior experience preferred" },
       { label: "How much", value: "$195" },
     ],
     ctaLabel: "Book your place",

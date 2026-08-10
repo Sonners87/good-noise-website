@@ -4,7 +4,6 @@ import UpcomingWorkshop from "../components/UpcomingWorkshop"
 import WhyWeExist from "../components/WhyWeExist"
 import Programs from "../components/Programs"
 import SafetyFirst from "../components/SafetyFirst"
-import FounderQuote from "../components/FounderQuote"
 import Facilitator from "../components/Facilitator"
 import GetInvolvedForm from "../components/GetInvolvedForm"
 import StayInLoop from "../components/StayInLoop"
@@ -17,7 +16,6 @@ export default function Home() {
       <IntroSection />
       <UpcomingWorkshop />
       <WhyWeExist />
-      <FounderQuote />
       <Programs />
       <SafetyFirst />
       <Facilitator />

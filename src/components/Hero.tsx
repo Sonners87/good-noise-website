@@ -18,7 +18,7 @@ export default function Hero() {
             <Eyebrow tone="onBlue">Community music workshops in Perth</Eyebrow>
 
             <h1 className="font-display text-white leading-[0.94] text-[13vw] md:text-[clamp(2.5rem,6vw,5.5rem)]">
-              Sounds Like You.
+              Music's Better Shared.
             </h1>
 
             <p className="font-body font-semibold mt-3 text-terracotta text-base md:text-lg">

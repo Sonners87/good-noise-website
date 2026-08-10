@@ -33,16 +33,6 @@ const heroImages: Record<string, { src: string; alt: string; objectPosition?: st
   },
 }
 
-// Workshops that use a full-bleed decorative background image behind the
-// hero copy instead of a side-by-side photo (see `heroImages` above) — the
-// hero collapses to a single column when a slug has one of these.
-const heroBackgroundImages: Record<string, { src: string; alt: string }> = {
-  "2026-spring-holidays": {
-    src: heroInstrumentsBw,
-    alt: "",
-  },
-}
-
 // `slugProp` lets a page mount this component directly against a fixed
 // workshop (e.g. the /for-schools route) instead of reading the slug from
 // the URL — same rendering, different route.
@@ -59,24 +49,87 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   if (!workshop) return <NotFound />
 
   const heroImage = heroImages[workshop.slug]
-  const heroBackground = heroBackgroundImages[workshop.slug]
+  const isSpringHolidays = workshop.slug === "2026-spring-holidays"
   const highlightsColumns =
     workshop.highlights.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
 
   return (
     <>
       {/* Intro / info summary */}
-      <section className="relative overflow-hidden bg-brand">
-        {heroBackground && (
-          <img
-            src={heroBackground.src}
-            alt={heroBackground.alt}
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full opacity-20"
-          />
-        )}
+      {isSpringHolidays ? (
+        <section className="overflow-hidden bg-brand">
+          <Header />
 
-        <div className="relative z-10">
+          <div className="md:flex md:min-h-[560px]">
+            {/* Eyebrow, headline, hook line, reassurance, CTA — left-aligned,
+                vertically centered against the photo column on desktop. */}
+            <div className="flex flex-col justify-center px-5 pb-10 pt-10 md:w-1/2 md:pb-16 md:pl-10 md:pr-10 md:pt-20">
+              <div className="max-w-md">
+                <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
+                <h1 className="font-display text-4xl uppercase leading-[1.05] text-terracotta sm:text-5xl md:text-6xl">
+                  {workshop.title}
+                </h1>
+                <p className="font-display mt-3 text-2xl uppercase leading-[1.05] text-white sm:text-3xl md:text-4xl">
+                  Your Bandmates Are Waiting!
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-white/85 md:text-lg">
+                  Some prior playing experience is preferred. Don&rsquo;t own
+                  an instrument? No worries — we&rsquo;ve got plenty.
+                </p>
+                <div className="mt-8">
+                  <PillButton href={workshop.ctaHref} variant="primary">
+                    {workshop.ctaLabel}
+                    <span aria-hidden="true">&rarr;</span>
+                  </PillButton>
+                </div>
+              </div>
+            </div>
+
+            {/* Arms/instruments photo — full-bleed strip below the CTA on
+                mobile, full-bleed right column on desktop. Rendered twice
+                (one per breakpoint) since the crop shape differs; the
+                source PNG is transparent above the arms, so object-position
+                bottom always keeps them anchored to the section's bottom
+                edge regardless of container height. */}
+            <div className="relative h-64 w-full overflow-hidden sm:h-80 md:hidden">
+              <img
+                src={heroInstrumentsBw}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: "center bottom" }}
+              />
+            </div>
+            <div className="relative hidden overflow-hidden md:block md:w-1/2">
+              <img
+                src={heroInstrumentsBw}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: "center bottom" }}
+              />
+            </div>
+          </div>
+
+          {/* Details card — existing width/styling, aligned under the left column */}
+          <div className="px-5 pb-14 md:pb-20 md:pl-10">
+            <div className="max-w-md">
+              <WorkshopInfoCard
+                rows={workshop.infoRows}
+                ctaLabel={workshop.ctaLabel}
+                ctaHref={workshop.ctaHref}
+              />
+            </div>
+
+            {workshop.ageRangeNote && (
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                {linkifyEmail(workshop.ageRangeNote)}
+              </p>
+            )}
+          </div>
+        </section>
+      ) : (
+        <section className="bg-brand">
           <Header />
           <div
             className={`mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-14 md:px-10 md:py-20 ${
@@ -85,13 +138,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
           >
             <div>
               <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
-              <h1
-                className={`font-display max-w-2xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl ${
-                  workshop.slug === "2026-spring-holidays"
-                    ? "uppercase text-terracotta"
-                    : "text-white"
-                }`}
-              >
+              <h1 className="font-display max-w-2xl text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl">
                 {workshop.title}
               </h1>
 
@@ -118,8 +165,8 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               />
             )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Intro copy */}
       <section className="bg-cream">
