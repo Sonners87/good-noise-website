@@ -14,7 +14,6 @@ import { linkifyEmail } from "../lib/linkifyEmail"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
-import heroInstrumentsBw from "../assets/images/hero-instruments-bw.png"
 
 // Per-slug hero imagery. Content data stays plain (no image imports), so
 // each new workshop just needs an entry here alongside its content entry.
@@ -57,75 +56,40 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
     <>
       {/* Intro / info summary */}
       {isSpringHolidays ? (
-        <section className="overflow-hidden bg-brand">
+        <section className="bg-brand">
           <Header />
 
-          <div className="md:flex md:min-h-[560px]">
-            {/* Eyebrow, headline, hook line, reassurance, CTA — left-aligned,
-                vertically centered against the photo column on desktop. */}
-            <div className="flex flex-col justify-center px-5 pb-10 pt-10 md:w-1/2 md:pb-16 md:pl-10 md:pr-10 md:pt-20">
-              <div className="max-w-md">
-                <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
-                <h1 className="font-display text-4xl uppercase leading-[1.05] text-terracotta sm:text-5xl md:text-6xl">
-                  {workshop.title}
-                </h1>
-                <p className="font-display mt-3 text-2xl uppercase leading-[1.05] text-white sm:text-3xl md:text-4xl">
-                  Your Bandmates Are Waiting!
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-white/85 md:text-lg">
-                  Some prior playing experience is preferred. Don&rsquo;t own
-                  an instrument? No worries — we&rsquo;ve got plenty.
-                </p>
-                <div className="mt-8">
-                  <PillButton href={workshop.ctaHref} variant="primary">
-                    {workshop.ctaLabel}
-                    <span aria-hidden="true">&rarr;</span>
-                  </PillButton>
-                </div>
-              </div>
-            </div>
-
-            {/* Arms/instruments photo — full-bleed strip below the CTA on
-                mobile, full-bleed right column on desktop. Rendered twice
-                (one per breakpoint) since the crop shape differs; the
-                source PNG is transparent above the arms, so object-position
-                bottom always keeps them anchored to the section's bottom
-                edge regardless of container height. */}
-            <div className="relative h-64 w-full overflow-hidden sm:h-80 md:hidden">
-              <img
-                src={heroInstrumentsBw}
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: "center bottom" }}
-              />
-            </div>
-            <div className="relative hidden overflow-hidden md:block md:w-1/2">
-              <img
-                src={heroInstrumentsBw}
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: "center bottom" }}
-              />
-            </div>
-          </div>
-
-          {/* Details card — existing width/styling, aligned under the left column */}
-          <div className="px-5 pb-14 md:pb-20 md:pl-10">
-            <div className="max-w-md">
-              <WorkshopInfoCard
-                rows={workshop.infoRows}
-                ctaLabel={workshop.ctaLabel}
-                ctaHref={workshop.ctaHref}
-              />
-            </div>
-
-            {workshop.ageRangeNote && (
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
-                {linkifyEmail(workshop.ageRangeNote)}
+          {/* Text column left-aligned to match the intro section's copy
+              below; table column shifts right, starting slightly right of
+              center (60/40 split) rather than the plain halfway point. On
+              mobile this collapses to a single column, so the table lands
+              directly under the hook line. */}
+          <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-5 py-14 md:grid-cols-[3fr_2fr] md:px-10 md:py-20">
+            <div>
+              <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
+              <h1 className="font-display max-w-2xl text-4xl uppercase leading-[1.05] text-terracotta sm:text-5xl md:text-6xl">
+                {workshop.title}
+              </h1>
+              <p className="font-display mt-3 max-w-xl text-2xl uppercase leading-[1.05] text-white sm:text-3xl md:text-4xl">
+                Your Bandmates Are Waiting!
               </p>
-            )}
+            </div>
+
+            <div>
+              <div className="max-w-md">
+                <WorkshopInfoCard
+                  rows={workshop.infoRows}
+                  ctaLabel={workshop.ctaLabel}
+                  ctaHref={workshop.ctaHref}
+                />
+              </div>
+
+              {workshop.ageRangeNote && (
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                  {linkifyEmail(workshop.ageRangeNote)}
+                </p>
+              )}
+            </div>
           </div>
         </section>
       ) : (
