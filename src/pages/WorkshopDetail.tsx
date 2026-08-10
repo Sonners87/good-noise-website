@@ -50,8 +50,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   const { slug: slugParam } = useParams<{ slug: string }>()
   const slug = slugProp ?? slugParam
   const workshop = slug ? workshops[slug] : undefined
-  const showFounderQuote =
-    workshop?.slug === "2026-spring-holidays" || workshop?.slug === "in-school-songwriting"
+  const showFounderQuote = workshop?.slug === "in-school-songwriting"
 
   useEffect(() => {
     if (workshop) document.title = workshop.title
@@ -254,13 +253,13 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
       {/* Secondary CTA, deliberately away from the primary Book button
           above — for people not ready to commit to these dates. */}
       {workshop.slug === "2026-spring-holidays" && (
-        <section className="bg-cream">
+        <section className="bg-ink">
           <div className="mx-auto max-w-[1400px] px-5 py-12 text-center md:px-10 md:py-16">
-            <p className="mx-auto max-w-md text-base leading-relaxed text-ink/70 md:text-lg">
+            <p className="mx-auto max-w-md text-base leading-relaxed text-white/85 md:text-lg">
               Can't make these dates?
             </p>
             <div className="mt-5">
-              <PillButton href="/stay-in-touch" variant="outline">
+              <PillButton href="/stay-in-touch" variant="outlineOnDark">
                 Get notified about future workshops
               </PillButton>
             </div>

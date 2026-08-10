@@ -44,7 +44,12 @@ export default function Footer() {
         <span className="font-body font-semibold text-xs tracking-wide text-cream/60">
           Join the community
         </span>
-        <SubscribeForm source="footer" variant="footer" submitLabel="Subscribe" />
+        <SubscribeForm
+          source="footer"
+          variant="footer"
+          submitLabel="Subscribe"
+          className="md:max-w-md"
+        />
       </div>
 
       <div className="mx-auto max-w-[1400px] px-5 pb-8 pt-10 md:px-10">
