@@ -17,10 +17,10 @@ export default function Home() {
       <IntroSection />
       <UpcomingWorkshop />
       <WhyWeExist />
+      <FounderQuote />
       <Programs />
       <SafetyFirst />
       <Facilitator />
-      <FounderQuote />
       <GetInvolvedForm />
       <StayInLoop source="stay-in-loop-block" />
       <Footer />

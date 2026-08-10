@@ -103,7 +103,7 @@ export default function SubscribeForm({
       <button
         type="submit"
         className={`${isInline ? "shrink-0" : "mt-2 w-fit"} ${pillBaseStyles} ${isInline ? pillSizeStyles.sm : pillSizeStyles.md} ${
-          variant === "footer" ? pillVariantStyles.primary : pillVariantStyles.onBlue
+          variant === "landing" ? pillVariantStyles.onBlue : pillVariantStyles.primary
         }`}
       >
         {submitLabel}
