@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import logo from "../assets/logo/good-noise-logo.png"
+import SubscribeForm from "./SubscribeForm"
 
 export default function Footer() {
   return (
@@ -22,6 +23,12 @@ export default function Footer() {
             Workshops
           </Link>
           <Link
+            to="/for-schools"
+            className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
+          >
+            For Schools
+          </Link>
+          <Link
             to="/child-safety-policy"
             className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
           >
@@ -31,6 +38,13 @@ export default function Footer() {
         <span className="font-body font-semibold text-xs tracking-wide text-cream/60">
           Good Noise Project © 2026
         </span>
+      </div>
+
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-3 border-b border-cream/15 px-5 py-8 md:px-10">
+        <span className="font-body font-semibold text-xs tracking-wide text-cream/60">
+          Join the community
+        </span>
+        <SubscribeForm source="footer" variant="footer" submitLabel="Subscribe" />
       </div>
 
       <div className="mx-auto max-w-[1400px] px-5 pb-8 pt-10 md:px-10">

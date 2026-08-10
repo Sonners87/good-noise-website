@@ -4,8 +4,10 @@ import UpcomingWorkshop from "../components/UpcomingWorkshop"
 import WhyWeExist from "../components/WhyWeExist"
 import Programs from "../components/Programs"
 import SafetyFirst from "../components/SafetyFirst"
+import FounderQuote from "../components/FounderQuote"
 import Facilitator from "../components/Facilitator"
 import GetInvolvedForm from "../components/GetInvolvedForm"
+import StayInLoop from "../components/StayInLoop"
 import Footer from "../components/Footer"
 
 export default function Home() {
@@ -18,7 +20,9 @@ export default function Home() {
       <Programs />
       <SafetyFirst />
       <Facilitator />
+      <FounderQuote />
       <GetInvolvedForm />
+      <StayInLoop source="stay-in-loop-block" />
       <Footer />
     </>
   )

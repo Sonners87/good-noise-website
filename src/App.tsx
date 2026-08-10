@@ -8,6 +8,7 @@ import BookingOctCamp from "./pages/BookingOctCamp"
 import HolidayCamps from "./pages/HolidayCamps"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
+import StayInTouch from "./pages/StayInTouch"
 import ChildSafetyPolicy from "./pages/ChildSafetyPolicy"
 import NotFound from "./pages/NotFound"
 import { SHOW_OCT_2026_CAMP } from "./content/featureFlags"
@@ -33,6 +34,11 @@ function App() {
           {SHOW_OCT_2026_CAMP && (
             <Route path="/holiday-camps" element={<HolidayCamps />} />
           )}
+          {/* In-School program: moved out of the Workshops pillar page and
+              off the generic /workshops/:slug route onto its own top-level
+              URL, reusing WorkshopDetail's rendering against a fixed slug. */}
+          <Route path="/for-schools" element={<WorkshopDetail slug="in-school-songwriting" />} />
+          <Route path="/stay-in-touch" element={<StayInTouch />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/child-safety-policy" element={<ChildSafetyPolicy />} />

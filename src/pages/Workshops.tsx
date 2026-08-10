@@ -1,11 +1,11 @@
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
 import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import WorkshopCard from "../components/WorkshopCard"
 import { workshops } from "../content/workshops"
 import { SHOW_OCT_2026_CAMP } from "../content/featureFlags"
 import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
-import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 
 function whoFor(slug: string): string {
@@ -36,7 +36,6 @@ export default function Workshops() {
 
   const musicMakersSpring = workshops["2026-spring-holidays"]
   const songwritingOct = SHOW_OCT_2026_CAMP ? workshops["songwriting-oct-2026"] : undefined
-  const inSchool = workshops["in-school-songwriting"]
 
   return (
     <>
@@ -45,8 +44,12 @@ export default function Workshops() {
           A Few Ways to Make Good Noise
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
-          From weekend workshops to in-school programs — here's what's on,
-          and what's coming.
+          Here's what's on, and what's coming — running an in-school
+          program? See our{" "}
+          <Link to="/for-schools" className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta">
+            For Schools
+          </Link>{" "}
+          page.
         </p>
       </PageHero>
 
@@ -75,16 +78,6 @@ export default function Workshops() {
                 photoAlt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
               />
             )}
-
-            <WorkshopCard
-              status="live"
-              href={`/workshops/${inSchool.slug}`}
-              title={inSchool.title}
-              blurb={inSchool.teaser}
-              whoFor={whoFor(inSchool.slug)}
-              photoSrc={acousticBoyPhoto}
-              photoAlt="A teenage boy playing acoustic guitar on stage"
-            />
 
             {comingSoon.map((card) => (
               <WorkshopCard

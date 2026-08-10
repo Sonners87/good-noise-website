@@ -7,6 +7,7 @@ import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
+import FounderQuote from "../components/FounderQuote"
 import NotFound from "./NotFound"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
@@ -42,9 +43,15 @@ const heroBackgroundImages: Record<string, { src: string; alt: string }> = {
   },
 }
 
-export default function WorkshopDetail() {
-  const { slug } = useParams<{ slug: string }>()
+// `slugProp` lets a page mount this component directly against a fixed
+// workshop (e.g. the /for-schools route) instead of reading the slug from
+// the URL — same rendering, different route.
+export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {}) {
+  const { slug: slugParam } = useParams<{ slug: string }>()
+  const slug = slugProp ?? slugParam
   const workshop = slug ? workshops[slug] : undefined
+  const showFounderQuote =
+    workshop?.slug === "2026-spring-holidays" || workshop?.slug === "in-school-songwriting"
 
   useEffect(() => {
     if (workshop) document.title = workshop.title
@@ -244,6 +251,23 @@ export default function WorkshopDetail() {
         </section>
       )}
 
+      {/* Secondary CTA, deliberately away from the primary Book button
+          above — for people not ready to commit to these dates. */}
+      {workshop.slug === "2026-spring-holidays" && (
+        <section className="bg-cream">
+          <div className="mx-auto max-w-[1400px] px-5 py-12 text-center md:px-10 md:py-16">
+            <p className="mx-auto max-w-md text-base leading-relaxed text-ink/70 md:text-lg">
+              Can't make these dates?
+            </p>
+            <div className="mt-5">
+              <PillButton href="/stay-in-touch" variant="outline">
+                Get notified about future workshops
+              </PillButton>
+            </div>
+          </div>
+        </section>
+      )}
+
       {workshop.directContact && (
         <section className="bg-brand">
           <div className="mx-auto max-w-[1400px] px-5 py-16 text-center md:px-10 md:py-20">
@@ -267,6 +291,8 @@ export default function WorkshopDetail() {
           </div>
         </section>
       )}
+
+      {showFounderQuote && <FounderQuote />}
 
       {/* Facilitator */}
       <section id="facilitator" className="bg-cream">

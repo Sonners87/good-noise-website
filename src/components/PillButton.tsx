@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 import { Link } from "react-router-dom"
 
 type Size = "sm" | "md"
-type Variant = "onBlue" | "onLight" | "primary"
+type Variant = "onBlue" | "onLight" | "primary" | "outline"
 
 type PillButtonProps = {
   href: string
@@ -24,6 +24,8 @@ export const pillVariantStyles: Record<Variant, string> = {
     "bg-brand text-white border-terracotta hover:bg-terracotta hover:text-white hover:border-terracotta",
   primary:
     "bg-terracotta text-white border-terracotta hover:bg-ink hover:text-white hover:border-ink",
+  outline:
+    "bg-transparent text-ink border-ink hover:bg-ink hover:text-cream",
 }
 
 export const pillBaseStyles =

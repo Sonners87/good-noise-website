@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Good Noise Project — Community music for young people</title>
+    <title>Good Noise Project | Youth Music Programs in Perth, WA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!--
@@ -93,6 +93,19 @@
       <input type="email" name="email" />
       <input type="tel" name="phone" />
       <textarea name="details"></textarea>
+    </form>
+
+    <!--
+      Static duplicate of the shared subscribe form rendered by
+      SubscribeForm.tsx — used by the Stay in Touch landing page, the "Stay
+      in the Loop" block, and the footer subscribe field. All three post to
+      this one "subscribe" form/stream, tagged by the hidden "source" field.
+    -->
+    <form name="subscribe" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="subscribe" />
+      <input type="hidden" name="source" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
     </form>
 
     <script type="module" src="/src/main.tsx"></script>
