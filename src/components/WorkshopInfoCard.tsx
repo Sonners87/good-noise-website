@@ -18,7 +18,9 @@ export default function WorkshopInfoCard({
   className = "",
 }: WorkshopInfoCardProps) {
   return (
-    <div className={`flex flex-col border-2 border-ink bg-cream ${className}`}>
+    <div
+      className={`flex flex-col overflow-hidden rounded-xl border-2 border-ink bg-cream ${className}`}
+    >
       {title && (
         <div className="border-b-2 border-ink px-6 py-4 md:py-5">
           <span className="font-body font-bold text-lg text-ink">{title}</span>

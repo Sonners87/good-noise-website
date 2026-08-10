@@ -19,7 +19,7 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="mt-10 max-w-lg border-2 border-ink bg-cream px-6 py-8">
+      <div className="mt-10 max-w-lg rounded-xl border-2 border-ink bg-cream px-6 py-8">
         <p className="font-body font-bold text-lg text-ink">
           Thanks — we'll be in touch soon.
         </p>
@@ -44,7 +44,7 @@ export default function ContactForm() {
           required
           type="text"
           name="name"
-          className="border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
+          className="rounded-xl border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
           placeholder="Your name"
         />
       </label>
@@ -57,7 +57,7 @@ export default function ContactForm() {
           required
           type="email"
           name="email"
-          className="border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
+          className="rounded-xl border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
           placeholder="you@example.com"
         />
       </label>
@@ -70,7 +70,7 @@ export default function ContactForm() {
           required
           name="message"
           rows={4}
-          className="border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
+          className="rounded-xl border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
           placeholder="Tell us a bit about who you're enquiring for..."
         />
       </label>

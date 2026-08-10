@@ -160,13 +160,14 @@ export default function HolidayCamps() {
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div className="flex flex-col overflow-hidden border-2 border-sage shadow-md">
+            <div className="flex flex-col overflow-hidden rounded-xl border-2 border-sage shadow-md">
               <div className="relative">
                 <PhotoImage
                   src={heroBandPractice}
                   alt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
                   aspect="aspect-[16/9]"
                   objectPosition="center 55%"
+                  rounded={false}
                 />
                 <div
                   className="absolute inset-0 bg-sage/60 mix-blend-color"
@@ -200,12 +201,13 @@ export default function HolidayCamps() {
               </div>
             </div>
 
-            <div className="flex flex-col overflow-hidden border-2 border-terracotta shadow-md">
+            <div className="flex flex-col overflow-hidden rounded-xl border-2 border-terracotta shadow-md">
               <div className="relative">
                 <PhotoImage
                   src={workshopBandTrio}
                   alt="Three young musicians performing together, two playing guitar and one singing into a microphone"
                   aspect="aspect-[16/9]"
+                  rounded={false}
                 />
                 <div
                   className="absolute inset-0 bg-terracotta/50 mix-blend-color"

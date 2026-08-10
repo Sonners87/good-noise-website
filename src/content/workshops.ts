@@ -89,7 +89,6 @@ const allWorkshops: Record<string, Workshop> = {
     ],
     ctaLabel: "Book your place",
     ctaHref: "/book-2026-spring-holidays",
-    introHeading: "Music's Better Shared",
     introParagraphs: [
       "Good Noise Project presents a two-day jam program in Perth, set inside a room full of instruments begging to be picked up. You'll join several other young musos in a safe space and jam out an original song together — lyrics, melody, harmonies, chords, the lot. There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band.",
       "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might even be a gun at your musical tool but want to give another one a go — or try one you've never touched. Whether you're quiet or loud, confident or used to playing alone in your bedroom, everyone's on equal footing here. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something different.",
@@ -258,3 +257,10 @@ export const workshops: Record<string, Workshop> = SHOW_OCT_2026_CAMP
 // Used by the header's single "Our next workshop" CTA — the chronologically
 // nearest camp.
 export const upcomingWorkshopSlug = "2026-spring-holidays"
+
+// Shared by every place that renders a workshop's "Who's it for" line (the
+// pillar page cards and the homepage teaser) so they can't drift from the
+// info card's own "Who" row.
+export function workshopWhoFor(slug: string): string {
+  return workshops[slug]?.infoRows.find((row) => row.label === "Who")?.value ?? ""
+}
