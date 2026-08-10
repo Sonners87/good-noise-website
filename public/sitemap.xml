@@ -16,9 +16,14 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodnoiseproject.com.au/workshops/in-school-songwriting</loc>
+    <loc>https://goodnoiseproject.com.au/for-schools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://goodnoiseproject.com.au/stay-in-touch</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://goodnoiseproject.com.au/booking-sep-camp</loc>

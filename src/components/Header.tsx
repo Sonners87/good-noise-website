@@ -9,6 +9,7 @@ import { upcomingWorkshopSlug } from "../content/workshops"
 const links = [
   { label: "Home", href: "/#home" },
   { label: "Workshops", href: "/workshops" },
+  { label: "For Schools", href: "/for-schools" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ]
@@ -49,7 +50,7 @@ export default function Header() {
             variant="primary"
             size="sm"
           >
-            See workshops
+            Book Now
           </PillButton>
           <button
             type="button"

@@ -9,6 +9,7 @@ import Eyebrow from "../components/Eyebrow"
 import PhotoImage from "../components/PhotoImage"
 import Facilitator from "../components/Facilitator"
 import WhyWeExist from "../components/WhyWeExist"
+import FounderQuote from "../components/FounderQuote"
 import Footer from "../components/Footer"
 import { pillBaseStyles, pillSizeStyles, pillVariantStyles } from "../components/PillButton"
 import logo from "../assets/logo/good-noise-logo.svg"
@@ -245,20 +246,7 @@ export default function HolidayCamps() {
       <WhyWeExist />
 
       {/* In Dave's words */}
-      <section className="bg-ink text-cream">
-        <div className="mx-auto max-w-3xl px-5 py-20 text-center md:px-10 md:py-28">
-          <Eyebrow tone="onBlue">In Dave's Words</Eyebrow>
-          <blockquote className="font-display mt-4 text-2xl leading-[1.2] text-cream sm:text-3xl md:text-4xl">
-            "I had people to relate to and share my time with. I belonged
-            somewhere. It wasn't footy after school — it was making music.
-            And I could do it without anyone telling me how. It was complete
-            freedom. It still is."
-          </blockquote>
-          <p className="font-body font-semibold mt-6 text-sm tracking-wide text-cream/60">
-            — Dave Sonntag, founder of Good Noise Project
-          </p>
-        </div>
-      </section>
+      <FounderQuote />
 
       {/* Reused word-for-word from the homepage, including its image */}
       <Facilitator />

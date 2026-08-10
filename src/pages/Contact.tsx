@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import ContactForm from "../components/ContactForm"
+import StayInLoop from "../components/StayInLoop"
 
 export default function Contact() {
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function Contact() {
         <ContactForm />
       </PageHero>
 
+      <StayInLoop source="stay-in-loop-block" />
       <Footer />
     </>
   )
