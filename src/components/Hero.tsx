@@ -42,6 +42,7 @@ export default function Hero() {
             className="h-full rounded-tl-[10rem] border-2 border-ink/20 md:rounded-tl-[14rem]"
             objectPosition="center 45%"
             tint
+            rounded={false}
           />
         </div>
       </div>

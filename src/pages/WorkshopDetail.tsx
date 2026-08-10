@@ -14,6 +14,7 @@ import { linkifyEmail } from "../lib/linkifyEmail"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
+import heroInstrumentsOverlay from "../assets/images/hero-instruments-overlay-3.png"
 
 // Per-slug hero imagery. Content data stays plain (no image imports), so
 // each new workshop just needs an entry here alongside its content entry.
@@ -63,16 +64,28 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               below; table column shifts right, starting slightly right of
               center (60/40 split) rather than the plain halfway point. On
               mobile this collapses to a single column, so the table lands
-              directly under the hook line. */}
+              directly under the hook line. The instruments/hands photo sits
+              behind the text column only, bottom-anchored — its own
+              transparent top means it always reads as "rising up" no matter
+              how tall this column ends up being. */}
           <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-5 py-14 md:grid-cols-[3fr_2fr] md:px-10 md:py-20">
-            <div>
-              <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
-              <h1 className="font-display max-w-2xl text-4xl uppercase leading-[1.05] text-terracotta sm:text-5xl md:text-6xl">
-                {workshop.title}
-              </h1>
-              <p className="font-display mt-3 max-w-xl text-2xl uppercase leading-[1.05] text-white sm:text-3xl md:text-4xl">
-                Your Bandmates Are Waiting!
-              </p>
+            <div className="relative overflow-hidden">
+              <img
+                src={heroInstrumentsOverlay}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full opacity-20"
+              />
+
+              <div className="relative z-10">
+                <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
+                <h1 className="font-display max-w-2xl text-4xl uppercase leading-[1.05] text-terracotta sm:text-5xl md:text-6xl">
+                  {workshop.title}
+                </h1>
+                <h2 className="font-display mt-3 max-w-xl text-4xl uppercase leading-[0.98] text-white sm:text-5xl">
+                  Your Bandmates Are Waiting!
+                </h2>
+              </div>
             </div>
 
             <div>
@@ -82,6 +95,9 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                   ctaLabel={workshop.ctaLabel}
                   ctaHref={workshop.ctaHref}
                 />
+                <p className="mt-4 text-center font-body font-bold text-base text-terracotta md:text-lg">
+                  SPOTS ARE LIMITED
+                </p>
               </div>
 
               {workshop.ageRangeNote && (

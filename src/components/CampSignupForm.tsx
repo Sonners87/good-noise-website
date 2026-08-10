@@ -3,7 +3,7 @@ import { pillBaseStyles, pillSizeStyles } from "./PillButton"
 import { submitNetlifyForm, submitNetlifyFormFields } from "../lib/submitNetlifyForm"
 
 const inputClass =
-  "border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
+  "rounded-xl border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
 const labelClass = "font-body font-semibold text-xs tracking-wide text-white/85"
 const sectionHeadingClass =
   "font-body font-bold text-base md:text-lg uppercase tracking-wide text-white"
@@ -93,7 +93,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
       <input type="hidden" name="camp" value={campLabel} />
 
       <div className="grid grid-cols-1 gap-5">
-        <span className={sectionHeadingClass}>Participant info</span>
+        <span className={sectionHeadingClass}>Musician info</span>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <label className="flex flex-col gap-2">
@@ -235,7 +235,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
               checked={sameAddress}
               onChange={(e) => setSameAddress(e.target.checked)}
             />
-            <span className={labelClass}>Same as participant address</span>
+            <span className={labelClass}>Same as musician address</span>
           </label>
 
           {sameAddress ? (
@@ -264,7 +264,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         </span>
 
         <div className="grid grid-cols-2 gap-3">
-          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
+          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
             <input
               required
               type="radio"
@@ -275,7 +275,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
             />
             No
           </label>
-          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
+          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
             <input
               required
               type="radio"
@@ -303,7 +303,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
       </div>
 
       {error && (
-        <p className="rounded-md bg-white/90 px-3 py-2 text-sm font-semibold text-ink">
+        <p className="rounded-xl bg-white/90 px-3 py-2 text-sm font-semibold text-ink">
           Something went wrong sending that — please try again, or email us
           directly.
         </p>
@@ -322,6 +322,12 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
             ? "Submit"
             : "Book & pay"}
       </button>
+
+      {supportNeeds !== "yes" && (
+        <p className="-mt-2 text-center text-sm text-white">
+          You'll be redirected to Stripe to complete payment.
+        </p>
+      )}
     </form>
   )
 }

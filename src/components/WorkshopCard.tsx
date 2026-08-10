@@ -51,7 +51,7 @@ export default function WorkshopCard(props: WorkshopCardProps) {
     return (
       <Link
         to={props.href}
-        className="group block border-2 border-ink bg-cream transition hover:border-terracotta"
+        className="group block overflow-hidden rounded-xl border-2 border-ink bg-cream transition hover:border-terracotta"
       >
         <Title title={props.title} />
 
@@ -60,6 +60,7 @@ export default function WorkshopCard(props: WorkshopCardProps) {
           alt={props.photoAlt}
           aspect="aspect-[16/9]"
           objectPosition={props.photoObjectPosition}
+          rounded={false}
         />
 
         <Details blurb={props.blurb} whoFor={props.whoFor} />
@@ -77,7 +78,7 @@ export default function WorkshopCard(props: WorkshopCardProps) {
   }
 
   return (
-    <div className="border-2 border-ink bg-cream">
+    <div className="overflow-hidden rounded-xl border-2 border-ink bg-cream">
       <div className="opacity-60">
         <Title title={props.title} />
       </div>

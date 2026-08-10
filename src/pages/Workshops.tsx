@@ -3,14 +3,9 @@ import { Link } from "react-router-dom"
 import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import WorkshopCard from "../components/WorkshopCard"
-import { workshops } from "../content/workshops"
+import { workshops, workshopWhoFor } from "../content/workshops"
+import { workshopCardPhotos } from "../content/workshopCardPhotos"
 import { SHOW_OCT_2026_CAMP } from "../content/featureFlags"
-import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
-import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
-
-function whoFor(slug: string): string {
-  return workshops[slug].infoRows.find((row) => row.label === "Who")?.value ?? ""
-}
 
 // Placeholder cards for formats that don't exist yet — draft copy, review
 // before this goes live.
@@ -61,10 +56,10 @@ export default function Workshops() {
               href={`/workshops/${musicMakersSpring.slug}`}
               title={musicMakersSpring.title}
               blurb={musicMakersSpring.teaser}
-              whoFor={whoFor(musicMakersSpring.slug)}
-              photoSrc={jamInstrumentsPhoto}
-              photoAlt="Silhouetted hands holding guitars, a bass, a keyboard, a cymbal and microphones up against the sky"
-              photoObjectPosition="center 80%"
+              whoFor={workshopWhoFor(musicMakersSpring.slug)}
+              photoSrc={workshopCardPhotos[musicMakersSpring.slug].src}
+              photoAlt={workshopCardPhotos[musicMakersSpring.slug].alt}
+              photoObjectPosition={workshopCardPhotos[musicMakersSpring.slug].objectPosition}
             />
 
             {songwritingOct && (
@@ -73,9 +68,10 @@ export default function Workshops() {
                 href={`/workshops/${songwritingOct.slug}`}
                 title={songwritingOct.title}
                 blurb={songwritingOct.teaser}
-                whoFor={whoFor(songwritingOct.slug)}
-                photoSrc={bandPracticePhoto}
-                photoAlt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
+                whoFor={workshopWhoFor(songwritingOct.slug)}
+                photoSrc={workshopCardPhotos[songwritingOct.slug].src}
+                photoAlt={workshopCardPhotos[songwritingOct.slug].alt}
+                photoObjectPosition={workshopCardPhotos[songwritingOct.slug].objectPosition}
               />
             )}
 

@@ -5,6 +5,10 @@ type PhotoImageProps = {
   aspect?: string
   objectPosition?: string
   tint?: boolean
+  /** Set false when the image sits flush inside another element that
+      handles its own rounding (e.g. as a strip inside a card), or when the
+      caller supplies its own bespoke radius via `className`. */
+  rounded?: boolean
 }
 
 export default function PhotoImage({
@@ -14,9 +18,12 @@ export default function PhotoImage({
   aspect = "aspect-[4/5]",
   objectPosition = "center",
   tint = false,
+  rounded = true,
 }: PhotoImageProps) {
   return (
-    <div className={`relative ${aspect} w-full overflow-hidden ${className}`}>
+    <div
+      className={`relative ${aspect} w-full overflow-hidden ${rounded ? "rounded-xl" : ""} ${className}`}
+    >
       <img
         src={src}
         alt={alt}
