@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import PillButton from "./PillButton"
 
 type InfoRow = { label: string; value: string }
@@ -8,6 +9,9 @@ type WorkshopInfoCardProps = {
   ctaLabel?: string
   ctaHref?: string
   className?: string
+  /** Rendered inside the CTA footer, below the button — e.g. a short
+      urgency note. Only shown alongside a CTA. */
+  children?: ReactNode
 }
 
 export default function WorkshopInfoCard({
@@ -16,6 +20,7 @@ export default function WorkshopInfoCard({
   ctaLabel,
   ctaHref,
   className = "",
+  children,
 }: WorkshopInfoCardProps) {
   return (
     <div
@@ -47,6 +52,7 @@ export default function WorkshopInfoCard({
             {ctaLabel}
             <span aria-hidden="true">&rarr;</span>
           </PillButton>
+          {children}
         </div>
       )}
     </div>
