@@ -78,10 +78,10 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                 src={heroInstrumentsOverlay}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full opacity-20"
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 hidden w-full opacity-20 md:block"
               />
 
-              <div className="relative z-10">
+              <div className="relative z-10 text-center md:text-left">
                 <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
                 <h1 className="font-display max-w-2xl text-4xl uppercase leading-[1.05] text-terracotta sm:text-5xl md:text-6xl">
                   {workshop.title}
