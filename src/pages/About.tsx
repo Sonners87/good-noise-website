@@ -64,6 +64,20 @@ export default function About() {
       </section>
 
       <section className="bg-cream">
+        <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10">
+          <div className="aspect-video w-full overflow-hidden rounded-xl">
+            <iframe
+              className="h-full w-full"
+              src="https://www.youtube-nocookie.com/embed/1K31eGjdm78"
+              title="Good Noise Project workshop video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
           <div className="flex flex-col items-start gap-4 border-t border-ink/15 pt-10 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-base text-ink/80 md:text-lg">
