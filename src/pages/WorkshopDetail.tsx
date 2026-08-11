@@ -67,8 +67,12 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               directly under the hook line. The instruments/hands photo sits
               behind the text column only, bottom-anchored — its own
               transparent top means it always reads as "rising up" no matter
-              how tall this column ends up being. */}
-          <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-5 py-14 md:grid-cols-[3fr_2fr] md:px-10 md:py-20">
+              how tall this column ends up being. Bottom padding lives on the
+              right column rather than the grid container, so the (grid-
+              stretched) left column's box — and the image inside it — runs
+              flush to the section's actual bottom edge instead of stopping
+              short at a shared padding line. */}
+          <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-5 pt-14 md:grid-cols-[3fr_2fr] md:px-10 md:pt-20">
             <div className="relative overflow-hidden">
               <img
                 src={heroInstrumentsOverlay}
@@ -88,16 +92,17 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               </div>
             </div>
 
-            <div>
+            <div className="pb-14 md:pb-20">
               <div className="max-w-md">
                 <WorkshopInfoCard
                   rows={workshop.infoRows}
                   ctaLabel={workshop.ctaLabel}
                   ctaHref={workshop.ctaHref}
-                />
-                <p className="mt-4 text-center font-body font-bold text-base text-terracotta md:text-lg">
-                  SPOTS ARE LIMITED
-                </p>
+                >
+                  <p className="mt-4 text-center font-body font-bold text-base text-terracotta md:text-lg">
+                    SPOTS ARE LIMITED
+                  </p>
+                </WorkshopInfoCard>
               </div>
 
               {workshop.ageRangeNote && (
@@ -161,8 +166,13 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               workshop.introHeading ? "mt-8" : ""
             }`}
           >
-            {workshop.introParagraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {workshop.introParagraphs.map((paragraph, i) => (
+              <p
+                key={paragraph}
+                className={isSpringHolidays && i === 0 ? "font-bold text-ink" : undefined}
+              >
+                {paragraph}
+              </p>
             ))}
           </div>
         </div>

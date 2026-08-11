@@ -17,6 +17,7 @@ export default function WhyWeExist() {
           aspect="aspect-auto"
           className="min-h-[360px]"
           objectPosition="center 30%"
+          rounded={false}
         />
 
         <div className="flex flex-col justify-center bg-brand py-14 pl-5 pr-5 text-white md:py-20 md:pl-12 md:pr-0">
