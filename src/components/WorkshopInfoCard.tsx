@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import PillButton from "./PillButton"
 
-type InfoRow = { label: string; value: string }
+type InfoRow = { label: string; value: ReactNode }
 
 type WorkshopInfoCardProps = {
   title?: string

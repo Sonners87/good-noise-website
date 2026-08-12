@@ -11,6 +11,11 @@ import FounderQuote from "../components/FounderQuote"
 import NotFound from "./NotFound"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
+import {
+  isEarlyBirdActive,
+  STANDARD_PRICE_DOLLARS,
+  EARLY_BIRD_PRICE_DOLLARS,
+} from "../content/pricing"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
@@ -52,6 +57,34 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   const isSpringHolidays = workshop.slug === "2026-spring-holidays"
   const highlightsColumns =
     workshop.highlights.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+
+  // Swaps the static "How much" row for a live early-bird/standard price,
+  // driven by the single cutoff date in `content/pricing.ts`.
+  const earlyBird = isSpringHolidays && isEarlyBirdActive()
+  const infoRows = isSpringHolidays
+    ? workshop.infoRows.map((row) =>
+        row.label === "How much"
+          ? {
+              ...row,
+              value: earlyBird ? (
+                <span className="flex flex-col items-end gap-1">
+                  <span className="flex items-baseline gap-2">
+                    <span className="text-ink/40 line-through">
+                      ${STANDARD_PRICE_DOLLARS}
+                    </span>
+                    <span className="font-bold text-ink">${EARLY_BIRD_PRICE_DOLLARS}</span>
+                  </span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wide text-terracotta">
+                    Early bird
+                  </span>
+                </span>
+              ) : (
+                `$${STANDARD_PRICE_DOLLARS}`
+              ),
+            }
+          : row,
+      )
+    : workshop.infoRows
 
   return (
     <>
@@ -95,7 +128,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
             <div className="pb-14 md:pb-20">
               <div className="max-w-md">
                 <WorkshopInfoCard
-                  rows={workshop.infoRows}
+                  rows={infoRows}
                   ctaLabel={workshop.ctaLabel}
                   ctaHref={workshop.ctaHref}
                 >
