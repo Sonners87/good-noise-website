@@ -2,11 +2,19 @@ import { useEffect } from "react"
 import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import CampSignupForm from "../components/CampSignupForm"
+import {
+  currentStripeUrl,
+  isEarlyBirdActive,
+  STANDARD_PRICE_DOLLARS,
+  EARLY_BIRD_PRICE_DOLLARS,
+} from "../content/pricing"
 
 export default function Book() {
   useEffect(() => {
     document.title = "Book Your Place — Good Noise Project"
   }, [])
+
+  const earlyBird = isEarlyBirdActive()
 
   return (
     <>
@@ -22,7 +30,7 @@ export default function Book() {
         <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-start md:gap-12">
           <CampSignupForm
             campLabel="September 2026 (30 Sep – 1 Oct)"
-            stripeUrl="https://buy.stripe.com/cNi28r4m2cd28Pc5BN3F600"
+            stripeUrl={currentStripeUrl()}
           />
 
           <div className="rounded-xl border-2 border-ink bg-cream p-6 md:p-8">
@@ -45,9 +53,23 @@ export default function Book() {
                 <span className="font-body font-bold uppercase tracking-wide text-ink">
                   Total Cost
                 </span>
-                <span className="font-display rounded-md bg-terracotta px-4 py-2 text-xl text-white">
-                  $195.00
-                </span>
+                <div className="flex flex-col items-end gap-1">
+                  {earlyBird && (
+                    <span className="font-body text-[11px] font-semibold uppercase tracking-wide text-terracotta">
+                      Early bird
+                    </span>
+                  )}
+                  <span className="font-display flex items-center gap-2 rounded-md bg-terracotta px-4 py-2 text-xl text-white">
+                    {earlyBird && (
+                      <span className="text-white/60 line-through">
+                        ${STANDARD_PRICE_DOLLARS}.00
+                      </span>
+                    )}
+                    <span>
+                      ${earlyBird ? EARLY_BIRD_PRICE_DOLLARS : STANDARD_PRICE_DOLLARS}.00
+                    </span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
