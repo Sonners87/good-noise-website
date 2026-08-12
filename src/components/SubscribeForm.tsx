@@ -36,8 +36,21 @@ export default function SubscribeForm({
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError(false)
+
+    const formData = new FormData(e.currentTarget)
+    const email = String(formData.get("email") ?? "")
+    const name = String(formData.get("name") ?? "")
+
     try {
       await submitNetlifyForm(e.currentTarget)
+
+      const response = await fetch("/.netlify/functions/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name: name || undefined }),
+      })
+      if (!response.ok) throw new Error(`Brevo subscribe failed: ${response.status}`)
+
       setSubmitted(true)
     } catch {
       setError(true)
