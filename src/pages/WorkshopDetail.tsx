@@ -19,7 +19,6 @@ import {
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
-import heroInstrumentsOverlay from "../assets/images/hero-instruments-overlay-3.png"
 
 // Per-slug hero imagery. Content data stays plain (no image imports), so
 // each new workshop just needs an entry here alongside its content entry.
@@ -87,63 +86,56 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
     : workshop.infoRows
 
   return (
-    <>
+    <div className={isSpringHolidays ? "gn-workshop-2026" : undefined}>
       {/* Intro / info summary */}
       {isSpringHolidays ? (
-        <section className="bg-brand">
+        <section className="bg-ink">
           <Header />
 
-          {/* Text column left-aligned to match the intro section's copy
-              below; table column shifts right, starting slightly right of
-              center (60/40 split) rather than the plain halfway point. On
-              mobile this collapses to a single column, so the table lands
-              directly under the hook line. The instruments/hands photo sits
-              behind the text column only, bottom-anchored — its own
-              transparent top means it always reads as "rising up" no matter
-              how tall this column ends up being. Bottom padding lives on the
-              right column rather than the grid container, so the (grid-
-              stretched) left column's box — and the image inside it — runs
-              flush to the section's actual bottom edge instead of stopping
-              short at a shared padding line. */}
-          <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-5 pt-14 md:grid-cols-[3fr_2fr] md:px-10 md:pt-20">
-            <div className="relative overflow-hidden">
-              <img
-                src={heroInstrumentsOverlay}
-                alt=""
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 z-0 hidden w-full opacity-20 md:block"
-              />
+          {/* Addendum 6: no photo. Solid forest (already the section bg via
+              .gn-workshop-2026) behind two columns — copy/CTA left, details
+              card right, filling its column the way the photo used to.
+              Mobile: single column, card follows straight after the CTA. */}
+          <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-10 md:pt-14 md:pb-20">
+            <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
+              <div className="text-center md:text-left">
+                <span className="gn-eyebrow text-[var(--gn-acid)]">
+                  {workshop.eyebrow ?? "Workshop"}
+                </span>
 
-              <div className="relative z-10 text-center md:text-left">
-                <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
-                <h1 className="font-display max-w-2xl text-4xl uppercase leading-[1.05] text-terracotta sm:text-5xl md:text-6xl">
-                  {workshop.title}
+                <h1 className="font-display mt-4 text-white leading-[0.98] text-[13vw] md:text-[clamp(2.5rem,6vw,5.5rem)]">
+                  Your <span className="gn-hl">Bandmates</span>
+                  <br />
+                  Are Waiting!
                 </h1>
-                <h2 className="font-display mt-3 max-w-xl text-4xl uppercase leading-[0.98] text-white sm:text-5xl">
-                  Your Bandmates Are Waiting!
-                </h2>
-              </div>
-            </div>
 
-            <div className="pb-14 md:pb-20">
-              <div className="max-w-md">
-                <WorkshopInfoCard
-                  rows={infoRows}
-                  ctaLabel={workshop.ctaLabel}
-                  ctaHref={workshop.ctaHref}
-                >
-                  <p className="mt-4 text-center font-body font-bold text-base text-terracotta md:text-lg">
-                    SPOTS ARE LIMITED
-                  </p>
-                </WorkshopInfoCard>
+                <div className="mt-8 flex flex-col items-center gap-3 md:items-start">
+                  <Link to={workshop.ctaHref} className="gn-btn-hero gn-btn-primary text-sm">
+                    {workshop.ctaLabel} &rarr;
+                  </Link>
+                  <span className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--gn-pink)]">
+                    Spots are limited
+                  </span>
+                </div>
               </div>
 
-              {workshop.ageRangeNote && (
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
-                  {linkifyEmail(workshop.ageRangeNote)}
-                </p>
-              )}
+              {/* .gn-card is the one featured card on this page — restored
+                  per Addendum 6. Its own padding:22px is zeroed out since
+                  WorkshopInfoCard's title/rows/footer regions already carry
+                  their own internal padding; stacking both looked bloated. */}
+              <WorkshopInfoCard
+                rows={infoRows}
+                title="2026 Spring Holiday Jam Program"
+                titleClassName="font-display text-4xl uppercase leading-[0.98] text-terracotta sm:text-5xl"
+                className="gn-card !p-0"
+              />
             </div>
+
+            {workshop.ageRangeNote && (
+              <p className="mx-auto mt-8 max-w-md text-center text-sm leading-relaxed text-white/70">
+                {linkifyEmail(workshop.ageRangeNote)}
+              </p>
+            )}
           </div>
         </section>
       ) : (
@@ -321,11 +313,14 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
       )}
 
       {/* Secondary CTA, deliberately away from the primary Book button
-          above — for people not ready to commit to these dates. */}
+          above — for people not ready to commit to these dates. Burnt
+          orange (not the surrounding bg-ink/forest) so it reads as its own
+          distinct strip rather than blurring into "Kept Small On Purpose"
+          above it. Bold + paper text for contrast against that fill. */}
       {workshop.slug === "2026-spring-holidays" && (
-        <section className="bg-ink">
+        <section className="bg-[var(--gn-pink)]">
           <div className="mx-auto max-w-[1400px] px-5 py-12 text-center md:px-10 md:py-16">
-            <p className="mx-auto max-w-md text-base leading-relaxed text-white/85 md:text-lg">
+            <p className="mx-auto max-w-md text-base font-bold leading-relaxed text-[var(--gn-paper)] md:text-lg">
               Can't make these dates?
             </p>
             <div className="mt-5">
@@ -424,6 +419,6 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
       )}
 
       <Footer />
-    </>
+    </div>
   )
 }

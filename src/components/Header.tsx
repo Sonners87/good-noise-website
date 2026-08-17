@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import PillButton from "./PillButton"
 import logo from "../assets/logo/good-noise-logo.png"
 import { upcomingWorkshopSlug } from "../content/workshops"
 
@@ -9,6 +8,7 @@ import { upcomingWorkshopSlug } from "../content/workshops"
 const links = [
   { label: "Home", href: "/#home" },
   { label: "Workshops", href: "/workshops" },
+  { label: "For Parents", href: "/for-parents" },
   { label: "For Schools", href: "/for-schools" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -23,13 +23,18 @@ export default function Header() {
         <a href="/#home" className="shrink-0">
           <img src={logo} alt="Good Noise" className="h-12 w-auto md:h-16" />
         </a>
-        <nav className="hidden items-center gap-9 md:flex">
+        {/* text-white/85 lives on <nav> rather than each link: .gn-nav-link
+            sets color:currentColor (unlayered, so it always wins over a
+            layered Tailwind text-* utility placed on the link itself) and
+            only overrides colour on hover/focus — the base colour has to
+            come from inheritance instead. */}
+        <nav className="hidden items-center gap-9 text-white/85 md:flex">
           {links.map((link) =>
             link.href.startsWith("/#") ? (
               <a
                 key={link.label}
                 href={link.href}
-                className="font-body font-semibold text-base text-white/85 transition hover:text-white"
+                className="gn-nav-link font-body font-semibold text-base"
               >
                 {link.label}
               </a>
@@ -37,7 +42,7 @@ export default function Header() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="font-body font-semibold text-base text-white/85 transition hover:text-white"
+                className="gn-nav-link font-body font-semibold text-base"
               >
                 {link.label}
               </Link>
@@ -45,13 +50,12 @@ export default function Header() {
           )}
         </nav>
         <div className="flex items-center gap-3">
-          <PillButton
-            href={`/workshops/${upcomingWorkshopSlug}`}
-            variant="primary"
-            size="sm"
+          <Link
+            to={`/workshops/${upcomingWorkshopSlug}`}
+            className="gn-btn-primary text-xs"
           >
             Book Now
-          </PillButton>
+          </Link>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -73,14 +77,14 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="flex flex-col border-t border-white/20 bg-brand-dark md:hidden">
+        <nav className="flex flex-col border-t border-white/20 bg-brand-dark text-white/85 md:hidden">
           {links.map((link) =>
             link.href.startsWith("/#") ? (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="font-body font-semibold border-b border-white/10 px-5 py-4 text-base text-white/85 last:border-b-0"
+                className="gn-nav-link font-body font-semibold border-b border-white/10 px-5 py-4 text-base last:border-b-0"
               >
                 {link.label}
               </a>
@@ -89,7 +93,7 @@ export default function Header() {
                 key={link.label}
                 to={link.href}
                 onClick={() => setOpen(false)}
-                className="font-body font-semibold border-b border-white/10 px-5 py-4 text-base text-white/85 last:border-b-0"
+                className="gn-nav-link font-body font-semibold border-b border-white/10 px-5 py-4 text-base last:border-b-0"
               >
                 {link.label}
               </Link>

@@ -1,6 +1,5 @@
+import { Link } from "react-router-dom"
 import PhotoImage from "./PhotoImage"
-import PillButton from "./PillButton"
-import Eyebrow from "./Eyebrow"
 import FacilitatorContact from "./FacilitatorContact"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
 
@@ -9,9 +8,9 @@ export default function Facilitator() {
     <section id="about" className="bg-cream">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
         <div>
-          <Eyebrow tone="onLight">Meet the facilitator</Eyebrow>
+          <span className="gn-eyebrow text-[var(--gn-ink)]">Meet the facilitator</span>
 
-          <h2 className="font-display text-4xl leading-[0.98] text-ink sm:text-5xl">
+          <h2 className="font-display mt-4 text-4xl leading-[0.98] text-ink sm:text-5xl">
             Dave Sonntag
           </h2>
 
@@ -23,9 +22,9 @@ export default function Facilitator() {
 
           <FacilitatorContact className="mt-6" />
 
-          <PillButton href="/about" variant="onLight" className="mt-9">
-            Read Dave's story
-          </PillButton>
+          <Link to="/about" className="gn-btn-secondary mt-9 text-[13px]">
+            Read Dave's story &rarr;
+          </Link>
         </div>
 
         <PhotoImage

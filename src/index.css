@@ -1,22 +1,47 @@
 @import "tailwindcss";
+@import "./styles/gn-tokens.css";
 
+/*
+  Tier 1 foundations pass: the old brand/sage/cream/terracotta/ink theme
+  colors now alias the gn-* design tokens instead of their own hex values,
+  so every existing bg-brand/text-terracotta/etc. utility across the site
+  repaints into the new ink/paper/pink/acid palette with no per-component
+  rename. Forest and burnt orange only come back inside .gn-workshop-2026.
+  Tier 2/3 component rebuilds will move call sites onto the gn-* utilities
+  directly and retire these aliases.
+*/
 @theme {
   --font-display: "Work Sans", sans-serif;
   --font-heading: "Anton", sans-serif;
   --font-body: "Work Sans", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
 
-  /* Forest — primary */
-  --color-brand: #1f3d2e;
-  --color-brand-dark: #15291d;
-  --color-brand-light: #4a6b57;
-  /* Sage — secondary */
-  --color-sage: #a7bfa4;
-  /* Warm cream — background */
-  --color-cream: #f2ede4;
-  /* Terracotta — accent, used sparingly */
-  --color-terracotta: #e46a3a;
-  /* Charcoal — near-black alt */
-  --color-ink: #1a1a1a;
+  --color-brand: var(--gn-ink);
+  --color-brand-dark: var(--gn-ink);
+  --color-brand-light: var(--gn-ink-soft);
+  --color-sage: var(--gn-paper-soft);
+  --color-cream: var(--gn-paper);
+  --color-terracotta: var(--gn-ink);
+  --color-ink: var(--gn-ink);
+}
+
+/*
+  Addendum 2 bug fix: a custom property's var() references are substituted
+  once, at the element where that property is declared (:root above) — the
+  result is what inherits down, not the live token. So .gn-workshop-2026
+  overriding --gn-ink further down the tree never reaches --color-ink (and
+  therefore every bg-ink/bg-brand/text-terracotta/border-ink utility),
+  because that substitution already happened at :root before the override
+  exists. Redeclaring the aliases directly here — one hop from the literal
+  legacy value, not two through --gn-ink — breaks the indirection instead
+  of relying on it, so the whole page (not just hand-built .gn-* elements)
+  actually repaints to forest/burnt.
+*/
+.gn-workshop-2026 {
+  --color-ink: var(--gn-legacy-forest);
+  --color-brand: var(--gn-legacy-forest);
+  --color-brand-dark: var(--gn-legacy-forest);
+  --color-terracotta: var(--gn-legacy-burnt);
 }
 
 * {
@@ -104,4 +129,88 @@ h2.font-display {
   font-weight: 600;
   font-size-adjust: none;
   letter-spacing: 0.01em;
+}
+
+/*
+  Accessibility floor (design brief): every interactive element needs a
+  visible 3px pink keyboard-focus outline, 2px offset. :focus-visible (not
+  :focus) so mouse/touch activation doesn't trigger it, only keyboard nav.
+*/
+:focus-visible {
+  outline: 3px solid var(--gn-pink);
+  outline-offset: 2px;
+}
+
+/*
+  Workshop-page hero CTA (component reference 05, .btn-primary-burnt): on
+  the 2026 workshop route, --gn-pink and --gn-acid both resolve to burnt
+  orange, so the generic .gn-btn-primary's ink text / pink shadow would
+  read as forest-on-burnt and burnt-on-burnt — low contrast, muddy. This
+  swaps both to paper specifically for that button.
+*/
+.gn-btn-hero {
+  color: var(--gn-paper);
+  box-shadow: 5px 5px 0 0 var(--gn-paper);
+}
+
+/*
+  Addendum 2 bug fix: .gn-btn-secondary in the token spec never sets
+  `display`, unlike .gn-btn-primary (which is display:inline-block). As an
+  <a>, that means it defaults to inline — its vertical padding then bleeds
+  visually into the line above/below instead of pushing it away, which is
+  what was overlapping "Read Dave's Story" with the email line above it.
+*/
+.gn-btn-secondary {
+  display: inline-block;
+}
+
+/*
+  .gn-card's own comment notes an "on ink backgrounds: ... shadow pink"
+  variant that was never actually implemented as a class in the token
+  file — only the on-paper version (paper-alt fill, ink border, ink
+  shadow) is. The homepage's "what's coming up" card sits on bg-brand
+  (ink), where .gn-card's ink-coloured shadow is the same colour as the
+  section it's cast onto — present in computed styles, invisible in the
+  browser. This supplies just the shadow-colour half of that comment;
+  the paper-alt fill and ink border already read fine against a dark
+  section on their own, so only the shadow needed swapping to pink.
+*/
+.gn-card-on-dark {
+  box-shadow: var(--gn-shadow-offset) var(--gn-shadow-offset) 0 0 var(--gn-pink);
+}
+
+/*
+  Volume 2 primary button (component reference 04, .btn-v2) — shown in the
+  demo but never promoted into good-noise-design-tokens.css as an actual
+  class, unlike .gn-btn-primary/.gn-btn-secondary. Values copied straight
+  from that demo's .btn-v2 rule: ink fill/border, paper text, smaller pink
+  offset shadow (4px, not 6px) — a lower-volume sibling of .gn-btn-primary
+  for Volume 2 pages.
+*/
+.gn-btn-v2 {
+  background: var(--gn-ink);
+  color: var(--gn-paper);
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 12px 22px;
+  border: 2px solid var(--gn-ink);
+  box-shadow: 4px 4px 0 0 var(--gn-pink);
+  border-radius: var(--gn-radius);
+  display: inline-block;
+}
+
+/*
+  .gn-hl's own -1.2deg rotation stacks on top of .gn-heading-tilt's when a
+  highlight word sits inside a fully-tilted heading (homepage hero) — the
+  word ends up visibly steeper than the rest of the line instead of
+  following the same trajectory. Cancelling the highlight's own rotation
+  here lets it sit flat within the already-rotated parent, so it inherits
+  the heading's single angle instead of adding a second one. Scoped to
+  .gn-heading-tilt specifically so the workshop hero's "Bandmates" — not
+  inside a tilted heading — keeps its own independent tilt unchanged.
+*/
+.gn-heading-tilt .gn-hl {
+  transform: none;
 }

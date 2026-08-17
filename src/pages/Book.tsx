@@ -33,7 +33,7 @@ export default function Book() {
             stripeUrl={currentStripeUrl()}
           />
 
-          <div className="rounded-xl border-2 border-ink bg-cream p-6 md:p-8">
+          <div className="border-2 border-ink bg-cream p-6 md:p-8">
             <span className="font-body font-bold text-xs uppercase tracking-wide text-ink/60">
               Order Summary
             </span>
@@ -59,7 +59,7 @@ export default function Book() {
                       Early bird
                     </span>
                   )}
-                  <span className="font-display flex items-center gap-2 rounded-md bg-terracotta px-4 py-2 text-xl text-white">
+                  <span className="font-display flex items-center gap-2 bg-terracotta px-4 py-2 text-xl text-white">
                     {earlyBird && (
                       <span className="text-white/60 line-through">
                         ${STANDARD_PRICE_DOLLARS}.00

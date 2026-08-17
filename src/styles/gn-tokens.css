@@ -1,0 +1,269 @@
+/* ============================================================
+   GOOD NOISE PROJECT — DESIGN TOKENS
+   Locked spec. Claude Code builds against this file.
+   Do not invent colours, fonts, radii or shadows not listed here.
+   ============================================================ */
+
+:root {
+
+  /* ---- CORE PALETTE (Volume 1 + Volume 2 both draw from this) ---- */
+
+  --gn-ink:        #15130F;  /* anchor. largest surface area. backgrounds, body text on cream */
+  --gn-paper:      #F7F0DC;  /* page background, text on ink. CONFIRMED — this replaces the old cream. */
+  --gn-paper-alt:  #FDFBF3;  /* card fills on cream backgrounds */
+  --gn-pink:       #FF2E7E;  /* SIGNATURE. highlights, offset shadows, one-per-viewport */
+  --gn-acid:       #D7FF3F;  /* SPARK. rarest. primary CTA fill, key eyebrows */
+
+  /* Supporting neutrals — derived, not new colours */
+  --gn-ink-soft:   #3A362C;  /* hairline dividers on ink backgrounds */
+  --gn-paper-soft: #EEE3BE;  /* alternate band on cream sections */
+  --gn-muted:      #5C5847;  /* small print, captions on cream */
+
+  /* ---- LEGACY PALETTE — WORKSHOP PAGE ONLY ---- */
+  /* Permitted ONLY on /workshops/2026-spring-holidays. Never elsewhere. */
+  --gn-legacy-forest: #2D493B;
+  --gn-legacy-burnt:  #E46A3A;
+
+  /* ---- TYPE ---- */
+  --gn-font-display: 'Anton', Impact, sans-serif;      /* headlines. uppercase. */
+  --gn-font-body:    'Work Sans', system-ui, sans-serif;
+  --gn-font-util:    'Space Mono', ui-monospace, monospace; /* eyebrows, badges, buttons, captions */
+  /* THREE FACES ONLY. No fourth. No script or handwritten fonts anywhere. */
+
+  --gn-size-h1:   clamp(38px, 7vw, 74px);
+  --gn-size-h2:   clamp(26px, 4vw, 40px);
+  --gn-size-h3:   19px;
+  --gn-size-body: 17px;
+  --gn-size-util: 12.5px;
+  --gn-size-small: 15.5px;
+
+  --gn-leading-display: 0.98;
+  --gn-leading-body:    1.55;
+  --gn-tracking-util:   0.12em;
+
+  /* ---- STRUCTURE ---- */
+  --gn-radius: 0;              /* NON-NEGOTIABLE. no rounded corners anywhere. */
+  --gn-border: 3px;            /* standard hard border */
+  --gn-border-thin: 2px;       /* badges, small elements */
+  --gn-shadow-offset: 6px;     /* offset block shadow. never blurred. */
+  --gn-tilt: -1.2deg;          /* standard rotation for highlight blocks / badges */
+
+  --gn-space-section: 72px;
+  --gn-space-gap: 22px;
+  --gn-maxwidth: 980px;
+}
+
+/* ============================================================
+   THE TWO VOLUMES
+   Same palette. Different intensity. Never different colours.
+   ============================================================ */
+
+/*
+  VOLUME 1 — TEEN-FACING (default for the whole site)
+  Pages: homepage, workshops index, workshop landing pages
+  - Ink backgrounds dominant
+  - Pink highlight blocks behind key words, rotated ~-1.2deg
+  - Acid used for primary CTA fill and one eyebrow per view
+  - Offset shadows on cards and buttons
+  - Ticker permitted
+  - Type set large, tight, uppercase display
+
+  VOLUME 2 — PARENT / SCHOOL-FACING
+  Pages: For Parents, For Schools, in-school pitch material, invoices, email signature
+  - Paper/cream backgrounds dominant, ink for type
+  - SAME hard edges, SAME borders, SAME offset shadows — structure does not soften
+  - Pink and acid appear only as small accents (rules, bullets, single eyebrow)
+  - NO rotation, NO ticker, NO highlight blocks behind headlines
+  - Type set smaller, more body copy, longer line lengths
+
+  The difference is volume, not vocabulary. A parent page should look like the
+  same brand turned down, not a different brand.
+*/
+
+/* ============================================================
+   COMPONENT SPECS
+   ============================================================ */
+
+/* EYEBROW — small label above a headline */
+.gn-eyebrow {
+  font-family: var(--gn-font-util);
+  font-size: var(--gn-size-util);
+  font-weight: 700;
+  letter-spacing: var(--gn-tracking-util);
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 5px 10px;
+  border: var(--gn-border-thin) solid currentColor;
+  border-radius: var(--gn-radius);
+}
+/* Vol 1: colour = var(--gn-acid) on ink backgrounds */
+/* Vol 2: colour = var(--gn-ink) on paper backgrounds */
+
+/* HEADING TILT — rotates a full heading block. Homepage hero only for now. */
+.gn-heading-tilt {
+  transform: rotate(var(--gn-tilt));
+}
+/* Same angle as .gn-hl below, so a highlighted word and its heading tilt
+   together — not fighting each other at two different angles.
+   Check for clipping/overflow at 380px before shipping this. */
+
+/* HIGHLIGHT BLOCK — behind a single word in a headline. Vol 1 only. */
+.gn-hl {
+  background: var(--gn-pink);
+  color: var(--gn-ink);
+  padding: 0 10px;
+  display: inline-block;
+  transform: rotate(var(--gn-tilt));
+}
+/* Use ONCE per viewport. Two highlight blocks in one hero cancel each other out. */
+
+/* ============================================================
+   THE OFFSET-SHADOW TREATMENT — where it applies and where it doesn't
+   ============================================================ */
+/*
+  This is the signature device: a solid colour block sitting behind an
+  element, offset down-right, border-radius 0. It reads as "look here."
+  That only works if it stays rare. Two components exist on purpose:
+
+  .gn-card         — HAS the offset shadow. Use for the ONE featured card
+                      per page: the single thing carrying the most important
+                      info a visitor needs right now.
+                      Examples: the "what's coming up" card on the homepage,
+                      the When/Where/Who/How-much details card on a workshop
+                      landing page.
+
+  .gn-card-flat    — NO shadow, border only. Use for anything that repeats:
+                      a grid of cards, a list of FAQ items, multiple photos
+                      in a gallery. If there's more than one of it on the
+                      page, it's .gn-card-flat, not .gn-card.
+
+  .gn-photo-frame  — Offset shadow around a photograph. Use ONLY on the
+                      single hero/lead image of a page. Supporting or
+                      gallery photos never get this.
+
+  HARD CEILING: no more than 2 offset-shadow elements visible in one
+  viewport at a time (buttons count). If a hero photo, a featured card,
+  and a CTA button would all be in view together, drop the frame from the
+  photo and keep it on the card and button — the button always keeps it,
+  it's the thing being acted on.
+*/
+
+/* CARD — featured. One per page. */
+.gn-card {
+  background: var(--gn-paper-alt);
+  border: var(--gn-border) solid var(--gn-ink);
+  box-shadow: var(--gn-shadow-offset) var(--gn-shadow-offset) 0 0 var(--gn-ink);
+  border-radius: var(--gn-radius);
+  padding: 22px;
+}
+/* On ink backgrounds: background ink, border paper, shadow pink. */
+
+/* CARD — flat. Anything that repeats. */
+.gn-card-flat {
+  background: var(--gn-paper-alt);
+  border: var(--gn-border) solid var(--gn-ink);
+  border-radius: var(--gn-radius);
+  padding: 22px;
+  box-shadow: none;
+}
+/* On ink backgrounds: background ink, border paper. Still no shadow. */
+
+/* PHOTO FRAME — hero/lead image only, never a gallery grid. */
+.gn-photo-frame {
+  border: var(--gn-border) solid var(--gn-ink);
+  box-shadow: var(--gn-shadow-offset) var(--gn-shadow-offset) 0 0 var(--gn-pink);
+  border-radius: var(--gn-radius);
+}
+.gn-photo-frame img {
+  display: block;
+  width: 100%;
+}
+
+/* PRIMARY BUTTON — Vol 1 */
+.gn-btn-primary {
+  background: var(--gn-acid);
+  color: var(--gn-ink);
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 13px 24px;
+  border: 2.5px solid var(--gn-paper);
+  box-shadow: 5px 5px 0 0 var(--gn-pink);
+  border-radius: var(--gn-radius);
+  display: inline-block;
+}
+
+/* SECONDARY BUTTON */
+.gn-btn-secondary {
+  background: transparent;
+  color: currentColor;
+  border: var(--gn-border-thin) solid currentColor;
+  border-radius: var(--gn-radius);
+  padding: 12px 22px;
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* NAV LINK — sitewide */
+.gn-nav-link {
+  color: currentColor;
+  transition: color 150ms ease;
+}
+.gn-nav-link:hover,
+.gn-nav-link:focus-visible {
+  color: var(--gn-acid);
+}
+/* Driven by --gn-acid, so this resolves to burnt orange automatically
+   inside .gn-workshop-2026 — no separate rule needed for that page. */
+
+/* TICKER — Vol 1 only */
+.gn-ticker {
+  background: var(--gn-ink);
+  color: var(--gn-acid);
+  font-family: var(--gn-font-util);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+}
+/* Must respect prefers-reduced-motion: animation none. */
+
+/* ============================================================
+   WORKSHOP PAGE OVERRIDE — /workshops/2026-spring-holidays ONLY
+   ============================================================ */
+
+.gn-workshop-2026 {
+  --gn-ink:   var(--gn-legacy-forest);   /* forest replaces ink on this page */
+  --gn-pink:  var(--gn-legacy-burnt);    /* burnt orange takes the signature slot */
+  --gn-acid:  var(--gn-legacy-burnt);    /* no acid on this page */
+}
+/*
+  Everything else — hard edges, offset shadows, highlight blocks, badge treatment,
+  type scale, component structure — is IDENTICAL to the rest of the site.
+  This page is the new brand wearing the old colours. Nothing more.
+  This override must not leak to any other route.
+*/
+
+/* ============================================================
+   HARD RULES — do not deviate
+   ============================================================ */
+/*
+  1. border-radius is 0 EVERYWHERE. No pills, no rounded cards, no soft buttons.
+  2. Shadows are solid offset blocks only. Never blurred, never rgba, never soft.
+  3. Forest green and burnt orange appear ONLY inside .gn-workshop-2026.
+  4. No colours outside this file. If something needs a new colour, ask first.
+  5. Anton / Work Sans / Space Mono only. No fourth typeface, no script/handwritten face.
+  6. Every accent-on-background pairing must pass WCAG AA for its text size.
+     Acid on ink passes. Pink on ink passes for large text ONLY — never body copy.
+  7. Mobile is not a scaled-down desktop. Check every hero at 380px width.
+  8. The "Est. 2026 · Perth, WA" badge is removed. The slot stays empty.
+  9. .gn-card (shadow) is for ONE featured element per page. Anything that
+     repeats in a grid or list uses .gn-card-flat. Same rule for photos:
+     .gn-photo-frame on the single hero image only, never a gallery.
+  10. Never more than 2 offset-shadow elements in one viewport at once.
+*/

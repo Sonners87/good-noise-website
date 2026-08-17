@@ -10,8 +10,11 @@ const sectionHeadingClass =
 // The card is on the terracotta accent color, so buttons need to be their
 // own dark variant rather than reusing PillButton's terracotta "primary" —
 // that would blend straight into the background.
+// rounded-full is re-added explicitly here: the site-wide radius reset
+// strips it from the shared pillBaseStyles, but this button lives inside
+// the booking form, which the design brief says stays visually untouched.
 const submitButtonClass =
-  "bg-ink text-white border-ink hover:bg-white hover:text-ink hover:border-ink"
+  "rounded-full bg-ink text-white border-ink hover:bg-white hover:text-ink hover:border-ink"
 
 type CampSignupFormProps = {
   campLabel: string

@@ -22,8 +22,14 @@ export const pillVariantStyles: Record<Variant, string> = {
     "bg-white text-ink border-terracotta hover:bg-terracotta hover:text-white hover:border-terracotta",
   onLight:
     "bg-brand text-white border-terracotta hover:bg-terracotta hover:text-white hover:border-terracotta",
+  // border-cream (not border-terracotta) deliberately: terracotta and brand
+  // both alias --gn-ink now (and both alias forest on the workshop-2026
+  // route), so a terracotta/ink border on this variant's ink/forest fill
+  // vanished whenever the button sat on an ink/forest section background.
+  // Cream never gets remapped by any scope, so the border stays visible
+  // everywhere regardless of which background or route it's used on.
   primary:
-    "bg-terracotta text-white border-terracotta hover:bg-ink hover:text-white hover:border-ink",
+    "bg-terracotta text-white border-cream hover:bg-ink hover:text-white",
   outline:
     "bg-transparent text-ink border-ink hover:bg-ink hover:text-cream",
   outlineOnDark:
@@ -31,7 +37,7 @@ export const pillVariantStyles: Record<Variant, string> = {
 }
 
 export const pillBaseStyles =
-  "font-body font-semibold inline-flex items-center justify-center gap-2 rounded-full border-2 tracking-wide transition"
+  "font-body font-semibold inline-flex items-center justify-center gap-2 border-2 tracking-wide transition"
 
 // PillButton is used for both in-app routes ("/about") and links that need a
 // real browser navigation — downloadable files ("/info-pack.pdf"), external

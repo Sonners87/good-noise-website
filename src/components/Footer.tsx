@@ -5,8 +5,8 @@ import SubscribeForm from "./SubscribeForm"
 export default function Footer() {
   return (
     <footer className="bg-ink text-cream">
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-6 border-b border-cream/15 px-5 py-6 md:flex-row md:items-center md:justify-between md:px-10">
-        <span className="font-body font-semibold text-xs tracking-wide text-cream/60">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-6 border-b-2 border-[var(--gn-ink-soft)] px-5 py-6 md:flex-row md:items-center md:justify-between md:px-10">
+        <span className="font-mono text-[12.5px] tracking-wide text-cream/60">
           Perth, WA
         </span>
         <nav className="flex flex-wrap justify-center gap-6 md:gap-8">
@@ -35,13 +35,13 @@ export default function Footer() {
             Child Safety Policy
           </Link>
         </nav>
-        <span className="font-body font-semibold text-xs tracking-wide text-cream/60">
+        <span className="font-mono text-[12.5px] tracking-wide text-cream/60">
           Good Noise Project © 2026
         </span>
       </div>
 
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-3 border-b border-cream/15 px-5 py-8 md:px-10">
-        <span className="font-body font-semibold text-xs tracking-wide text-cream/60">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-3 border-b-2 border-[var(--gn-ink-soft)] px-5 py-8 md:px-10">
+        <span className="font-mono text-[12.5px] tracking-wide text-cream/60">
           Join the community
         </span>
         <SubscribeForm
