@@ -15,6 +15,10 @@ type LiveWorkshopCardProps = CardBody & {
   photoSrc: string
   photoAlt: string
   photoObjectPosition?: string
+  /** Extra classes for the root — e.g. "gn-card" for the ONE featured
+      instance of this card (homepage). Every other usage repeats in a
+      grid, so it stays flat/bordered-only per the offset-shadow rule. */
+  className?: string
 }
 
 type ComingSoonWorkshopCardProps = CardBody & {
@@ -51,7 +55,7 @@ export default function WorkshopCard(props: WorkshopCardProps) {
     return (
       <Link
         to={props.href}
-        className="group block overflow-hidden rounded-xl border-2 border-ink bg-cream transition hover:border-terracotta"
+        className={`group block overflow-hidden border-2 border-ink bg-cream transition hover:border-terracotta ${props.className ?? ""}`}
       >
         <Title title={props.title} />
 
@@ -60,7 +64,6 @@ export default function WorkshopCard(props: WorkshopCardProps) {
           alt={props.photoAlt}
           aspect="aspect-[16/9]"
           objectPosition={props.photoObjectPosition}
-          rounded={false}
         />
 
         <Details blurb={props.blurb} whoFor={props.whoFor} />
@@ -78,7 +81,7 @@ export default function WorkshopCard(props: WorkshopCardProps) {
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border-2 border-ink bg-cream">
+    <div className="overflow-hidden border-2 border-ink bg-cream">
       <div className="opacity-60">
         <Title title={props.title} />
       </div>

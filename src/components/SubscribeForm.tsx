@@ -87,7 +87,7 @@ export default function SubscribeForm({
           <input
             type="text"
             name="name"
-            className="rounded-xl border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
+            className="border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
             placeholder="Your name"
           />
         </label>
@@ -104,7 +104,7 @@ export default function SubscribeForm({
           type="email"
           name="email"
           aria-label="Email"
-          className={`w-full rounded-xl border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ink ${
+          className={`w-full border-2 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-ink ${
             variant === "footer"
               ? "border-cream/30 bg-ink text-cream placeholder:text-cream/40"
               : "border-ink bg-cream text-ink placeholder:text-ink/40"

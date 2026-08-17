@@ -64,7 +64,7 @@ export default function About() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10">
-          <div className="aspect-video w-full overflow-hidden rounded-xl">
+          <div className="aspect-video w-full overflow-hidden">
             <iframe
               className="h-full w-full"
               src="https://www.youtube-nocookie.com/embed/1K31eGjdm78"

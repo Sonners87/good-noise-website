@@ -6,6 +6,7 @@ import WorkshopDetail from "./pages/WorkshopDetail"
 import Book from "./pages/Book"
 import BookingOctCamp from "./pages/BookingOctCamp"
 import HolidayCamps from "./pages/HolidayCamps"
+import ForParents from "./pages/ForParents"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
 import StayInTouch from "./pages/StayInTouch"
@@ -38,6 +39,7 @@ function App() {
               off the generic /workshops/:slug route onto its own top-level
               URL, reusing WorkshopDetail's rendering against a fixed slug. */}
           <Route path="/for-schools" element={<WorkshopDetail slug="in-school-songwriting" />} />
+          <Route path="/for-parents" element={<ForParents />} />
           <Route path="/stay-in-touch" element={<StayInTouch />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

@@ -19,6 +19,12 @@ export default function UpcomingWorkshop() {
         </Eyebrow>
 
         <div className="max-w-md">
+          {/* The one featured card on the homepage — .gn-card, not
+              -flat. !p-0 because Title/Photo/Details inside already carry
+              their own padding; gn-card's own 22px would stack on top.
+              gn-card-on-dark: this section is bg-brand (ink), where
+              .gn-card's default ink-coloured shadow would be invisible
+              against a matching ink background — see index.css. */}
           <WorkshopCard
             status="live"
             href={`/workshops/${workshop.slug}`}
@@ -28,6 +34,7 @@ export default function UpcomingWorkshop() {
             photoSrc={photo.src}
             photoAlt={photo.alt}
             photoObjectPosition={photo.objectPosition}
+            className="gn-card gn-card-on-dark !p-0"
           />
         </div>
       </div>

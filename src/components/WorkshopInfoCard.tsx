@@ -5,6 +5,9 @@ type InfoRow = { label: string; value: ReactNode }
 
 type WorkshopInfoCardProps = {
   title?: string
+  /** Overrides the default title styling entirely — e.g. to match another
+      heading elsewhere on the page instead of this card's own default. */
+  titleClassName?: string
   rows: InfoRow[]
   ctaLabel?: string
   ctaHref?: string
@@ -16,6 +19,7 @@ type WorkshopInfoCardProps = {
 
 export default function WorkshopInfoCard({
   title,
+  titleClassName,
   rows,
   ctaLabel,
   ctaHref,
@@ -24,11 +28,17 @@ export default function WorkshopInfoCard({
 }: WorkshopInfoCardProps) {
   return (
     <div
-      className={`flex flex-col overflow-hidden rounded-xl border-2 border-ink bg-cream ${className}`}
+      className={`flex flex-col overflow-hidden border-2 border-ink bg-cream ${className}`}
     >
       {title && (
         <div className="border-b-2 border-ink px-6 py-4 md:py-5">
-          <span className="font-body font-bold text-lg text-ink">{title}</span>
+          {/* h2 (not span) so titleClassName="font-display" can pick up the
+              h2.font-display global rule — that's what actually swaps the
+              family to Anton with the right letter-spacing/size-adjust;
+              the plain .font-display utility alone stays Work Sans. */}
+          <h2 className={titleClassName ?? "font-body font-bold text-lg text-ink"}>
+            {title}
+          </h2>
         </div>
       )}
       <div className="flex flex-1 flex-col justify-start gap-4 px-6 py-6">

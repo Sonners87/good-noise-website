@@ -160,14 +160,13 @@ export default function HolidayCamps() {
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div className="flex flex-col overflow-hidden rounded-xl border-2 border-sage shadow-md">
+            <div className="flex flex-col overflow-hidden border-2 border-sage shadow-[6px_6px_0_0_var(--gn-ink)]">
               <div className="relative">
                 <PhotoImage
                   src={heroBandPractice}
                   alt="Two young musicians at band practice, one playing electric guitar and singing into a microphone"
                   aspect="aspect-[16/9]"
                   objectPosition="center 55%"
-                  rounded={false}
                 />
                 <div
                   className="absolute inset-0 bg-sage/60 mix-blend-color"
@@ -176,10 +175,10 @@ export default function HolidayCamps() {
               </div>
               <div className="flex flex-1 flex-col bg-sage/20 p-8 md:p-10">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-body font-bold inline-block w-fit rounded-full bg-sage px-4 py-1.5 text-sm uppercase tracking-wide text-ink">
+                  <span className="font-body font-bold inline-block w-fit bg-sage px-4 py-1.5 text-sm uppercase tracking-wide text-ink">
                     Ages 11–14
                   </span>
-                  <span className="font-body font-bold inline-block w-fit rounded-full bg-sage px-4 py-1.5 text-sm uppercase tracking-wide text-ink">
+                  <span className="font-body font-bold inline-block w-fit bg-sage px-4 py-1.5 text-sm uppercase tracking-wide text-ink">
                     Two-Day Songwriting Camp
                   </span>
                 </div>
@@ -201,13 +200,12 @@ export default function HolidayCamps() {
               </div>
             </div>
 
-            <div className="flex flex-col overflow-hidden rounded-xl border-2 border-terracotta shadow-md">
+            <div className="flex flex-col overflow-hidden border-2 border-terracotta shadow-[6px_6px_0_0_var(--gn-ink)]">
               <div className="relative">
                 <PhotoImage
                   src={workshopBandTrio}
                   alt="Three young musicians performing together, two playing guitar and one singing into a microphone"
                   aspect="aspect-[16/9]"
-                  rounded={false}
                 />
                 <div
                   className="absolute inset-0 bg-terracotta/50 mix-blend-color"
@@ -216,10 +214,10 @@ export default function HolidayCamps() {
               </div>
               <div className="flex flex-1 flex-col bg-terracotta/10 p-8 md:p-10">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-body font-bold inline-block w-fit rounded-full bg-terracotta px-4 py-1.5 text-sm uppercase tracking-wide text-white">
+                  <span className="font-body font-bold inline-block w-fit bg-terracotta px-4 py-1.5 text-sm uppercase tracking-wide text-white">
                     Ages 15–18
                   </span>
-                  <span className="font-body font-bold inline-block w-fit rounded-full bg-terracotta px-4 py-1.5 text-sm uppercase tracking-wide text-white">
+                  <span className="font-body font-bold inline-block w-fit bg-terracotta px-4 py-1.5 text-sm uppercase tracking-wide text-white">
                     Two-Day Songwriting Camp
                   </span>
                 </div>
