@@ -97,7 +97,7 @@ export default function ForParents() {
 
               <div className="mt-8 border-t-2 border-ink pt-6">
                 <p className="text-base leading-relaxed text-ink/80">
-                  Good Noise Project is run by Dave Sonntag — a drummer of
+                  Good Noise Project is run by Dave Sonntag, a drummer of
                   thirty years, a self-taught singer-songwriter, and a
                   dedicated mentor to young people.
                 </p>
@@ -125,7 +125,7 @@ export default function ForParents() {
         <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
           <div className="max-w-2xl">
             <h2 className="font-display text-[clamp(26px,4vw,38px)] leading-[0.98] text-ink">
-              Questions, Bookings, or Anything Else
+              Questions, Bookings or Anything Else
             </h2>
 
             <div className="mt-8 flex flex-col gap-4">
@@ -151,16 +151,6 @@ export default function ForParents() {
                   dave@goodnoiseproject.com.au
                 </a>
               </div>
-              <div className="flex items-start justify-between gap-4 border-b border-ink/15 pb-4">
-                <span className="font-body font-semibold text-xs uppercase tracking-wide text-ink/60">
-                  Refunds
-                </span>
-                <span className="font-body font-semibold text-ink text-right">
-                  Available for cancellations made 2+ weeks before a
-                  workshop starts.
-                </span>
-              </div>
-            </div>
 
             <p className="mt-8 text-base leading-relaxed text-ink/80">
               Have a question we haven't covered here? Get in touch
