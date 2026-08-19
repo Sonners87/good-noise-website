@@ -12,9 +12,9 @@ export default function UpcomingWorkshop() {
   const photo = workshopCardPhotos[upcomingWorkshopSlug]
 
   return (
-    <section id="workshops" className="bg-brand">
+    <section id="workshops" className="bg-[var(--gn-acid)]">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-        <Eyebrow tone="onBlue" className="mb-8 self-start">
+        <Eyebrow tone="onLight" className="mb-8 self-start">
           What's coming up
         </Eyebrow>
 
@@ -22,9 +22,10 @@ export default function UpcomingWorkshop() {
           {/* The one featured card on the homepage — .gn-card, not
               -flat. !p-0 because Title/Photo/Details inside already carry
               their own padding; gn-card's own 22px would stack on top.
-              gn-card-on-dark: this section is bg-brand (ink), where
-              .gn-card's default ink-coloured shadow would be invisible
-              against a matching ink background — see index.css. */}
+              Plain .gn-card (not the -on-dark shadow variant) here — this
+              section is orange, not ink, so the default ink-coloured
+              shadow reads fine against it without needing the pink/blue
+              swap-in that dark ink sections require. */}
           <WorkshopCard
             status="live"
             href={`/workshops/${workshop.slug}`}
@@ -34,7 +35,7 @@ export default function UpcomingWorkshop() {
             photoSrc={photo.src}
             photoAlt={photo.alt}
             photoObjectPosition={photo.objectPosition}
-            className="gn-card gn-card-on-dark !p-0"
+            className="gn-card !p-0"
           />
         </div>
       </div>

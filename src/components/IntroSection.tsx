@@ -3,7 +3,9 @@ export default function IntroSection() {
     <section className="bg-cream">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
         <h2 className="font-display mb-8 max-w-2xl text-4xl leading-[0.98] text-ink sm:text-5xl">
-          Find Your People. Find Your Sound.
+          Find Your People.
+          <br />
+          Find Your Sound.
         </h2>
 
         <div className="max-w-3xl space-y-5 text-base leading-relaxed text-ink/80 md:text-lg">
@@ -25,11 +27,6 @@ export default function IntroSection() {
             a professional therapy practice.
           </p>
         </div>
-
-        <p className="font-body font-bold mt-8 max-w-3xl text-xl leading-snug text-ink md:text-2xl">
-          Music Is the Vehicle. Play Is the Action. Connection Is the
-          Outcome.
-        </p>
       </div>
     </section>
   )

@@ -8,11 +8,11 @@
 
   /* ---- CORE PALETTE (Volume 1 + Volume 2 both draw from this) ---- */
 
-  --gn-ink:        #15130F;  /* anchor. largest surface area. backgrounds, body text on cream */
-  --gn-paper:      #F7F0DC;  /* page background, text on ink. CONFIRMED — this replaces the old cream. */
+  --gn-ink:        #14120F;  /* anchor. largest surface area. backgrounds, body text on cream */
+  --gn-paper:      #F4F0E6;  /* page background, text on ink. CONFIRMED — this replaces the old cream. */
   --gn-paper-alt:  #FDFBF3;  /* card fills on cream backgrounds */
-  --gn-pink:       #FF2E7E;  /* SIGNATURE. highlights, offset shadows, one-per-viewport */
-  --gn-acid:       #D7FF3F;  /* SPARK. rarest. primary CTA fill, key eyebrows */
+  --gn-pink:       #6FD3FF;  /* SIGNATURE. highlights, offset shadows, one-per-viewport. Background use only — see gn-* usages on light backgrounds for the ink fallback. */
+  --gn-acid:       #FF4A00;  /* SPARK. rarest. primary CTA fill, key eyebrows */
 
   /* Supporting neutrals — derived, not new colours */
   --gn-ink-soft:   #3A362C;  /* hairline dividers on ink backgrounds */
@@ -109,7 +109,7 @@
 
 /* HIGHLIGHT BLOCK — behind a single word in a headline. Vol 1 only. */
 .gn-hl {
-  background: var(--gn-pink);
+  background: var(--gn-acid);
   color: var(--gn-ink);
   padding: 0 10px;
   display: inline-block;

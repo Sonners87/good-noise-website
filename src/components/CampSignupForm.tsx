@@ -3,18 +3,15 @@ import { pillBaseStyles, pillSizeStyles } from "./PillButton"
 import { submitNetlifyForm, submitNetlifyFormFields } from "../lib/submitNetlifyForm"
 
 const inputClass =
-  "rounded-xl border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
-const labelClass = "font-body font-semibold text-xs tracking-wide text-white/85"
+  "border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
+const labelClass = "font-body font-semibold text-xs tracking-wide text-ink/70"
 const sectionHeadingClass =
-  "font-body font-bold text-base md:text-lg uppercase tracking-wide text-white"
-// The card is on the terracotta accent color, so buttons need to be their
-// own dark variant rather than reusing PillButton's terracotta "primary" —
-// that would blend straight into the background.
-// rounded-full is re-added explicitly here: the site-wide radius reset
-// strips it from the shared pillBaseStyles, but this button lives inside
-// the booking form, which the design brief says stays visually untouched.
+  "font-body font-bold text-base md:text-lg uppercase tracking-wide text-ink"
+// The card is cream (light), so buttons need to be their own dark variant
+// rather than reusing PillButton's terracotta "primary" — that would blend
+// straight into the background.
 const submitButtonClass =
-  "rounded-full bg-ink text-white border-ink hover:bg-white hover:text-ink hover:border-ink"
+  "bg-ink text-white border-ink hover:bg-white hover:text-ink hover:border-ink"
 
 type CampSignupFormProps = {
   campLabel: string
@@ -76,8 +73,8 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
 
   if (flagged) {
     return (
-      <div className="rounded-xl border-2 border-ink bg-terracotta p-6 md:p-8">
-        <p className="font-body font-bold text-lg text-white">
+      <div className="border-2 border-ink bg-cream p-6 md:p-8">
+        <p className="font-body font-bold text-lg text-ink">
           Thanks — I'll be in touch within 24 hours to make sure this is a
           great fit before booking is finalised.
         </p>
@@ -90,7 +87,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
       onSubmit={handleSubmit}
       name="camp-signup"
       data-netlify="true"
-      className="grid grid-cols-1 gap-6 rounded-xl border-2 border-ink bg-terracotta p-6 md:p-8"
+      className="grid grid-cols-1 gap-6 border-2 border-ink bg-cream p-6 md:p-8"
     >
       <input type="hidden" name="form-name" value="camp-signup" />
       <input type="hidden" name="camp" value={campLabel} />
@@ -180,7 +177,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 border-t-2 border-white/25 pt-6">
+      <div className="grid grid-cols-1 gap-5 border-t-2 border-ink/15 pt-6">
         <span className={sectionHeadingClass}>Parent info</span>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -260,14 +257,14 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 border-t-2 border-white/25 pt-6">
+      <div className="grid grid-cols-1 gap-4 border-t-2 border-ink/15 pt-6">
         <span className={labelClass}>
           Does your child have any additional support needs (sensory,
           medical, behavioural, or otherwise) we should be aware of?
         </span>
 
         <div className="grid grid-cols-2 gap-3">
-          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
+          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
             <input
               required
               type="radio"
@@ -278,7 +275,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
             />
             No
           </label>
-          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
+          <label className="flex min-h-11 cursor-pointer items-center justify-center gap-2 border-2 border-ink bg-cream px-4 py-3 font-body font-semibold text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
             <input
               required
               type="radio"
@@ -306,7 +303,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
       </div>
 
       {error && (
-        <p className="rounded-xl bg-white/90 px-3 py-2 text-sm font-semibold text-ink">
+        <p className="border-2 border-ink bg-white/90 px-3 py-2 text-sm font-semibold text-ink">
           Something went wrong sending that — please try again, or email us
           directly.
         </p>
@@ -327,7 +324,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
       </button>
 
       {supportNeeds !== "yes" && (
-        <p className="-mt-2 text-center text-sm text-white">
+        <p className="-mt-2 text-center text-sm text-ink">
           You'll be redirected to Stripe to complete payment.
         </p>
       )}

@@ -45,10 +45,10 @@ export default function ForParents() {
           highlight-behind-headline, lower visual volume than Volume 1's
           hero pattern). No offset shadow on the photo here — the page's
           one shadow is reserved for the "Who's running it" card below. */}
-      <section className="bg-cream">
+      <section className="bg-[var(--gn-pink)]">
         <div className="mx-auto max-w-[1400px] px-5 pt-12 pb-14 md:px-10 md:pt-16 md:pb-20">
-          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
-            <div>
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 md:items-start">
+            <div className="md:pt-10 lg:pt-14">
               <span className="gn-eyebrow text-ink">For parents</span>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/80 md:text-lg">
                 Good Noise Project runs small, facilitated music workshops
@@ -78,7 +78,7 @@ export default function ForParents() {
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
           <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-12">
-            <div className="gn-card">
+            <div className="gn-card" style={{ background: "#DDF1FC" }}>
               <h2 className="font-display text-[clamp(26px,4vw,38px)] leading-[0.98] text-ink">
                 Who's Running It, and How We Keep It Safe
               </h2>
@@ -103,7 +103,7 @@ export default function ForParents() {
                 </p>
                 <Link
                   to="/about"
-                  className="mt-3 inline-block font-semibold text-ink underline decoration-2 underline-offset-4 hover:text-[var(--gn-pink)]"
+                  className="mt-3 inline-block font-semibold text-ink underline decoration-2 underline-offset-4 hover:text-[var(--gn-ink)]"
                 >
                   Read Dave's story &rarr;
                 </Link>
@@ -135,7 +135,7 @@ export default function ForParents() {
                 </span>
                 <a
                   href="tel:+61413626240"
-                  className="font-body font-semibold text-ink hover:text-[var(--gn-pink)]"
+                  className="font-body font-semibold text-ink hover:text-[var(--gn-ink)]"
                 >
                   +61 413 626 240
                 </a>
@@ -146,7 +146,7 @@ export default function ForParents() {
                 </span>
                 <a
                   href="mailto:dave@goodnoiseproject.com.au"
-                  className="font-body font-semibold text-ink hover:text-[var(--gn-pink)]"
+                  className="font-body font-semibold text-ink hover:text-[var(--gn-ink)]"
                 >
                   dave@goodnoiseproject.com.au
                 </a>
