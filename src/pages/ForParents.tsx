@@ -151,6 +151,7 @@ export default function ForParents() {
                   dave@goodnoiseproject.com.au
                 </a>
               </div>
+            </div>
 
             <p className="mt-8 text-base leading-relaxed text-ink/80">
               Have a question we haven't covered here? Get in touch
