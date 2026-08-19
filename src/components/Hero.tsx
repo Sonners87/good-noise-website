@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="grid w-full flex-1 grid-cols-1 md:grid-cols-2">
         <div className="relative z-10 flex flex-col justify-center py-14 pr-5 pl-[var(--edge-pad)] md:py-0 md:pr-8">
           <div className="relative max-w-2xl">
-            <span className="gn-eyebrow text-[var(--gn-acid)]">
+            <span className="gn-eyebrow text-[var(--gn-pink)]">
               Community music workshops in Perth
             </span>
 

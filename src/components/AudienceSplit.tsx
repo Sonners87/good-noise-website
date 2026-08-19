@@ -19,7 +19,7 @@ export default function AudienceSplit() {
           <Link
             key={block.label}
             to={block.href}
-            className="border-[3px] border-[var(--gn-ink)] px-5 py-[18px] font-display text-[clamp(19px,3vw,27px)] text-[var(--gn-ink)] uppercase leading-none"
+            className="self-start w-1/2 min-w-[260px] max-w-[520px] border-[3px] border-[var(--gn-ink)] px-5 py-[18px] font-display text-[clamp(19px,3vw,27px)] text-[var(--gn-ink)] uppercase leading-none"
             style={{ background: block.background, transform: `rotate(${block.rotate})` }}
           >
             {block.label} &rarr;
