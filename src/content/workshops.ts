@@ -64,6 +64,13 @@ export type Workshop = {
   prerequisites?: string
   scholarshipNote?: string
   refundPolicy?: WorkshopInfoRow[]
+  /** Short note on refunding the price difference for early bookers, shown alongside the other fine print. */
+  priceMatchNote?: string
+
+  // Prominent scholarship callout — rendered directly under the hero details
+  // card, ahead of the fine print. A summary in the decision path, not a
+  // replacement for `scholarshipNote`'s fuller policy text below.
+  scholarshipCallout?: { heading: string; body: string }
 }
 
 const allWorkshops: Record<string, Workshop> = {
@@ -76,7 +83,7 @@ const allWorkshops: Record<string, Workshop> = {
       "Our next workshop runs this Spring school holidays in North Perth, giving teen musos aged 14–17 the chance to write, compose and perform a song together over two days.",
     dates: "30 Sep – 1 Oct 2026 (9am – 3pm each day)",
     location: "North Perth",
-    price: "$195",
+    price: "$80",
     infoRows: [
       { label: "When", value: "Wed, 30 Sep – Thu, 1 Oct 2026" },
       { label: "Time", value: "9am – 3pm each day" },
@@ -85,7 +92,7 @@ const allWorkshops: Record<string, Workshop> = {
         value: "Player 1 Music School\n5 Woodville Lane, North Perth WA 6006",
       },
       { label: "Who", value: "Ages 14-17" },
-      { label: "How much", value: "$195" },
+      { label: "How much", value: "$80" },
     ],
     ctaLabel: "Book your place",
     ctaHref: "/book-2026-spring-holidays",
@@ -144,6 +151,12 @@ const allWorkshops: Record<string, Workshop> = {
       { label: "1–2 weeks' notice", value: "50% refund" },
       { label: "Less than one week's notice", value: "No refund" },
     ],
+    priceMatchNote:
+      "Booked earlier at a higher price? We'll refund you the difference automatically — you don't need to ask.",
+    scholarshipCallout: {
+      heading: "Cost shouldn't decide this.",
+      body: "If $80 is a stretch, email dave@goodnoiseproject.com.au and we'll sort a partial or full place. No questions asked, no awkwardness.",
+    },
   },
 
   "songwriting-oct-2026": {

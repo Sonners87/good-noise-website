@@ -11,11 +11,7 @@ import FounderQuote from "../components/FounderQuote"
 import NotFound from "./NotFound"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
-import {
-  isEarlyBirdActive,
-  STANDARD_PRICE_DOLLARS,
-  EARLY_BIRD_PRICE_DOLLARS,
-} from "../content/pricing"
+import { PRICE_DOLLARS } from "../content/pricing"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
@@ -57,28 +53,21 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   const highlightsColumns =
     workshop.highlights.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
 
-  // Swaps the static "How much" row for a live early-bird/standard price,
-  // driven by the single cutoff date in `content/pricing.ts`.
-  const earlyBird = isSpringHolidays && isEarlyBirdActive()
+  // Swaps the static "How much" row for the foundation-price display,
+  // driven by the single price constant in `content/pricing.ts`.
   const infoRows = isSpringHolidays
     ? workshop.infoRows.map((row) =>
         row.label === "How much"
           ? {
               ...row,
-              value: earlyBird ? (
+              value: (
                 <span className="flex flex-col items-end gap-1">
-                  <span className="flex items-baseline gap-2">
-                    <span className="text-ink/40 line-through">
-                      ${STANDARD_PRICE_DOLLARS}
-                    </span>
-                    <span className="font-bold text-ink">${EARLY_BIRD_PRICE_DOLLARS}</span>
-                  </span>
+                  <span className="font-bold text-ink">${PRICE_DOLLARS}</span>
+                  <span className="text-[11px] text-ink/60">for both days</span>
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-terracotta">
-                    Early bird
+                    Foundation Price · Our First Program
                   </span>
                 </span>
-              ) : (
-                `$${STANDARD_PRICE_DOLLARS}`
               ),
             }
           : row,
@@ -119,16 +108,34 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                 </div>
               </div>
 
-              {/* .gn-card is the one featured card on this page — restored
-                  per Addendum 6. Its own padding:22px is zeroed out since
-                  WorkshopInfoCard's title/rows/footer regions already carry
-                  their own internal padding; stacking both looked bloated. */}
-              <WorkshopInfoCard
-                rows={infoRows}
-                title="2026 Spring Holiday Jam Program"
-                titleClassName="font-display text-4xl uppercase leading-[0.98] text-terracotta sm:text-5xl"
-                className="gn-card !p-0"
-              />
+              <div>
+                {/* .gn-card is the one featured card on this page — restored
+                    per Addendum 6. Its own padding:22px is zeroed out since
+                    WorkshopInfoCard's title/rows/footer regions already carry
+                    their own internal padding; stacking both looked bloated. */}
+                <WorkshopInfoCard
+                  rows={infoRows}
+                  title="2026 Spring Holiday Jam Program"
+                  titleClassName="font-display text-4xl uppercase leading-[0.98] text-terracotta sm:text-5xl"
+                  className="gn-card !p-0"
+                />
+
+                {/* Prominent scholarship callout — deliberately breaks this
+                    page's "one .gn-card / two shadows per viewport" rule.
+                    Someone who's decided the price is a problem has already
+                    left by the time they reach the fine print, so this needs
+                    to sit right in the decision path, not below it. */}
+                {workshop.scholarshipCallout && (
+                  <div className="gn-card-on-dark mt-6 border-2 border-[var(--gn-paper)] bg-[var(--gn-ink)] p-6">
+                    <p className="font-display text-2xl uppercase leading-[0.98] text-terracotta">
+                      {workshop.scholarshipCallout.heading}
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-white/85 md:text-base">
+                      {linkifyEmail(workshop.scholarshipCallout.body)}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
             {workshop.ageRangeNote && (
@@ -389,6 +396,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
       {/* Prerequisites, scholarship, refund policy — each renders only if present */}
       {(workshop.prerequisites ||
         workshop.scholarshipNote ||
+        workshop.priceMatchNote ||
         workshop.refundPolicy) && (
         <section className="bg-cream">
           <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
@@ -406,8 +414,14 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               </div>
             )}
 
+            {workshop.priceMatchNote && (
+              <p className="mt-8 max-w-2xl text-sm leading-relaxed text-ink/70">
+                {workshop.priceMatchNote}
+              </p>
+            )}
+
             {workshop.refundPolicy && (
-              <div className="mt-8 max-w-md">
+              <div id="cancellations" className="mt-8 max-w-md scroll-mt-24">
                 <WorkshopInfoCard
                   title="Cancellations & Refunds"
                   rows={workshop.refundPolicy}

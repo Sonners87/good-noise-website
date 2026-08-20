@@ -2,19 +2,12 @@ import { useEffect } from "react"
 import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import CampSignupForm from "../components/CampSignupForm"
-import {
-  currentStripeUrl,
-  isEarlyBirdActive,
-  STANDARD_PRICE_DOLLARS,
-  EARLY_BIRD_PRICE_DOLLARS,
-} from "../content/pricing"
+import { STRIPE_URL, PRICE_DOLLARS } from "../content/pricing"
 
 export default function Book() {
   useEffect(() => {
     document.title = "Book Your Place — Good Noise Project"
   }, [])
-
-  const earlyBird = isEarlyBirdActive()
 
   return (
     <>
@@ -30,7 +23,7 @@ export default function Book() {
         <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-start md:gap-12">
           <CampSignupForm
             campLabel="September 2026 (30 Sep – 1 Oct)"
-            stripeUrl={currentStripeUrl()}
+            stripeUrl={STRIPE_URL}
           />
 
           <div className="border-2 border-ink bg-cream p-6 md:p-8">
@@ -54,21 +47,13 @@ export default function Book() {
                   Total Cost
                 </span>
                 <div className="flex flex-col items-end gap-1">
-                  {earlyBird && (
-                    <span className="font-body text-[11px] font-semibold uppercase tracking-wide text-terracotta">
-                      Early bird
-                    </span>
-                  )}
-                  <span className="font-display flex items-center gap-2 bg-terracotta px-4 py-2 text-xl text-white">
-                    {earlyBird && (
-                      <span className="text-white/60 line-through">
-                        ${STANDARD_PRICE_DOLLARS}.00
-                      </span>
-                    )}
-                    <span>
-                      ${earlyBird ? EARLY_BIRD_PRICE_DOLLARS : STANDARD_PRICE_DOLLARS}.00
-                    </span>
+                  <span className="font-body text-[11px] font-semibold uppercase tracking-wide text-terracotta">
+                    Foundation Price · Our First Program
                   </span>
+                  <span className="font-display bg-terracotta px-4 py-2 text-xl text-white">
+                    ${PRICE_DOLLARS}.00
+                  </span>
+                  <span className="font-body text-xs text-ink/60">for both days</span>
                 </div>
               </div>
             </div>
