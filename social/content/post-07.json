@@ -1,0 +1,57 @@
+{
+  "id": "07",
+  "name": "for-the-parents",
+  "slides": [
+    {
+      "template": "T1",
+      "ground": "blue",
+      "eyebrow": "FOR THE PARENTS",
+      "headline": "THE BIT YOU ACTUALLY WANT TO KNOW.",
+      "body": "Answers before you have to ask.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "blue",
+      "eyebrow": "WHO'S RUNNING IT",
+      "headline": "DAVE SONNTAG.",
+      "body": "Thirty years behind a drum kit, a working musician, and a facilitator with a WA youth mental health charity. Working With Children Check. SafeTALK trained.",
+      "cta": null
+    },
+    {
+      "template": "T2",
+      "ground": "blue",
+      "eyebrow": "WHERE & WHEN",
+      "rows": [
+        { "label": "DATES", "value": "Wed 30 Sep – Thu 1 Oct 2026" },
+        { "label": "HOURS", "value": "9am – 3pm. Drop off and pick up at the door." },
+        { "label": "VENUE", "value": "Player 1 Music School, 5 Woodville Lane, North Perth" },
+        { "label": "BRING", "value": "Instrument (optional), lunch, water, earplugs" }
+      ]
+    },
+    {
+      "template": "T1",
+      "ground": "blue",
+      "eyebrow": "GROUP SIZE",
+      "headline": "KEPT SMALL ON PURPOSE.",
+      "body": "Small enough that every kid gets heard instead of lost in a crowd.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "blue",
+      "eyebrow": "COST",
+      "headline": "NOBODY MISSES OUT.",
+      "body": "$80 for the two days — a foundation price for our first program. If that's still a barrier, email Dave for a partial or full place. No questions asked, no awkwardness.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "blue",
+      "eyebrow": null,
+      "headline": "NOT A LESSON. NOT THERAPY.",
+      "body": "It's a room where your kid makes something real with other kids. There's something therapeutic in that — but we're musicians, not clinicians.",
+      "cta": "DETAILS VIA LINK IN BIO"
+    }
+  ]
+}

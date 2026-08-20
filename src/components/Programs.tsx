@@ -22,7 +22,7 @@ export default function Programs() {
         <Link
           to="/workshops"
           className="group relative mt-10 block overflow-hidden border-2 border-ink"
-          aria-label="Explore Good Noise workshops"
+          aria-label="Explore Good Noise Project workshops"
         >
           <PhotoImage
             src={programsPhoto}

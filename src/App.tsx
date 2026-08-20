@@ -11,6 +11,9 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import StayInTouch from "./pages/StayInTouch"
 import ChildSafetyPolicy from "./pages/ChildSafetyPolicy"
+import PhotographyPolicy from "./pages/PhotographyPolicy"
+import Privacy from "./pages/Privacy"
+import ShootSheet from "./pages/admin/ShootSheet"
 import NotFound from "./pages/NotFound"
 import { SHOW_OCT_2026_CAMP } from "./content/featureFlags"
 
@@ -44,6 +47,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/child-safety-policy" element={<ChildSafetyPolicy />} />
+          <Route path="/photography-policy" element={<PhotographyPolicy />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/admin/shoot-sheet" element={<ShootSheet />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

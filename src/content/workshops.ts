@@ -162,7 +162,7 @@ const allWorkshops: Record<string, Workshop> = {
   "songwriting-oct-2026": {
     slug: "songwriting-oct-2026",
     title: "Good Noise Project: October 2026 Songwriting Camp",
-    shortTitle: "Good Noise Songwriting Camp",
+    shortTitle: "Good Noise Project Songwriting Camp",
     eyebrow: "Camp",
     teaser:
       "Our next workshop runs this October school holidays in North Perth, giving Years 6–8 musos the chance to write, compose and perform a song together over two days.",
@@ -216,7 +216,7 @@ const allWorkshops: Record<string, Workshop> = {
     title: "In-School Song and Lyric Writing Workshop",
     shortTitle: "In-School Song and Lyric Writing Workshop",
     teaser:
-      "A term-long, in-class songwriting program for Years 9–12 English classes, delivered entirely by Good Noise.",
+      "A term-long, in-class songwriting program for Years 9–12 English classes, delivered entirely by Good Noise Project.",
     eyebrow: "For Schools",
     infoRows: [
       { label: "When", value: "One school term" },
@@ -229,7 +229,7 @@ const allWorkshops: Record<string, Workshop> = {
     introParagraphs: [
       "Songwriting is one of the oldest forms of human communication — and it uses almost every skill the English curriculum asks students to build. Metaphor. Imagery. Voice. Tone. Structure. Audience. The difference is, students don't think they're doing English. They think they're writing a song.",
       "Delivered over a full term, students move from analysing lyrics as texts, to writing from a specific personal image, to shaping a verse and chorus with real structural intent — the same thinking the syllabus asks for, built through a form students already care about.",
-      "Sessions are facilitated entirely by Good Noise — teachers can observe, join in, or use the time to catch up on other work. No preparation required on your end.",
+      "Sessions are facilitated entirely by Good Noise Project — teachers can observe, join in, or use the time to catch up on other work. No preparation required on your end.",
     ],
     highlightsHeading: "Why It Works",
     highlights: [

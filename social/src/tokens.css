@@ -1,0 +1,127 @@
+/* ============================================================
+   GOOD NOISE — INSTAGRAM GENERATOR TOKENS
+   Mirrored from /src/styles/gn-tokens.css (the live site's source of
+   truth). Do not invent colours, fonts, or structural values here —
+   change the site tokens first, then re-sync this file.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/Anton-Regular.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  /* Static instances, not the variable font — Chromium's PDF export embeds
+     a variable font's glyphs as a Type 3 (procedural/raster) font instead
+     of live vector outlines, which breaks editing in Affinity. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/WorkSans-Regular.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/WorkSans-Medium.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/SpaceMono-Regular.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/SpaceMono-Bold.woff2') format('woff2');
+  font-display: block;
+}
+
+:root {
+  /* ---- CORE PALETTE — copied verbatim from src/styles/gn-tokens.css ---- */
+  --gn-ink:        #14120F;
+  --gn-paper:      #F4F0E6;
+  --gn-paper-alt:  #FDFBF3;
+  --gn-pink:       #6FD3FF; /* signature light blue */
+  --gn-acid:       #FF4A00; /* coral/orange spark */
+
+  --gn-ink-soft:   #3A362C;
+  --gn-paper-soft: #EEE3BE;
+  --gn-muted:      #5C5847;
+
+  /* ---- LEGACY PALETTE — 2026 spring holiday workshop only ----
+     Matches .gn-workshop-2026 on the live site (src/styles/gn-tokens.css).
+     Permitted ONLY on posts promoting that specific workshop. */
+  --gn-legacy-forest: #2D493B;
+  --gn-legacy-burnt:  #E46A3A;
+
+  --gn-tilt: -1.2deg; /* rotation for the headline highlight block */
+
+  /* ---- TYPE — three faces only, matches src/styles/gn-tokens.css ---- */
+  --gn-font-display: 'Anton', Impact, sans-serif;
+  --gn-font-body:    'Work Sans', system-ui, sans-serif;
+  --gn-font-util:    'Space Mono', ui-monospace, monospace;
+
+  /* ---- STRUCTURE ---- */
+  --gn-radius:        0;    /* non-negotiable, no rounded corners anywhere */
+  --gn-border:        3px;
+  --gn-border-thin:   2px;
+  --gn-shadow-offset: 6px;  /* solid offset block shadow, never blurred */
+
+  /* ---- CANVAS ---- */
+  --canvas-w: 1080px;
+  --canvas-h: 1350px;
+  --safe-pad: 96px;
+  --logo-h: 88px;
+  --logo-bottom: 120px; /* logo's bottom edge, measured from canvas bottom */
+  --logo-zone-h: 230px; /* reserved height content must clear above the bottom edge */
+}
+
+/* ---- GROUND VARIANTS ----
+   ink   — youth-facing default. bg ink, text paper/cream, accent acid orange.
+   blue  — parent-facing. bg signature light blue, text ink (dark-on-light for contrast).
+   orange — announcement/CTA. bg acid orange, text ink (dark-on-light, per brief).
+   Offset shadows always read ink block / paper border / pink(blue) shadow,
+   matching the .gn-card pattern in the site tokens, regardless of ground. */
+.ground-ink {
+  --bg: var(--gn-ink);
+  --fg: var(--gn-paper);
+  --accent: var(--gn-acid);
+  --accent2: var(--gn-pink);
+}
+.ground-blue {
+  --bg: var(--gn-pink);
+  --fg: var(--gn-ink);
+  --accent: var(--gn-ink);
+  --accent2: var(--gn-acid);
+}
+.ground-orange {
+  --bg: var(--gn-acid);
+  --fg: var(--gn-ink);
+  --accent: var(--gn-ink);
+  --accent2: var(--gn-paper);
+}
+
+/* ---- PALETTE OVERRIDE — 2026 spring holiday workshop ----
+   Same mechanism as .gn-workshop-2026 on the live site: forest replaces
+   ink, burnt takes both the "pink" (shadow) and "acid" (accent) slots.
+   Apply alongside a ground-* class on the same slide element — every rule
+   above resolves through --gn-ink/--gn-pink/--gn-acid, so this repaints
+   the whole slide (badges, shadows, eyebrows included) with no other
+   changes needed. Add via a slide's "palette": "forest" in content JSON. */
+.palette-forest {
+  --gn-ink:  var(--gn-legacy-forest);
+  --gn-pink: var(--gn-legacy-burnt);
+  --gn-acid: var(--gn-legacy-burnt);
+}

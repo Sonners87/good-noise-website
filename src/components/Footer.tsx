@@ -28,16 +28,36 @@ export default function Footer() {
           >
             For Schools
           </Link>
+        </nav>
+        <span className="font-mono text-[12.5px] tracking-wide text-cream/60">
+          Good Noise Project © 2026
+        </span>
+      </div>
+
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-3 border-b-2 border-[var(--gn-ink-soft)] px-5 py-6 md:flex-row md:items-start md:gap-8 md:px-10">
+        <span className="pt-0.5 font-mono text-[12.5px] tracking-wide text-cream/60">
+          Policies
+        </span>
+        <nav className="flex flex-wrap gap-x-6 gap-y-3 md:gap-x-8">
           <Link
             to="/child-safety-policy"
             className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
           >
             Child Safety Policy
           </Link>
+          <Link
+            to="/photography-policy"
+            className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
+          >
+            Photography, Filming and Recording Policy
+          </Link>
+          <Link
+            to="/privacy"
+            className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
+          >
+            Privacy Collection Notice
+          </Link>
         </nav>
-        <span className="font-mono text-[12.5px] tracking-wide text-cream/60">
-          Good Noise Project © 2026
-        </span>
       </div>
 
       <div className="mx-auto flex max-w-[1400px] flex-col gap-3 border-b-2 border-[var(--gn-ink-soft)] px-5 py-8 md:px-10">
@@ -53,7 +73,7 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-[1400px] px-5 pb-8 pt-10 md:px-10">
-        <img src={logo} alt="Good Noise" className="h-16 w-auto md:h-20" />
+        <img src={logo} alt="Good Noise Project" className="h-16 w-auto md:h-20" />
       </div>
     </footer>
   )

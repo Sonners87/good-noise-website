@@ -1,0 +1,58 @@
+{
+  "eyebrow": "Create | Play | Experiment",
+  "headline": {
+    "pre": "Your ",
+    "highlight": "Bandmates",
+    "post": "Are Waiting!"
+  },
+  "subline": "A two-day jam program for Perth musos aged 14–17. Write an original song. Play it as a band.",
+  "infoRows": [
+    { "label": "When", "value": "Wed 30 Sep – Thu 1 Oct 2026" },
+    { "label": "Time", "value": "9am – 3pm each day" },
+    { "label": "Where", "value": "Player 1 Music School, 5 Woodville Lane, North Perth" },
+    { "label": "Who", "value": "Ages 14–17" }
+  ],
+  "price": {
+    "value": "$80 for both days",
+    "note": "Foundation price · Our first program"
+  },
+  "priceExplainer": "Our first-ever jam program, so we've set the price low on purpose.",
+  "scholarship": {
+    "heading": "Cost shouldn't decide this.",
+    "body": "If $80 is a stretch, email Dave and we'll sort a partial or full place. No questions asked, no awkwardness."
+  },
+  "benefits": [
+    {
+      "headline": "Write a Song From Scratch",
+      "body": "Two days, one original, with musos you've only just met."
+    },
+    {
+      "headline": "Keep the Recording",
+      "body": "You'll walk out with your song. Yours forever."
+    },
+    {
+      "headline": "Find Out What You've Got",
+      "body": "You'll learn things about your playing you didn't know were there."
+    },
+    {
+      "headline": "Maybe Find Your Band",
+      "body": "A lot of first bands start in a room exactly like this."
+    }
+  ],
+  "reassurance": "No judgement.  No benchmarks.  No solo pressure.",
+  "quote": {
+    "text": "It wasn't footy after school — it was making music. I had people to relate to. I belonged somewhere. And I could do it without anyone telling me how. That's what I want for today's kids.",
+    "attribution": "Dave Sonntag · Good Noise Project"
+  },
+  "cta": {
+    "label": "Book Your Place ->",
+    "url": "goodnoiseproject.com.au/jam",
+    "spotsLimited": "Spots Are Limited"
+  },
+  "footer": {
+    "name": "Dave Sonntag",
+    "email": "dave@goodnoiseproject.com.au",
+    "phone": "0413 626 240"
+  },
+  "qrUrl": "https://goodnoiseproject.com.au/jam"
+}

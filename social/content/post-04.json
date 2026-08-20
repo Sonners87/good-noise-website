@@ -1,0 +1,77 @@
+{
+  "id": "04",
+  "name": "your-bandmates-are-waiting",
+  "slides": [
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "eyebrow": "2026 SPRING HOLIDAY JAM",
+      "headline": "YOUR BANDMATES ARE WAITING.",
+      "body": "Two days. One original song. A room full of instruments.",
+      "cta": null
+    },
+    {
+      "template": "T2",
+      "ground": "ink",
+      "palette": "forest",
+      "eyebrow": "THE DETAILS",
+      "rows": [
+        {
+          "label": "WHEN",
+          "value": "Wed 30 Sep – Thu 1 Oct 2026"
+        },
+        {
+          "label": "TIME",
+          "value": "9am – 3pm each day"
+        },
+        {
+          "label": "WHERE",
+          "value": "Player 1 Music School, North Perth"
+        },
+        {
+          "label": "WHO",
+          "value": "Ages 14–17"
+        }
+      ]
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "eyebrow": "DAY ONE",
+      "headline": "EXPLORE.",
+      "body": "Try instruments. Find your role in the group. Shape ideas together. No theory, no sitting and listening.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "eyebrow": "DAY TWO",
+      "headline": "BRING IT TO LIFE.",
+      "body": "The song you wrote — played together, start to finish.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "eyebrow": null,
+      "headline": "NO SOLO PRESSURE.",
+      "body": "Nobody's singled out. Groups are kept deliberately small so every voice actually gets heard.",
+      "cta": null
+    },
+    {
+      "template": "T5",
+      "ground": "orange",
+      "palette": "forest",
+      "badge": "FOUNDATION PRICE",
+      "price": "$80",
+      "oldPrice": null,
+      "priceNote": "for both days",
+      "cta": "BOOK VIA LINK IN BIO",
+      "footnote": "Spots are limited.\nCost a barrier? Email Dave for a full or partial place — no questions asked."
+    }
+  ]
+}

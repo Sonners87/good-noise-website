@@ -21,7 +21,7 @@ export default function Header() {
     <header className="relative z-20">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-5 md:px-10">
         <a href="/#home" className="shrink-0">
-          <img src={logo} alt="Good Noise" className="h-12 w-auto md:h-16" />
+          <img src={logo} alt="Good Noise Project" className="h-12 w-auto md:h-16" />
         </a>
         {/* text-white/85 lives on <nav> rather than each link: .gn-nav-link
             sets color:currentColor (unlayered, so it always wins over a

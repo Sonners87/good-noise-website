@@ -33,7 +33,7 @@ export default function SafetyFirst() {
             Here to Play, Not to Prove.
           </h2>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-cream/75 md:text-lg">
-            Every participant of a Good Noise workshop is treated the same,
+            Every participant of a Good Noise Project workshop is treated the same,
             regardless of skill, background, or how long they've been
             playing. No judgement. No hierarchy. And no pressure to share
             before you're ready.

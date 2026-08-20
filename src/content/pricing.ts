@@ -2,4 +2,4 @@
 // and the Stripe Payment Link it charges.
 export const PRICE_DOLLARS = 80
 
-export const STRIPE_URL = "https://buy.stripe.com/cNi28r4m2cd28Pc5BN3F600"
+export const STRIPE_URL = "https://buy.stripe.com/3cI8wP4m2dh6c1o0ht3F603"

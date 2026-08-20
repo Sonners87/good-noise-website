@@ -28,13 +28,13 @@ export default function ChildSafetyPolicy() {
               <h2 className="font-display text-2xl text-ink sm:text-3xl">1. Introduction</h2>
               <div className="mt-4 space-y-3">
                 <p>
-                  1.1 Good Noise ("Good Noise", "we", "us") is committed to
+                  1.1 Good Noise Project ("we", "us") is committed to
                   protecting the rights, safety and wellbeing of all children
                   and young people who participate in our programs and
                   workshops.
                 </p>
                 <p>
-                  1.2 Good Noise is a Perth-based, sole-facilitator youth
+                  1.2 Good Noise Project is a Perth-based, sole-facilitator youth
                   music program run by Dave Sonntag, delivering songwriting
                   and music workshops to young people in Western Australia.
                 </p>
@@ -47,7 +47,7 @@ export default function ChildSafetyPolicy() {
                 <p>
                   2.1 This policy sets out our commitment to the safety and
                   wellbeing of children and young people who take part in
-                  Good Noise programs, and explains how we work to keep them
+                  Good Noise Project programs, and explains how we work to keep them
                   safe.
                 </p>
                 <p>2.2 This policy seeks to:</p>
@@ -85,7 +85,7 @@ export default function ChildSafetyPolicy() {
                   is any person under the age of 18 years.
                 </p>
                 <p>
-                  3.2 This policy applies to all Good Noise programs and
+                  3.2 This policy applies to all Good Noise Project programs and
                   workshops, and to Dave Sonntag as the sole facilitator of
                   those programs.
                 </p>
@@ -119,12 +119,12 @@ export default function ChildSafetyPolicy() {
               </h2>
               <div className="mt-4 space-y-3">
                 <p>
-                  4.1 Good Noise is run by a single facilitator, Dave
+                  4.1 Good Noise Project is run by a single facilitator, Dave
                   Sonntag, who holds a current Working with Children Check
                   (WWCC), renewed in line with WA requirements.
                 </p>
                 <p>
-                  4.2 Good Noise does not currently engage other workers,
+                  4.2 Good Noise Project does not currently engage other workers,
                   volunteers or subcontractors to deliver programs, so this
                   policy does not include recruitment or screening
                   procedures for additional staff. Should that change in
@@ -167,7 +167,7 @@ export default function ChildSafetyPolicy() {
               </h2>
               <div className="mt-4 space-y-3">
                 <p>
-                  6.1 Good Noise takes reasonable steps to identify and
+                  6.1 Good Noise Project takes reasonable steps to identify and
                   reduce risks to children and young people participating in
                   our programs, across both our physical and online
                   environments.
@@ -182,7 +182,7 @@ export default function ChildSafetyPolicy() {
                 <p>
                   6.3 Where any online or digital communication is needed
                   with a participant, this is directed through a parent or
-                  guardian wherever possible. Good Noise does not
+                  guardian wherever possible. Good Noise Project does not
                   communicate privately with a child or young person outside
                   of appropriate, parent/guardian-included channels.
                 </p>
@@ -197,7 +197,7 @@ export default function ChildSafetyPolicy() {
                 <p>
                   7.1 Personal information collected about children and
                   young people (including through our intake process) is
-                  used only to plan and safely run Good Noise programs, and
+                  used only to plan and safely run Good Noise Project programs, and
                   is kept confidential.
                 </p>
                 <p>
@@ -214,7 +214,7 @@ export default function ChildSafetyPolicy() {
               <div className="mt-4 space-y-3">
                 <p>
                   8.1 If you have a concern about the safety or wellbeing of
-                  a child or young person in connection with Good Noise,
+                  a child or young person in connection with Good Noise Project,
                   please{" "}
                   <Link to="/contact" className={linkClass}>
                     contact us

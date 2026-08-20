@@ -1,0 +1,54 @@
+{
+  "id": "09",
+  "name": "why-follow-us",
+  "slides": [
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SO... WHAT'S IN IT [[FOR YOU]]?",
+      "body": "Why you should give us a follow.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SONGWRITING [[TRICKS]] YOU CAN ACTUALLY USE.",
+      "body": "Not theory. Not lessons. Fun stuff even the pros use.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "A WAY INTO A [[BAND]].",
+      "body": "Not just tips — actual chances to jam with other musos.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "BEHIND THE [[SCENES]].",
+      "body": "A look into our workshops and what you can expect from joining one.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "FIRST TO [[KNOW]].",
+      "body": "Workshop dates, spots and pricing — before they fill up.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SOMETHING FOR YOUR [[DAD]].",
+      "body": "Yes, actually — dad workshops are on the way too.",
+      "cta": null
+    }
+  ]
+}

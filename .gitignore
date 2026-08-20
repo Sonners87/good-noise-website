@@ -37,7 +37,15 @@ dist-ssr
 /design-refresh/
 /consent-forms-draft/
 /email-templates/
-/social/
 /public/qr-code/Design.pdf
 /booking-page-copy-archive.md
 /Good-Noise-Audience-Research-Age 11-14-Brief.pdf
+
+# Instagram post generator — keep the generator source under version
+# control, ignore only its rendered output and build scratch space.
+/social/output/
+/social/.build-tmp/
+
+# Flyer generator — same pattern, keep source, ignore rendered output.
+/social/flyer/output/
+/social/flyer/.build-tmp/

@@ -1,0 +1,328 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: var(--canvas-w);
+  height: var(--canvas-h);
+}
+
+body {
+  overflow: hidden;
+  font-family: var(--gn-font-body);
+}
+
+.slide {
+  position: relative;
+  width: var(--canvas-w);
+  height: var(--canvas-h);
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+}
+
+/* content lives inside the safe area, clear of the logo zone at the bottom */
+.safe {
+  position: absolute;
+  left: var(--safe-pad);
+  right: var(--safe-pad);
+  top: var(--safe-pad);
+  bottom: var(--logo-zone-h);
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  bottom: var(--logo-bottom);
+  transform: translateX(-50%);
+  height: var(--logo-h);
+  width: auto;
+  display: block;
+}
+
+.eyebrow {
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+  border: var(--gn-border-thin) solid var(--accent);
+  padding: 8px 16px;
+  width: fit-content;
+}
+
+.headline {
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  line-height: 0.92;
+  font-size: 140px;
+  color: var(--fg);
+  overflow-wrap: break-word;
+}
+
+/* HIGHLIGHT BLOCK — behind a single word/phrase in a headline, matching
+   .gn-hl on the live site (background accent, text bg, tilted). Marked up
+   in content JSON headlines as [[boxed text]]. Use sparingly — once per
+   headline, same rule as the site. */
+.hl {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0 0.12em;
+  transform: rotate(var(--gn-tilt));
+}
+
+.body-text {
+  font-family: var(--gn-font-body);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.35;
+  color: var(--fg);
+}
+
+.cta-line {
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---- T1 — STATEMENT ---- */
+.t1 .safe {
+  justify-content: flex-start;
+  gap: 32px;
+}
+.t1 .headline-wrap {
+  flex: 0 0 auto;
+}
+.t1 .body-text {
+  max-width: 900px;
+}
+.t1 .cta-line {
+  margin-top: auto;
+}
+
+/* ---- T2 — SPEC ---- */
+.t2 .safe {
+  justify-content: flex-start;
+  gap: 40px;
+}
+.t2 .rows {
+  display: flex;
+  flex-direction: column;
+}
+.t2 .row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px 0;
+  border-bottom: 2px solid var(--fg);
+  border-bottom-color: color-mix(in srgb, var(--fg) 20%, transparent);
+}
+.t2 .row:first-child {
+  padding-top: 0;
+}
+.t2 .row:last-child {
+  border-bottom: none;
+}
+.t2 .row-label {
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg);
+  opacity: 0.6;
+}
+.t2 .row-value {
+  font-family: var(--gn-font-body);
+  font-weight: 500;
+  font-size: 40px;
+  color: var(--fg);
+}
+
+/* ---- T3 — SERIES ---- */
+.t3 .safe {
+  justify-content: flex-start;
+  gap: 36px;
+}
+.t3 .number-block {
+  width: 200px;
+  height: 200px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--gn-font-display);
+  font-size: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.t3 .headline {
+  font-size: 120px;
+}
+
+/* ---- T4 — IMAGE ---- */
+.t4 .safe {
+  inset: 0;
+  padding: 0;
+  justify-content: flex-end;
+}
+.t4 .frame {
+  position: absolute;
+  inset: 0;
+}
+.t4 .frame img,
+.t4 .frame .placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.08);
+}
+.t4 .duotone {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--gn-ink), var(--accent2));
+  mix-blend-mode: color;
+}
+.t4 .scrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 62%;
+  background: linear-gradient(to bottom, transparent, var(--gn-ink) 88%);
+}
+.t4 .text-block {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--safe-pad) var(--logo-zone-h) var(--safe-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--gn-paper);
+}
+.t4 .headline {
+  color: var(--gn-paper);
+  font-size: 104px;
+}
+.t4 .sub {
+  font-family: var(--gn-font-body);
+  font-weight: 400;
+  font-size: 40px;
+  color: var(--gn-paper);
+  max-width: 860px;
+}
+
+/* ---- T5 — CTA / PRICE ---- */
+.t5 .safe {
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+}
+.t5 .badge {
+  background: var(--gn-ink);
+  color: var(--gn-paper);
+  border: var(--gn-border-thin) solid var(--gn-paper);
+  box-shadow: var(--gn-shadow-offset) var(--gn-shadow-offset) 0 0 var(--gn-pink);
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  width: fit-content;
+}
+.t5 .price-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+.t5 .price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+}
+.t5 .price-old {
+  font-family: var(--gn-font-body);
+  font-weight: 400;
+  font-size: 48px;
+  color: var(--fg);
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.t5 .price-new {
+  font-family: var(--gn-font-display);
+  font-size: 150px;
+  color: var(--fg);
+  line-height: 1;
+}
+.t5 .price-note {
+  font-family: var(--gn-font-body);
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--fg);
+  opacity: 0.75;
+}
+.t5 .cta-block {
+  background: var(--gn-ink);
+  color: var(--gn-paper);
+  border: var(--gn-border-thin) solid var(--gn-paper);
+  box-shadow: var(--gn-shadow-offset) var(--gn-shadow-offset) 0 0 var(--gn-pink);
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 22px 32px;
+  width: fit-content;
+  margin-top: 20px;
+}
+.t5 .footnote {
+  font-family: var(--gn-font-body);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.4;
+  color: var(--fg);
+  opacity: 0.75;
+  margin-top: 10px;
+  white-space: pre-line; /* footnote may carry a literal \n for a second line */
+}
+
+/* ---- placeholder image slot ---- */
+.placeholder {
+  background: var(--gn-ink);
+  border: 2px solid var(--gn-acid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.placeholder-inner {
+  font-family: var(--gn-font-body);
+  color: var(--gn-paper);
+  text-align: center;
+  max-width: 780px;
+  padding: 0 60px;
+}
+.placeholder-slot {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.placeholder-desc {
+  font-size: 26px;
+  font-weight: 400;
+  opacity: 0.8;
+  line-height: 1.5;
+}

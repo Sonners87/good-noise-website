@@ -1,0 +1,42 @@
+{
+  "id": "08",
+  "name": "the-room",
+  "slides": [
+    {
+      "template": "T4",
+      "ground": "ink",
+      "palette": "forest",
+      "image": "08-01",
+      "headline": "THIS IS WHERE IT HAPPENS.",
+      "sub": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "eyebrow": null,
+      "headline": "PLAYER 1 MUSIC SCHOOL, NORTH PERTH.",
+      "body": "A room full of instruments begging to be picked up.",
+      "cta": null
+    },
+    {
+      "template": "T4",
+      "ground": "ink",
+      "palette": "forest",
+      "image": "08-03",
+      "headline": "BRING YOURS OR USE OURS.",
+      "sub": "Kit, guitars, bass, keys, mics — it's all there."
+    },
+    {
+      "template": "T5",
+      "ground": "orange",
+      "palette": "forest",
+      "badge": "FOUNDATION PRICE",
+      "price": "$80",
+      "oldPrice": null,
+      "priceNote": "for both days",
+      "cta": "BOOK VIA LINK IN BIO",
+      "footnote": "Limited spots.\nScholarships available — just ask."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+/* ============================================================
+   GOOD NOISE — JAM FLYER TOKENS
+   Colours match .gn-workshop-2026's override in src/index.css and
+   src/styles/gn-tokens.css exactly — sampled from the live rendered
+   /workshops/2026-spring-holidays page, not eyeballed from a screenshot.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/Anton-Regular.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  /* Static instances, not the variable font — Chromium's PDF export embeds
+     a variable font's glyphs as a Type 3 (procedural/raster) font instead
+     of live vector outlines, which breaks editing in Affinity/Acrobat. */
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/WorkSans-Regular.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/WorkSans-Medium.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/SpaceMono-Regular.woff2') format('woff2');
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/SpaceMono-Bold.woff2') format('woff2');
+  font-display: block;
+}
+
+:root {
+  /* .gn-workshop-2026 override values, not the sitewide default palette */
+  --ink:      #2D493B; /* legacy forest — ground + primary text-on-cream */
+  --accent:   #E46A3A; /* legacy burnt orange — signature + CTA fill */
+  --paper:    #F4F0E6; /* cream page background */
+  --paper-alt:#FDFBF3; /* card fill, slightly lighter than paper */
+  --ink-60:   rgba(45, 73, 59, 0.6);
+  --ink-40:   rgba(45, 73, 59, 0.4);
+  --ink-15:   rgba(45, 73, 59, 0.15);
+  --cream-70: rgba(244, 240, 230, 0.7);
+
+  --font-display: 'Anton', Impact, sans-serif;
+  --font-body:    'Work Sans', system-ui, sans-serif;
+  --font-util:    'Space Mono', ui-monospace, monospace;
+}

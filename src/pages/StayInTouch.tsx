@@ -22,7 +22,7 @@ export default function StayInTouch() {
           Be Part of Where This Goes Next
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
-          Good Noise isn't a one-off program — it's the start of an ongoing
+          Good Noise Project isn't a one-off program — it's the start of an ongoing
           community of young musicians in Perth. Saxophonists, shredding
           guitarists, singers, drummers — every instrument, every skill
           level, everyone welcome. We're growing this deliberately, over

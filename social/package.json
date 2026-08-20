@@ -1,0 +1,9 @@
+{
+  "name": "good-noise-social",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:placeholders": "node src/generate-placeholders.mjs"
+  }
+}

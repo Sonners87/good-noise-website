@@ -62,7 +62,7 @@ export default function HolidayCamps() {
       <section className="bg-brand">
         <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10 md:pt-8">
           <Link to="/" className="mx-auto block w-fit">
-            <img src={logo} alt="Good Noise" className="h-14 w-auto md:h-16" />
+            <img src={logo} alt="Good Noise Project" className="h-14 w-auto md:h-16" />
           </Link>
           <p className="font-body font-bold mx-auto mt-3 max-w-[19rem] text-center text-sm text-white md:text-base">
             Two-day songwriting camps in North Perth, for two different age

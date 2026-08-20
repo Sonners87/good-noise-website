@@ -1,0 +1,45 @@
+{
+  "id": "05",
+  "name": "trick-01-sing-gibberish-first",
+  "slides": [
+    {
+      "template": "T3",
+      "ground": "ink",
+      "number": "01",
+      "eyebrow": "SONGWRITING TRICKS YOU CAN ACTUALLY USE",
+      "headline": "SING GIBBERISH FIRST."
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "WORDS FIRST IS A TRAP.",
+      "body": "Write the lyrics before the melody and you'll end up with a tune that just follows your sentences around.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SO DON'T.",
+      "body": "Loop your chords. Mumble total nonsense over the top. Sing whatever sounds good, not whatever means something.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "THEN FIND WORDS THAT FIT THE SOUND.",
+      "body": "The melody's already there. Now you're just filling in the shapes.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "orange",
+      "eyebrow": "TRUE STORY",
+      "headline": "\"YESTERDAY\" WAS \"SCRAMBLED EGGS\" FIRST.",
+      "body": "McCartney kept the placeholder for months while he hunted for the real words.",
+      "cta": null
+    }
+  ]
+}

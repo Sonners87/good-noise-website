@@ -12,7 +12,7 @@ const bioParagraphs = [
   "Music has been Dave Sonntag's saviour, his mate, his megaphone and his silo — a way to express, a way to vent, and above all, a way to connect. For thirty years as a drummer and twenty as a self-taught guitarist, vocalist and singer-songwriter, it's carried him as much as he's carried it: onto Triple J, onto the drum stool in front of thousands, and into a life built around creativity, connection and belonging. It introduced him to lifelong mates. It even introduced him to his wife.",
   "His professional path as a copywriter led him to design and refresh programs for zero2hero, a West Australian youth mental health organisation, where he's spent time volunteering and mentoring young people.",
   "He's passionate about youth mental health, about seeing music in young people's lives, and about the indescribable feelings and incomparable opportunities that playing music — and creating with others — can give them.",
-  "That's why he started Good Noise.",
+  "That's why he started Good Noise Project.",
 ]
 
 const credentialsLine =
@@ -80,7 +80,7 @@ export default function About() {
         <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
           <div className="flex flex-col items-start gap-4 border-t border-ink/15 pt-10 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-base text-ink/80 md:text-lg">
-              Curious what a Good Noise workshop looks like?
+              Curious what a Good Noise Project workshop looks like?
             </p>
             <PillButton href="/#workshops" variant="onLight" size="sm">
               See workshops

@@ -47,7 +47,7 @@ export default function BookingOctCamp() {
     <>
       <PageHero>
         <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-          Good Noise Songwriting Camp
+          Good Noise Project Songwriting Camp
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
           Two days. One song. A room full of young musos meeting for the
