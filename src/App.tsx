@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Workshops from "./pages/Workshops"
 import WorkshopDetail from "./pages/WorkshopDetail"
 import Book from "./pages/Book"
+import BookingConfirmed from "./pages/BookingConfirmed"
 import BookingOctCamp from "./pages/BookingOctCamp"
 import HolidayCamps from "./pages/HolidayCamps"
 import ForParents from "./pages/ForParents"
@@ -27,6 +28,7 @@ function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
           <Route path="/book-2026-spring-holidays" element={<Book />} />
+          <Route path="/booking-confirmed-2026-spring" element={<BookingConfirmed />} />
           {/* October 2026 camp is paused — see SHOW_OCT_2026_CAMP in
               content/featureFlags.ts. Flip it to `true` to restore this
               route (and the /holiday-camps route below) without touching
