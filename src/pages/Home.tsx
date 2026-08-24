@@ -8,6 +8,7 @@ import Facilitator from "../components/Facilitator"
 import GetInvolvedForm from "../components/GetInvolvedForm"
 import StayInLoop from "../components/StayInLoop"
 import Footer from "../components/Footer"
+import SpringHolidayJamPopup from "../components/SpringHolidayJamPopup"
 
 // WhyWeExist (loneliness stat, values list, "not a professional therapy
 // practice" line) is deliberately not rendered here — the design brief
@@ -27,6 +28,7 @@ export default function Home() {
       <GetInvolvedForm />
       <StayInLoop source="stay-in-loop-block" />
       <Footer />
+      <SpringHolidayJamPopup />
     </>
   )
 }

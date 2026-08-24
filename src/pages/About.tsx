@@ -6,6 +6,7 @@ import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
 import FacilitatorContact from "../components/FacilitatorContact"
 import StayInLoop from "../components/StayInLoop"
+import SpringHolidayJamPopup from "../components/SpringHolidayJamPopup"
 import facilitatorPhoto from "../assets/images/facilitator-dave-red-jumper.webp"
 
 const bioParagraphs = [
@@ -91,6 +92,7 @@ export default function About() {
 
       <StayInLoop source="stay-in-loop-block" />
       <Footer />
+      <SpringHolidayJamPopup />
     </>
   )
 }
