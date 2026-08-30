@@ -37,22 +37,28 @@ function formatHeadline(text) {
 }
 
 // Paths are relative to the scratch HTML file the build writes into
-// social/.build-tmp/ (one level below social/) — see build.mjs.
-function logoImg() {
-  return `<img class="logo" src="../assets/logo/good-noise-logo-cream.png" alt="" />`;
+// social/.build-tmp/ (one level below social/) — see build.mjs. Sourced
+// directly from the website's own logo assets (src/assets/logo) rather than
+// a duplicate copy, same file social/flyer already treats as canonical.
+function logoImg(variant) {
+  const cls = variant === 'top' ? 'logo logo-top' : variant === 'center' ? 'logo logo-center' : 'logo';
+  return `<img class="${cls}" src="../../src/assets/logo/good-noise-logo-cream.svg" alt="" />`;
 }
 
 export function t1(data) {
-  const { eyebrow, headline, body, cta } = data;
+  const { eyebrow, headline, body, cta, heroLogo } = data;
+  const classes = heroLogo ? slideClasses(data, 't1') + ' hero-logo' : slideClasses(data, 't1');
   return `
-  <div class="${slideClasses(data, 't1')}">
+  <div class="${classes}">
     <div class="safe">
       ${eyebrow ? `<div class="eyebrow">${esc(eyebrow)}</div>` : ''}
-      <div class="headline-wrap"><div class="headline" data-autofit data-min="88" data-max="140">${formatHeadline(headline)}</div></div>
-      ${body ? `<div class="body-text">${esc(body)}</div>` : ''}
+      <div class="copy-block">
+        <div class="headline-wrap"><div class="headline" data-autofit data-min="88" data-max="140">${formatHeadline(headline)}</div></div>
+        ${body ? `<div class="body-text">${esc(body)}</div>` : ''}
+      </div>
       ${cta ? `<div class="cta-line">${esc(cta)}</div>` : ''}
     </div>
-    ${logoImg()}
+    ${logoImg(heroLogo ? 'top' : 'bottom')}
   </div>`;
 }
 
@@ -129,4 +135,54 @@ export function t5(data) {
   </div>`;
 }
 
-export const templates = { T1: t1, T2: t2, T3: t3, T4: t4, T5: t5 };
+// T6 — ANNOUNCEMENT / CENTRED POSTER. A one-off, fully-centred composition
+// that folds a title line, a date/location line, the headline, price and a
+// CTA onto a single canvas — a deliberately different rhythm from T1-T5's
+// left-aligned layouts, for a single-image "everything you need" post.
+export function t6(data) {
+  const {
+    kicker,
+    datesLine,
+    locationLine,
+    ageLabel,
+    ageValue,
+    headline,
+    headlineMin,
+    headlineMax,
+    headlineNoWrap,
+    badge,
+    price,
+    priceNote,
+    cta,
+    footnote,
+  } = data;
+  const headlineClass = headlineNoWrap ? 'headline nowrap' : 'headline';
+  return `
+  <div class="${slideClasses(data, 't6')}">
+    <div class="safe">
+      <div class="t6-top">
+        ${logoImg('center')}
+        ${kicker ? `<div class="kicker">${esc(kicker)}</div>` : ''}
+        ${datesLine ? `<div class="dates-line">${esc(datesLine)}</div>` : ''}
+        ${locationLine ? `<div class="location-line">${esc(locationLine)}</div>` : ''}
+      </div>
+      <div class="headline-wrap"><div class="${headlineClass}" data-autofit data-min="${headlineMin || 60}" data-max="${headlineMax || 110}">${formatHeadline(headline)}</div></div>
+      <div class="t6-bottom">
+        <div class="price-stack">
+          ${badge ? `<div class="badge">${esc(badge)}</div>` : ''}
+          <div class="price-new" data-autofit data-min="70" data-max="110">${esc(price)}</div>
+          ${priceNote ? `<div class="price-note">${esc(priceNote)}</div>` : ''}
+        </div>
+        ${cta ? `<div class="cta-block">${esc(cta)}</div>` : ''}
+        ${footnote ? `<div class="footnote">${esc(footnote)}</div>` : ''}
+      </div>
+      ${
+        ageValue
+          ? `<div class="ages-badge">${ageLabel ? `<span>${esc(ageLabel)}</span>` : ''}<span>${esc(ageValue)}</span></div>`
+          : ''
+      }
+    </div>
+  </div>`;
+}
+
+export const templates = { T1: t1, T2: t2, T3: t3, T4: t4, T5: t5, T6: t6 };

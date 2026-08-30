@@ -1,0 +1,25 @@
+{
+  "id": "12",
+  "name": "spring-jam-announcement-alt",
+  "slides": [
+    {
+      "template": "T6",
+      "ground": "ink",
+      "palette": "forest",
+      "kicker": "2026 SPRING HOLIDAY JAM PROGRAM",
+      "datesLine": "WED 30 SEP – THU 1 OCT 2026",
+      "locationLine": "NORTH PERTH",
+      "ageLabel": "AGES",
+      "ageValue": "14–17",
+      "headline": "CREATE | PLAY | EXPERIMENT",
+      "headlineMin": 56,
+      "headlineMax": 56,
+      "headlineNoWrap": true,
+      "badge": "FOUNDATION PRICE",
+      "price": "$80",
+      "priceNote": "FOR BOTH DAYS",
+      "cta": "DETAILS VIA LINK IN BIO",
+      "footnote": "Limited spots.\nCost a barrier? Ask about a no-questions-asked scholarship place."
+    }
+  ]
+}

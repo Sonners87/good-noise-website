@@ -7,7 +7,7 @@
       "ground": "ink",
       "palette": "forest",
       "eyebrow": "2026 SPRING HOLIDAY JAM",
-      "headline": "YOUR BANDMATES ARE WAITING.",
+      "headline": "YOUR [[BANDMATES]] ARE WAITING.",
       "body": "Two days. One original song. A room full of instruments.",
       "cta": null
     },
@@ -40,7 +40,7 @@
       "ground": "ink",
       "palette": "forest",
       "eyebrow": "DAY ONE",
-      "headline": "EXPLORE.",
+      "headline": "[[EXPLORE]].",
       "body": "Try instruments. Find your role in the group. Shape ideas together. No theory, no sitting and listening.",
       "cta": null
     },
@@ -49,7 +49,7 @@
       "ground": "ink",
       "palette": "forest",
       "eyebrow": "DAY TWO",
-      "headline": "BRING IT TO LIFE.",
+      "headline": "BRING IT TO [[LIFE]].",
       "body": "The song you wrote — played together, start to finish.",
       "cta": null
     },
@@ -58,7 +58,7 @@
       "ground": "ink",
       "palette": "forest",
       "eyebrow": null,
-      "headline": "NO SOLO PRESSURE.",
+      "headline": "NO SOLO [[PRESSURE]].",
       "body": "Nobody's singled out. Groups are kept deliberately small so every voice actually gets heard.",
       "cta": null
     },

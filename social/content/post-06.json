@@ -6,7 +6,7 @@
       "template": "T1",
       "ground": "ink",
       "eyebrow": null,
-      "headline": "HERE TO PLAY. NOT TO PROVE.",
+      "headline": "HERE TO [[PLAY]]. NOT TO PROVE.",
       "body": "What actually happens in a Good Noise room.",
       "cta": null
     },
@@ -14,7 +14,7 @@
       "template": "T1",
       "ground": "ink",
       "eyebrow": "01",
-      "headline": "NO JUDGEMENT.",
+      "headline": "NO [[JUDGEMENT]].",
       "body": "We embrace mistakes. That's where the good stuff comes from.",
       "cta": null
     },
@@ -22,7 +22,7 @@
       "template": "T1",
       "ground": "ink",
       "eyebrow": "02",
-      "headline": "NO HIERARCHY.",
+      "headline": "NO [[HIERARCHY]].",
       "body": "Nobody's here to perform, prove themselves or hit a benchmark.",
       "cta": null
     },
@@ -30,7 +30,7 @@
       "template": "T1",
       "ground": "ink",
       "eyebrow": "03",
-      "headline": "NO PRESSURE.",
+      "headline": "NO [[PRESSURE]].",
       "body": "Share when you're ready. Not a moment before.",
       "cta": null
     },
@@ -38,7 +38,7 @@
       "template": "T4",
       "ground": "ink",
       "image": "06-05",
-      "headline": "EVERY MUSO'S ON EQUAL FOOTING.",
+      "headline": "EVERY MUSO'S ON [[EQUAL]] FOOTING.",
       "sub": "Beginner or gun — same room, same rules."
     }
   ]

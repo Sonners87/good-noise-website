@@ -44,6 +44,34 @@ body {
   display: block;
 }
 
+/* ---- HERO LOGO — top-left feature placement ----
+   Opt-in per slide via "heroLogo": true (see T1 in templates.mjs). Moves the
+   wordmark off the bottom lockup and up above the headline, sized as the
+   post's focal point, with the standard bottom logo zone reclaimed for
+   content since nothing occupies it anymore. */
+.logo-top {
+  left: var(--safe-pad);
+  bottom: auto;
+  top: var(--safe-pad);
+  transform: none;
+  height: var(--hero-logo-h);
+}
+.hero-logo .safe {
+  top: calc(var(--safe-pad) + var(--hero-logo-h) + var(--hero-logo-gap));
+  bottom: var(--safe-pad);
+}
+/* Headline + body ride as one block, pinned to the exact vertical centre of
+   the canvas (not just of the safe area) — independent of the logo above
+   and the CTA line pinned below. position: fixed roots it to the viewport,
+   which Playwright sizes to exactly match the canvas. */
+.hero-logo .copy-block {
+  position: fixed;
+  top: 50%;
+  left: var(--safe-pad);
+  right: var(--safe-pad);
+  transform: translateY(-50%);
+}
+
 .eyebrow {
   font-family: var(--gn-font-util);
   font-weight: 700;
@@ -98,6 +126,11 @@ body {
 /* ---- T1 — STATEMENT ---- */
 .t1 .safe {
   justify-content: flex-start;
+  gap: 32px;
+}
+.copy-block {
+  display: flex;
+  flex-direction: column;
   gap: 32px;
 }
 .t1 .headline-wrap {
@@ -298,6 +331,127 @@ body {
   opacity: 0.75;
   margin-top: 10px;
   white-space: pre-line; /* footnote may carry a literal \n for a second line */
+}
+
+/* ---- T6 — ANNOUNCEMENT / CENTRED POSTER ---- */
+.t6 .safe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* three groups (top cluster / headline / bottom cluster) spread across
+     the full safe height, each buffered from the canvas edge by safe-pad
+     — reaches toward the top and bottom without risking an Instagram crop */
+  justify-content: space-between;
+  text-align: center;
+  top: var(--safe-pad);
+  bottom: var(--safe-pad);
+}
+.t6-top,
+.t6-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.t6 .logo-center {
+  position: static;
+  transform: none;
+  height: 100px;
+  width: auto;
+  margin-bottom: 6px;
+}
+.t6 .kicker,
+.t6 .dates-line {
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  font-size: 56px;
+  line-height: 1.1;
+  color: var(--fg);
+  max-width: 860px;
+}
+.t6 .dates-line {
+  color: var(--accent);
+}
+.t6 .location-line {
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  font-size: 38px;
+  line-height: 1.15;
+  color: var(--fg);
+  max-width: 820px;
+}
+/* Off-centre accent, not part of the centred column — sits low, in the
+   margin between the copy and the canvas's left edge, no shadow. */
+.t6 .ages-badge {
+  position: absolute;
+  left: 0;
+  top: 640px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--gn-paper);
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+.t6 .ages-badge span:first-child {
+  font-size: 26px;
+}
+.t6 .ages-badge span:last-child {
+  font-size: 34px;
+}
+.t6 .headline {
+  text-align: center;
+}
+.t6 .headline.nowrap {
+  white-space: nowrap;
+}
+.t6 .price-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.t6 .price-stack .price-new {
+  font-family: var(--gn-font-display);
+  line-height: 1;
+  color: var(--fg);
+}
+.t6 .price-stack .price-note {
+  font-family: var(--gn-font-body);
+  font-weight: 500;
+  font-size: 26px;
+  color: var(--fg);
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.t6 .badge,
+.t6 .cta-block {
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 27px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: var(--gn-border-thin) solid var(--accent);
+  padding: 14px 24px;
+  width: fit-content;
+}
+.t6 .footnote {
+  font-family: var(--gn-font-body);
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 1.4;
+  color: var(--fg);
+  opacity: 0.75;
+  max-width: 760px;
+  white-space: pre-line;
 }
 
 /* ---- placeholder image slot ---- */

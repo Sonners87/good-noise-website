@@ -86,6 +86,10 @@
   --logo-h: 88px;
   --logo-bottom: 120px; /* logo's bottom edge, measured from canvas bottom */
   --logo-zone-h: 230px; /* reserved height content must clear above the bottom edge */
+
+  /* ---- HERO LOGO — top-left feature placement (opt-in via "heroLogo": true) ---- */
+  --hero-logo-h: 171px;
+  --hero-logo-gap: 90px; /* clearance between logo bottom edge and headline top */
 }
 
 /* ---- GROUND VARIANTS ----

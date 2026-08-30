@@ -7,7 +7,7 @@
       "ground": "ink",
       "palette": "forest",
       "image": "08-01",
-      "headline": "THIS IS WHERE IT HAPPENS.",
+      "headline": "THIS IS WHERE IT [[HAPPENS]].",
       "sub": null
     },
     {
@@ -15,7 +15,7 @@
       "ground": "ink",
       "palette": "forest",
       "eyebrow": null,
-      "headline": "PLAYER 1 MUSIC SCHOOL, NORTH PERTH.",
+      "headline": "[[PLAYER 1]] MUSIC SCHOOL, NORTH PERTH.",
       "body": "A room full of instruments begging to be picked up.",
       "cta": null
     },
@@ -24,7 +24,7 @@
       "ground": "ink",
       "palette": "forest",
       "image": "08-03",
-      "headline": "BRING YOURS OR USE OURS.",
+      "headline": "BRING YOURS OR USE [[OURS]].",
       "sub": "Kit, guitars, bass, keys, mics — it's all there."
     },
     {

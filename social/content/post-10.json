@@ -1,0 +1,15 @@
+{
+  "id": "10",
+  "name": "follow-cta-personal",
+  "slides": [
+    {
+      "template": "T1",
+      "ground": "ink",
+      "heroLogo": true,
+      "eyebrow": null,
+      "headline": "YOUR [[BANDMATES]] ARE WAITING.",
+      "body": "A youth music program starting in North Perth these school holidays.",
+      "cta": "FOLLOW @GOODNOISEAU"
+    }
+  ]
+}
