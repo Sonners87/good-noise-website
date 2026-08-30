@@ -53,10 +53,16 @@ export default function ForParents() {
               <span className="gn-eyebrow text-ink">For parents</span>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/80 md:text-lg">
                 Good Noise Project runs small, facilitated music workshops
-                for young people in Perth. If your young musician's
-                coming to a workshop — or you're deciding whether to send
-                them — here's what actually happens in the room, who's
-                running it, and how to reach us.
+                for young people in Perth, including our{" "}
+                <Link
+                  to="/school-holiday-music-camp-perth"
+                  className="font-semibold text-ink underline decoration-2 underline-offset-4 hover:text-[var(--gn-ink)]"
+                >
+                  holiday music program for teens
+                </Link>
+                . If your young musician's coming to a workshop — or you're
+                deciding whether to send them — here's what actually
+                happens in the room, who's running it, and how to reach us.
               </p>
             </div>
 

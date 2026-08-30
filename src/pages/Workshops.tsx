@@ -46,6 +46,16 @@ export default function Workshops() {
           </Link>{" "}
           page.
         </p>
+        <p className="mt-3 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+          Full details on our{" "}
+          <Link
+            to="/school-holiday-music-camp-perth"
+            className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta"
+          >
+            school holidays music workshop in North Perth
+          </Link>{" "}
+          — dates, pricing and FAQs — live on its own page.
+        </p>
       </PageHero>
 
       <section className="bg-cream">

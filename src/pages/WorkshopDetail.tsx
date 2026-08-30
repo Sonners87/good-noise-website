@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Eyebrow from "../components/Eyebrow"
@@ -11,6 +11,7 @@ import FounderQuote from "../components/FounderQuote"
 import NotFound from "./NotFound"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
+import { setCanonical } from "../lib/pageMeta"
 import { PRICE_DOLLARS } from "../content/pricing"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
@@ -41,10 +42,18 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   const slug = slugProp ?? slugParam
   const workshop = slug ? workshops[slug] : undefined
   const showFounderQuote = workshop?.slug === "in-school-songwriting"
+  const { pathname } = useLocation()
 
+  // Self-referencing canonical — this page is the deeper program/booking
+  // page that /school-holiday-music-camp-perth links out to via "View full
+  // program & book", so it needs its own canonical rather than pointing at
+  // (or being redirected to) that landing page.
   useEffect(() => {
-    if (workshop) document.title = workshop.title
-  }, [workshop])
+    if (workshop) {
+      document.title = workshop.title
+      setCanonical(pathname)
+    }
+  }, [workshop, pathname])
 
   if (!workshop) return <NotFound />
 

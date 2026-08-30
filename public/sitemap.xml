@@ -6,6 +6,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://goodnoiseproject.com.au/school-holiday-music-camp-perth</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://goodnoiseproject.com.au/workshops</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -16,24 +21,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://goodnoiseproject.com.au/school-holiday-music-camp-perth</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://goodnoiseproject.com.au/for-schools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://goodnoiseproject.com.au/for-parents</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://goodnoiseproject.com.au/stay-in-touch</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://goodnoiseproject.com.au/booking-sep-camp</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://goodnoiseproject.com.au/about</loc>
@@ -47,6 +47,16 @@
   </url>
   <url>
     <loc>https://goodnoiseproject.com.au/child-safety-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://goodnoiseproject.com.au/photography-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://goodnoiseproject.com.au/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
