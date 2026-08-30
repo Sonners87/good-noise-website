@@ -3,6 +3,8 @@ import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
+import { trackMetaEvent } from "../lib/metaPixel"
+import { PRICE_DOLLARS } from "../content/pricing"
 
 const WHAT_TO_BRING = [
   "Instrument (we've also got a range on hand)",
@@ -18,6 +20,22 @@ const WHAT_TO_BRING = [
 export default function BookingConfirmed() {
   useEffect(() => {
     document.title = "You're In — Good Noise Project"
+  }, [])
+
+  useEffect(() => {
+    // Stripe's Payment Link redirects here once checkout completes, so this
+    // mount is our signal a booking is done. If the Payment Link's
+    // confirmation URL is configured (in the Stripe dashboard) to include
+    // ?session_id={CHECKOUT_SESSION_ID}, that ID is reused as the event ID
+    // so Meta can de-duplicate this against the matching server-side
+    // Conversions API event fired from netlify/functions/stripe-webhook.js.
+    const sessionId =
+      new URLSearchParams(window.location.search).get("session_id") ?? undefined
+    trackMetaEvent(
+      "Purchase",
+      { value: PRICE_DOLLARS, currency: "AUD" },
+      sessionId,
+    )
   }, [])
 
   return (

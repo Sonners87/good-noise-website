@@ -2,9 +2,70 @@
 // Jam Program Payment Link completes, verifies it's genuinely from Stripe,
 // then sends the same confirmation shown on /booking-confirmed-2026-spring as an email
 // via Brevo. Keep this copy in sync with src/pages/BookingConfirmed.tsx.
+import { createHash } from "node:crypto"
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
+// Server-side half of the Meta Conversions API integration (the client-side
+// half is the Pixel "Purchase" event fired from BookingConfirmed.tsx). Only
+// runs once both env vars are set in Netlify — until then this is a no-op,
+// same as the BREVO_PUSH_ENABLED gate in subscribe.js.
+async function sendMetaPurchaseEvent(session) {
+  const pixelId = process.env.META_PIXEL_ID
+  const accessToken = process.env.META_CONVERSIONS_API_ACCESS_TOKEN
+  if (!pixelId || !accessToken) return
+
+  const email = session.customer_details?.email
+  if (!email) return
+
+  const hashedEmail = createHash("sha256")
+    .update(email.trim().toLowerCase())
+    .digest("hex")
+
+  const payload = {
+    data: [
+      {
+        event_name: "Purchase",
+        // Stripe's checkout session ID — also used as the eventID for the
+        // client-side fbq('track', 'Purchase', ...) call when the Payment
+        // Link's confirmation URL passes it through as ?session_id=..., so
+        // Meta de-duplicates the two instead of double-counting.
+        event_id: session.id,
+        event_time: Math.floor(Date.now() / 1000),
+        action_source: "website",
+        event_source_url: "https://goodnoiseproject.com.au/booking-confirmed-2026-spring",
+        user_data: {
+          em: [hashedEmail],
+        },
+        custom_data: {
+          currency: (session.currency || "aud").toUpperCase(),
+          value: (session.amount_total ?? 0) / 100,
+        },
+      },
+    ],
+    ...(process.env.META_TEST_EVENT_CODE
+      ? { test_event_code: process.env.META_TEST_EVENT_CODE }
+      : {}),
+  }
+
+  try {
+    const response = await fetch(
+      `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+      },
+    )
+
+    if (!response.ok) {
+      console.error("Meta Conversions API error:", await response.text())
+    }
+  } catch (err) {
+    console.error("Error calling Meta Conversions API:", err)
+  }
+}
 
 export default async (req) => {
   const sig = req.headers.get("stripe-signature")
@@ -34,6 +95,8 @@ export default async (req) => {
     console.error("No customer email found on session — cannot send email")
     return new Response("No email to send to", { status: 200 })
   }
+
+  await sendMetaPurchaseEvent(session)
 
   try {
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
