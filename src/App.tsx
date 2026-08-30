@@ -7,6 +7,7 @@ import Book from "./pages/Book"
 import BookingConfirmed from "./pages/BookingConfirmed"
 import BookingOctCamp from "./pages/BookingOctCamp"
 import HolidayCamps from "./pages/HolidayCamps"
+import SchoolHolidayMusicCamp from "./pages/SchoolHolidayMusicCamp"
 import ForParents from "./pages/ForParents"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -28,6 +29,10 @@ function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
           <Route path="/book-2026-spring-holidays" element={<Book />} />
+          {/* Standalone SEO landing page targeting "school holiday music
+              camp" + variations, geo-tagged to Perth — not in primary nav,
+              linked from the homepage intro and from search. */}
+          <Route path="/school-holiday-music-camp-perth" element={<SchoolHolidayMusicCamp />} />
           <Route path="/booking-confirmed-2026-spring" element={<BookingConfirmed />} />
           {/* October 2026 camp is paused — see SHOW_OCT_2026_CAMP in
               content/featureFlags.ts. Flip it to `true` to restore this

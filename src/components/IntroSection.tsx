@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function IntroSection() {
   return (
     <section className="bg-cream">
@@ -25,6 +27,17 @@ export default function IntroSection() {
             lessons — we believe in learning by doing. And while there's
             something genuinely therapeutic in what happens here, we're not
             a professional therapy practice.
+          </p>
+          <p>
+            Our next one is a{" "}
+            <Link
+              to="/school-holiday-music-camp-perth"
+              className="font-semibold text-terracotta underline decoration-2 underline-offset-4 hover:text-ink"
+            >
+              school holiday music camp
+            </Link>{" "}
+            in North Perth this Spring — two days of writing, jamming and
+            performing an original song together.
           </p>
         </div>
       </div>
