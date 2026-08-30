@@ -92,6 +92,7 @@ const allWorkshops: Record<string, Workshop> = {
         value: "Player 1 Music School\n5 Woodville Lane, North Perth WA 6006",
       },
       { label: "Who", value: "Ages 14-17" },
+      { label: "Group size", value: "8–12 musos" },
       { label: "How much", value: "$80" },
     ],
     ctaLabel: "Book your place",
@@ -99,7 +100,7 @@ const allWorkshops: Record<string, Workshop> = {
     introParagraphs: [
       "Good Noise Project presents a two-day jam program in Perth, set inside a room full of instruments begging to be picked up.",
       "You'll join several other young musos in a safe space and jam out an original song together — lyrics, melody, harmonies, chords, the lot. There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band.",
-      "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might even be a gun at your musical tool but want to give another one a go — or try one you've never touched. Whether you're quiet or loud, confident or used to playing alone in your bedroom, everyone's on equal footing here. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something different.",
+      "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might already be a gun on it and want to give something else a go — or try one you've never touched. Whether you're quiet or loud, confident or used to playing alone in your bedroom, everyone's on equal footing here. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something different.",
     ],
     whatToExpect: [
       {
@@ -137,7 +138,7 @@ const allWorkshops: Record<string, Workshop> = {
     refundShortNote: "Refund for cancellations 2+ weeks before.",
     ageRangeNote:
       "Outside ages 14–17? Get in touch directly at dave@goodnoiseproject.com.au.",
-    facilitatorHeading: "About your facilitator",
+    facilitatorHeading: "Who's Running It",
     facilitatorBio:
       "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",
     facilitatorLinkLabel: "More about Dave",
