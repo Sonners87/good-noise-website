@@ -27,7 +27,7 @@ export default function PhotographyPolicy() {
             Photography, Filming and Recording Policy
           </h1>
           <p className="mt-4 font-body text-sm text-ink/60">
-            Last updated: 20 August 2026 · Next review: 20 August 2027
+            Last updated: 2 September 2026 · Next review: 2 September 2027
           </p>
 
           <div className="mt-12 space-y-10 text-base leading-relaxed text-ink/80 md:text-lg">
@@ -92,24 +92,25 @@ export default function PhotographyPolicy() {
               <div className="mt-4 space-y-3">
                 <p>
                   <strong className="font-semibold text-ink">
-                    Nothing is used without permission, and permission is
-                    never all-or-nothing.
+                    Nothing is used without permission.
                   </strong>
                 </p>
                 <p>
-                  When you book, you choose separately whether we may use
-                  images where your child isn't identifiable and identifiable
-                  images. There's also a plain "No thanks" option that
-                  declines everything.
+                  Photo and video consent is part of the parent/guardian
+                  consent you give as part of our booking terms and
+                  conditions — it isn't a separate tick-box. Agreeing to it
+                  is one of the steps needed to complete a booking, alongside
+                  the rest of the registration form.
                 </p>
 
                 <div className={calloutClass}>
                   <p className={calloutTextClass}>
                     <strong className="text-ink">
-                      Consent is never a condition of taking part.
+                      Want a different arrangement?
                     </strong>{" "}
-                    Your child's place is exactly the same whatever you
-                    choose, and we won't ask why.
+                    {linkifyContact(
+                      "If you'd rather your child wasn't included in any marketing material, contact Dave before you book at dave@goodnoiseproject.com.au and we'll sort it out — it won't affect your child's place.",
+                    )}
                   </p>
                 </div>
 
@@ -117,7 +118,8 @@ export default function PhotographyPolicy() {
                   <p className={calloutTextClass}>
                     <strong className="text-ink">Your child gets their own say.</strong> We
                     ask the young person directly on the day. If a parent
-                    agrees and the young person doesn't,{" "}
+                    has agreed and the young person doesn't want to be
+                    photographed,{" "}
                     <strong className="text-ink">
                       the young person's answer is the one we follow.
                     </strong>{" "}
@@ -129,9 +131,9 @@ export default function PhotographyPolicy() {
                 </div>
 
                 <p>
-                  <strong className="font-semibold text-ink">Consent expires.</strong> Every
-                  permission lapses automatically three years after the
-                  workshop. We don't ask anyone to agree to something
+                  <strong className="font-semibold text-ink">Consent expires.</strong> We
+                  treat every permission as lapsing three years after the
+                  workshop. We don't rely on anyone agreeing to something
                   permanent. If we want to keep using material beyond that,
                   we ask again.
                 </p>
@@ -140,7 +142,8 @@ export default function PhotographyPolicy() {
                   start, we tell participants there'll be a camera around
                   and that anyone can step out of a shot at any moment — no
                   reason needed, no questions asked. Whoever is taking
-                  photos works from a list of who has agreed to what.
+                  photos is briefed on any arrangement made directly with a
+                  family.
                 </p>
               </div>
             </div>
@@ -157,7 +160,7 @@ export default function PhotographyPolicy() {
                 </p>
                 <ul className="list-disc space-y-2 pl-6">
                   <li>is briefed on this policy before the workshop starts</li>
-                  <li>works from the consent list for that group</li>
+                  <li>is briefed on any opt-out arrangement agreed directly with a family</li>
                   <li>
                     holds a current Working With Children Check if they'll
                     be present with participants

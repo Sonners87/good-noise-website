@@ -5,7 +5,6 @@ import { submitNetlifyFormFields } from "../lib/submitNetlifyForm"
 import RadioPillGroup from "./form/RadioPillGroup"
 import ConsentCheckbox from "./form/ConsentCheckbox"
 import ConditionalReveal from "./form/ConditionalReveal"
-import { parentMediaLevel, consentExpiry, type ParentMediaConsent } from "../lib/consent"
 
 const inputClass =
   "border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
@@ -34,11 +33,7 @@ const travelOptions = [
   { value: "other", label: "They'll be collected by someone else" },
 ]
 
-const defaultParentConsent: ParentMediaConsent = {
-  imagesNonIdentifiable: false,
-  imagesIdentifiable: false,
-  declinedAll: false,
-}
+const todayISODate = new Date().toISOString().slice(0, 10)
 
 type CampSignupFormProps = {
   campLabel: string
@@ -52,9 +47,11 @@ type CampSignupFormProps = {
 // are two separate steps, so a failed submission never sends someone to pay
 // without us having their details on file.
 //
-// Consent (media, song licence, terms) is deliberately never wired to
-// block or gate the Stripe redirect — only the pre-existing support-needs
-// screen does that, and it's unrelated to consent.
+// The parent/guardian consent fields (and the health-info consent
+// checkbox) gate the Stripe redirect the same way the old consent
+// checkboxes did — via native HTML `required`, not custom JS logic. The
+// support-needs screen is the only thing that diverts the flow instead of
+// blocking it.
 export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormProps) {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(false)
@@ -69,23 +66,9 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
   const [supportNeeds, setSupportNeeds] = useState<"yes" | "no" | "">("")
   const healthDisclosed = allergies === "yes" || medication === "yes" || supportNeeds === "yes"
 
-  const [parentConsent, setParentConsent] = useState<ParentMediaConsent>(defaultParentConsent)
-
   const [healthInfoConsent, setHealthInfoConsent] = useState(false)
-  const [songLicenceParent, setSongLicenceParent] = useState(false)
 
   const [flagged, setFlagged] = useState(false)
-
-  function setParentConsentField(key: keyof ParentMediaConsent, checked: boolean) {
-    setParentConsent((prev) => {
-      if (key === "declinedAll") {
-        return checked
-          ? { ...defaultParentConsent, declinedAll: true }
-          : { ...prev, declinedAll: false }
-      }
-      return { ...prev, [key]: checked, declinedAll: checked ? false : prev.declinedAll }
-    })
-  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -99,12 +82,6 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
     for (const [key, value] of formData.entries()) {
       fields[key] = String(value)
     }
-
-    const capturedAt = new Date()
-    const expiresAt = consentExpiry(capturedAt)
-    fields.effectiveConsentLevel = parentMediaLevel(parentConsent)
-    fields.consentCapturedAt = capturedAt.toISOString()
-    fields.consentExpiresAt = expiresAt.toISOString()
 
     try {
       await submitNetlifyFormFields(fields)
@@ -313,88 +290,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         </div>
       </div>
 
-      {/* 2. PARENT INFO */}
-      <div className="grid grid-cols-1 gap-5 border-t-2 border-ink/15 pt-6">
-        <span className={sectionHeadingClass}>Parent info</span>
-
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <label className="flex flex-col gap-2">
-            <span className={labelClass}>Parent first name</span>
-            <input
-              required
-              type="text"
-              name="parentFirstName"
-              autoComplete="given-name"
-              className={inputClass}
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            <span className={labelClass}>Parent last name</span>
-            <input
-              required
-              type="text"
-              name="parentLastName"
-              autoComplete="family-name"
-              className={inputClass}
-            />
-          </label>
-        </div>
-
-        <label className="flex flex-col gap-2">
-          <span className={labelClass}>Email</span>
-          <input
-            required
-            type="email"
-            name="email"
-            inputMode="email"
-            autoComplete="email"
-            className={inputClass}
-          />
-        </label>
-
-        <label className="flex flex-col gap-2">
-          <span className={labelClass}>Phone</span>
-          <input
-            required
-            type="tel"
-            name="phone"
-            inputMode="tel"
-            autoComplete="tel"
-            className={inputClass}
-          />
-        </label>
-
-        <div className="flex flex-col gap-3">
-          <label className="flex min-h-11 cursor-pointer items-center gap-3">
-            <input
-              type="checkbox"
-              className="h-5 w-5 accent-ink"
-              checked={sameAddress}
-              onChange={(e) => setSameAddress(e.target.checked)}
-            />
-            <span className={labelClass}>Same as musician address</span>
-          </label>
-
-          {sameAddress ? (
-            <input type="hidden" name="parentAddress" value={participantAddress} />
-          ) : (
-            <label className="flex flex-col gap-2">
-              <span className={labelClass}>Address</span>
-              <input
-                required
-                type="text"
-                name="parentAddress"
-                autoComplete="street-address"
-                className={inputClass}
-                value={parentAddressManual}
-                onChange={(e) => setParentAddressManual(e.target.value)}
-              />
-            </label>
-          )}
-        </div>
-      </div>
-
-      {/* 3. HEALTH & SUPPORT */}
+      {/* 2. HEALTH & SUPPORT */}
       <div className="grid grid-cols-1 gap-6 border-t-2 border-ink/15 pt-6">
         <span className={sectionHeadingClass}>Health &amp; support</span>
 
@@ -485,122 +381,233 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         />
       </div>
 
-      {/* 4. MEDIA CONSENT — PARENT/GUARDIAN */}
+      {/* 3. PARENT/GUARDIAN CONSENT — TERMS AND CONDITIONS */}
       <div className="grid grid-cols-1 gap-5 border-t-2 border-ink/15 pt-6">
-        <span className={sectionHeadingClass}>Photos, video and recordings</span>
+        <span className={sectionHeadingClass}>
+          Parent/Guardian Consent - Terms and Conditions
+        </span>
+
+        <div className="grid grid-cols-1 gap-3">
+          <p className={noteClass}>
+            I declare that I have read the information regarding Good Noise
+            Project's 2026 Spring Holidays Jam Program and have accurately
+            completed the registration form, including medical information.
+          </p>
+
+          <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
+            Participation
+          </p>
+          <p className={noteClass}>
+            I am aware that my child / children can freely elect to
+            participate in Good Noise Project's 2026 Spring Holidays Jam
+            Program activities and that any risk is voluntary.
+          </p>
+
+          <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
+            Health &amp; safety warning
+          </p>
+          <p className={noteClass}>
+            I understand that if I have questions about possible hazards, it
+            is my responsibility to seek additional information from Good
+            Noise Project staff prior to agreeing to the terms and
+            conditions.
+          </p>
+          <p className={noteClass}>
+            I understand that, despite safety precautions, Good Noise
+            Project, and their staff or volunteers cannot guarantee that my
+            child / children will not be injured.
+          </p>
+
+          <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
+            Health authorisation
+          </p>
+          <p className={noteClass}>
+            In the event of accident or illness, I authorise Good Noise
+            Project to arrange medical treatment and emergency evacuation
+            services, as the event organisers deem necessary, for my child's
+            safety and well-being.
+          </p>
+          <p className={noteClass}>
+            I authorise Good Noise Project to consent, where it is
+            impractical to communicate with me, for my child to receive an
+            x-ray, surgical or hospital treatment as may be deemed necessary
+            by a licensed physician and/or surgeon. In the case of an
+            emergency if Good Noise Project is required to engage in such
+            treatment, I understand that I am responsible for any medical
+            costs that may be required.
+          </p>
+
+          <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
+            Property
+          </p>
+          <p className={noteClass}>
+            I understand that Good Noise Project take no responsibility for
+            my child's property.
+          </p>
+
+          <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
+            Photo consent
+          </p>
+          <p className={noteClass}>
+            I understand there is often a photographer or videographer
+            present at Good Noise Project programs and events and that these
+            photos and videos may be used for Good Noise Project marketing
+            and media purposes only (for example on the Good Noise Project
+            website goodnoiseproject.com.au).
+          </p>
+          <p className={noteClass}>
+            I hereby consent to the use of any photographs or videos of my
+            child / children taken on behalf of Good Noise Project for
+            marketing and media purposes.
+          </p>
+        </div>
 
         <p className={noteClass}>
-          Good Noise Project is new. We'd like to document this program so
-          future families and schools can see what actually happens in the
-          room.
-        </p>
-        <p className="text-sm font-semibold leading-relaxed text-ink">
-          This is entirely optional and it doesn't affect your child's
-          place. You can change your mind at any time by emailing{" "}
-          <a href="mailto:dave@goodnoiseproject.com.au" className={linkClass}>
-            dave@goodnoiseproject.com.au
-          </a>
+          See our{" "}
+          <Link
+            to="/workshops/2026-spring-holidays#cancellations"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            Cancellation and Refund Policy
+          </Link>{" "}
+          and{" "}
+          <Link to="/privacy" className={linkClass}>
+            Privacy Collection Notice
+          </Link>
           .
         </p>
 
-        <div className="grid grid-cols-1 gap-3">
-          <ConsentCheckbox
-            name="consentImagesIdentifiable"
-            checked={parentConsent.imagesIdentifiable}
-            onChange={(checked) => setParentConsentField("imagesIdentifiable", checked)}
-            title="Identifiable images"
-            description="Photos or video where my child can be recognised — online, in print, and in presentations to schools and funders"
-          />
-          <ConsentCheckbox
-            name="consentImagesNonIdentifiable"
-            checked={parentConsent.imagesNonIdentifiable}
-            onChange={(checked) => setParentConsentField("imagesNonIdentifiable", checked)}
-            title="Non-identifiable images"
-            description="Photos or video where my child can't be recognised (hands, instruments, wide room shots, from behind)"
-          />
-          <ConsentCheckbox
-            name="consentDeclinedAll"
-            checked={parentConsent.declinedAll}
-            onChange={(checked) => setParentConsentField("declinedAll", checked)}
-            title="No thanks"
-            description="Please don't use any images or video of my child beyond Good Noise Project's own internal review"
-          />
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Parent/Guardian first name</span>
+            <input
+              required
+              type="text"
+              name="consentParentFirstName"
+              autoComplete="given-name"
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Parent/Guardian last name</span>
+            <input
+              required
+              type="text"
+              name="consentParentLastName"
+              autoComplete="family-name"
+              className={inputClass}
+            />
+          </label>
         </div>
+
+        <label className="flex flex-col gap-2">
+          <span className={labelClass}>
+            Please type your full name to authorise consent
+          </span>
+          <input
+            required
+            type="text"
+            name="consentSignature"
+            className={inputClass}
+          />
+        </label>
+
+        <label className="flex flex-col gap-2">
+          <span className={labelClass}>Date</span>
+          <input
+            required
+            type="date"
+            name="consentDate"
+            defaultValue={todayISODate}
+            className={inputClass}
+          />
+        </label>
       </div>
 
-      {/* 5. THE SONG — RECORDING & LICENCE */}
+      {/* 4. PARENT INFO */}
       <div className="grid grid-cols-1 gap-5 border-t-2 border-ink/15 pt-6">
-        <span className={sectionHeadingClass}>The song you write is yours</span>
+        <span className={sectionHeadingClass}>Parent info</span>
 
-        <p className={noteClass}>
-          Whatever the group creates over the two days belongs to the group
-          who wrote it. We'll send everyone a copy of the recording after
-          the workshop.
-        </p>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Parent first name</span>
+            <input
+              required
+              type="text"
+              name="parentFirstName"
+              autoComplete="given-name"
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Parent last name</span>
+            <input
+              required
+              type="text"
+              name="parentLastName"
+              autoComplete="family-name"
+              className={inputClass}
+            />
+          </label>
+        </div>
 
-        <div className="grid grid-cols-1 gap-3">
-          <ConsentCheckbox
-            name="songLicenceParent"
-            checked={songLicenceParent}
-            onChange={setSongLicenceParent}
-            title="Parent/guardian"
-            description="I give Good Noise Project permission to use the recording — or part of it — in its own promotional material (website, social media, presentations to schools and funders). Good Noise Project won't sell it, licence it to anyone else, or use it in paid advertising for another organisation."
+        <label className="flex flex-col gap-2">
+          <span className={labelClass}>Email</span>
+          <input
+            required
+            type="email"
+            name="email"
+            inputMode="email"
+            autoComplete="email"
+            className={inputClass}
           />
+        </label>
+
+        <label className="flex flex-col gap-2">
+          <span className={labelClass}>Phone</span>
+          <input
+            required
+            type="tel"
+            name="phone"
+            inputMode="tel"
+            autoComplete="tel"
+            className={inputClass}
+          />
+        </label>
+
+        <div className="flex flex-col gap-3">
+          <label className="flex min-h-11 cursor-pointer items-center gap-3">
+            <input
+              type="checkbox"
+              className="h-5 w-5 accent-ink"
+              checked={sameAddress}
+              onChange={(e) => setSameAddress(e.target.checked)}
+            />
+            <span className={labelClass}>Same as musician address</span>
+          </label>
+
+          {sameAddress ? (
+            <input type="hidden" name="parentAddress" value={participantAddress} />
+          ) : (
+            <label className="flex flex-col gap-2">
+              <span className={labelClass}>Address</span>
+              <input
+                required
+                type="text"
+                name="parentAddress"
+                autoComplete="street-address"
+                className={inputClass}
+                value={parentAddressManual}
+                onChange={(e) => setParentAddressManual(e.target.value)}
+              />
+            </label>
+          )}
         </div>
       </div>
 
-      {/* 6. TERMS & POLICIES */}
-      <div className="grid grid-cols-1 gap-3 border-t-2 border-ink/15 pt-6">
-        <span className={sectionHeadingClass}>Terms &amp; policies</span>
-
-        <label className="flex min-h-11 cursor-pointer items-start gap-3 border-2 border-ink bg-cream px-4 py-3 text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
-          <input
-            required
-            type="checkbox"
-            name="acceptRefundPolicy"
-            className="mt-0.5 h-5 w-5 shrink-0 accent-ink"
-          />
-          <span className="font-body font-semibold leading-snug">
-            I've read and accept the{" "}
-            <Link
-              to="/workshops/2026-spring-holidays#cancellations"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkClass}
-              onClick={(e) => e.stopPropagation()}
-            >
-              cancellation and refund policy
-            </Link>
-            .
-          </span>
-        </label>
-
-        <label className="flex min-h-11 cursor-pointer items-start gap-3 border-2 border-ink bg-cream px-4 py-3 text-ink has-[:checked]:bg-ink has-[:checked]:text-white">
-          <input
-            required
-            type="checkbox"
-            name="acceptPrivacyPolicy"
-            className="mt-0.5 h-5 w-5 shrink-0 accent-ink"
-          />
-          <span className="font-body font-semibold leading-snug">
-            I've read the{" "}
-            <Link to="/privacy" className={linkClass} onClick={(e) => e.stopPropagation()}>
-              Privacy Collection Notice
-            </Link>{" "}
-            and the{" "}
-            <Link
-              to="/photography-policy"
-              className={linkClass}
-              onClick={(e) => e.stopPropagation()}
-            >
-              Photography, Filming and Recording Policy
-            </Link>
-            .
-          </span>
-        </label>
-      </div>
-
-      {/* 7. TRUST STRIP */}
+      {/* 5. TRUST STRIP */}
       <div className="border-t-2 border-ink/15 pt-6 text-sm leading-relaxed text-ink/70">
         <p>
           Facilitated by Dave Sonntag · Working With Children Check (WWC

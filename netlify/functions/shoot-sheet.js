@@ -53,8 +53,7 @@ export default async (req) => {
         firstName: data.firstName || "",
         lastName: data.lastName || "",
         camp: data.camp || "",
-        effectiveConsentLevel: data.effectiveConsentLevel || "none",
-        songLicenceParent: data.songLicenceParent === "on",
+        consentDate: data.consentDate || "",
         submittedAt: submission.created_at,
       }
     })
