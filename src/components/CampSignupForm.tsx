@@ -381,7 +381,88 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         />
       </div>
 
-      {/* 3. PARENT/GUARDIAN CONSENT — TERMS AND CONDITIONS */}
+      {/* 3. PARENT INFO */}
+      <div className="grid grid-cols-1 gap-5 border-t-2 border-ink/15 pt-6">
+        <span className={sectionHeadingClass}>Parent info</span>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Parent first name</span>
+            <input
+              required
+              type="text"
+              name="parentFirstName"
+              autoComplete="given-name"
+              className={inputClass}
+            />
+          </label>
+          <label className="flex flex-col gap-2">
+            <span className={labelClass}>Parent last name</span>
+            <input
+              required
+              type="text"
+              name="parentLastName"
+              autoComplete="family-name"
+              className={inputClass}
+            />
+          </label>
+        </div>
+
+        <label className="flex flex-col gap-2">
+          <span className={labelClass}>Email</span>
+          <input
+            required
+            type="email"
+            name="email"
+            inputMode="email"
+            autoComplete="email"
+            className={inputClass}
+          />
+        </label>
+
+        <label className="flex flex-col gap-2">
+          <span className={labelClass}>Phone</span>
+          <input
+            required
+            type="tel"
+            name="phone"
+            inputMode="tel"
+            autoComplete="tel"
+            className={inputClass}
+          />
+        </label>
+
+        <div className="flex flex-col gap-3">
+          <label className="flex min-h-11 cursor-pointer items-center gap-3">
+            <input
+              type="checkbox"
+              className="h-5 w-5 accent-ink"
+              checked={sameAddress}
+              onChange={(e) => setSameAddress(e.target.checked)}
+            />
+            <span className={labelClass}>Same as musician address</span>
+          </label>
+
+          {sameAddress ? (
+            <input type="hidden" name="parentAddress" value={participantAddress} />
+          ) : (
+            <label className="flex flex-col gap-2">
+              <span className={labelClass}>Address</span>
+              <input
+                required
+                type="text"
+                name="parentAddress"
+                autoComplete="street-address"
+                className={inputClass}
+                value={parentAddressManual}
+                onChange={(e) => setParentAddressManual(e.target.value)}
+              />
+            </label>
+          )}
+        </div>
+      </div>
+
+      {/* 4. PARENT/GUARDIAN CONSENT — TERMS AND CONDITIONS */}
       <div className="grid grid-cols-1 gap-5 border-t-2 border-ink/15 pt-6">
         <span className={sectionHeadingClass}>
           Parent/Guardian Consent - Terms and Conditions
@@ -401,21 +482,6 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
             I am aware that my child / children can freely elect to
             participate in Good Noise Project's 2026 Spring Holidays Jam
             Program activities and that any risk is voluntary.
-          </p>
-
-          <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
-            Health &amp; safety warning
-          </p>
-          <p className={noteClass}>
-            I understand that if I have questions about possible hazards, it
-            is my responsibility to seek additional information from Good
-            Noise Project staff prior to agreeing to the terms and
-            conditions.
-          </p>
-          <p className={noteClass}>
-            I understand that, despite safety precautions, Good Noise
-            Project, and their staff or volunteers cannot guarantee that my
-            child / children will not be injured.
           </p>
 
           <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
@@ -524,87 +590,6 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
             className={inputClass}
           />
         </label>
-      </div>
-
-      {/* 4. PARENT INFO */}
-      <div className="grid grid-cols-1 gap-5 border-t-2 border-ink/15 pt-6">
-        <span className={sectionHeadingClass}>Parent info</span>
-
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <label className="flex flex-col gap-2">
-            <span className={labelClass}>Parent first name</span>
-            <input
-              required
-              type="text"
-              name="parentFirstName"
-              autoComplete="given-name"
-              className={inputClass}
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            <span className={labelClass}>Parent last name</span>
-            <input
-              required
-              type="text"
-              name="parentLastName"
-              autoComplete="family-name"
-              className={inputClass}
-            />
-          </label>
-        </div>
-
-        <label className="flex flex-col gap-2">
-          <span className={labelClass}>Email</span>
-          <input
-            required
-            type="email"
-            name="email"
-            inputMode="email"
-            autoComplete="email"
-            className={inputClass}
-          />
-        </label>
-
-        <label className="flex flex-col gap-2">
-          <span className={labelClass}>Phone</span>
-          <input
-            required
-            type="tel"
-            name="phone"
-            inputMode="tel"
-            autoComplete="tel"
-            className={inputClass}
-          />
-        </label>
-
-        <div className="flex flex-col gap-3">
-          <label className="flex min-h-11 cursor-pointer items-center gap-3">
-            <input
-              type="checkbox"
-              className="h-5 w-5 accent-ink"
-              checked={sameAddress}
-              onChange={(e) => setSameAddress(e.target.checked)}
-            />
-            <span className={labelClass}>Same as musician address</span>
-          </label>
-
-          {sameAddress ? (
-            <input type="hidden" name="parentAddress" value={participantAddress} />
-          ) : (
-            <label className="flex flex-col gap-2">
-              <span className={labelClass}>Address</span>
-              <input
-                required
-                type="text"
-                name="parentAddress"
-                autoComplete="street-address"
-                className={inputClass}
-                value={parentAddressManual}
-                onChange={(e) => setParentAddressManual(e.target.value)}
-              />
-            </label>
-          )}
-        </div>
       </div>
 
       {/* 5. TRUST STRIP */}
