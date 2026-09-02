@@ -485,6 +485,21 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
           </p>
 
           <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
+            Health &amp; safety warning
+          </p>
+          <p className={noteClass}>
+            I understand that if I have questions about possible hazards, it
+            is my responsibility to seek additional information from Good
+            Noise Project staff prior to agreeing to the terms and
+            conditions.
+          </p>
+          <p className={noteClass}>
+            I understand that, despite safety precautions, Good Noise
+            Project, and their staff or volunteers cannot guarantee that my
+            child / children will not be injured.
+          </p>
+
+          <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
             Health authorisation
           </p>
           <p className={noteClass}>
