@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import logo from "../assets/logo/good-noise-logo.png"
 import SubscribeForm from "./SubscribeForm"
+import InstagramIcon from "./icons/InstagramIcon"
 
 export default function Footer() {
   return (
@@ -28,6 +29,15 @@ export default function Footer() {
           >
             For Schools
           </Link>
+          <a
+            href="https://www.instagram.com/goodnoiseau/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="text-cream/80 transition hover:text-sage"
+          >
+            <InstagramIcon className="h-5 w-5" />
+          </a>
         </nav>
         <span className="font-mono text-[12.5px] tracking-wide text-cream/60">
           Good Noise Project © 2026

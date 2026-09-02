@@ -2,6 +2,9 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import logo from "../assets/logo/good-noise-logo.png"
 import { upcomingWorkshopSlug } from "../content/workshops"
+import InstagramIcon from "./icons/InstagramIcon"
+
+const instagramUrl = "https://www.instagram.com/goodnoiseau/"
 
 // "Home" is a same-page hash anchor (scrolls to id="home" on the homepage),
 // so it stays a plain <a> — the rest are real routes and use Link.
@@ -48,6 +51,15 @@ export default function Header() {
               </Link>
             ),
           )}
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="gn-nav-link"
+          >
+            <InstagramIcon className="h-5 w-5" />
+          </a>
         </nav>
         <div className="flex items-center gap-3">
           <Link
@@ -99,6 +111,16 @@ export default function Header() {
               </Link>
             ),
           )}
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="gn-nav-link flex items-center gap-2 px-5 py-4 text-base"
+            onClick={() => setOpen(false)}
+          >
+            <InstagramIcon className="h-5 w-5" />
+          </a>
         </nav>
       )}
     </header>
