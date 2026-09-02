@@ -29,11 +29,6 @@
       fbq('init', '1343571111100105');
       fbq('track', 'PageView');
     </script>
-    <noscript>
-      <img height="1" width="1" style="display:none" alt=""
-        src="https://www.facebook.com/tr?id=1343571111100105&ev=PageView&noscript=1"
-      />
-    </noscript>
     <!-- End Meta Pixel base code -->
 
     <meta charset="UTF-8" />
@@ -98,6 +93,14 @@
     </noscript>
   </head>
   <body>
+    <!-- Meta Pixel noscript fallback — moved here from <head> since a
+         <noscript> there may only contain <link>/<style>/<meta>, not <img>. -->
+    <noscript>
+      <img height="1" width="1" style="display:none" alt=""
+        src="https://www.facebook.com/tr?id=1343571111100105&ev=PageView&noscript=1"
+      />
+    </noscript>
+
     <div id="root"></div>
 
     <!--
