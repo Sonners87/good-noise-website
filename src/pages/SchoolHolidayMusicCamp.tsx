@@ -458,8 +458,10 @@ export default function SchoolHolidayMusicCamp() {
               dedicated mentor to young people.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-ink/80 md:text-lg">
-              Dave holds a current Western Australia Working With Children
-              Check and is SafeTALK certified.
+              There'll be two facilitators running each program. Both hold a
+              current Western Australia Working With Children Check and have
+              years of experience mentoring and facilitating with young
+              people.
             </p>
 
             <div className="mt-6 flex flex-col gap-1.5 font-body text-sm text-ink/70">
