@@ -4,15 +4,8 @@ type Participant = {
   firstName: string
   lastName: string
   camp: string
-  effectiveConsentLevel: "all" | "non_identifiable" | "none"
-  songLicenceParent: boolean
+  consentDate: string
   submittedAt: string
-}
-
-const consentLabel: Record<Participant["effectiveConsentLevel"], string> = {
-  all: "Identifiable OK",
-  non_identifiable: "Non-identifiable only",
-  none: "No images",
 }
 
 // Not linked from site nav. Gated by a short access key (checked
@@ -143,10 +136,7 @@ export default function ShootSheet() {
               Name
             </th>
             <th className="py-2 font-body text-xs uppercase tracking-wide text-ink/70">
-              Consent level
-            </th>
-            <th className="py-2 font-body text-xs uppercase tracking-wide text-ink/70">
-              Song licence OK
+              Consent signed
             </th>
           </tr>
         </thead>
@@ -156,8 +146,7 @@ export default function ShootSheet() {
               <td className="py-2 pr-3 font-body font-semibold text-ink">
                 {p.firstName} {p.lastName}
               </td>
-              <td className="py-2 text-ink">{consentLabel[p.effectiveConsentLevel]}</td>
-              <td className="py-2 text-ink">{p.songLicenceParent ? "Yes" : "No"}</td>
+              <td className="py-2 text-ink">{p.consentDate || "—"}</td>
             </tr>
           ))}
         </tbody>

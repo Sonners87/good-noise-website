@@ -3,7 +3,7 @@ import PhotoImage from "./PhotoImage"
 import FacilitatorContact from "./FacilitatorContact"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
 
-export default function Facilitator() {
+export default function Facilitator({ extraParagraph }: { extraParagraph?: string } = {}) {
   return (
     <section id="about" className="bg-cream">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
@@ -19,6 +19,12 @@ export default function Facilitator() {
             self-taught singer-songwriter, and a dedicated mentor to young
             people.
           </p>
+
+          {extraParagraph && (
+            <p className="mt-4 max-w-md text-base leading-relaxed text-ink/80 md:text-lg">
+              {extraParagraph}
+            </p>
+          )}
 
           <FacilitatorContact className="mt-6" />
 

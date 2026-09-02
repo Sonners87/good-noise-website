@@ -95,7 +95,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What's included, and what should we bring?",
-    a: "A range of instruments is provided on the day, plus a facilitator running the group the whole way through. Bring your own instrument if you have one, along with a water bottle, packed lunch and snacks for each day.",
+    a: "A range of instruments is provided on the day, plus facilitators running the group the whole way through. Bring your own instrument if you have one, along with a water bottle, packed lunch and snacks for each day.",
   },
   {
     q: "How is this different from music lessons or a typical holiday workshop?",
