@@ -47,7 +47,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What's included, and what should we bring?",
-    a: "A range of instruments is provided on the day, plus a facilitator running the group the whole way through. Bring your own instrument if you have one, along with a water bottle, packed lunch and snacks for each day.",
+    a: "A range of instruments is provided on the day, plus facilitators running the group the whole way through. Bring your own instrument if you have one, along with a water bottle, packed lunch and snacks for each day.",
   },
   {
     q: "How is this different from a typical school holidays music workshop?",
@@ -254,8 +254,10 @@ export default function SchoolHolidayMusicCamp() {
           Perth's school holiday music camps. */}
       <SafetyFirst />
 
-      {/* Facilitator — reused word-for-word from the homepage. */}
-      <Facilitator />
+      {/* Facilitator — bio paragraph reused word-for-word from the homepage,
+          plus a program-specific paragraph (two facilitators per program)
+          that only applies here, not on Home or HolidayCamps. */}
+      <Facilitator extraParagraph="There'll be two facilitators running each program. Both hold a current Western Australia Working With Children Check and have years of experience mentoring and facilitating with young people." />
 
       {/* FAQ — targets long-tail/People Also Ask queries, mirrored into the
           FAQPage structured data above. */}
