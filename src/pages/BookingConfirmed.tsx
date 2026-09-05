@@ -5,6 +5,7 @@ import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
 import { trackMetaEvent } from "../lib/metaPixel"
 import { PRICE_DOLLARS } from "../content/pricing"
+import { markCheckoutStarted } from "../lib/bookingIntent"
 
 const WHAT_TO_BRING = [
   "Instrument (we've also got a range on hand)",
@@ -20,6 +21,14 @@ const WHAT_TO_BRING = [
 export default function BookingConfirmed() {
   useEffect(() => {
     document.title = "You're In — Good Noise Project"
+  }, [])
+
+  // Reaching this page means the booking is done — including for anyone who
+  // paid via the Payment Link directly rather than through CampSignupForm.
+  // Records the same flag that form does, so the workshop page's soft
+  // "stay in the loop" offer never greets a visitor who has already booked.
+  useEffect(() => {
+    markCheckoutStarted()
   }, [])
 
   useEffect(() => {

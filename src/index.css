@@ -214,3 +214,41 @@ h2.font-display {
 .gn-heading-tilt .gn-hl {
   transform: none;
 }
+
+/*
+  Entrance for WorkshopStayInLoopPopup. Written as opt-in rather than
+  opt-out — the animation only exists inside the no-preference query, so a
+  visitor who has asked for reduced motion gets the card simply present,
+  with no keyframes to override. A soft offer shouldn't announce itself
+  with movement anyone has said they don't want.
+*/
+@keyframes gn-popup-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gn-popup-enter {
+    animation: gn-popup-rise 260ms ease-out both;
+  }
+}
+
+/*
+  WorkshopStayInLoopPopup's container takes focus programmatically when it
+  opens, purely so keyboard and screen-reader users land on it. The
+  accessibility floor's 3px burnt ring is meant for controls; on a panel
+  that already carries a paper border it just reads as a second border.
+  Suppressed here rather than with Tailwind's focus:outline-none because
+  the floor rule is unlayered — it outranks any layered utility no matter
+  the specificity. Every control inside the panel keeps the ring.
+*/
+.gn-popup-panel:focus,
+.gn-popup-panel:focus-visible {
+  outline: none;
+}

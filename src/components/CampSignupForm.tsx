@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react"
 import { Link } from "react-router-dom"
 import { pillBaseStyles, pillSizeStyles } from "./PillButton"
 import { submitNetlifyFormFields } from "../lib/submitNetlifyForm"
+import { markCheckoutStarted } from "../lib/bookingIntent"
 import RadioPillGroup from "./form/RadioPillGroup"
 import ConsentCheckbox from "./form/ConsentCheckbox"
 import ConditionalReveal from "./form/ConditionalReveal"
@@ -105,6 +106,10 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         setFlagged(true)
         setSubmitting(false)
       } else {
+        // Record the conversion before leaving for Stripe, so soft "not
+        // ready to book?" offers elsewhere on the site (e.g.
+        // WorkshopStayInLoopPopup) stay quiet for this visitor from here on.
+        markCheckoutStarted()
         window.location.href = stripeUrl
       }
     } catch {

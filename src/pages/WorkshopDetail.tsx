@@ -9,6 +9,9 @@ import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
 import FounderQuote from "../components/FounderQuote"
 import NotFound from "./NotFound"
+import WorkshopStayInLoopPopup, {
+  LOOP_POPUP_ANCHOR_ID,
+} from "../components/WorkshopStayInLoopPopup"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setCanonical } from "../lib/pageMeta"
@@ -489,6 +492,13 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
         </section>
       )}
 
+      {/* Scroll marker for WorkshopStayInLoopPopup's mobile trigger: sits
+          directly below the primary booking CTA, so scrolling past it means
+          the visitor has read the pitch and moved on without booking. An
+          element rather than a scroll percentage, so edits to the copy above
+          don't silently move the trigger point. */}
+      {isSpringHolidays && <div id={LOOP_POPUP_ANCHOR_ID} aria-hidden="true" />}
+
       {/* Secondary CTA, deliberately away from the primary Book button
           above — for people not ready to commit to these dates. Burnt
           orange (not the surrounding bg-ink/forest) so it reads as its own
@@ -660,6 +670,8 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
       )}
 
       <Footer />
+
+      {isSpringHolidays && <WorkshopStayInLoopPopup />}
     </div>
   )
 }
