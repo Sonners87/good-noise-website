@@ -80,7 +80,7 @@ const allWorkshops: Record<string, Workshop> = {
     shortTitle: "2026 Spring Holidays Jam Program",
     eyebrow: "CREATE | PLAY | EXPERIMENT",
     teaser:
-      "Our next workshop runs this Spring school holidays in North Perth, giving teen musos aged 14–17 the chance to write, compose and perform a song together over two days.",
+      "Our next workshop runs this Spring school holidays in North Perth, giving teen musos aged 13–17 the chance to write, compose and perform a song together over two days.",
     dates: "30 Sep – 1 Oct 2026 (9am – 3pm each day)",
     location: "North Perth",
     price: "$80",
@@ -91,7 +91,7 @@ const allWorkshops: Record<string, Workshop> = {
         label: "Where",
         value: "Player 1 Music School\n5 Woodville Lane, North Perth WA 6006",
       },
-      { label: "Who", value: "Ages 14-17" },
+      { label: "Who", value: "Ages 13-17" },
       { label: "Group size", value: "8–12 musos" },
       { label: "How much", value: "$80" },
     ],
@@ -137,7 +137,7 @@ const allWorkshops: Record<string, Workshop> = {
       "Spots are limited to a small group to ensure everyone feels comfortable, included and has their voice heard (if they want it to be!).",
     refundShortNote: "Refund for cancellations 2+ weeks before.",
     ageRangeNote:
-      "Outside ages 14–17? Get in touch directly at dave@goodnoiseproject.com.au.",
+      "Outside ages 13–17? Get in touch directly at dave@goodnoiseproject.com.au.",
     facilitatorHeading: "Who's Running It",
     facilitatorBio:
       "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",

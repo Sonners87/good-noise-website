@@ -46,9 +46,9 @@ export const upcomingProgram: UpcomingProgram = {
       label: "Where",
       value: "Player 1 Music School\n5 Woodville Lane, North Perth WA 6006",
     },
-    { label: "Who", value: "Ages 14–17" },
+    { label: "Who", value: "Ages 13–17" },
   ],
-  ages: "14-17",
+  ages: "13-17",
   ctaLabel: "View full program & book",
   ctaHref: "/workshops/2026-spring-holidays",
   refundNote: "Refund for cancellations 2+ weeks before.",
@@ -64,6 +64,6 @@ export const upcomingProgram: UpcomingProgram = {
   endDateISO: "2026-10-01T15:00:00+08:00",
   validFromISO: "2026-08-01T00:00:00+08:00",
   eventDescription:
-    "A two-day school holiday music camp in Perth for ages 14–17. A small group writes an original song and jams it out together — no theory, no assessment, no solos.",
+    "A two-day school holiday music camp in Perth for ages 13–17. A small group writes an original song and jams it out together — no theory, no assessment, no solos.",
   bookingUrl: "https://goodnoiseproject.com.au/workshops/2026-spring-holidays",
 }

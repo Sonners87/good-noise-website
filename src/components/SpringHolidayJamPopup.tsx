@@ -111,7 +111,7 @@ export default function SpringHolidayJamPopup() {
         <div className="mt-7 flex flex-col items-center gap-2 font-mono text-sm tracking-wide text-[var(--gn-paper)] uppercase">
           <span>Wed 30 Sep – Thu 1 Oct 2026</span>
           <span>North Perth</span>
-          <span>Ages 14–17</span>
+          <span>Ages 13–17</span>
         </div>
 
         <div className="mt-7 border-2 border-terracotta px-6 py-5">

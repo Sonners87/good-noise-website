@@ -21,9 +21,9 @@ import drummerPhoto from "../assets/images/strip-drummer.webp"
 import buskerPhoto from "../assets/images/strip-busker.webp"
 import logoAsset from "../assets/logo/good-noise-logo.png"
 
-const PAGE_TITLE = "School Holiday Music Camp Perth | Ages 14–17 | Good Noise"
+const PAGE_TITLE = "School Holiday Music Camp Perth | Ages 13–17 | Good Noise"
 const PAGE_DESCRIPTION =
-  "Two-day school holiday music camps in Perth for ages 14–17. Write and jam an original song with a small group. Next: 30 Sep – 1 Oct 2026, North Perth, $80."
+  "Two-day school holiday music camps in Perth for ages 13–17. Write and jam an original song with a small group. Next: 30 Sep – 1 Oct 2026, North Perth, $80."
 const CANONICAL_PATH = "/school-holiday-music-camp-perth"
 
 const whatHappens: { bold: string; rest: string }[] = [
@@ -75,7 +75,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What ages is this for?",
-    a: "This program is for teens aged 14–17. Outside that range? Email dave@goodnoiseproject.com.au and we'll let you know what's coming up for other ages.",
+    a: "This program is for teens aged 13–17. Outside that range? Email dave@goodnoiseproject.com.au and we'll let you know what's coming up for other ages.",
   },
   {
     q: "Where in Perth is it held?",
@@ -210,7 +210,7 @@ export default function SchoolHolidayMusicCamp() {
                 original song and jams it out together — no theory lessons,
                 no benchmarks, nobody put on the spot. Our next program runs
                 30 September – 1 October 2026 in North Perth, for ages
-                14–17, and it's $80 for both days.
+                13–17, and it's $80 for both days.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -343,7 +343,7 @@ export default function SchoolHolidayMusicCamp() {
             Who Our Perth School Holiday Music Camps Are For
           </h2>
           <div className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-ink/80 md:text-lg">
-            <p>Right now Good Noise runs one program, for ages 14–17.</p>
+            <p>Right now Good Noise runs one program, for ages 13–17.</p>
             <p>
               It suits young musicians who've been playing something for a
               year or more — drums, guitar, bass, keys, voice, whatever it

@@ -87,7 +87,7 @@ const springHolidaysFaqs: { q: string; a: string }[] = [
   },
   {
     q: "I'm 14 — will everyone else be older and better than me?",
-    a: "The group runs 14 to 17, with a real mix of experience. That's on purpose, not by accident. Some people will have been playing for a decade, some for a year, and it genuinely doesn't create a hierarchy — everyone's writing something new together, so nobody's ahead.",
+    a: "The group runs 13 to 17, with a real mix of experience. That's on purpose, not by accident. Some people will have been playing for a decade, some for a year, and it genuinely doesn't create a hierarchy — everyone's writing something new together, so nobody's ahead.",
   },
   {
     q: "Do I need to be good?",
@@ -190,7 +190,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
 
                 <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-white/85 md:mx-0 md:text-lg">
                   Two days in North Perth jamming out an original song with a
-                  bunch of other young musos. Ages 14–17 (a little outside
+                  bunch of other young musos. Ages 13–17 (a little outside
                   that?{" "}
                   <a
                     href="mailto:dave@goodnoiseproject.com.au"
