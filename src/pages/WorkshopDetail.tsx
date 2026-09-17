@@ -12,6 +12,7 @@ import NotFound from "./NotFound"
 import WorkshopStayInLoopPopup, {
   LOOP_POPUP_ANCHOR_ID,
 } from "../components/WorkshopStayInLoopPopup"
+import SubscribeForm from "../components/SubscribeForm"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setCanonical } from "../lib/pageMeta"
@@ -115,6 +116,17 @@ const springHolidaysFaqs: { q: string; a: string }[] = [
   },
 ]
 
+// While the program is full, "What happens after I book?" is the one FAQ
+// that can't be answered honestly, so it's swapped for the question a full
+// program actually raises. The rest of the list still applies to whoever
+// comes off the waitlist.
+const BOOKED_FAQ_Q = "What happens after I book?"
+
+const soldOutFaq = {
+  q: "It's full — can I still get in?",
+  a: "Sometimes. Cancellations do happen, and when one does we email the waitlist first. Join it above and you're in the running — and either way you'll hear about the next program before it's announced publicly.",
+}
+
 // `slugProp` lets a page mount this component directly against a fixed
 // workshop (e.g. the /for-schools route) instead of reading the slug from
 // the URL — same rendering, different route.
@@ -140,13 +152,27 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
 
   const heroImage = heroImages[workshop.slug]
   const isSpringHolidays = workshop.slug === "2026-spring-holidays"
+  // Present only while the workshop is full. Every Book CTA below checks
+  // this, so the page can never hand a visitor to the Stripe form once the
+  // block is set in content/workshops.ts.
+  const soldOut = workshop.soldOut
+  const faqs = soldOut
+    ? springHolidaysFaqs.map((item) => (item.q === BOOKED_FAQ_Q ? soldOutFaq : item))
+    : springHolidaysFaqs
   const highlightsColumns =
     workshop.highlights.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
 
-  // Swaps the static "How much" row for the foundation-price display,
-  // driven by the single price constant in `content/pricing.ts`.
-  const infoRows = isSpringHolidays
-    ? workshop.infoRows.map((row) =>
+  // While the program is full, price and group size come out of the details
+  // card altogether — neither is something a waitlist visitor can act on,
+  // and a "$80 / 8–12 musos" row sitting beside a FULL stamp still reads as
+  // an offer. Otherwise the static "How much" row is swapped for the
+  // foundation-price display, driven by the single price constant in
+  // `content/pricing.ts`.
+  const springInfoRows = soldOut
+    ? workshop.infoRows.filter(
+        (row) => row.label !== "How much" && row.label !== "Group size",
+      )
+    : workshop.infoRows.map((row) =>
         row.label === "How much"
           ? {
               ...row,
@@ -162,7 +188,8 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
             }
           : row,
       )
-    : workshop.infoRows
+
+  const infoRows = isSpringHolidays ? springInfoRows : workshop.infoRows
 
   return (
     <div className={isSpringHolidays ? "gn-workshop-2026" : undefined}>
@@ -188,6 +215,18 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                   Are Waiting!
                 </h1>
 
+                {soldOut && (
+                  /* The one thing an ad click or a returning visitor needs
+                     to know before anything else on the page, so it sits
+                     directly under the headline at heading scale rather
+                     than as an eyebrow down in the CTA stack. Filled, not
+                     outlined: against the forest hero an outline reads as a
+                     label, a fill reads as a stamp. */
+                  <p className="font-display mt-6 inline-block border-2 border-[var(--gn-paper)] bg-[var(--gn-pink)] px-5 py-3 text-2xl uppercase leading-none text-[var(--gn-paper)] sm:text-3xl md:text-4xl">
+                    {soldOut.badge}
+                  </p>
+                )}
+
                 <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-white/85 md:mx-0 md:text-lg">
                   Two days in North Perth jamming out an original song with a
                   bunch of other young musos. Ages 13–17 (a little outside
@@ -202,12 +241,28 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                 </p>
 
                 <div className="mt-8 flex flex-col items-center gap-3 md:items-start">
-                  <Link to={workshop.ctaHref} className="gn-btn-hero gn-btn-primary text-sm">
-                    {workshop.ctaLabel} &rarr;
-                  </Link>
-                  <span className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--gn-pink)]">
-                    12 spots only · Our first ever program
-                  </span>
+                  {soldOut ? (
+                    <>
+                      {/* Plain <a>, not Link: the waitlist block is a hash
+                          target on this same page. The status itself is
+                          already stamped under the headline above. */}
+                      <a href="#waitlist" className="gn-btn-hero gn-btn-primary text-sm">
+                        Join the waitlist &rarr;
+                      </a>
+                      <span className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--gn-pink)]">
+                        Cancellations happen · The list hears first
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Link to={workshop.ctaHref} className="gn-btn-hero gn-btn-primary text-sm">
+                        {workshop.ctaLabel} &rarr;
+                      </Link>
+                      <span className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--gn-pink)]">
+                        12 spots only · Our first ever program
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -231,7 +286,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                     Someone who's decided the price is a problem has already
                     left by the time they reach the fine print, so this needs
                     to sit right in the decision path, not below it. */}
-                {workshop.scholarshipCallout && (
+                {workshop.scholarshipCallout && !soldOut && (
                   <div className="gn-card-on-dark mt-6 border-2 border-[var(--gn-paper)] bg-[var(--gn-ink)] p-6">
                     <p className="font-display text-2xl uppercase leading-[0.98] text-terracotta">
                       {workshop.scholarshipCallout.heading}
@@ -479,13 +534,25 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               </p>
             )}
             <div className="mt-8 flex flex-col items-center gap-3">
-              <PillButton href={workshop.ctaHref} variant="primary">
-                {workshop.ctaLabel}
-              </PillButton>
-              {workshop.refundShortNote && (
-                <span className="font-body font-semibold text-xs text-white/70">
-                  {workshop.refundShortNote}
-                </span>
+              {soldOut ? (
+                <PillButton href="#waitlist" variant="primary">
+                  Join the waitlist
+                </PillButton>
+              ) : (
+                <>
+                  <PillButton href={workshop.ctaHref} variant="primary">
+                    {workshop.ctaLabel}
+                  </PillButton>
+                  {/* Refund terms only matter to someone who can still book —
+                      suppressed while the waitlist CTA stands in for the
+                      booking one. The full policy table further down stays
+                      put for anyone already booked in. */}
+                  {workshop.refundShortNote && (
+                    <span className="font-body font-semibold text-xs text-white/70">
+                      {workshop.refundShortNote}
+                    </span>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -504,20 +571,59 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
           orange (not the surrounding bg-ink/forest) so it reads as its own
           distinct strip rather than blurring into "Kept Small On Purpose"
           above it. Bold + paper text for contrast against that fill. */}
-      {workshop.slug === "2026-spring-holidays" && (
-        <section className="bg-[var(--gn-pink)]">
-          <div className="mx-auto max-w-[1400px] px-5 py-12 text-center md:px-10 md:py-16">
-            <p className="mx-auto max-w-md text-base font-bold leading-relaxed text-[var(--gn-paper)] md:text-lg">
-              Can't make these dates?
-            </p>
-            <div className="mt-5">
-              <PillButton href="/stay-in-touch" variant="outlineOnDark">
-                Get notified about future workshops
-              </PillButton>
+      {workshop.slug === "2026-spring-holidays" &&
+        (soldOut ? (
+          /* Replaces the "Can't make these dates?" strip while the program
+             is full — same strip, same audience, but the ask is now the only
+             thing a visitor can act on, so the form itself lives here rather
+             than a link off to /stay-in-touch. The form sits on a paper card
+             because --gn-pink and --color-terracotta both resolve to burnt
+             orange on this route: SubscribeForm's burnt submit button would
+             disappear into the strip's own fill. */
+          <section id="waitlist" className="scroll-mt-20 bg-[var(--gn-pink)]">
+            <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
+              <div className="gn-card-flat mx-auto max-w-xl text-center">
+                <span className="gn-eyebrow text-terracotta">{soldOut.badge}</span>
+                <h2 className="font-display mt-4 text-3xl uppercase leading-[0.98] text-ink sm:text-4xl">
+                  {soldOut.heading}
+                </h2>
+                <p className="mt-4 text-base leading-relaxed text-ink/80">
+                  {soldOut.body}
+                </p>
+
+                <SubscribeForm
+                  source={soldOut.subscribeSource}
+                  variant="compact"
+                  submitLabel="Join the waitlist"
+                  className="mx-auto mt-7 w-full max-w-md text-left"
+                />
+
+                <p className="mt-5 text-sm leading-relaxed text-ink/70">
+                  No spam, unsubscribe any time.{" "}
+                  <Link
+                    to="/stay-in-touch"
+                    className="font-semibold text-terracotta underline decoration-2 underline-offset-4 hover:text-ink"
+                  >
+                    More about staying in touch &rarr;
+                  </Link>
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        ) : (
+          <section className="bg-[var(--gn-pink)]">
+            <div className="mx-auto max-w-[1400px] px-5 py-12 text-center md:px-10 md:py-16">
+              <p className="mx-auto max-w-md text-base font-bold leading-relaxed text-[var(--gn-paper)] md:text-lg">
+                Can't make these dates?
+              </p>
+              <div className="mt-5">
+                <PillButton href="/stay-in-touch" variant="outlineOnDark">
+                  Get notified about future workshops
+                </PillButton>
+              </div>
+            </div>
+          </section>
+        ))}
 
       {workshop.directContact && (
         <section className="bg-brand">
@@ -609,7 +715,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               Questions You Might Have
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
-              {springHolidaysFaqs.map((item) => (
+              {faqs.map((item) => (
                 <div key={item.q} className="gn-card-flat">
                   <h3 className="font-body font-bold text-base text-ink md:text-lg">
                     {item.q}

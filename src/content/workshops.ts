@@ -71,6 +71,20 @@ export type Workshop = {
   // card, ahead of the fine print. A summary in the decision path, not a
   // replacement for `scholarshipNote`'s fuller policy text below.
   scholarshipCallout?: { heading: string; body: string }
+
+  // Set once every place is taken. Its presence is what flips the detail
+  // page out of booking mode: every Book CTA is replaced by the waitlist
+  // subscribe block, so nothing on the page can start a checkout while this
+  // is here. Remove the block (rather than adding a second flag) to put the
+  // workshop back on sale.
+  soldOut?: {
+    /** Short status line — used as the hero badge and the waitlist eyebrow. */
+    badge: string
+    heading: string
+    body: string
+    /** Tags this placement in the shared Netlify/Brevo subscribe stream. */
+    subscribeSource: string
+  }
 }
 
 const allWorkshops: Record<string, Workshop> = {
@@ -157,6 +171,12 @@ const allWorkshops: Record<string, Workshop> = {
     scholarshipCallout: {
       heading: "Cost shouldn't decide this.",
       body: "If $80 is a stretch, email dave@goodnoiseproject.com.au and we'll sort a partial or full place. No questions asked, no awkwardness.",
+    },
+    soldOut: {
+      badge: "This program is full",
+      heading: "This One's Full \u2014 Join the Waitlist",
+      body: "Every spot for 30 Sep \u2013 1 Oct is taken. Pop your email in and we'll come straight to you if a place opens up from a cancellation \u2014 and you'll be first to hear when the next Good Noise program is announced, before it goes public.",
+      subscribeSource: "workshop-2026-spring-holidays-waitlist",
     },
   },
 

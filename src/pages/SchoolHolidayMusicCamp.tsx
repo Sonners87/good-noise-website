@@ -14,6 +14,7 @@ import PillButton from "../components/PillButton"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setLandingPageMeta, SITE_URL } from "../lib/pageMeta"
 import { upcomingProgram } from "../data/upcomingProgram"
+import { workshops } from "../content/workshops"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
 import concertFriendsPhoto from "../assets/images/strip-concert-friends.webp"
@@ -163,7 +164,13 @@ const eventJsonLd = {
     "@type": "Offer",
     price: String(upcomingProgram.price),
     priceCurrency: "AUD",
-    availability: "https://schema.org/InStock",
+    // Tracks the program's own soldOut block rather than being a standing
+    // "InStock" claim — this is the Event markup Google reads for the
+    // program the whole page is about, so it can't say places are available
+    // once they aren't.
+    availability: workshops["2026-spring-holidays"].soldOut
+      ? "https://schema.org/SoldOut"
+      : "https://schema.org/InStock",
     url: upcomingProgram.bookingUrl,
     validFrom: upcomingProgram.validFromISO,
   },

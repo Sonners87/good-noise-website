@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import logo from "../assets/logo/good-noise-logo.png"
-import { upcomingWorkshopSlug } from "../content/workshops"
+import { workshops, upcomingWorkshopSlug } from "../content/workshops"
 import InstagramIcon from "./icons/InstagramIcon"
 
 const instagramUrl = "https://www.instagram.com/goodnoiseau/"
@@ -62,11 +62,15 @@ export default function Header() {
           </a>
         </nav>
         <div className="flex items-center gap-3">
+          {/* Same destination either way — the label just has to match what
+              the visitor finds when they land. Driven off the workshop's own
+              soldOut block so the nav flips with the page rather than
+              needing to be remembered separately. */}
           <Link
             to={`/workshops/${upcomingWorkshopSlug}`}
             className="gn-btn-primary text-xs"
           >
-            Book Now
+            {workshops[upcomingWorkshopSlug].soldOut ? "Join Waitlist" : "Book Now"}
           </Link>
           <button
             type="button"

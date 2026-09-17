@@ -2,12 +2,66 @@ import { useEffect } from "react"
 import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import CampSignupForm from "../components/CampSignupForm"
+import SubscribeForm from "../components/SubscribeForm"
+import PillButton from "../components/PillButton"
+import { workshops } from "../content/workshops"
 import { STRIPE_URL, PRICE_DOLLARS } from "../content/pricing"
+import { trackMetaEvent } from "../lib/metaPixel"
 
 export default function Book() {
+  // Nothing links here while the program is full — the workshop page's CTAs
+  // all point at its waitlist instead — but the route stays live for anyone
+  // arriving from an old ad, email or bookmark, so it has to answer for
+  // itself rather than show a working checkout form.
+  const soldOut = workshops["2026-spring-holidays"].soldOut
+
   useEffect(() => {
-    document.title = "Book Your Place — Good Noise Project"
-  }, [])
+    document.title = soldOut
+      ? "This Program Is Full — Good Noise Project"
+      : "Book Your Place — Good Noise Project"
+  }, [soldOut])
+
+  // Landing on this page is the start of checkout — the form here hands off
+  // to Stripe. Fired on mount rather than on submit so it also counts
+  // visitors who arrive with intent but drop out of the form, which is the
+  // signal Meta optimises delivery against. Suppressed while the program is
+  // full: there's no checkout to start, and counting these arrivals would
+  // train delivery on a conversion that can't happen.
+  useEffect(() => {
+    if (soldOut) return
+    trackMetaEvent("InitiateCheckout")
+  }, [soldOut])
+
+  if (soldOut) {
+    return (
+      <>
+        <PageHero>
+          <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
+            {soldOut.heading}
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+            {soldOut.body}
+          </p>
+
+          <div className="mt-10">
+            <SubscribeForm
+              source={soldOut.subscribeSource}
+              variant="landing"
+              submitLabel="Join the waitlist"
+            />
+          </div>
+
+          <div className="mt-10">
+            <PillButton href="/workshops/2026-spring-holidays" variant="onBlue">
+              Back to the program details
+            </PillButton>
+          </div>
+        </PageHero>
+
+        <Footer />
+      </>
+    )
+  }
 
   return (
     <>

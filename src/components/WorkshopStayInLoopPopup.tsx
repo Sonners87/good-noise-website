@@ -2,9 +2,9 @@ import { useEffect, useRef, useState, type FormEvent } from "react"
 import { submitNetlifyFormFields } from "../lib/submitNetlifyForm"
 import { hasCheckoutStarted } from "../lib/bookingIntent"
 
-// The soft-offer counterpart to the page's "Can't make these dates?" strip:
-// same offer, but brought to the visitor at the point they're leaving rather
-// than waiting for them to find it. Deliberately a corner/bottom card rather
+// The soft-offer counterpart to the page's waitlist strip: same offer, but
+// brought to the visitor at the point they're leaving rather than waiting
+// for them to find it. Deliberately a corner/bottom card rather
 // than a full-screen modal — a backdrop would block the page underneath,
 // which is exactly what this shouldn't do for a low-commitment ask.
 //
@@ -234,8 +234,8 @@ export default function WorkshopStayInLoopPopup() {
             You're on the list.
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-[var(--gn-paper)]/80">
-            We'll email you when the next Good Noise workshop is locked in.
-            Nothing else in between.
+            We'll email you if a spot opens up for these dates, and when the
+            next Good Noise workshop is locked in. Nothing else in between.
           </p>
           <button
             type="button"
@@ -248,19 +248,20 @@ export default function WorkshopStayInLoopPopup() {
       ) : (
         <>
           <span className="gn-eyebrow mr-10 text-[var(--gn-acid)]">
-            Can't make these dates?
+            This program is full
           </span>
 
           <h2
             id="workshop-loop-popup-heading"
             className="font-display mt-3 pr-8 text-2xl leading-[1.05] text-white sm:text-[1.75rem]"
           >
-            Stay in the Loop
+            Join the Waitlist
           </h2>
 
           <p className="mt-3 text-sm leading-relaxed text-[var(--gn-paper)]/80">
-            Not these dates, or not ready to decide? Leave your email and
-            we'll let you know when the next Good Noise workshop comes up.
+            Every spot for these dates is taken. Leave your email and we'll
+            come to you first if a cancellation frees one up — and when the
+            next Good Noise program is announced.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-3">
