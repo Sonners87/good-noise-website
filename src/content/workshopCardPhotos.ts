@@ -4,6 +4,7 @@
 // and the homepage "What's coming up" teaser render the exact same card.
 import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
+import bandTrioPhoto from "../assets/images/workshop-band-trio.webp"
 
 export const workshopCardPhotos: Record<
   string,
@@ -13,6 +14,14 @@ export const workshopCardPhotos: Record<
     src: jamInstrumentsPhoto,
     alt: "Silhouetted hands holding guitars, a bass, a keyboard, a cymbal and microphones up against the sky",
     objectPosition: "center 80%",
+  },
+  // A different photo from the spring card's on purpose — the two programs
+  // share a format and most of their copy, so the cards shouldn't also look
+  // like the same listing posted twice.
+  "christmas-holidays-jam-program": {
+    src: bandTrioPhoto,
+    alt: "Three young musicians performing together — acoustic guitar, electric guitar and vocals",
+    objectPosition: "center 40%",
   },
   "songwriting-oct-2026": {
     src: bandPracticePhoto,

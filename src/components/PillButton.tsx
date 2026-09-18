@@ -2,7 +2,13 @@ import type { ReactNode } from "react"
 import { Link } from "react-router-dom"
 
 type Size = "sm" | "md"
-type Variant = "onBlue" | "onLight" | "primary" | "outline" | "outlineOnDark"
+type Variant =
+  | "onBlue"
+  | "onLight"
+  | "primary"
+  | "outline"
+  | "outlineOnDark"
+  | "acidOnDark"
 
 type PillButtonProps = {
   href: string
@@ -34,6 +40,12 @@ export const pillVariantStyles: Record<Variant, string> = {
     "bg-transparent text-ink border-ink hover:bg-ink hover:text-cream",
   outlineOnDark:
     "bg-transparent text-white border-white hover:bg-white hover:text-ink",
+  // For a primary CTA sitting on an ink section. "primary" can't do this job
+  // in the standard palette: terracotta aliases --gn-ink, so its fill is the
+  // same colour as the section it sits on and only the border shows. Acid on
+  // ink is the token spec's own primary CTA pairing, and it passes AA.
+  acidOnDark:
+    "bg-[var(--gn-acid)] text-ink border-cream hover:bg-cream hover:text-ink",
 }
 
 export const pillBaseStyles =

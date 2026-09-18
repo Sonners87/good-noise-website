@@ -9,7 +9,11 @@ import { submitNetlifyForm } from "../lib/submitNetlifyForm"
 // placement a submission came from without splitting the data. Keep the
 // static hidden duplicate of this form in index.html in sync with the
 // fields below (Netlify Forms only detects forms present in raw HTML).
-type SubscribeFormVariant = "landing" | "compact" | "footer"
+
+// "card" is the stacked name + email pair used inside a paper card on a
+// coloured strip (the register-interest block on a workshop page) — same
+// fields as "landing", but labelled in ink rather than white.
+type SubscribeFormVariant = "landing" | "compact" | "footer" | "card"
 
 type SubscribeFormProps = {
   source: string
@@ -22,6 +26,7 @@ const successCopy: Record<SubscribeFormVariant, string> = {
   landing: "Thanks for joining — we'll be in touch.",
   compact: "You're on the list!",
   footer: "You're on the list!",
+  card: "You're on the list — we'll be in touch as soon as it's locked in.",
 }
 
 export default function SubscribeForm({
@@ -67,26 +72,39 @@ export default function SubscribeForm({
     )
   }
 
-  const isInline = variant !== "landing"
+  // The two single-field variants sit on one row; "landing" and "card" both
+  // stack a name field above the email one.
+  const isInline = variant === "compact" || variant === "footer"
+  const isCard = variant === "card"
 
   return (
     <form
       onSubmit={handleSubmit}
       name="subscribe"
       data-netlify="true"
-      className={`${isInline ? "flex flex-col gap-3 sm:flex-row" : "grid max-w-lg grid-cols-1 gap-5"} ${className}`}
+      className={`${
+        isInline
+          ? "flex flex-col gap-3 sm:flex-row"
+          : isCard
+            ? "grid grid-cols-1 gap-4"
+            : "grid max-w-lg grid-cols-1 gap-5"
+      } ${className}`}
     >
       <input type="hidden" name="form-name" value="subscribe" />
       <input type="hidden" name="source" value={source} />
 
-      {variant === "landing" && (
+      {!isInline && (
         <label className="flex flex-col gap-2">
-          <span className="font-body font-semibold text-xs tracking-wide text-white/80">
-            Name (optional)
+          <span
+            className={`font-body font-semibold text-xs tracking-wide ${isCard ? "text-ink/70" : "text-white/80"}`}
+          >
+            {isCard ? "Name" : "Name (optional)"}
           </span>
           <input
+            required={isCard}
             type="text"
             name="name"
+            autoComplete="given-name"
             className="border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
             placeholder="Your name"
           />
@@ -94,8 +112,10 @@ export default function SubscribeForm({
       )}
 
       <label className={isInline ? "flex-1" : "flex flex-col gap-2"}>
-        {variant === "landing" && (
-          <span className="font-body font-semibold text-xs tracking-wide text-white/80">
+        {!isInline && (
+          <span
+            className={`font-body font-semibold text-xs tracking-wide ${isCard ? "text-ink/70" : "text-white/80"}`}
+          >
             Email
           </span>
         )}
@@ -115,9 +135,9 @@ export default function SubscribeForm({
 
       <button
         type="submit"
-        className={`${isInline ? "shrink-0" : "mt-2 w-fit"} ${pillBaseStyles} ${isInline ? pillSizeStyles.sm : pillSizeStyles.md} ${
-          variant === "landing" ? pillVariantStyles.onBlue : pillVariantStyles.primary
-        }`}
+        className={`${isInline ? "shrink-0" : isCard ? "mt-1 w-full" : "mt-2 w-fit"} ${pillBaseStyles} ${
+          isInline || isCard ? pillSizeStyles.sm : pillSizeStyles.md
+        } ${variant === "landing" ? pillVariantStyles.onBlue : pillVariantStyles.primary}`}
       >
         {submitLabel}
       </button>

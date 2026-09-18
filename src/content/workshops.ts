@@ -16,6 +16,20 @@ export type Workshop = {
   teaser: string
   /** Detail-page hero eyebrow. Defaults to "Workshop" if omitted. */
   eyebrow?: string
+  /** Jam-program hero H1, rendered as `before` + a highlighted `highlight`,
+      then a line break, then `after`. Distinct per program: it's the single
+      strongest signal that two runs of one format are different offerings. */
+  heroHeadline?: { before: string; highlight: string; after: string }
+  /** Lead sentence under the jam-program hero headline, up to (but not
+      including) the "a little outside that?" aside the page appends. */
+  heroLead?: string
+  /** Eyebrow above the jam-program hero's details card. */
+  infoCardEyebrow?: string
+  /** <meta name="description"> for the detail page. Write a distinct one per
+      workshop — two runs of the same program share most of their on-page
+      copy, so the snippet is one of the few signals telling search engines
+      (and anyone reading a result) that they're different offerings. */
+  metaDescription?: string
 
   // Homepage "what's coming up" teaser card — only needed for whichever
   // workshop is currently featured there (see `upcomingWorkshopSlug`).
@@ -85,6 +99,21 @@ export type Workshop = {
     /** Tags this placement in the shared Netlify/Brevo subscribe stream. */
     subscribeSource: string
   }
+
+  // Set while a program is announced but not yet scheduled — dates, venue
+  // and price still TBA. Mirror image of `soldOut`: its presence flips the
+  // detail page out of booking mode the same way, replacing every Book CTA
+  // with the register-interest form, so nothing on the page can start a
+  // checkout before there's something to check out of. Remove the block once
+  // the details are locked in and the workshop goes on sale.
+  registerInterest?: {
+    /** Short status line — used as the hero badge and the form's eyebrow. */
+    badge: string
+    heading: string
+    body: string
+    /** Tags this placement in the shared Netlify/Brevo subscribe stream. */
+    subscribeSource: string
+  }
 }
 
 const allWorkshops: Record<string, Workshop> = {
@@ -93,6 +122,12 @@ const allWorkshops: Record<string, Workshop> = {
     title: "2026 Spring Holidays Jam Program",
     shortTitle: "2026 Spring Holidays Jam Program",
     eyebrow: "CREATE | PLAY | EXPERIMENT",
+    heroHeadline: { before: "Your ", highlight: "Bandmates", after: "Are Waiting!" },
+    heroLead:
+      "Two days in North Perth jamming out an original song with a bunch of other young musos. Ages 13–17",
+    infoCardEyebrow: "Our First Ever Program",
+    metaDescription:
+      "Two days of the spring school holidays in North Perth, 30 Sep \u2013 1 Oct 2026: teen musos aged 13\u201317 write and jam out an original song together. No theory, no assessment, no solos.",
     teaser:
       "Our next workshop runs this Spring school holidays in North Perth, giving teen musos aged 13–17 the chance to write, compose and perform a song together over two days.",
     dates: "30 Sep – 1 Oct 2026 (9am – 3pm each day)",
@@ -177,6 +212,86 @@ const allWorkshops: Record<string, Workshop> = {
       heading: "This One's Full \u2014 Join the Waitlist",
       body: "Every spot for 30 Sep \u2013 1 Oct is taken. Pop your email in and we'll come straight to you if a place opens up from a cancellation \u2014 and you'll be first to hear when the next Good Noise program is announced, before it goes public.",
       subscribeSource: "workshop-2026-spring-holidays-waitlist",
+    },
+  },
+
+  // The same two-day jam format as the spring program above, run again over
+  // the Christmas school holidays. Body copy below the hero is deliberately
+  // the spring program's, with the season wording adjusted — reviewed and
+  // chosen over a differentiated rewrite. That leaves the two pages near
+  // duplicates for search: expect one to be filtered out of results until
+  // the copy diverges. The hero (headline, lead) and the meta description
+  // are the parts that do differ.
+  //
+  // Evergreen slug (no year): this URL is reused for each summer run so links
+  // and search history accumulate on one page instead of resetting annually.
+  // Update the year in `title`/`shortTitle`/`metaDescription` each time.
+  //
+  // Dates, venue and price aren't locked in yet, so this entry carries a
+  // `registerInterest` block instead of a bookable ctaHref: the detail page
+  // renders the register-interest form in place of every Book CTA until those
+  // details exist. When they do, fill in the TBA rows, add the price row and
+  // refund policy back, and delete that block.
+  "christmas-holidays-jam-program": {
+    slug: "christmas-holidays-jam-program",
+    title: "2026 Christmas Holidays Jam Program",
+    shortTitle: "2026 Christmas Holidays Jam Program",
+    eyebrow: "CREATE | PLAY | EXPERIMENT",
+    heroHeadline: { before: "Start A ", highlight: "Band", after: "This Summer" },
+    heroLead:
+      "Two days of the summer break spent writing one song from nothing with a room full of other young musos. Dates and venue to be announced. Ages 13–17",
+    infoCardEyebrow: "What We Know So Far",
+    metaDescription:
+      "A two-day music program in Perth for ages 13–17 over the December–January school holidays. Write an original song with a small group and jam it out as a band. Dates TBA.",
+    teaser:
+      "Two days of the summer break in Perth, writing and playing an original song with a small group of other 13–17 year olds. Dates and venue to be announced — register your interest to hear them first.",
+    infoRows: [
+      { label: "When", value: "TBA" },
+      { label: "Time", value: "TBA" },
+      { label: "Where", value: "TBA" },
+      { label: "Who", value: "Ages 13-17" },
+      { label: "Group size", value: "8–12 musos" },
+    ],
+    ctaLabel: "Register your interest",
+    ctaHref: "#register-interest",
+    introParagraphs: [
+      "Good Noise Project presents a two-day jam program in Perth these Christmas school holidays, set inside a room full of instruments begging to be picked up.",
+      "You'll join several other young musos in a safe space and jam out an original song together — lyrics, melody, harmonies, chords, the lot. There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band.",
+      "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might already be a gun on it and want to give something else a go — or try one you've never touched. Whether you're quiet or loud, confident or used to playing alone in your bedroom, everyone's on equal footing here. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something different.",
+    ],
+    whatToBring: [
+      "Your instrument (range of instruments available)",
+      "Water bottle",
+      "Packed lunch & snacks each day",
+      "Earplugs (if sensitive to noise)",
+    ],
+    highlightsHeading: "What happens over two days:",
+    highlights: [],
+    limitedSpotsHeading: "Kept Small On Purpose",
+    limitedSpotsNote:
+      "Spots are limited to a small group to ensure everyone feels comfortable, included and has their voice heard (if they want it to be!).",
+    ageRangeNote:
+      "Outside ages 13–17? Get in touch directly at dave@goodnoiseproject.com.au.",
+    facilitatorHeading: "Who's Running It",
+    facilitatorBio:
+      "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",
+    facilitatorLinkLabel: "More about Dave",
+    facilitatorLinkHref: "/about",
+    prerequisites:
+      "While we prefer each participant has prior music experience, exceptions can be made for those with a big interest in starting to play. We don't focus on music theory, but a willingness to learn about songwriting, composition and playing together is a must.",
+    scholarshipNote:
+      "We have a no-questions-asked scholarship policy to ensure our workshops are accessible to everyone who wants to participate. If the cost of the workshop presents a significant financial barrier, please reach out to dave@goodnoiseproject.com.au for a partial or full scholarship.",
+    scholarshipCallout: {
+      heading: "Cost shouldn't decide this.",
+      body: "If the cost is a stretch, email dave@goodnoiseproject.com.au and we'll sort a partial or full place. No questions asked, no awkwardness.",
+    },
+    registerInterest: {
+      badge: "Dates to be announced",
+      heading: "Get The Dates First",
+      body: "We're locking in dates and a venue for the summer break now. Leave your name and email and you'll have them the day they're confirmed — ahead of the public announcement, and before the rest of your holidays fill up.",
+      // Year-stamped even though the slug isn't: next summer's run reuses
+      // this page, and its registrations need to be a separate stream.
+      subscribeSource: "workshop-2026-christmas-holidays-register-interest",
     },
   },
 
@@ -292,6 +407,14 @@ export const workshops: Record<string, Workshop> = SHOW_OCT_2026_CAMP
 // Used by the header's single "Our next workshop" CTA — the chronologically
 // nearest camp.
 export const upcomingWorkshopSlug = "2026-spring-holidays"
+
+// Every program currently open for booking or registration, soonest first.
+// Read by the homepage "What's Coming Up" section and the Workshops pillar
+// page, so adding or retiring a program is one edit here rather than two.
+export const upcomingWorkshopSlugs = [
+  "2026-spring-holidays",
+  "christmas-holidays-jam-program",
+]
 
 // Shared by every place that renders a workshop's "Who's it for" line (the
 // pillar page cards and the homepage teaser) so they can't drift from the

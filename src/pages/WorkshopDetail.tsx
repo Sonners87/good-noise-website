@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link, useLocation, useParams } from "react-router-dom"
-import Header from "../components/Header"
+import Header, { type HeaderTone } from "../components/Header"
 import Footer from "../components/Footer"
 import Eyebrow from "../components/Eyebrow"
 import PillButton from "../components/PillButton"
@@ -15,7 +15,7 @@ import WorkshopStayInLoopPopup, {
 import SubscribeForm from "../components/SubscribeForm"
 import { workshops } from "../content/workshops"
 import { linkifyEmail } from "../lib/linkifyEmail"
-import { setCanonical } from "../lib/pageMeta"
+import { setCanonical, setPageMeta } from "../lib/pageMeta"
 import { PRICE_DOLLARS } from "../content/pricing"
 import acousticBoyPhoto from "../assets/images/strip-acoustic-boy.webp"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
@@ -40,11 +40,116 @@ const heroImages: Record<string, { src: string; alt: string; objectPosition?: st
   },
 }
 
-// Bespoke to the 2026 spring holidays conversion page — replaces the
-// generic workshop.whatToExpect bullet list, which was written in third
-// person on a page that otherwise addresses "you" throughout. Kept local
-// rather than added to the shared Workshop type since this two-panel
-// layout isn't a general-purpose content shape other workshops would reuse.
+// Every run of the two-day jam program shares one bespoke conversion layout
+// — the hero below, the two-day breakdown, the FAQ and the CTA strip —
+// listed here rather than checked slug-by-slug so a new run of the program
+// picks all of it up by being added to this array. Which colours it wears is
+// a separate question, answered by jamThemes below.
+const JAM_PROGRAM_SLUGS = ["2026-spring-holidays", "christmas-holidays-jam-program"]
+
+/*
+  The two colour treatments a jam program page can wear.
+
+  "acid" is the standard one, and the only one new programs should use. It
+  sits in the site-wide audience suite: ink (black) for the homepage and For
+  Schools, --gn-pink (blue) for For Parents, --gn-acid (orange) for
+  participant-facing workshop pages. Text on the orange hero is ink or paper
+  only — white on #FF4A00 is ~3.0:1 and fails AA at body size.
+
+  "legacy" is the forest/burnt scheme (.gn-workshop-2026), kept ONLY because
+  printed flyers for the 2026 spring program went out in those colours and
+  changing the page mid-campaign would have read as a different organisation.
+  It retires with that program — do not add a third page to it.
+*/
+type JamTheme = {
+  wrapper?: string
+  headerTone: HeaderTone
+  heroSection: string
+  eyebrow: string
+  headline: string
+  /** Add-on class for the headline's .gn-hl block. */
+  highlight: string
+  badge: string
+  lead: string
+  leadLink: string
+  /** Add-on class for the hero's .gn-btn-primary CTA. */
+  ctaButton: string
+  ctaNote: string
+  infoCardEyebrow: string
+  infoCardTitle: string
+  callout: string
+  calloutHeading: string
+  calloutBody: string
+  ageNote: string
+  /** Background for the trailing waitlist / register-interest strip. */
+  ctaStrip: string
+  /** Copy directly on that strip (not inside a card on it). */
+  ctaStripText: string
+  ctaStripButton: "outline" | "outlineOnDark"
+  /** Primary CTA in the "Kept Small On Purpose" band, which is ink-filled. */
+  limitedSpotsButton: "primary" | "acidOnDark"
+}
+
+const jamThemes: Record<"acid" | "legacy", JamTheme> = {
+  acid: {
+    headerTone: "onAcid",
+    heroSection: "bg-[var(--gn-acid)]",
+    eyebrow: "text-ink",
+    headline: "text-ink",
+    highlight: "gn-hl-on-acid",
+    badge: "border-ink bg-ink text-[var(--gn-paper)]",
+    lead: "text-ink/80",
+    leadLink: "hover:text-[var(--gn-paper)]",
+    ctaButton: "gn-btn-on-acid",
+    ctaNote: "text-ink/70",
+    infoCardEyebrow: "text-ink",
+    // Display-size type, so acid on the card's paper fill clears AA large.
+    // Never use it for the small print on this page.
+    infoCardTitle: "text-[var(--gn-acid)]",
+    callout: "border-ink bg-ink",
+    calloutHeading: "text-[var(--gn-acid)]",
+    calloutBody: "text-[var(--gn-paper)]/85",
+    ageNote: "text-ink/70",
+    ctaStrip: "bg-[var(--gn-acid)]",
+    ctaStripText: "text-ink",
+    ctaStripButton: "outline",
+    limitedSpotsButton: "acidOnDark",
+  },
+  legacy: {
+    wrapper: "gn-workshop-2026",
+    headerTone: "onDark",
+    heroSection: "bg-ink",
+    eyebrow: "text-[var(--gn-acid)]",
+    headline: "text-white",
+    highlight: "",
+    badge: "border-[var(--gn-paper)] bg-[var(--gn-pink)] text-[var(--gn-paper)]",
+    lead: "text-white/85",
+    leadLink: "hover:text-terracotta",
+    ctaButton: "gn-btn-hero",
+    ctaNote: "text-[var(--gn-pink)]",
+    infoCardEyebrow: "text-[var(--gn-acid)]",
+    infoCardTitle: "text-terracotta",
+    callout: "gn-card-on-dark border-[var(--gn-paper)] bg-[var(--gn-ink)]",
+    calloutHeading: "text-terracotta",
+    calloutBody: "text-white/85",
+    ageNote: "text-white/70",
+    ctaStrip: "bg-[var(--gn-pink)]",
+    ctaStripText: "text-[var(--gn-paper)]",
+    ctaStripButton: "outlineOnDark",
+    // Burnt orange on forest — reads fine, so this one stays as it was.
+    limitedSpotsButton: "primary",
+  },
+}
+
+// Bespoke to the jam program conversion pages — replaces the generic
+// workshop.whatToExpect bullet list, which was written in third person on a
+// page that otherwise addresses "you" throughout. Kept local rather than
+// added to the shared Workshop type since this two-panel layout isn't a
+// general-purpose content shape other workshops would reuse.
+//
+// Shared by every run of the jam program: same format, same two days, same
+// telling. A differentiated rewrite per program was written and reviewed,
+// then reverted in favour of keeping one voice across both pages.
 const twoDayBreakdown = {
   heading: "How the Two Days Work",
   panels: [
@@ -78,16 +183,18 @@ const twoDayBreakdown = {
   ],
 }
 
-// Same reasoning as twoDayBreakdown above — this FAQ set is specific to the
-// spring holidays conversion page's own objections/questions, distinct from
-// (and complementary to) the evergreen SEO page's FAQ.
-const springHolidaysFaqs: { q: string; a: string }[] = [
+// Specific to the jam program conversion pages' own objections/questions,
+// distinct from (and complementary to) the evergreen SEO page's FAQ. Shared
+// across both runs of the program, same as twoDayBreakdown above.
+type Faq = { q: string; a: string }
+
+const jamProgramFaqs: Faq[] = [
   {
     q: "Do I have to sing?",
     a: "No. Plenty of people won't. There's a whole band's worth of things to be doing, and you'll find the role that suits you.",
   },
   {
-    q: "I'm 14 — will everyone else be older and better than me?",
+    q: "I'm 13 — will everyone else be older and better than me?",
     a: "The group runs 13 to 17, with a real mix of experience. That's on purpose, not by accident. Some people will have been playing for a decade, some for a year, and it genuinely doesn't create a hierarchy — everyone's writing something new together, so nobody's ahead.",
   },
   {
@@ -116,13 +223,17 @@ const springHolidaysFaqs: { q: string; a: string }[] = [
   },
 ]
 
-// While the program is full, "What happens after I book?" is the one FAQ
-// that can't be answered honestly, so it's swapped for the question a full
-// program actually raises. The rest of the list still applies to whoever
-// comes off the waitlist.
+// "What happens after I book?" has no honest answer unless the program is
+// actually on sale, so each other state swaps in the question it raises
+// instead. The rest of the list still applies either way.
 const BOOKED_FAQ_Q = "What happens after I book?"
 
-const soldOutFaq = {
+const registerInterestFaq: Faq = {
+  q: "When will the dates be announced?",
+  a: "We're locking them in now, along with the venue. Register your interest above and you'll get an email the moment it's confirmed, with everything you need to know — before spots open to everyone else.",
+}
+
+const soldOutFaq: Faq = {
   q: "It's full — can I still get in?",
   a: "Sometimes. Cancellations do happen, and when one does we email the waitlist first. Join it above and you're in the running — and either way you'll hear about the next program before it's announced publicly.",
 }
@@ -143,7 +254,11 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   // (or being redirected to) that landing page.
   useEffect(() => {
     if (workshop) {
-      document.title = workshop.title
+      if (workshop.metaDescription) {
+        setPageMeta(workshop.title, workshop.metaDescription)
+      } else {
+        document.title = workshop.title
+      }
       setCanonical(pathname)
     }
   }, [workshop, pathname])
@@ -151,14 +266,37 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   if (!workshop) return <NotFound />
 
   const heroImage = heroImages[workshop.slug]
+  // The bespoke forest/burnt conversion layout — hero, two-day breakdown,
+  // FAQ, CTA strip — shared by every run of the two-day jam program.
+  const isJamProgram = JAM_PROGRAM_SLUGS.includes(workshop.slug)
+  // Only the 2026 spring program wears the legacy forest/burnt scheme, and
+  // only until it has run — see jamThemes above.
+  const theme = jamThemes[workshop.slug === "2026-spring-holidays" ? "legacy" : "acid"]
+  // The first run of the program: the only one that can honestly call itself
+  // that, and the only one with a Foundation Price to show.
   const isSpringHolidays = workshop.slug === "2026-spring-holidays"
-  // Present only while the workshop is full. Every Book CTA below checks
-  // this, so the page can never hand a visitor to the Stripe form once the
-  // block is set in content/workshops.ts.
+  // Present only while the workshop is full (soldOut) or not yet scheduled
+  // (registerInterest). Every Book CTA below checks these, so the page can
+  // never hand a visitor to the Stripe form once either block is set in
+  // content/workshops.ts.
   const soldOut = workshop.soldOut
-  const faqs = soldOut
-    ? springHolidaysFaqs.map((item) => (item.q === BOOKED_FAQ_Q ? soldOutFaq : item))
-    : springHolidaysFaqs
+  const registerInterest = workshop.registerInterest
+  const faqs = jamProgramFaqs.map((item) => {
+    if (item.q !== BOOKED_FAQ_Q) return item
+    if (soldOut) return soldOutFaq
+    if (registerInterest) return registerInterestFaq
+    return item
+  })
+  // Whether anything in the trailing fine-print block will actually render:
+  // on a jam program page prerequisites/scholarshipNote are suppressed (see
+  // the block itself), so checking the raw fields would leave an empty
+  // padded section on a program that carries only those two.
+  const showFinePrint = Boolean(
+    (workshop.prerequisites && !isJamProgram) ||
+      (workshop.scholarshipNote && !isJamProgram) ||
+      workshop.priceMatchNote ||
+      workshop.refundPolicy,
+  )
   const highlightsColumns =
     workshop.highlights.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
 
@@ -168,7 +306,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
   // an offer. Otherwise the static "How much" row is swapped for the
   // foundation-price display, driven by the single price constant in
   // `content/pricing.ts`.
-  const springInfoRows = soldOut
+  const jamInfoRows = soldOut
     ? workshop.infoRows.filter(
         (row) => row.label !== "How much" && row.label !== "Group size",
       )
@@ -189,14 +327,14 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
           : row,
       )
 
-  const infoRows = isSpringHolidays ? springInfoRows : workshop.infoRows
+  const infoRows = isJamProgram ? jamInfoRows : workshop.infoRows
 
   return (
-    <div className={isSpringHolidays ? "gn-workshop-2026" : undefined}>
+    <div className={isJamProgram ? theme.wrapper : undefined}>
       {/* Intro / info summary */}
-      {isSpringHolidays ? (
-        <section className="bg-ink">
-          <Header />
+      {isJamProgram ? (
+        <section className={theme.heroSection}>
+          <Header tone={theme.headerTone} />
 
           {/* Addendum 6: no photo. Solid forest (already the section bg via
               .gn-workshop-2026) behind two columns — copy/CTA left, details
@@ -205,35 +343,42 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
           <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-10 md:pt-14 md:pb-20">
             <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
               <div className="text-center md:text-left">
-                <span className="gn-eyebrow text-[var(--gn-acid)]">
+                <span className={`gn-eyebrow ${theme.eyebrow}`}>
                   {workshop.eyebrow ?? "Workshop"}
                 </span>
 
-                <h1 className="font-display mt-4 text-white leading-[0.98] text-[13vw] md:text-[clamp(2.5rem,6vw,5.5rem)]">
-                  Your <span className="gn-hl">Bandmates</span>
+                <h1
+                  className={`font-display mt-4 leading-[0.98] text-[13vw] md:text-[clamp(2.5rem,6vw,5.5rem)] ${theme.headline}`}
+                >
+                  {workshop.heroHeadline?.before}
+                  <span className={`gn-hl ${theme.highlight}`}>
+                    {workshop.heroHeadline?.highlight}
+                  </span>
                   <br />
-                  Are Waiting!
+                  {workshop.heroHeadline?.after}
                 </h1>
 
-                {soldOut && (
+                {(soldOut || registerInterest) && (
                   /* The one thing an ad click or a returning visitor needs
                      to know before anything else on the page, so it sits
                      directly under the headline at heading scale rather
                      than as an eyebrow down in the CTA stack. Filled, not
                      outlined: against the forest hero an outline reads as a
                      label, a fill reads as a stamp. */
-                  <p className="font-display mt-6 inline-block border-2 border-[var(--gn-paper)] bg-[var(--gn-pink)] px-5 py-3 text-2xl uppercase leading-none text-[var(--gn-paper)] sm:text-3xl md:text-4xl">
-                    {soldOut.badge}
+                  <p
+                    className={`font-display mt-6 inline-block border-2 px-5 py-3 text-2xl uppercase leading-none sm:text-3xl md:text-4xl ${theme.badge}`}
+                  >
+                    {(soldOut ?? registerInterest)?.badge}
                   </p>
                 )}
 
-                <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-white/85 md:mx-0 md:text-lg">
-                  Two days in North Perth jamming out an original song with a
-                  bunch of other young musos. Ages 13–17 (a little outside
-                  that?{" "}
+                <p
+                  className={`mx-auto mt-5 max-w-md text-base leading-relaxed md:mx-0 md:text-lg ${theme.lead}`}
+                >
+                  {workshop.heroLead} (a little outside that?{" "}
                   <a
                     href="mailto:dave@goodnoiseproject.com.au"
-                    className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta"
+                    className={`font-semibold underline decoration-2 underline-offset-4 ${theme.leadLink}`}
                   >
                     Flick us a message
                   </a>
@@ -246,19 +391,34 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                       {/* Plain <a>, not Link: the waitlist block is a hash
                           target on this same page. The status itself is
                           already stamped under the headline above. */}
-                      <a href="#waitlist" className="gn-btn-hero gn-btn-primary text-sm">
+                      <a href="#waitlist" className={`gn-btn-primary text-sm ${theme.ctaButton}`}>
                         Join the waitlist &rarr;
                       </a>
-                      <span className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--gn-pink)]">
+                      <span className={`font-mono text-xs font-bold uppercase tracking-[0.12em] ${theme.ctaNote}`}>
                         Cancellations happen · The list hears first
+                      </span>
+                    </>
+                  ) : registerInterest ? (
+                    <>
+                      {/* Same reasoning as the waitlist anchor above — the
+                          register-interest form is a hash target on this
+                          page, not a route. */}
+                      <a
+                        href="#register-interest"
+                        className={`gn-btn-primary text-sm ${theme.ctaButton}`}
+                      >
+                        {workshop.ctaLabel} &rarr;
+                      </a>
+                      <span className={`font-mono text-xs font-bold uppercase tracking-[0.12em] ${theme.ctaNote}`}>
+                        Small group · The list hears first
                       </span>
                     </>
                   ) : (
                     <>
-                      <Link to={workshop.ctaHref} className="gn-btn-hero gn-btn-primary text-sm">
+                      <Link to={workshop.ctaHref} className={`gn-btn-primary text-sm ${theme.ctaButton}`}>
                         {workshop.ctaLabel} &rarr;
                       </Link>
-                      <span className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[var(--gn-pink)]">
+                      <span className={`font-mono text-xs font-bold uppercase tracking-[0.12em] ${theme.ctaNote}`}>
                         12 spots only · Our first ever program
                       </span>
                     </>
@@ -267,17 +427,19 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               </div>
 
               <div>
-                <span className="gn-eyebrow mb-3 inline-block text-[var(--gn-acid)]">
-                  Our First Ever Program
-                </span>
+                {workshop.infoCardEyebrow && (
+                  <span className={`gn-eyebrow mb-3 inline-block ${theme.infoCardEyebrow}`}>
+                    {workshop.infoCardEyebrow}
+                  </span>
+                )}
                 {/* .gn-card is the one featured card on this page — restored
                     per Addendum 6. Its own padding:22px is zeroed out since
                     WorkshopInfoCard's title/rows/footer regions already carry
                     their own internal padding; stacking both looked bloated. */}
                 <WorkshopInfoCard
                   rows={infoRows}
-                  title="2026 Spring Holiday Jam Program"
-                  titleClassName="font-display text-4xl uppercase leading-[0.98] text-terracotta sm:text-5xl"
+                  title={workshop.title}
+                  titleClassName={`font-display text-4xl uppercase leading-[0.98] sm:text-5xl ${theme.infoCardTitle}`}
                   className="gn-card !p-0"
                 />
 
@@ -287,11 +449,15 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                     left by the time they reach the fine print, so this needs
                     to sit right in the decision path, not below it. */}
                 {workshop.scholarshipCallout && !soldOut && (
-                  <div className="gn-card-on-dark mt-6 border-2 border-[var(--gn-paper)] bg-[var(--gn-ink)] p-6">
-                    <p className="font-display text-2xl uppercase leading-[0.98] text-terracotta">
+                  <div className={`mt-6 border-2 p-6 ${theme.callout}`}>
+                    <p
+                      className={`font-display text-2xl uppercase leading-[0.98] ${theme.calloutHeading}`}
+                    >
                       {workshop.scholarshipCallout.heading}
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-white/85 md:text-base">
+                    <p
+                      className={`mt-3 text-sm leading-relaxed md:text-base ${theme.calloutBody}`}
+                    >
                       {linkifyEmail(workshop.scholarshipCallout.body)}
                     </p>
                   </div>
@@ -300,7 +466,9 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
             </div>
 
             {workshop.ageRangeNote && (
-              <p className="mx-auto mt-8 max-w-md text-center text-sm leading-relaxed text-white/70">
+              <p
+                className={`mx-auto mt-8 max-w-md text-center text-sm leading-relaxed ${theme.ageNote}`}
+              >
                 {linkifyEmail(workshop.ageRangeNote)}
               </p>
             )}
@@ -362,14 +530,14 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
             {workshop.introParagraphs.map((paragraph, i) => (
               <p
                 key={paragraph}
-                className={isSpringHolidays && i === 0 ? "font-bold text-ink" : undefined}
+                className={isJamProgram && i === 0 ? "font-bold text-ink" : undefined}
               >
                 {paragraph}
               </p>
             ))}
           </div>
 
-          {isSpringHolidays && (
+          {isJamProgram && (
             <div className="mt-6 max-w-2xl space-y-2 text-base leading-relaxed text-ink/80 md:text-lg">
               <p>
                 <a
@@ -394,10 +562,10 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
           the two-day breakdown panels replace the generic bullet list — it's
           this page's heaviest-selling section, so it gets its own layout
           rather than the shared third-person "What to Expect" copy. */}
-      {(workshop.whatToExpect || isSpringHolidays || workshop.whatToBring) && (
+      {(workshop.whatToExpect || isJamProgram || workshop.whatToBring) && (
         <section className="bg-cream">
           <div className="mx-auto flex max-w-[1400px] flex-col gap-14 px-5 pb-16 md:px-10 md:pb-24">
-            {isSpringHolidays ? (
+            {isJamProgram ? (
               <div>
                 <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
                   {twoDayBreakdown.heading}
@@ -535,12 +703,19 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
             )}
             <div className="mt-8 flex flex-col items-center gap-3">
               {soldOut ? (
-                <PillButton href="#waitlist" variant="primary">
+                <PillButton href="#waitlist" variant={theme.limitedSpotsButton}>
                   Join the waitlist
+                </PillButton>
+              ) : registerInterest ? (
+                <PillButton
+                  href="#register-interest"
+                  variant={theme.limitedSpotsButton}
+                >
+                  {workshop.ctaLabel}
                 </PillButton>
               ) : (
                 <>
-                  <PillButton href={workshop.ctaHref} variant="primary">
+                  <PillButton href={workshop.ctaHref} variant={theme.limitedSpotsButton}>
                     {workshop.ctaLabel}
                   </PillButton>
                   {/* Refund terms only matter to someone who can still book —
@@ -571,7 +746,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
           orange (not the surrounding bg-ink/forest) so it reads as its own
           distinct strip rather than blurring into "Kept Small On Purpose"
           above it. Bold + paper text for contrast against that fill. */}
-      {workshop.slug === "2026-spring-holidays" &&
+      {isJamProgram &&
         (soldOut ? (
           /* Replaces the "Can't make these dates?" strip while the program
              is full — same strip, same audience, but the ask is now the only
@@ -580,7 +755,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
              because --gn-pink and --color-terracotta both resolve to burnt
              orange on this route: SubscribeForm's burnt submit button would
              disappear into the strip's own fill. */
-          <section id="waitlist" className="scroll-mt-20 bg-[var(--gn-pink)]">
+          <section id="waitlist" className={`scroll-mt-20 ${theme.ctaStrip}`}>
             <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
               <div className="gn-card-flat mx-auto max-w-xl text-center">
                 <span className="gn-eyebrow text-terracotta">{soldOut.badge}</span>
@@ -610,14 +785,52 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               </div>
             </div>
           </section>
+        ) : registerInterest ? (
+          /* Same strip and same card as the waitlist block above — the ask
+             is just earlier in the program's life. Nothing here can be
+             booked yet, so this form is the page's only conversion. */
+          <section id="register-interest" className={`scroll-mt-20 ${theme.ctaStrip}`}>
+            <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-20">
+              <div className="gn-card-flat mx-auto max-w-xl text-center">
+                <span className="gn-eyebrow text-terracotta">
+                  {registerInterest.badge}
+                </span>
+                <h2 className="font-display mt-4 text-3xl uppercase leading-[0.98] text-ink sm:text-4xl">
+                  {registerInterest.heading}
+                </h2>
+                <p className="mt-4 text-base leading-relaxed text-ink/80">
+                  {registerInterest.body}
+                </p>
+
+                <SubscribeForm
+                  source={registerInterest.subscribeSource}
+                  variant="card"
+                  submitLabel={workshop.ctaLabel}
+                  className="mx-auto mt-7 w-full max-w-md text-left"
+                />
+
+                <p className="mt-5 text-sm leading-relaxed text-ink/70">
+                  No spam, unsubscribe any time.{" "}
+                  <Link
+                    to="/stay-in-touch"
+                    className="font-semibold text-terracotta underline decoration-2 underline-offset-4 hover:text-ink"
+                  >
+                    More about staying in touch &rarr;
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </section>
         ) : (
-          <section className="bg-[var(--gn-pink)]">
+          <section className={theme.ctaStrip}>
             <div className="mx-auto max-w-[1400px] px-5 py-12 text-center md:px-10 md:py-16">
-              <p className="mx-auto max-w-md text-base font-bold leading-relaxed text-[var(--gn-paper)] md:text-lg">
+              <p
+                className={`mx-auto max-w-md text-base font-bold leading-relaxed md:text-lg ${theme.ctaStripText}`}
+              >
                 Can't make these dates?
               </p>
               <div className="mt-5">
-                <PillButton href="/stay-in-touch" variant="outlineOnDark">
+                <PillButton href="/stay-in-touch" variant={theme.ctaStripButton}>
                   Get notified about future workshops
                 </PillButton>
               </div>
@@ -655,9 +868,9 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
       <section id="facilitator" className="bg-cream">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
           <PhotoImage
-            src={isSpringHolidays ? facilitatorRedJumperPhoto : facilitatorPhoto}
+            src={isJamProgram ? facilitatorRedJumperPhoto : facilitatorPhoto}
             alt={
-              isSpringHolidays
+              isJamProgram
                 ? "Dave Sonntag, facilitator of the Good Noise Project school holiday jam program in Perth"
                 : "Dave Sonntag playing acoustic guitar and singing into a microphone outdoors"
             }
@@ -668,7 +881,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
             <h2 className="font-display text-4xl leading-[0.98] text-ink sm:text-5xl">
               {workshop.facilitatorHeading}
             </h2>
-            {isSpringHolidays ? (
+            {isJamProgram ? (
               <div className="mt-6 max-w-md space-y-4 text-base leading-relaxed text-ink/80 md:text-lg">
                 <p>
                   Dave Sonntag — a drummer of thirty years, a self-taught
@@ -704,11 +917,11 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
         </div>
       </section>
 
-      {/* FAQ — spring holidays conversion page only. Sits after the
+      {/* FAQ — jam program conversion pages only. Sits after the
           facilitators (who's running it) and before the fine-print/refund
           table below, answering the objections most likely to be stopping
           someone from booking right now. */}
-      {isSpringHolidays && (
+      {isJamProgram && (
         <section id="faq" className="scroll-mt-20 bg-cream">
           <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
             <h2 className="font-display max-w-2xl text-4xl leading-[0.98] text-ink sm:text-5xl">
@@ -731,25 +944,22 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
       )}
 
       {/* Prerequisites, scholarship, refund policy — each renders only if present.
-          On the spring holidays page, prerequisites/scholarshipNote are
+          On the jam program pages, prerequisites/scholarshipNote are
           deliberately suppressed here — that content now lives in the FAQ
           above (and the "Cost shouldn't decide this" callout in the hero
           already covers scholarships), so this block would otherwise repeat
           itself. The underlying workshop data is left untouched since the
           evergreen SEO page reads the same fields for its own FAQ. */}
-      {(workshop.prerequisites ||
-        workshop.scholarshipNote ||
-        workshop.priceMatchNote ||
-        workshop.refundPolicy) && (
+      {showFinePrint && (
         <section className="bg-cream">
           <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
-            {workshop.prerequisites && !isSpringHolidays && (
+            {workshop.prerequisites && !isJamProgram && (
               <p className="max-w-2xl text-base leading-relaxed text-ink/80 md:text-lg">
                 {workshop.prerequisites}
               </p>
             )}
 
-            {workshop.scholarshipNote && !isSpringHolidays && (
+            {workshop.scholarshipNote && !isJamProgram && (
               <div className="mt-8 max-w-2xl border-2 border-terracotta bg-terracotta/10 p-6">
                 <p className="text-sm italic leading-relaxed text-ink/85 md:text-base">
                   {linkifyEmail(workshop.scholarshipNote)}

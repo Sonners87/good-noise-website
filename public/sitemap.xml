@@ -21,6 +21,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://goodnoiseproject.com.au/workshops/christmas-holidays-jam-program</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://goodnoiseproject.com.au/for-schools</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

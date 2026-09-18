@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import PageHero from "../components/PageHero"
 import Footer from "../components/Footer"
 import WorkshopCard from "../components/WorkshopCard"
-import { workshops, workshopWhoFor } from "../content/workshops"
+import { workshops, upcomingWorkshopSlugs, workshopWhoFor } from "../content/workshops"
 import { workshopCardPhotos } from "../content/workshopCardPhotos"
 import { SHOW_OCT_2026_CAMP } from "../content/featureFlags"
 
@@ -29,7 +29,12 @@ export default function Workshops() {
     document.title = "Workshops — Good Noise Project"
   }, [])
 
-  const musicMakersSpring = workshops["2026-spring-holidays"]
+  // Same list the homepage's "What's coming up" section renders, so the two
+  // can't fall out of step. A slug gated off by a feature flag drops out of
+  // `workshops` and filters itself out here.
+  const upcoming = upcomingWorkshopSlugs
+    .map((slug) => ({ workshop: workshops[slug], photo: workshopCardPhotos[slug] }))
+    .filter((entry) => entry.workshop && entry.photo)
   const songwritingOct = SHOW_OCT_2026_CAMP ? workshops["songwriting-oct-2026"] : undefined
 
   return (
@@ -61,16 +66,19 @@ export default function Workshops() {
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <WorkshopCard
-              status="live"
-              href={`/workshops/${musicMakersSpring.slug}`}
-              title={musicMakersSpring.title}
-              blurb={musicMakersSpring.teaser}
-              whoFor={workshopWhoFor(musicMakersSpring.slug)}
-              photoSrc={workshopCardPhotos[musicMakersSpring.slug].src}
-              photoAlt={workshopCardPhotos[musicMakersSpring.slug].alt}
-              photoObjectPosition={workshopCardPhotos[musicMakersSpring.slug].objectPosition}
-            />
+            {upcoming.map(({ workshop, photo }) => (
+              <WorkshopCard
+                key={workshop.slug}
+                status="live"
+                href={`/workshops/${workshop.slug}`}
+                title={workshop.title}
+                blurb={workshop.teaser}
+                whoFor={workshopWhoFor(workshop.slug)}
+                photoSrc={photo.src}
+                photoAlt={photo.alt}
+                photoObjectPosition={photo.objectPosition}
+              />
+            ))}
 
             {songwritingOct && (
               <WorkshopCard

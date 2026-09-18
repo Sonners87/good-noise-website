@@ -4,7 +4,6 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import PhotoImage from "../components/PhotoImage"
 import WhyWeExist from "../components/WhyWeExist"
-import SpringHolidayJamPopup from "../components/SpringHolidayJamPopup"
 import laughingGirlPhoto from "../assets/images/laughing-girl.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave-red-jumper.webp"
 
@@ -172,7 +171,6 @@ export default function ForParents() {
       </section>
 
       <Footer />
-      <SpringHolidayJamPopup />
     </>
   )
 }

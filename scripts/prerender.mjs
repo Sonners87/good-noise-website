@@ -28,6 +28,7 @@ const ROUTES = [
   "/",
   "/workshops",
   "/workshops/2026-spring-holidays",
+  "/workshops/christmas-holidays-jam-program",
   "/for-schools",
   "/book-2026-spring-holidays",
   "/school-holiday-music-camp-perth",

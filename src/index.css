@@ -154,6 +154,47 @@ h2.font-display {
 }
 
 /*
+  ORANGE HERO — participant/workshop pages.
+
+  The audience suite is: ink (black) for the homepage and For Schools,
+  --gn-pink (blue) for For Parents, --gn-acid (orange) for participant-facing
+  workshop pages. Nothing new is introduced — it's which existing token owns
+  which audience.
+
+  On an --gn-acid background every Volume 1 hero device disappears, because
+  they're all built out of acid themselves: .gn-hl's block fill IS acid, and
+  so is .gn-btn-primary's, whose --gn-pink shadow then reads as a third
+  colour nobody asked for. Ink and paper are also the only pair that clears
+  WCAG AA against #FF4A00 at body size (ink/acid ~6.4:1; white/acid ~3.0:1
+  fails), so paper text goes on ink fills here, never straight onto orange.
+
+  Both are add-on classes — apply alongside .gn-hl / .gn-btn-primary, which
+  keep supplying the padding, tilt and type treatment. They win on source
+  order (gn-tokens.css is @imported at the top of this file), not weight.
+*/
+.gn-hl-on-acid {
+  background: var(--gn-ink);
+  color: var(--gn-paper);
+}
+
+/*
+  .gn-nav-link's hover colour is --gn-acid, which is the background itself on
+  an orange hero — hovering would make the link vanish. Scoped to the nav
+  container so one class on <nav> covers every link inside it.
+*/
+.gn-nav-on-acid .gn-nav-link:hover,
+.gn-nav-on-acid .gn-nav-link:focus-visible {
+  color: var(--gn-paper);
+}
+
+.gn-btn-on-acid {
+  background: var(--gn-ink);
+  color: var(--gn-paper);
+  border-color: var(--gn-paper);
+  box-shadow: 5px 5px 0 0 var(--gn-paper);
+}
+
+/*
   Addendum 2 bug fix: .gn-btn-secondary in the token spec never sets
   `display`, unlike .gn-btn-primary (which is display:inline-block). As an
   <a>, that means it defaults to inline — its vertical padding then bleeds

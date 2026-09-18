@@ -13,9 +13,9 @@ import { hasCheckoutStarted } from "../lib/bookingIntent"
 // form page; hasCheckoutStarted() covers the visitor who books and then
 // navigates back here.
 
-// localStorage (not sessionStorage, unlike SpringHolidayJamPopup): this is a
-// "once per visitor per device" ask, not a "once per visit" one. Someone who
-// dismissed it or handed over an email should not be asked again tomorrow.
+// localStorage: this is a "once per visitor per device" ask, not a "once per
+// visit" one. Someone who dismissed it or handed over an email should not be
+// asked again tomorrow.
 const DISMISSED_KEY = "gn-workshop-loop-popup-dismissed"
 const SUBSCRIBED_KEY = "gn-workshop-loop-popup-subscribed"
 
