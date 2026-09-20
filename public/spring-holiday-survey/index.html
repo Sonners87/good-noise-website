@@ -601,7 +601,19 @@ button[type="submit"]:disabled{opacity:.65;cursor:progress}
 
       <!-- 5 -->
       <fieldset class="q">
-        <legend><span class="q-num">5</span>What&rsquo;s the funnest thing about music for you?</legend>
+        <legend><span class="q-num">5</span>If someone said &ldquo;let&rsquo;s play this in G&rdquo;, what would happen?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="playInG" value="I'd know what to play" id="ing-1"><span>I&rsquo;d know what to play</span></label>
+          <label class="opt"><input type="radio" name="playInG" value="I'd work it out pretty quickly" id="ing-2"><span>I&rsquo;d work it out pretty quickly</span></label>
+          <label class="opt"><input type="radio" name="playInG" value="I'd need someone to show me" id="ing-3"><span>I&rsquo;d need someone to show me</span></label>
+          <label class="opt"><input type="radio" name="playInG" value="No idea, but I'm keen to find out" id="ing-4"><span>No idea, but I&rsquo;m keen to find out</span></label>
+          <label class="opt"><input type="radio" name="playInG" value="I play drums, so I'd just count us in" id="ing-5"><span>I play drums, so I&rsquo;d just count us in</span></label>
+        </div>
+      </fieldset>
+
+      <!-- 6 -->
+      <fieldset class="q">
+        <legend><span class="q-num">6</span>What&rsquo;s the funnest thing about music for you?</legend>
         <p class="opt-note">Pick as many as you like</p>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="funnest" value="Learning new songs" id="fun-1"><span>Learning new songs</span></label>
@@ -618,9 +630,9 @@ button[type="submit"]:disabled{opacity:.65;cursor:progress}
         </div>
       </fieldset>
 
-      <!-- 6 -->
+      <!-- 7 -->
       <fieldset class="q">
-        <legend><span class="q-num">6</span>What&rsquo;s the hardest part of music for you at the moment?</legend>
+        <legend><span class="q-num">7</span>What&rsquo;s the hardest part of music for you at the moment?</legend>
         <p class="opt-note">Pick as many as you like</p>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="hardest" value="Playing in front of people" id="hard-1"><span>Playing in front of people</span></label>
@@ -637,9 +649,9 @@ button[type="submit"]:disabled{opacity:.65;cursor:progress}
         </div>
       </fieldset>
 
-      <!-- 7 -->
+      <!-- 8 -->
       <fieldset class="q">
-        <legend><span class="q-num">7</span>What would make these two days awesome for you?</legend>
+        <legend><span class="q-num">8</span>What would make these two days awesome for you?</legend>
         <p class="opt-note">Pick as many as you like</p>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="awesome" value="New songwriting skills" id="awe-1"><span>New songwriting skills</span></label>
@@ -656,9 +668,9 @@ button[type="submit"]:disabled{opacity:.65;cursor:progress}
         </div>
       </fieldset>
 
-      <!-- 8 -->
+      <!-- 9 -->
       <fieldset class="q">
-        <legend><span class="q-num">8</span>What made you sign up to this program?</legend>
+        <legend><span class="q-num">9</span>What made you sign up to this program?</legend>
         <p class="opt-note">Pick as many as you like</p>
         <div class="opts">
           <label class="opt"><input type="checkbox" name="whySignedUp" value="Meeting new people" id="why-1"><span>Meeting new people</span></label>
@@ -674,9 +686,9 @@ button[type="submit"]:disabled{opacity:.65;cursor:progress}
         </div>
       </fieldset>
 
-      <!-- 9 -->
+      <!-- 10 -->
       <fieldset class="q">
-        <legend><span class="q-num">9</span>When you&rsquo;re with people you don&rsquo;t know yet, are you usually&hellip;</legend>
+        <legend><span class="q-num">10</span>When you&rsquo;re with people you don&rsquo;t know yet, are you usually&hellip;</legend>
         <div class="opts">
           <label class="opt"><input type="radio" name="meetingPeople" value="First one to speak" id="meet-1"><span>First one to speak</span></label>
           <label class="opt"><input type="radio" name="meetingPeople" value="Fine once things get moving" id="meet-2"><span>Fine once things get moving</span></label>
@@ -687,9 +699,9 @@ button[type="submit"]:disabled{opacity:.65;cursor:progress}
         </div>
       </fieldset>
 
-      <!-- 10 -->
+      <!-- 11 -->
       <div class="q">
-        <label class="q-label" for="anythingElse"><span class="q-num">10</span>Anything I should know about you before the program? <span class="soft">(optional)</span></label>
+        <label class="q-label" for="anythingElse"><span class="q-num">11</span>Anything I should know about you before the program? <span class="soft">(optional)</span></label>
         <div class="field">
           <textarea id="anythingElse" name="anythingElse" rows="5"></textarea>
         </div>
@@ -828,6 +840,7 @@ button[type="submit"]:disabled{opacity:.65;cursor:progress}
       lastName: text("lastName"),
       bringOwnInstrument: text("bringOwnInstrument"),
       songOnRepeat: text("songOnRepeat"),
+      playInG: text("playInG"),
       funnest: joined("funnest"),
       funnestOther: text("funnestOther"),
       hardest: joined("hardest"),
