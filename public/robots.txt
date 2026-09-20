@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /musician-intake
+Disallow: /spring-holiday-survey
 
 Sitemap: https://goodnoiseproject.com.au/sitemap.xml
