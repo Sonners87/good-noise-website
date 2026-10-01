@@ -1,0 +1,5 @@
+# Force the end-of-program song to download rather than open in the
+# browser's media player (the link's download attribute covers most
+# browsers; this covers the rest).
+/audio/then-and-now.mp3
+  Content-Disposition: attachment; filename="Then and Now.mp3"

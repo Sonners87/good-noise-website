@@ -49,3 +49,6 @@ dist-ssr
 # Flyer generator — same pattern, keep source, ignore rendered output.
 /social/flyer/output/
 /social/flyer/.build-tmp/
+
+# Raw audio bounces — only the compressed copies in /public/audio/ ship.
+/SPRING SONG/
