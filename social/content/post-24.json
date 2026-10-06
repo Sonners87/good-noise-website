@@ -1,0 +1,17 @@
+{
+  "id": "24",
+  "name": "full-house",
+  "slides": [
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "heroLogo": true,
+      "eyebrow": "2026 SPRING HOLIDAYS JAM PROGRAM",
+      "headline": "THAT'S A [[FULL HOUSE]].",
+      "body": "Our first ever program — completely booked.",
+      "ctaMeta": "30 SEP–1 OCT | NORTH PERTH",
+      "cta": null
+    }
+  ]
+}

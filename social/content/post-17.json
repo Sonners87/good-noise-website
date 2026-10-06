@@ -1,0 +1,45 @@
+{
+  "id": "17",
+  "name": "trick-03-cut-up-the-words",
+  "slides": [
+    {
+      "template": "T3",
+      "ground": "ink",
+      "number": "03",
+      "eyebrow": "SONGWRITING TRICKS YOU CAN ACTUALLY USE",
+      "headline": "[[CUT UP]] THE WORDS."
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "WAITING FOR A [[DEEP]] LYRIC?",
+      "body": "You'll be waiting all day. Staring at a blank page is the slowest way to write anything.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SO [[CHOP]] SOMETHING UP.",
+      "body": "Grab any words you've got — a news story, your group chat, the back of a cereal box. Cut them into strips. Shuffle them. Sing whatever lands.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "RANDOM BEATS [[CLEVER]].",
+      "body": "Two lines that were never meant to meet will say something you'd never have written on purpose.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "orange",
+      "eyebrow": "TRUE STORY",
+      "headline": "[[BOWIE]] WROTE WITH SCISSORS.",
+      "body": "He cut newspapers into strips, shuffled the pieces and sang what came out. He kept doing it for decades.",
+      "cta": null
+    }
+  ]
+}

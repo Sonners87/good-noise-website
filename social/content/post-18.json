@@ -1,0 +1,45 @@
+{
+  "id": "18",
+  "name": "trick-04-play-it-at-the-wrong-speed",
+  "slides": [
+    {
+      "template": "T3",
+      "ground": "ink",
+      "number": "04",
+      "eyebrow": "SONGWRITING TRICKS YOU CAN ACTUALLY USE",
+      "headline": "PLAY IT AT THE [[WRONG SPEED]]."
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "YOUR TEMPO IS AN [[ACCIDENT]].",
+      "body": "The speed you landed on is usually just the speed you could play it at first go. That's not a decision.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SO [[BREAK]] IT.",
+      "body": "Same chords, same melody — now take it double time. Then half. Play it stupidly fast and painfully slow.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SPEED IS THE WHOLE [[MOOD]].",
+      "body": "One song at three tempos is three different songs. Yours might have been hiding at another speed the whole time.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "orange",
+      "eyebrow": "TRUE STORY",
+      "headline": "\"PLEASE PLEASE ME\" WAS A [[BALLAD]].",
+      "body": "The Beatles brought it in slow and dreary. George Martin told them to speed it up. When they nailed the faster take he leaned into the intercom: \"Gentlemen, you've just made your first number one.\"",
+      "cta": null
+    }
+  ]
+}

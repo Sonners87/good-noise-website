@@ -1,0 +1,19 @@
+{
+  "id": "23",
+  "name": "seventy-five-percent-full-v5-now-playing",
+  "slides": [
+    {
+      "template": "T9",
+      "ground": "orange",
+      "palette": "forest",
+      "context": "SPRING HOLIDAYS JAM PROGRAM",
+      "artKicker": "WE'RE",
+      "artStat": "75%",
+      "artStatLabel": "FULL.",
+      "trackTitle": "Get In Quick",
+      "trackArtist": "A Few Spots Left",
+      "fillPercent": 75,
+      "liked": true
+    }
+  ]
+}

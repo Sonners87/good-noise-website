@@ -123,6 +123,23 @@ body {
   color: var(--accent);
 }
 
+/* Optional detail line sitting directly above the CTA (T1's "ctaMeta").
+   Same face and size as the CTA so the two read as one block — only the
+   colour differs, holding the accent for the CTA itself. */
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cta-meta {
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
 /* ---- T1 — STATEMENT ---- */
 .t1 .safe {
   justify-content: flex-start;
@@ -139,7 +156,7 @@ body {
 .t1 .body-text {
   max-width: 900px;
 }
-.t1 .cta-line {
+.t1 .cta-group {
   margin-top: auto;
 }
 
@@ -479,4 +496,284 @@ body {
   font-weight: 400;
   opacity: 0.8;
   line-height: 1.5;
+}
+
+/* ---- T7 — FILL METER ----
+   Capacity poster. The stat + bar carry the message, so this deliberately
+   drops T1's headline/highlight rhythm: no .hl slab, standard bottom logo
+   lockup, and a solid fill bar instead. Everything resolves through --fg
+   so it repaints with the ground/palette like every other template. */
+.t7 .safe {
+  justify-content: flex-start;
+  gap: 40px;
+}
+.t7 .meter-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.stat {
+  font-family: var(--gn-font-display);
+  font-size: 320px;
+  line-height: 0.8;
+  color: var(--fg);
+}
+/* A slabbed stat needs a taller line box than a bare one: .hl draws the
+   line box, and the stat's tight 0.8 line-height is shorter than Anton's
+   digits, so they bleed past the slab and vanish against the ground. 1.0
+   gives the same hug the headline highlights have. */
+.stat-hl {
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  font-size: 130px;
+  line-height: 0.9;
+  color: var(--fg);
+}
+.meter {
+  height: 56px;
+  border: var(--gn-border) solid var(--fg);
+}
+.meter-fill {
+  height: 100%;
+  background: var(--fg);
+}
+.meter-note {
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+.t7 .cta-group {
+  margin-top: auto;
+  margin-bottom: 24px;
+}
+
+/* ---- T8 — DIAGONAL ----
+   The type layer sits behind everything, centred and rotated, clipped by the
+   slide so the letters run off all four edges. Overlaid copy switches to
+   paper cream (not --fg) because it crosses both the display type and the
+   bare ground — cream is the one value that holds on both. */
+.t8 .diag-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.diag-text {
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 400px;
+  line-height: 0.8;
+  color: var(--fg);
+  transform: rotate(-38deg);
+}
+.t8 .safe {
+  justify-content: flex-end;
+  gap: 44px;
+}
+.t8 .body-text {
+  font-weight: 500;
+  color: var(--gn-paper);
+}
+.t8 .cta-meta,
+.t8 .cta-line {
+  color: var(--gn-paper);
+}
+.t8 .cta-group {
+  margin-bottom: 24px;
+}
+
+/* ---- T9 — NOW PLAYING ----
+   Player-screen pastiche. Ignores .safe entirely: this layout needs its own
+   padding and no bottom logo zone, since the wordmark lives inside the
+   album art instead. Square corners still hold everywhere except the play
+   disc and the liked tick, which are circles by the same licence the
+   AGES badge uses. */
+.t9 .np {
+  position: absolute;
+  inset: 0;
+  padding: 52px 76px 44px;
+  display: flex;
+  flex-direction: column;
+  color: var(--fg);
+}
+.np-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.np-header .np-ico:last-child {
+  justify-self: end;
+}
+.np-ico {
+  width: 44px;
+  height: 44px;
+  color: var(--fg);
+}
+.np-context {
+  font-family: var(--gn-font-util);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Album art — the post-12 lockup: cream wordmark over the program name in
+   the ground colour, on a forest field. */
+.np-art {
+  /* Sized from the height budget, not the container width: at 100% width the
+     square is 928px tall and pushes the transport row off the canvas. */
+  width: 700px;
+  height: 700px;
+  align-self: center;
+  background: var(--fg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 54px 40px 46px;
+  flex: none;
+}
+.np-art-logo {
+  height: 92px;
+  width: auto;
+  flex: none;
+}
+/* Stat lockup centres in the space left below the logo, which keeps the
+   wordmark in the art's top third. */
+.np-art-stat {
+  margin: auto 0;
+  text-align: center;
+}
+.np-art-kicker {
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  font-size: 84px;
+  line-height: 1;
+  color: var(--bg);
+}
+.np-art-num {
+  font-family: var(--gn-font-display);
+  font-size: 230px;
+  line-height: 1;
+}
+.np-art-label {
+  font-family: var(--gn-font-display);
+  text-transform: uppercase;
+  font-size: 100px;
+  line-height: 1;
+  color: var(--bg);
+  margin-top: 6px;
+}
+
+/* Inverted highlight slab. .hl paints an accent block on the ground colour,
+   but inside the album art the field is already --fg, so the slab and its
+   text swap roles. Same tilt and padding as .hl — only the fill flips. */
+.hl-art {
+  display: inline-block;
+  background: var(--bg);
+  color: var(--fg);
+  padding: 0 0.12em;
+  line-height: 1;
+  transform: rotate(var(--gn-tilt));
+}
+
+.np-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 40px;
+}
+.np-title {
+  font-family: var(--gn-font-display);
+  font-size: 78px;
+  line-height: 1;
+}
+.np-artist {
+  font-family: var(--gn-font-body);
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1.2;
+  margin-top: 10px;
+  opacity: 0.72;
+}
+.np-liked {
+  width: 66px;
+  height: 66px;
+  flex: none;
+  color: var(--fg);
+}
+.np-liked-tick {
+  stroke: var(--bg);
+}
+
+/* Progress — the whole point of the post: the bar is the capacity. */
+.np-bar {
+  position: relative;
+  height: 10px;
+  margin-top: 44px;
+}
+.np-track {
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  opacity: 0.28;
+}
+.np-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--fg);
+}
+.np-knob {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--fg);
+  transform: translate(-50%, -50%);
+}
+/* Reserved, deliberately empty — the elapsed/remaining figures are blank. */
+.np-times {
+  height: 34px;
+}
+
+.np-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26px;
+}
+.np-ctl {
+  width: 62px;
+  height: 62px;
+  color: var(--fg);
+}
+.np-play {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.np-play svg {
+  width: 68px;
+  height: 68px;
+  color: var(--bg);
+  margin-left: 6px;
 }

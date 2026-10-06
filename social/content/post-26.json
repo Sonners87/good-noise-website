@@ -1,0 +1,18 @@
+{
+  "id": "26",
+  "name": "one-hundred-percent-full",
+  "slides": [
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "heroLogo": true,
+      "eyebrow": "2026 SPRING HOLIDAYS JAM PROGRAM",
+      "headline": "[[100%]] FULL.",
+      "headlineMax": 176,
+      "body": "Our first ever program. Every spot gone.",
+      "ctaMeta": "30 SEP–1 OCT | NORTH PERTH",
+      "cta": null
+    }
+  ]
+}

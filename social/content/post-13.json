@@ -1,0 +1,16 @@
+{
+  "id": "13",
+  "name": "less-than-3-weeks-to-go",
+  "slides": [
+    {
+      "template": "T1",
+      "ground": "ink",
+      "palette": "forest",
+      "heroLogo": true,
+      "eyebrow": "2026 SPRING HOLIDAY JAM",
+      "headline": "LESS THAN [[3 WEEKS]] TO GO.",
+      "body": "Grab your spot for our school holiday jam program.",
+      "cta": "TICKETS VIA LINK IN BIO"
+    }
+  ]
+}

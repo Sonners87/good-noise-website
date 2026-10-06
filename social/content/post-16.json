@@ -1,0 +1,45 @@
+{
+  "id": "16",
+  "name": "trick-02-hit-record-first",
+  "slides": [
+    {
+      "template": "T3",
+      "ground": "ink",
+      "number": "02",
+      "eyebrow": "SONGWRITING TRICKS YOU CAN ACTUALLY USE",
+      "headline": "HIT [[RECORD]] FIRST."
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "YOU WON'T [[REMEMBER]] IT.",
+      "body": "Every muso swears they'll remember that riff tomorrow. Nobody ever does. The good ones vanish fastest.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "SO LEAVE IT [[RUNNING]].",
+      "body": "Voice memo on before you start playing. Not once it sounds good — before. Let it catch the mess.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "ink",
+      "eyebrow": null,
+      "headline": "THE [[MESS]] IS THE GOLD.",
+      "body": "Half your best ideas happen while you're warming up and not really trying. Only the tape notices.",
+      "cta": null
+    },
+    {
+      "template": "T1",
+      "ground": "orange",
+      "eyebrow": "TRUE STORY",
+      "headline": "\"[[SATISFACTION]]\" WAS A 3AM VOICE MEMO.",
+      "body": "Keith Richards woke up, played the riff into a bedside cassette and fell straight back asleep. The tape: a couple of minutes of riff, then the rest of it snoring.",
+      "cta": null
+    }
+  ]
+}

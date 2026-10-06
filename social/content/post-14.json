@@ -1,0 +1,22 @@
+{
+  "id": "14",
+  "name": "less-than-3-weeks-to-go-poster",
+  "slides": [
+    {
+      "template": "T6",
+      "ground": "ink",
+      "palette": "forest",
+      "kicker": "SCHOOL HOLIDAY JAM PROGRAM",
+      "datesLine": "WED 30 SEP – THU 1 OCT 2026",
+      "locationLine": "NORTH PERTH",
+      "ageLabel": "AGES",
+      "ageValue": "14–17",
+      "headline": "LESS THAN [[3 WEEKS]] TO GO.",
+      "badge": "FOUNDATION PRICE",
+      "price": "$80",
+      "priceNote": "FOR BOTH DAYS",
+      "cta": "TICKETS VIA LINK IN BIO",
+      "footnote": "Grab your spot — limited places.\nCost a barrier? Ask about a no-questions-asked scholarship place."
+    }
+  ]
+}
