@@ -2,7 +2,7 @@
 // each workshop's own detail page both read from here — add a new object to
 // `workshops` for a new workshop rather than hardcoding copy into a page.
 
-import { SHOW_OCT_2026_CAMP } from "./featureFlags"
+import { SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "./featureFlags"
 
 export type WorkshopInfoRow = { label: string; value: string }
 export type WorkshopHighlight = { title?: string; body: string }
@@ -395,18 +395,23 @@ const allWorkshops: Record<string, Workshop> = {
   },
 }
 
-// The October 2026 camp is paused (see SHOW_OCT_2026_CAMP) — filtered out of
-// the exported map so its detail page (looked up by slug) 404s via the
-// normal "unknown workshop" path, without deleting its content above.
-export const workshops: Record<string, Workshop> = SHOW_OCT_2026_CAMP
-  ? allWorkshops
-  : Object.fromEntries(
-      Object.entries(allWorkshops).filter(([slug]) => slug !== "songwriting-oct-2026"),
-    )
+// Paused programs (see SHOW_OCT_2026_CAMP and SHOW_SPRING_2026_PROGRAM) are
+// filtered out of the exported map so their detail pages (looked up by slug)
+// 404 via the normal "unknown workshop" path, and any card reading this map
+// drops them — without deleting their content above.
+const hiddenSlugs = [
+  ...(SHOW_OCT_2026_CAMP ? [] : ["songwriting-oct-2026"]),
+  ...(SHOW_SPRING_2026_PROGRAM ? [] : ["2026-spring-holidays"]),
+]
+export const workshops: Record<string, Workshop> = Object.fromEntries(
+  Object.entries(allWorkshops).filter(([slug]) => !hiddenSlugs.includes(slug)),
+)
 
 // Used by the header's single "Our next workshop" CTA — the chronologically
 // nearest camp.
-export const upcomingWorkshopSlug = "2026-spring-holidays"
+export const upcomingWorkshopSlug = SHOW_SPRING_2026_PROGRAM
+  ? "2026-spring-holidays"
+  : "christmas-holidays-jam-program"
 
 // Every program currently open for booking or registration, soonest first.
 // Read by the homepage "What's Coming Up" section and the Workshops pillar

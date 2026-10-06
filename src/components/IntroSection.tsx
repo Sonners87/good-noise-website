@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { SHOW_SPRING_2026_PROGRAM } from "../content/featureFlags"
 
 export default function IntroSection() {
   return (
@@ -28,6 +29,7 @@ export default function IntroSection() {
             something genuinely therapeutic in what happens here, we're not
             a professional therapy practice.
           </p>
+          {SHOW_SPRING_2026_PROGRAM && (
           <p>
             Our next one is a{" "}
             <Link
@@ -39,6 +41,7 @@ export default function IntroSection() {
             in North Perth this Spring — two days of writing, jamming and
             performing an original song together.
           </p>
+          )}
         </div>
       </div>
     </section>

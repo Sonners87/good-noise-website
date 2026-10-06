@@ -4,7 +4,7 @@
 // and the homepage "What's coming up" teaser render the exact same card.
 import jamInstrumentsPhoto from "../assets/images/workshop-jam-instruments.jpg"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
-import bandTrioPhoto from "../assets/images/workshop-band-trio.webp"
+import jamRoomVocalistPhoto from "../assets/images/workshop-jam-room-vocalist.webp"
 
 export const workshopCardPhotos: Record<
   string,
@@ -19,9 +19,9 @@ export const workshopCardPhotos: Record<
   // share a format and most of their copy, so the cards shouldn't also look
   // like the same listing posted twice.
   "christmas-holidays-jam-program": {
-    src: bandTrioPhoto,
-    alt: "Three young musicians performing together — acoustic guitar, electric guitar and vocals",
-    objectPosition: "center 40%",
+    src: jamRoomVocalistPhoto,
+    alt: "A group of teenage musicians smiling in a jam room — a vocalist holding a microphone in front, two saxophonists behind",
+    objectPosition: "center 30%",
   },
   "songwriting-oct-2026": {
     src: bandPracticePhoto,

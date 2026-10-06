@@ -13,7 +13,7 @@ export default function Book() {
   // all point at its waitlist instead — but the route stays live for anyone
   // arriving from an old ad, email or bookmark, so it has to answer for
   // itself rather than show a working checkout form.
-  const soldOut = workshops["2026-spring-holidays"].soldOut
+  const soldOut = workshops["2026-spring-holidays"]?.soldOut
 
   useEffect(() => {
     document.title = soldOut

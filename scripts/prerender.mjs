@@ -22,17 +22,14 @@ const distDir = path.join(__dirname, "..", "dist")
 const PORT = 4173
 
 // Every real, indexable route. Excludes: the wildcard 404, /admin/* (internal
-// tool, not for search), and routes gated off by SHOW_OCT_2026_CAMP (they
-// 404 client-side while disabled, so there's nothing meaningful to snapshot).
+// tool, not for search), and routes gated off by SHOW_OCT_2026_CAMP or
+// SHOW_SPRING_2026_PROGRAM (they 404 client-side while disabled, so there's
+// nothing meaningful to snapshot).
 const ROUTES = [
   "/",
   "/workshops",
-  "/workshops/2026-spring-holidays",
   "/workshops/christmas-holidays-jam-program",
   "/for-schools",
-  "/book-2026-spring-holidays",
-  "/school-holiday-music-camp-perth",
-  "/booking-confirmed-2026-spring",
   "/for-parents",
   "/stay-in-touch",
   "/about",

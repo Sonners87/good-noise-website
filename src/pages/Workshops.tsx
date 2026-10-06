@@ -5,7 +5,7 @@ import Footer from "../components/Footer"
 import WorkshopCard from "../components/WorkshopCard"
 import { workshops, upcomingWorkshopSlugs, workshopWhoFor } from "../content/workshops"
 import { workshopCardPhotos } from "../content/workshopCardPhotos"
-import { SHOW_OCT_2026_CAMP } from "../content/featureFlags"
+import { SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "../content/featureFlags"
 
 // Placeholder cards for formats that don't exist yet — draft copy, review
 // before this goes live.
@@ -51,6 +51,8 @@ export default function Workshops() {
           </Link>{" "}
           page.
         </p>
+        {/* Links to the spring-program SEO page — hidden while it's paused. */}
+        {SHOW_SPRING_2026_PROGRAM && (
         <p className="mt-3 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
           Full details on our{" "}
           <Link
@@ -61,6 +63,7 @@ export default function Workshops() {
           </Link>{" "}
           — dates, pricing and FAQs — live on its own page.
         </p>
+        )}
       </PageHero>
 
       <section className="bg-cream">

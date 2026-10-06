@@ -17,7 +17,7 @@ import PhotographyPolicy from "./pages/PhotographyPolicy"
 import Privacy from "./pages/Privacy"
 import ShootSheet from "./pages/admin/ShootSheet"
 import NotFound from "./pages/NotFound"
-import { SHOW_OCT_2026_CAMP } from "./content/featureFlags"
+import { SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "./content/featureFlags"
 
 function App() {
   return (
@@ -28,12 +28,22 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
-          <Route path="/book-2026-spring-holidays" element={<Book />} />
+          {/* 2026 Spring Holidays program is paused — see
+              SHOW_SPRING_2026_PROGRAM in content/featureFlags.ts. Flip it to
+              `true` to restore these three routes. */}
+          {SHOW_SPRING_2026_PROGRAM && (
+            <Route path="/book-2026-spring-holidays" element={<Book />} />
+          )}
           {/* Standalone SEO landing page targeting "school holiday music
               camp" + variations, geo-tagged to Perth — not in primary nav,
-              linked from the homepage intro and from search. */}
-          <Route path="/school-holiday-music-camp-perth" element={<SchoolHolidayMusicCamp />} />
-          <Route path="/booking-confirmed-2026-spring" element={<BookingConfirmed />} />
+              linked from the homepage intro and from search. Built around
+              the spring program, so it's paused with it. */}
+          {SHOW_SPRING_2026_PROGRAM && (
+            <Route path="/school-holiday-music-camp-perth" element={<SchoolHolidayMusicCamp />} />
+          )}
+          {SHOW_SPRING_2026_PROGRAM && (
+            <Route path="/booking-confirmed-2026-spring" element={<BookingConfirmed />} />
+          )}
           {/* October 2026 camp is paused — see SHOW_OCT_2026_CAMP in
               content/featureFlags.ts. Flip it to `true` to restore this
               route (and the /holiday-camps route below) without touching

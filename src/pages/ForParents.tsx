@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
+import { SHOW_SPRING_2026_PROGRAM } from "../content/featureFlags"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import PhotoImage from "../components/PhotoImage"
@@ -52,13 +53,18 @@ export default function ForParents() {
               <span className="gn-eyebrow text-ink">For parents</span>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/80 md:text-lg">
                 Good Noise Project runs small, facilitated music workshops
-                for young people in Perth, including our{" "}
-                <Link
-                  to="/school-holiday-music-camp-perth"
-                  className="font-semibold text-ink underline decoration-2 underline-offset-4 hover:text-[var(--gn-ink)]"
-                >
-                  holiday music program for teens
-                </Link>
+                for young people in Perth
+                {SHOW_SPRING_2026_PROGRAM && (
+                  <>
+                    , including our{" "}
+                    <Link
+                      to="/school-holiday-music-camp-perth"
+                      className="font-semibold text-ink underline decoration-2 underline-offset-4 hover:text-[var(--gn-ink)]"
+                    >
+                      holiday music program for teens
+                    </Link>
+                  </>
+                )}
                 . If your young musician's coming to a workshop — or you're
                 deciding whether to send them — here's what actually
                 happens in the room, who's running it, and how to reach us.

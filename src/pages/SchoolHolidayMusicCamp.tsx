@@ -168,7 +168,7 @@ const eventJsonLd = {
     // "InStock" claim — this is the Event markup Google reads for the
     // program the whole page is about, so it can't say places are available
     // once they aren't.
-    availability: workshops["2026-spring-holidays"].soldOut
+    availability: workshops["2026-spring-holidays"]?.soldOut
       ? "https://schema.org/SoldOut"
       : "https://schema.org/InStock",
     url: upcomingProgram.bookingUrl,
