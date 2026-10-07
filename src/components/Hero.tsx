@@ -26,7 +26,7 @@ export default function Hero() {
 
             <p className="font-body font-semibold mt-3 text-white/85 text-base md:text-lg">
               Inspiring young people to connect, create and find their voice
-              through music.
+              through original music.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
