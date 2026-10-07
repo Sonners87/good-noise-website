@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import PhotoImage from "./PhotoImage"
 import Header from "./Header"
-import heroPhoto from "../assets/images/hero-sunset-friends.webp"
+import heroPhoto from "../assets/images/hero-studio-group.webp"
 
 export default function Hero() {
   return (
@@ -37,23 +37,19 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative min-h-[320px] md:min-h-0">
-          {/* .gn-photo-frame's offset shadow needs its own wrapper: PhotoImage's
-              own div is overflow-hidden (to clip the zoomed image), which would
-              clip the shadow too if it lived on the same element. h-[calc(100%-6px)]
-              (not h-full + margin-bottom — height:100% ignores margin and just
-              overflows the parent instead of leaving a gap above it) plus
-              mr-[6px] (auto-width block, so margin *does* shrink it here) leaves
-              the outer section's overflow-hidden room to not clip the shadow. */}
-          <div className="gn-photo-frame mr-[6px] h-[calc(100%-6px)]">
+        <div className="relative flex items-end pr-[6px] pb-[6px] pl-[var(--edge-pad)] md:pl-0">
+          {/* Group shot with a dozen people edge to edge, so it's shown whole
+              at its native ratio (no zoom, no cover-crop) and pinned to the
+              screen's bottom-right corner instead of stretched to fill the
+              column's full height. The 6px right/bottom padding keeps
+              .gn-photo-frame's offset shadow inside the section's
+              overflow-hidden. */}
+          <div className="gn-photo-frame w-full">
             <PhotoImage
               src={heroPhoto}
-              alt="A group of young musicians laughing together outdoors at sunset, one holding an acoustic guitar"
-              aspect="aspect-auto"
-              className="h-full"
-              objectPosition="65% 38%"
+              alt="A Good Noise workshop group of young musicians and facilitators smiling together in a studio, holding saxophones, a bass guitar and a microphone"
+              aspect="aspect-[1900/1403]"
               tint
-              zoom
             />
           </div>
         </div>
