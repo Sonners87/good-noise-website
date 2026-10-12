@@ -244,7 +244,7 @@ const allWorkshops: Record<string, Workshop> = {
     metaDescription:
       "A two-day music program in Perth for ages 13–17 over the December–January school holidays. Write an original song with a small group and jam it out as a band. Dates TBA.",
     teaser:
-      "Two days of the summer break in Perth, writing and playing an original song with a small group of other 13–17 year olds. Dates and venue to be announced — register your interest to hear them first.",
+      "Two days of the summer break in Perth, writing and playing an original song with a small group of other 13–17 year olds. Dates and venue to be announced soon! Register your interest to hear them first.",
     infoRows: [
       { label: "When", value: "TBA" },
       { label: "Time", value: "TBA" },
