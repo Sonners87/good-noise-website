@@ -30,6 +30,7 @@ const ROUTES = [
   "/workshops",
   "/workshops/christmas-holidays-jam-program",
   "/for-schools",
+  "/school-holiday-music-camp-perth",
   "/for-parents",
   "/stay-in-touch",
   "/about",

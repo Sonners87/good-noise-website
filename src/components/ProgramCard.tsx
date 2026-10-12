@@ -5,7 +5,8 @@ type ProgramCardRow = { label: string; value: ReactNode }
 
 type ProgramCardProps = {
   title: string
-  price: number
+  /** null while the program's price isn't confirmed — shows "TBA". */
+  price: number | null
   priceLabel: string
   scholarshipNote: string
   rows: ProgramCardRow[]
@@ -42,7 +43,7 @@ export default function ProgramCard({
 
       <div className="border-b-2 border-ink px-6 py-6">
         <span className="font-display text-6xl leading-none text-ink sm:text-7xl">
-          ${price}
+          {price === null ? "TBA" : `$${price}`}
         </span>
         <p className="mt-2 font-body text-sm font-semibold text-ink/70">{priceLabel}</p>
         <p className="mt-4 font-body text-base font-semibold leading-relaxed text-ink">

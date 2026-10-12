@@ -14,7 +14,6 @@ import PillButton from "../components/PillButton"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setLandingPageMeta, SITE_URL } from "../lib/pageMeta"
 import { upcomingProgram } from "../data/upcomingProgram"
-import { workshops } from "../content/workshops"
 import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
 import concertFriendsPhoto from "../assets/images/strip-concert-friends.webp"
@@ -24,7 +23,7 @@ import logoAsset from "../assets/logo/good-noise-logo.png"
 
 const PAGE_TITLE = "School Holiday Music Camp Perth | Ages 13–17 | Good Noise"
 const PAGE_DESCRIPTION =
-  "Two-day school holiday music camps in Perth for ages 13–17. Write and jam an original song with a small group. Next: 30 Sep – 1 Oct 2026, North Perth, $80."
+  "Two-day school holiday music camps in Perth for ages 13–17. Write and jam an original song with a small group. Next: summer holidays 2026–27 — register your interest."
 const CANONICAL_PATH = "/school-holiday-music-camp-perth"
 
 const whatHappens: { bold: string; rest: string }[] = [
@@ -62,7 +61,6 @@ const whatToBring = [
 ]
 
 const waHolidayDates = [
-  { period: "Spring holidays 2026", dates: "Sat 26 Sep – Sun 11 Oct 2026" },
   { period: "Summer holidays 2026–27", dates: "Fri 18 Dec 2026 – Sun 31 Jan 2027" },
 ]
 
@@ -72,7 +70,7 @@ const waHolidayDates = [
 const faqs: { q: string; a: string }[] = [
   {
     q: "What is a school holiday music camp?",
-    a: "It's a short, intensive music program that runs during the school holidays rather than as weekly term lessons. Ours is two full days in North Perth: a small group of teenagers writes an original song together and spends the second day jamming it out as a band. No theory, no assessment.",
+    a: "It's a short, intensive music program that runs during the school holidays rather than as weekly term lessons. Ours is two full days in Perth: a small group of teenagers writes an original song together and spends the second day jamming it out as a band. No theory, no assessment.",
   },
   {
     q: "What ages is this for?",
@@ -80,15 +78,15 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Where in Perth is it held?",
-    a: "At Player 1 Music School, 5 Woodville Lane, North Perth WA 6006 — an easy stop for families from Perth's inner, northern and western suburbs.",
+    a: "Our spring 2026 program ran in North Perth. The venue for the summer program is being locked in now — register your interest and you'll hear it first.",
   },
   {
-    q: "When are the September and October 2026 school holidays in WA?",
-    a: "Term 3 finishes on Friday 25 September 2026 and the spring holidays run from Saturday 26 September to Sunday 11 October. Term 4 starts on Monday 12 October. Our program runs in the first week of the break, on Wednesday 30 September and Thursday 1 October.",
+    q: "When are the summer 2026–27 school holidays in WA?",
+    a: "Term 4 finishes on Thursday 17 December 2026 and the summer holidays run from Friday 18 December 2026 to Sunday 31 January 2027. Our next program runs during that break — dates are being confirmed now, and everyone who registers interest hears them first.",
   },
   {
     q: "How much does it cost?",
-    a: "$80 for both days — a Foundation Price for our first program. Free and part scholarships are available, no questions asked. Just email dave@goodnoiseproject.com.au.",
+    a: "Pricing for the summer program will be announced with the dates (our spring 2026 program was $80 for both days). Free and part scholarships are always available, no questions asked. Just email dave@goodnoiseproject.com.au.",
   },
   {
     q: "Does my teen need to already play an instrument?",
@@ -137,13 +135,16 @@ const organizationJsonLd = {
   founder: { "@type": "Person", name: "Dave Sonntag" },
 }
 
-const eventJsonLd = {
+// Only emitted once the next program has confirmed dates and a venue —
+// Google's Event markup requires a real startDate and location.
+const event = upcomingProgram.event
+const eventJsonLd = event && {
   "@context": "https://schema.org",
   "@type": "Event",
   name: upcomingProgram.title,
-  description: upcomingProgram.eventDescription,
-  startDate: upcomingProgram.startDateISO,
-  endDate: upcomingProgram.endDateISO,
+  description: event.eventDescription,
+  startDate: event.startDateISO,
+  endDate: event.endDateISO,
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   typicalAgeRange: upcomingProgram.ages,
@@ -153,26 +154,25 @@ const eventJsonLd = {
   image: [`${SITE_URL}/og-image.png`],
   location: {
     "@type": "Place",
-    name: upcomingProgram.venueName,
+    name: event.venueName,
     address: {
       "@type": "PostalAddress",
-      ...upcomingProgram.venueAddress,
+      ...event.venueAddress,
     },
   },
   organizer: { "@id": `${SITE_URL}/#organization` },
   offers: {
     "@type": "Offer",
-    price: String(upcomingProgram.price),
+    price: String(upcomingProgram.price ?? ""),
     priceCurrency: "AUD",
-    // Tracks the program's own soldOut block rather than being a standing
-    // "InStock" claim — this is the Event markup Google reads for the
-    // program the whole page is about, so it can't say places are available
-    // once they aren't.
-    availability: workshops["2026-spring-holidays"]?.soldOut
+    // Set from the program's own sold-out state rather than being a standing
+    // "InStock" claim, so the markup can't say places are available once
+    // they aren't.
+    availability: event.soldOut
       ? "https://schema.org/SoldOut"
       : "https://schema.org/InStock",
     url: upcomingProgram.bookingUrl,
-    validFrom: upcomingProgram.validFromISO,
+    validFrom: event.validFromISO,
   },
 }
 
@@ -190,7 +190,9 @@ export default function SchoolHolidayMusicCamp() {
   useEffect(() => {
     setLandingPageMeta(PAGE_TITLE, PAGE_DESCRIPTION, {
       canonicalPath: CANONICAL_PATH,
-      structuredData: [organizationJsonLd, eventJsonLd, faqJsonLd],
+      structuredData: eventJsonLd
+        ? [organizationJsonLd, eventJsonLd, faqJsonLd]
+        : [organizationJsonLd, faqJsonLd],
     })
   }, [])
 
@@ -215,9 +217,10 @@ export default function SchoolHolidayMusicCamp() {
                 Good Noise Project runs school holiday music camps in Perth
                 for teenage musicians. Over two days, a small group writes an
                 original song and jams it out together — no theory lessons,
-                no benchmarks, nobody put on the spot. Our next program runs
-                30 September – 1 October 2026 in North Perth, for ages
-                13–17, and it's $80 for both days.
+                no benchmarks, nobody put on the spot. Our next program, for
+                ages 13–17, runs over the 2026–27 summer holidays. Dates and
+                venue are being locked in now — register your interest to
+                hear them first.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -568,11 +571,8 @@ export default function SchoolHolidayMusicCamp() {
           </p>
           <div className="mt-8 flex flex-col items-center gap-3">
             <PillButton href={upcomingProgram.ctaHref} variant="primary">
-              View program &amp; book your place
+              {upcomingProgram.ctaLabel}
             </PillButton>
-            <span className="font-body font-semibold text-xs text-white/70">
-              Refund for cancellations 2+ weeks before.
-            </span>
           </div>
         </div>
       </section>

@@ -5,65 +5,54 @@
 
 export type UpcomingProgram = {
   title: string
-  price: number
+  /** null until confirmed — the card shows "TBA". */
+  price: number | null
   priceLabel: string
   scholarshipNote: string
   rows: { label: string; value: string }[]
   ages: string
   ctaLabel: string
   ctaHref: string
-  refundNote: string
-  venueName: string
-  venueAddress: {
-    streetAddress: string
-    addressLocality: string
-    addressRegion: string
-    postalCode: string
-    addressCountry: string
-  }
-  // Event JSON-LD fields — ISO 8601 with explicit +08:00 (WA does not
-  // observe daylight saving, so this offset never changes).
-  startDateISO: string
-  endDateISO: string
-  validFromISO: string
-  eventDescription: string
+  refundNote?: string
+  /** Event JSON-LD. null while dates/venue are TBA — the page then emits no
+      Event markup at all, rather than markup with made-up dates. Dates are
+      ISO 8601 with explicit +08:00 (WA does not observe daylight saving). */
+  event: {
+    venueName: string
+    venueAddress: {
+      streetAddress: string
+      addressLocality: string
+      addressRegion: string
+      postalCode: string
+      addressCountry: string
+    }
+    startDateISO: string
+    endDateISO: string
+    validFromISO: string
+    eventDescription: string
+    soldOut: boolean
+  } | null
   /** Event JSON-LD offers.url — the funnel hand-off page, same as ctaHref
-      (the conversion page at /workshops/2026-spring-holidays), not the raw
+      (the program's /workshops/<slug> conversion page), not the raw
       Stripe booking form. Keeps the SEO page, the card CTA and the schema
       all pointing at one destination. */
   bookingUrl: string
 }
 
 export const upcomingProgram: UpcomingProgram = {
-  title: "2026 Spring Holidays Jam Program",
-  price: 80,
-  priceLabel: "for both days · Foundation Price",
+  title: "2026 Christmas Holidays Jam Program",
+  price: null,
+  priceLabel: "for both days · price to be announced",
   scholarshipNote: "Free and part-scholarships available — no questions asked.",
   rows: [
-    { label: "When", value: "Wed, 30 Sep – Thu, 1 Oct 2026" },
-    { label: "Time", value: "9am – 3pm each day" },
-    {
-      label: "Where",
-      value: "Player 1 Music School\n5 Woodville Lane, North Perth WA 6006",
-    },
+    { label: "When", value: "Summer holidays 2026–27\n(dates TBA)" },
+    { label: "Time", value: "TBA" },
+    { label: "Where", value: "Perth (venue TBA)" },
     { label: "Who", value: "Ages 13–17" },
   ],
   ages: "13-17",
-  ctaLabel: "View full program & book",
-  ctaHref: "/workshops/2026-spring-holidays",
-  refundNote: "Refund for cancellations 2+ weeks before.",
-  venueName: "Player 1 Music School",
-  venueAddress: {
-    streetAddress: "5 Woodville Lane",
-    addressLocality: "North Perth",
-    addressRegion: "WA",
-    postalCode: "6006",
-    addressCountry: "AU",
-  },
-  startDateISO: "2026-09-30T09:00:00+08:00",
-  endDateISO: "2026-10-01T15:00:00+08:00",
-  validFromISO: "2026-08-01T00:00:00+08:00",
-  eventDescription:
-    "A two-day school holiday music camp in Perth for ages 13–17. A small group writes an original song and jams it out together — no theory, no assessment, no solos.",
-  bookingUrl: "https://goodnoiseproject.com.au/workshops/2026-spring-holidays",
+  ctaLabel: "Register your interest",
+  ctaHref: "/workshops/christmas-holidays-jam-program#register-interest",
+  event: null,
+  bookingUrl: "https://goodnoiseproject.com.au/workshops/christmas-holidays-jam-program",
 }

@@ -36,11 +36,9 @@ function App() {
           )}
           {/* Standalone SEO landing page targeting "school holiday music
               camp" + variations, geo-tagged to Perth — not in primary nav,
-              linked from the homepage intro and from search. Built around
-              the spring program, so it's paused with it. */}
-          {SHOW_SPRING_2026_PROGRAM && (
-            <Route path="/school-holiday-music-camp-perth" element={<SchoolHolidayMusicCamp />} />
-          )}
+              linked from search. Evergreen: it features whichever program is
+              next (src/data/upcomingProgram.ts), so it's never paused. */}
+          <Route path="/school-holiday-music-camp-perth" element={<SchoolHolidayMusicCamp />} />
           {SHOW_SPRING_2026_PROGRAM && (
             <Route path="/booking-confirmed-2026-spring" element={<BookingConfirmed />} />
           )}
