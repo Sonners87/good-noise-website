@@ -77,7 +77,7 @@ export default function Privacy() {
             Privacy Collection Notice
           </h1>
           <p className="mt-4 font-body text-sm text-ink/60">
-            Last updated: 20 August 2026 · Next review: 20 August 2027
+            Last updated: 19 October 2026 · Next review: 19 October 2027
           </p>
 
           <div className="mt-12 space-y-10 text-base leading-relaxed text-ink/80 md:text-lg">
@@ -221,6 +221,21 @@ export default function Privacy() {
                 <p>
                   Deleting your information may mean we can't complete a
                   booking — we'll tell you if that's the case before we act.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="font-display text-2xl text-ink sm:text-3xl">
+                Programs run with a school, council or organisation
+              </h2>
+              <div className="mt-4 space-y-3">
+                <p>
+                  When a school, council or organisation takes registrations
+                  through its own system, we receive only what we need to run
+                  the program safely: names, emergency contacts, health and
+                  support needs, and consent choices. We handle that
+                  information under this notice.
                 </p>
               </div>
             </div>

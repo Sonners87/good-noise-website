@@ -10,10 +10,19 @@ type PlaceholderProps = {
   kind?: "PLACEHOLDER" | "CHECK"
   children: ReactNode
   className?: string
+  /** Renders as a <span> so it can sit inside a sentence or list item. */
+  inline?: boolean
 }
 
-export default function Placeholder({ kind = "PLACEHOLDER", children, className = "" }: PlaceholderProps) {
+export default function Placeholder({ kind = "PLACEHOLDER", children, className = "", inline = false }: PlaceholderProps) {
   if (!SHOW_PLACEHOLDERS) return null
+  if (inline) {
+    return (
+      <span data-placeholder={kind} className={`bg-[var(--gn-pink)] px-1 font-semibold text-ink ${className}`}>
+        [{kind}: {children}]
+      </span>
+    )
+  }
   return (
     <p
       data-placeholder={kind}
