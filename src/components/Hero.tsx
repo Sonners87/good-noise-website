@@ -37,7 +37,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative min-h-[320px] md:min-h-0">
+        <div className="relative md:min-h-0">
           {/* .gn-photo-frame's offset shadow needs its own wrapper: PhotoImage's
               own div is overflow-hidden (to clip the zoomed image), which would
               clip the shadow too if it lived on the same element. h-[calc(100%-6px)]
@@ -45,7 +45,11 @@ export default function Hero() {
               overflows the parent instead of leaving a gap above it) plus
               mr-[6px] (auto-width block, so margin *does* shrink it here) leaves
               the outer section's overflow-hidden room to not clip the shadow. */}
-          <div className="gn-photo-frame mr-[6px] h-[calc(100%-6px)]">
+          <div className="gn-photo-frame relative mr-[6px] aspect-square overflow-hidden md:aspect-auto md:h-[calc(100%-6px)]">
+            {/* The photo is absolutely positioned so its own proportions can't
+                stretch the hero: the frame stays square on phones and fills the
+                column height on desktop. */}
+            <div className="absolute inset-0">
             <PhotoImage
               src={heroPhoto}
               alt="Three young singers laughing together, each holding a microphone, in a sunlit room"
@@ -54,6 +58,7 @@ export default function Hero() {
               objectPosition="50% 30%"
               tint
             />
+            </div>
           </div>
         </div>
       </div>

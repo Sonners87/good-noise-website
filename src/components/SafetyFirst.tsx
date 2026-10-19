@@ -1,14 +1,14 @@
 import PhotoImage from "./PhotoImage"
-import concertFriends from "../assets/images/strip-concert-friends.webp"
+import dropIn from "../assets/images/after-school-drop-in.webp"
+import writing from "../assets/images/after-school-eight-week.webp"
 import jamSession from "../assets/images/hero-guitar-jam.webp"
-import busker from "../assets/images/strip-busker.webp"
 
 const pillars = [
   {
     title: "No Judgement",
     body: "We embrace mistakes — that's where the good stuff comes from.",
-    photo: concertFriends,
-    alt: "A group of teenage girls laughing together in a crowd",
+    photo: dropIn,
+    alt: "Young musicians laughing together in a jam session, with saxophones, a microphone and lyric sheets in hand",
   },
   {
     title: "No Hierarchy",
@@ -19,8 +19,8 @@ const pillars = [
   {
     title: "No Pressure",
     body: "Share when you're ready — not a moment before.",
-    photo: busker,
-    alt: "A young woman singing into a microphone while playing acoustic guitar",
+    photo: writing,
+    alt: "Two young musicians sitting on a rug in a jam room, smiling as they write lyrics on sheets of paper",
   },
 ]
 
