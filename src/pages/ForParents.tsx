@@ -38,15 +38,15 @@ export default function ForParents() {
 
   return (
     <>
-      <div className="bg-ink">
-        <Header />
+      <div className="bg-cream">
+        <Header tone="onLight" />
       </div>
 
       {/* Opening — eyebrow + intro line only, no headline (Volume 2: no
           highlight-behind-headline, lower visual volume than Volume 1's
           hero pattern). No offset shadow on the photo here — the page's
           one shadow is reserved for the "Who's running it" card below. */}
-      <section className="bg-[var(--gn-pink)]">
+      <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 pt-12 pb-14 md:px-10 md:pt-16 md:pb-20">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 md:items-start">
             <div className="md:pt-10 lg:pt-14">

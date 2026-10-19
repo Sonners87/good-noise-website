@@ -7,23 +7,6 @@ import { workshops, upcomingWorkshopSlugs, workshopWhoFor } from "../content/wor
 import { workshopCardPhotos } from "../content/workshopCardPhotos"
 import { SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "../content/featureFlags"
 
-// Placeholder cards for formats that don't exist yet — draft copy, review
-// before this goes live.
-const comingSoon = [
-  {
-    title: "A Workshop for Dads",
-    blurb: "For dads who play — or used to — to pick it back up and make music with other dads.",
-    whoFor: "Dads",
-    figure: "guitarist" as const,
-  },
-  {
-    title: "Primary School Songwriting Workshop",
-    blurb: "A gentler, more playful introduction to writing and making music together, built for younger kids.",
-    whoFor: "Primary school students",
-    figure: "singer" as const,
-  },
-]
-
 export default function Workshops() {
   useEffect(() => {
     document.title = "Workshops — Good Noise Project"
@@ -44,12 +27,15 @@ export default function Workshops() {
           A Few Ways to Make Good Noise
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
-          Here's what's on, and what's coming — running an in-school
-          program? See our{" "}
-          <Link to="/for-schools" className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta">
-            For Schools
-          </Link>{" "}
-          page.
+          Here's what's on, and what's coming.
+        </p>
+        <p className="mt-3 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+          Looking for a weekly program for a council, school or youth
+          organisation? See our{" "}
+          <Link to="/after-school-programs" className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta">
+            after-school programs
+          </Link>
+          .
         </p>
         {/* Links to the spring-program SEO page — hidden while it's paused. */}
         {SHOW_SPRING_2026_PROGRAM && (
@@ -96,16 +82,6 @@ export default function Workshops() {
               />
             )}
 
-            {comingSoon.map((card) => (
-              <WorkshopCard
-                key={card.title}
-                status="comingSoon"
-                title={card.title}
-                blurb={card.blurb}
-                whoFor={card.whoFor}
-                figure={card.figure}
-              />
-            ))}
           </div>
         </div>
       </section>

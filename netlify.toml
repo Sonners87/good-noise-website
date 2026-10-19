@@ -1,0 +1,10 @@
+# Only environment settings live here. Build command and publish directory
+# stay as configured in the Netlify UI.
+
+# Preview builds show [PLACEHOLDER] / [CHECK] markers as highlighted TODOs.
+# Production never does. See src/components/afterschool/Placeholder.tsx.
+[context.deploy-preview.environment]
+  VITE_SHOW_PLACEHOLDERS = "true"
+
+[context.branch-deploy.environment]
+  VITE_SHOW_PLACEHOLDERS = "true"

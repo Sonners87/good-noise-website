@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import PhotoImage from "./PhotoImage"
 import Header from "./Header"
-import heroPhoto from "../assets/images/hero-guitar-jam.webp"
+import heroPhoto from "../assets/images/hero-singers-mics.webp"
 
 export default function Hero() {
   return (
@@ -48,10 +48,10 @@ export default function Hero() {
           <div className="gn-photo-frame mr-[6px] h-[calc(100%-6px)]">
             <PhotoImage
               src={heroPhoto}
-              alt="A Good Noise facilitator laughing as he plays acoustic guitar with young musicians on keyboard, guitar and electric guitar in a studio jam session"
+              alt="Three young singers laughing together, each holding a microphone, in a sunlit room"
               aspect="aspect-auto"
               className="h-full"
-              objectPosition="45% 40%"
+              objectPosition="50% 30%"
               tint
             />
           </div>

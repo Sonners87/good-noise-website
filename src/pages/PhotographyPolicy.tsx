@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import Placeholder, { SHOW_PLACEHOLDERS } from "../components/afterschool/Placeholder"
 import { linkifyContact } from "../lib/linkifyEmail"
 import { setPageMeta } from "../lib/pageMeta"
 
@@ -27,7 +28,7 @@ export default function PhotographyPolicy() {
             Photography, Filming and Recording Policy
           </h1>
           <p className="mt-4 font-body text-sm text-ink/60">
-            Last updated: 2 September 2026 · Next review: 2 September 2027
+            Last updated: 19 October 2026 · Next review: 19 October 2027
           </p>
 
           <div className="mt-12 space-y-10 text-base leading-relaxed text-ink/80 md:text-lg">
@@ -102,6 +103,13 @@ export default function PhotographyPolicy() {
                   is one of the steps needed to complete a booking, alongside
                   the rest of the registration form.
                 </p>
+                {SHOW_PLACEHOLDERS && (
+                  <p>
+                    For programs run with a school, council or organisation,
+                    consent is collected through{" "}
+                    <Placeholder inline>our consent form, or the host's registration form</Placeholder>.
+                  </p>
+                )}
 
                 <div className={calloutClass}>
                   <p className={calloutTextClass}>
@@ -276,6 +284,17 @@ export default function PhotographyPolicy() {
                   {linkifyContact(
                     "If you're unhappy with how we've handled photos, video or audio of your child, contact Dave Sonntag at dave@goodnoiseproject.com.au or 0413 626 240. We'll respond within five business days and work with you until it's sorted.",
                   )}
+                </p>
+              </div>
+            </div>
+
+            <div id="who-owns-the-songs" className="scroll-mt-6">
+              <h2 className="font-display text-2xl text-ink sm:text-3xl">Who owns the songs</h2>
+              <div className="mt-4 space-y-3">
+                <p>
+                  Songs belong to the young people who wrote them. A song
+                  written by a group belongs to the group. We use recordings
+                  only as the consent allows.
                 </p>
               </div>
             </div>

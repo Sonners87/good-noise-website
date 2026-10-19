@@ -125,10 +125,8 @@ const organizationJsonLd = {
   logo: `${SITE_URL}${logoAsset}`,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "36 Park St",
-    addressLocality: "Como",
+    addressLocality: "Perth",
     addressRegion: "WA",
-    postalCode: "6152",
     addressCountry: "AU",
   },
   areaServed: { "@type": "City", name: "Perth" },

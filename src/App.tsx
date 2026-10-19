@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import ScrollToTop from "./components/ScrollToTop"
 import Home from "./pages/Home"
 import Workshops from "./pages/Workshops"
@@ -8,8 +8,13 @@ import BookingConfirmed from "./pages/BookingConfirmed"
 import BookingOctCamp from "./pages/BookingOctCamp"
 import HolidayCamps from "./pages/HolidayCamps"
 import SchoolHolidayMusicCamp from "./pages/SchoolHolidayMusicCamp"
+import AfterSchoolPrograms from "./pages/AfterSchoolPrograms"
+import AfterSchoolSafety from "./pages/AfterSchoolSafety"
+import AfterSchoolRequest from "./pages/AfterSchoolRequest"
+import AfterSchoolContact from "./pages/AfterSchoolContact"
 import ForParents from "./pages/ForParents"
 import About from "./pages/About"
+import AboutTheProject from "./pages/AboutTheProject"
 import Contact from "./pages/Contact"
 import StayInTouch from "./pages/StayInTouch"
 import ChildSafetyPolicy from "./pages/ChildSafetyPolicy"
@@ -17,7 +22,7 @@ import PhotographyPolicy from "./pages/PhotographyPolicy"
 import Privacy from "./pages/Privacy"
 import ShootSheet from "./pages/admin/ShootSheet"
 import NotFound from "./pages/NotFound"
-import { SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "./content/featureFlags"
+import { SHOW_FOR_SCHOOLS_PAGE, SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "./content/featureFlags"
 
 function App() {
   return (
@@ -56,10 +61,26 @@ function App() {
           {/* In-School program: moved out of the Workshops pillar page and
               off the generic /workshops/:slug route onto its own top-level
               URL, reusing WorkshopDetail's rendering against a fixed slug. */}
-          <Route path="/for-schools" element={<WorkshopDetail slug="in-school-songwriting" />} />
+          {/* Draft: see SHOW_FOR_SCHOOLS_PAGE in content/featureFlags.ts. While it's
+              off, old links land on the after-school page instead. */}
+          <Route
+            path="/for-schools"
+            element={
+              SHOW_FOR_SCHOOLS_PAGE ? (
+                <WorkshopDetail slug="in-school-songwriting" />
+              ) : (
+                <Navigate to="/after-school-programs" replace />
+              )
+            }
+          />
+          <Route path="/after-school-programs" element={<AfterSchoolPrograms />} />
+          <Route path="/after-school-programs/safety" element={<AfterSchoolSafety />} />
+          <Route path="/after-school-programs/request" element={<AfterSchoolRequest />} />
+          <Route path="/after-school-programs/contact" element={<AfterSchoolContact />} />
           <Route path="/for-parents" element={<ForParents />} />
           <Route path="/stay-in-touch" element={<StayInTouch />} />
           <Route path="/about" element={<About />} />
+          <Route path="/about-the-project" element={<AboutTheProject />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/child-safety-policy" element={<ChildSafetyPolicy />} />
           <Route path="/photography-policy" element={<PhotographyPolicy />} />
