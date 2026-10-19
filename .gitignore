@@ -52,3 +52,11 @@ dist-ssr
 
 # Raw audio bounces — only the compressed copies in /public/audio/ ship.
 /SPRING SONG/
+
+# After-school page source material: the raw 100MB video and the reference PDF
+# never ship. Only the compressed copy in /public/video/ does.
+/docs/after-school/*.MP4
+/docs/after-school/*.mp4
+/docs/after-school/*.mov
+/docs/after-school/School Wellbeing Program*.pdf
+/docs/after-school/*.jpg
