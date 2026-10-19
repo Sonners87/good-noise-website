@@ -27,12 +27,7 @@ export default function Workshops() {
           A Few Ways to Make Good Noise
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
-          Here's what's on, and what's coming — running an in-school
-          program? See our{" "}
-          <Link to="/for-schools" className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta">
-            For Schools
-          </Link>{" "}
-          page.
+          Here's what's on, and what's coming.
         </p>
         <p className="mt-3 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
           Looking for a weekly program for a council, school or youth

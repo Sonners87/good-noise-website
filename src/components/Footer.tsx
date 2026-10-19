@@ -24,16 +24,16 @@ export default function Footer() {
             Workshops
           </Link>
           <Link
-            to="/for-schools"
-            className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
-          >
-            For Schools
-          </Link>
-          <Link
             to="/after-school-programs"
             className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
           >
             After-School Programs
+          </Link>
+          <Link
+            to="/about-the-project"
+            className="font-body font-semibold text-sm text-cream/80 transition hover:text-sage"
+          >
+            About the Project
           </Link>
           <a
             href="https://www.instagram.com/goodnoiseau/"

@@ -8,17 +8,27 @@ import InstagramIcon from "./icons/InstagramIcon"
 const instagramUrl = "https://www.instagram.com/goodnoiseau/"
 
 type NavLink = { label: string; href: string }
+type NavDropdown = { label: string; items: NavLink[] }
 
 // The logo links home, so there's no separate Home item.
+const programsMenu: NavDropdown = {
+  label: "Programs",
+  items: [
+    { label: "School Holiday Programs", href: "/workshops" },
+    { label: "After-School Programs", href: "/after-school-programs" },
+  ],
+}
 const leftLinks: NavLink[] = [
-  { label: "Workshops", href: "/workshops" },
+  { label: "For Organisations", href: "/after-school-programs" },
   { label: "For Parents", href: "/for-parents" },
-  { label: "For Schools", href: "/for-schools" },
 ]
-const aboutLinks: NavLink[] = [
-  { label: "Meet Dave", href: "/about" },
-  { label: "About the Project", href: "/about-the-project" },
-]
+const aboutMenu: NavDropdown = {
+  label: "About",
+  items: [
+    { label: "Meet Dave", href: "/about" },
+    { label: "About the Project", href: "/about-the-project" },
+  ],
+}
 const contactLink: NavLink = { label: "Contact", href: "/contact" }
 
 // Every page put the nav on an ink/forest section until the participant
@@ -30,6 +40,35 @@ const contactLink: NavLink = { label: "Contact", href: "/contact" }
 // and the paper-coloured parents hero, where the acid nav hover would vanish or
 // clash, so links underline instead.
 export type HeaderTone = "onDark" | "onAcid" | "onLight"
+
+// Dropdown opens on hover and on keyboard focus. The panel's pt bridges the
+// gap so the pointer doesn't leave the hover area.
+function Dropdown({ menu, linkClass }: { menu: NavDropdown; linkClass: string }) {
+  return (
+    <div className="group relative">
+      <button type="button" aria-haspopup="true" className={`${linkClass} inline-flex items-center gap-1.5`}>
+        {menu.label}
+        <svg viewBox="0 0 10 6" aria-hidden="true" className="h-2 w-2.5 fill-none stroke-current" strokeWidth="2">
+          <path d="M1 1l4 4 4-4" />
+        </svg>
+      </button>
+      <div className="invisible absolute left-1/2 top-full z-30 -translate-x-1/2 pt-3 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+        <ul className="min-w-[14rem] whitespace-nowrap border-2 border-ink bg-cream py-2 text-ink shadow-[4px_4px_0_0_var(--gn-ink)]">
+          {menu.items.map((link) => (
+            <li key={link.label}>
+              <Link
+                to={link.href}
+                className="font-body block px-5 py-2.5 text-base font-semibold hover:bg-ink hover:text-cream focus-visible:bg-ink focus-visible:text-cream"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) {
   const [open, setOpen] = useState(false)
@@ -74,6 +113,7 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
       <div className="relative mx-auto grid max-w-[1400px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-5 py-5 md:px-10">
         <div className="flex items-center justify-start xl:justify-end">
           <nav className={`hidden items-center gap-8 xl:flex xl:pr-10 ${navColour}`}>
+            <Dropdown menu={programsMenu} linkClass={linkClass} />
             {leftLinks.map((link) => (
               <Link key={link.label} to={link.href} className={linkClass}>
                 {link.label}
@@ -107,34 +147,7 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
 
         <div className="flex items-center justify-end xl:justify-start">
           <nav className={`hidden items-center gap-8 xl:flex xl:pl-10 ${navColour}`}>
-            {/* Dropdown opens on hover and on keyboard focus. The panel's pt
-                bridges the gap so the pointer doesn't leave the hover area. */}
-            <div className="group relative">
-              <button
-                type="button"
-                aria-haspopup="true"
-                className={`${linkClass} inline-flex items-center gap-1.5`}
-              >
-                About
-                <svg viewBox="0 0 10 6" aria-hidden="true" className="h-2 w-2.5 fill-none stroke-current" strokeWidth="2">
-                  <path d="M1 1l4 4 4-4" />
-                </svg>
-              </button>
-              <div className="invisible absolute left-1/2 top-full z-30 -translate-x-1/2 pt-3 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                <ul className="min-w-[14rem] whitespace-nowrap border-2 border-ink bg-cream py-2 text-ink shadow-[4px_4px_0_0_var(--gn-ink)]">
-                  {aboutLinks.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        to={link.href}
-                        className="font-body block px-5 py-2.5 text-base font-semibold hover:bg-ink hover:text-cream focus-visible:bg-ink focus-visible:text-cream"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <Dropdown menu={aboutMenu} linkClass={linkClass} />
             <Link to={contactLink.href} className={linkClass}>
               {contactLink.label}
             </Link>
@@ -163,12 +176,17 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
             onAcid ? "border-ink/30" : "border-white/20"
           }`}
         >
+          {programsMenu.items.map((link) => (
+            <Link key={link.label} to={link.href} onClick={() => setOpen(false)} className={mobileLinkClass}>
+              Programs: {link.label}
+            </Link>
+          ))}
           {leftLinks.map((link) => (
             <Link key={link.label} to={link.href} onClick={() => setOpen(false)} className={mobileLinkClass}>
               {link.label}
             </Link>
           ))}
-          {aboutLinks.map((link) => (
+          {aboutMenu.items.map((link) => (
             <Link key={link.label} to={link.href} onClick={() => setOpen(false)} className={mobileLinkClass}>
               About: {link.label}
             </Link>

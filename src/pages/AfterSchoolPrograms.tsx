@@ -56,10 +56,10 @@ const structuredData = [
 
 const jumpLinks = [
   { label: "Who it's for", href: "#whos-it-for" },
-  { label: "What young people walk away with", href: "#outcomes" },
+  { label: "Outcomes", href: "#outcomes" },
   { label: "Formats", href: "#programs" },
-  { label: "Get onboard", href: "#get-onboard" },
-  { label: "The facilitator", href: "#facilitator" },
+  { label: "Process", href: "#get-onboard" },
+  { label: "Facilitator", href: "#facilitator" },
   { label: "Cost + FAQs", href: "#cost-faqs" },
 ]
 
