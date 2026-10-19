@@ -162,19 +162,39 @@ export default function AfterSchoolPrograms() {
       <section className="bg-ink text-cream" id="programs">
         <div className={sectionInner}>
           <h2 className={h2Class}>{programs.heading}</h2>
-          <div className="mt-10 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-3">
             {programs.cards.map((card) => (
-              <article key={card.id} className="flex flex-col border-[3px] border-cream bg-ink">
+              <article key={card.id} className="border-[3px] border-cream bg-ink">
                 <PhotoImage
                   src={cardPhotos[card.id]}
                   alt={card.photoAlt}
                   aspect="aspect-[4/3]"
                   objectPosition={card.photoPosition}
                 />
-                <div className="flex flex-1 flex-col p-5 md:p-6">
-                  <h3 className="font-display text-2xl">{card.title}</h3>
-                  <p className="mt-3 mb-5 text-base leading-relaxed text-cream/85">{card.oneLiner}</p>
-                  <Accordion tone="dark" className="mt-auto pt-0" summary="See details">
+                <div className="p-5 md:p-6">
+                  {/* All three title + one-liner blocks share one grid cell, so every
+                      card's collapsed text area is as tall as the longest one at any
+                      width. Expanding a card then only grows that card. */}
+                  <div className="grid">
+                    {programs.cards.map((c) => {
+                      const own = c.id === card.id
+                      return (
+                        <div
+                          key={c.id}
+                          className={`col-start-1 row-start-1 ${own ? "" : "invisible"}`}
+                          aria-hidden={own ? undefined : true}
+                        >
+                          {own ? (
+                            <h3 className="font-display text-2xl">{c.title}</h3>
+                          ) : (
+                            <p className="font-display text-2xl">{c.title}</p>
+                          )}
+                          <p className="mt-3 text-base leading-relaxed text-cream/85">{c.oneLiner}</p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <Accordion tone="dark" className="mt-5" summary="See details">
                     {card.id === "eight-week" ? (
                       <div className="space-y-5">
                         <p className="text-base leading-relaxed text-cream/85">
