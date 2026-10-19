@@ -38,6 +38,7 @@ const ROUTES = [
   "/for-parents",
   "/stay-in-touch",
   "/about",
+  "/about-the-project",
   "/contact",
   "/child-safety-policy",
   "/photography-policy",

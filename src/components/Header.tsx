@@ -7,20 +7,19 @@ import InstagramIcon from "./icons/InstagramIcon"
 
 const instagramUrl = "https://www.instagram.com/goodnoiseau/"
 
-// "Home" is a same-page hash anchor (scrolls to id="home" on the homepage),
-// so it stays a plain <a> — the rest are real routes and use Link.
-const links = [
-  { label: "Home", href: "/#home" },
+type NavLink = { label: string; href: string }
+
+// The logo links home, so there's no separate Home item.
+const leftLinks: NavLink[] = [
   { label: "Workshops", href: "/workshops" },
   { label: "For Parents", href: "/for-parents" },
   { label: "For Schools", href: "/for-schools" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ]
-
-// Desktop splits the same list either side of the centred logo.
-const leftLinks = links.slice(0, 4)
-const rightLinks = links.slice(4)
+const aboutLinks: NavLink[] = [
+  { label: "Meet Dave", href: "/about" },
+  { label: "About the Project", href: "/about-the-project" },
+]
+const contactLink: NavLink = { label: "Contact", href: "/contact" }
 
 // Every page put the nav on an ink/forest section until the participant
 // workshop pages moved to an --gn-acid hero. White nav links and a cream
@@ -59,49 +58,42 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
         ? "gn-nav-on-acid text-ink"
         : "text-white/85"
 
-  // Desktop: left group of links, centred logo, right group of links plus the
-  // CTA. Mobile: menu button, centred logo, CTA. text-white/85 lives on the
-  // <nav> rather than each link: .gn-nav-link sets color:currentColor
-  // (unlayered, so it beats a layered Tailwind text-* utility on the link
-  // itself) and only overrides colour on hover/focus.
-  const renderLink = (link: (typeof links)[number]) =>
-    link.href.startsWith("/#") ? (
-      <a key={link.label} href={link.href} className="gn-nav-link font-body font-semibold text-base">
-        {link.label}
-      </a>
-    ) : (
-      <Link key={link.label} to={link.href} className="gn-nav-link font-body font-semibold text-base">
-        {link.label}
-      </Link>
-    )
+  const linkClass = "gn-nav-link font-body font-semibold text-base"
+  const mobileLinkClass =
+    "gn-nav-link font-body font-semibold border-b border-white/10 px-5 py-4 text-base"
+  const bar = onAcid ? "bg-ink" : "bg-white"
 
+  // Desktop (lg and up): links either side of the centred logo, About as a
+  // dropdown, and the CTA on its own in the far right corner. Below xl: menu
+  // button, centred logo, CTA. text-white/85 lives on the <nav> rather than
+  // each link: .gn-nav-link sets color:currentColor (unlayered, so it beats a
+  // layered Tailwind text-* utility on the link itself) and only overrides
+  // colour on hover/focus.
   return (
     <header className="relative z-20">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-5 py-5 md:px-10">
-        <div className="flex items-center justify-start">
-          <nav className={`hidden items-center gap-9 md:flex ${navColour}`}>
-            {leftLinks.map(renderLink)}
+      <div className="relative mx-auto grid max-w-[1400px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-5 py-5 md:px-10">
+        <div className="flex items-center justify-start xl:justify-end">
+          <nav className={`hidden items-center gap-8 xl:flex xl:pr-10 ${navColour}`}>
+            {leftLinks.map((link) => (
+              <Link key={link.label} to={link.href} className={linkClass}>
+                {link.label}
+              </Link>
+            ))}
           </nav>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className={`flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 border-2 md:hidden ${
+            className={`flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 border-2 xl:hidden ${
               onAcid ? "border-ink" : "border-white"
             }`}
           >
             {/* One bar colour for all three, so the tone swap can't leave a
                 half-ink/half-white burger. */}
-            <span
-              className={`h-0.5 w-6 transition ${onAcid ? "bg-ink" : "bg-white"} ${open ? "translate-y-2 rotate-45" : ""}`}
-            />
-            <span
-              className={`h-0.5 w-6 transition ${onAcid ? "bg-ink" : "bg-white"} ${open ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`h-0.5 w-6 transition ${onAcid ? "bg-ink" : "bg-white"} ${open ? "-translate-y-2 -rotate-45" : ""}`}
-            />
+            <span className={`h-0.5 w-6 transition ${bar} ${open ? "translate-y-2 rotate-45" : ""}`} />
+            <span className={`h-0.5 w-6 transition ${bar} ${open ? "opacity-0" : ""}`} />
+            <span className={`h-0.5 w-6 transition ${bar} ${open ? "-translate-y-2 -rotate-45" : ""}`} />
           </button>
         </div>
 
@@ -113,9 +105,39 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
           />
         </a>
 
-        <div className="flex items-center justify-end gap-9">
-          <nav className={`hidden items-center gap-9 md:flex ${navColour}`}>
-            {rightLinks.map(renderLink)}
+        <div className="flex items-center justify-end xl:justify-start">
+          <nav className={`hidden items-center gap-8 xl:flex xl:pl-10 ${navColour}`}>
+            {/* Dropdown opens on hover and on keyboard focus. The panel's pt
+                bridges the gap so the pointer doesn't leave the hover area. */}
+            <div className="group relative">
+              <button
+                type="button"
+                aria-haspopup="true"
+                className={`${linkClass} inline-flex items-center gap-1.5`}
+              >
+                About
+                <svg viewBox="0 0 10 6" aria-hidden="true" className="h-2 w-2.5 fill-none stroke-current" strokeWidth="2">
+                  <path d="M1 1l4 4 4-4" />
+                </svg>
+              </button>
+              <div className="invisible absolute left-1/2 top-full z-30 -translate-x-1/2 pt-3 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                <ul className="min-w-[14rem] whitespace-nowrap border-2 border-ink bg-cream py-2 text-ink shadow-[4px_4px_0_0_var(--gn-ink)]">
+                  {aboutLinks.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        to={link.href}
+                        className="font-body block px-5 py-2.5 text-base font-semibold hover:bg-ink hover:text-cream focus-visible:bg-ink focus-visible:text-cream"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <Link to={contactLink.href} className={linkClass}>
+              {contactLink.label}
+            </Link>
             <a
               href={instagramUrl}
               target="_blank"
@@ -128,7 +150,7 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
           </nav>
           <Link
             to={ctaHref}
-            className={`gn-btn-primary px-3! py-2.5! text-[10px] md:px-6! md:py-[13px]! md:text-xs ${onAcid ? "gn-btn-on-acid" : ""}`}
+            className={`gn-btn-primary px-3! py-2.5! text-[10px] md:px-6! md:py-[13px]! md:text-xs xl:absolute xl:right-10 xl:top-1/2 xl:-translate-y-1/2 ${onAcid ? "gn-btn-on-acid" : ""}`}
           >
             {ctaLabel}
           </Link>
@@ -137,31 +159,23 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
 
       {open && (
         <nav
-          className={`flex flex-col border-t bg-brand-dark text-white/85 md:hidden ${
+          className={`flex flex-col border-t bg-brand-dark text-white/85 xl:hidden ${
             onAcid ? "border-ink/30" : "border-white/20"
           }`}
         >
-          {links.map((link) =>
-            link.href.startsWith("/#") ? (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="gn-nav-link font-body font-semibold border-b border-white/10 px-5 py-4 text-base last:border-b-0"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                to={link.href}
-                onClick={() => setOpen(false)}
-                className="gn-nav-link font-body font-semibold border-b border-white/10 px-5 py-4 text-base last:border-b-0"
-              >
-                {link.label}
-              </Link>
-            ),
-          )}
+          {leftLinks.map((link) => (
+            <Link key={link.label} to={link.href} onClick={() => setOpen(false)} className={mobileLinkClass}>
+              {link.label}
+            </Link>
+          ))}
+          {aboutLinks.map((link) => (
+            <Link key={link.label} to={link.href} onClick={() => setOpen(false)} className={mobileLinkClass}>
+              About: {link.label}
+            </Link>
+          ))}
+          <Link to={contactLink.href} onClick={() => setOpen(false)} className={mobileLinkClass}>
+            {contactLink.label}
+          </Link>
           <a
             href={instagramUrl}
             target="_blank"

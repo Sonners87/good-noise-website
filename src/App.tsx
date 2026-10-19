@@ -14,6 +14,7 @@ import AfterSchoolRequest from "./pages/AfterSchoolRequest"
 import AfterSchoolContact from "./pages/AfterSchoolContact"
 import ForParents from "./pages/ForParents"
 import About from "./pages/About"
+import AboutTheProject from "./pages/AboutTheProject"
 import Contact from "./pages/Contact"
 import StayInTouch from "./pages/StayInTouch"
 import ChildSafetyPolicy from "./pages/ChildSafetyPolicy"
@@ -68,6 +69,7 @@ function App() {
           <Route path="/for-parents" element={<ForParents />} />
           <Route path="/stay-in-touch" element={<StayInTouch />} />
           <Route path="/about" element={<About />} />
+          <Route path="/about-the-project" element={<AboutTheProject />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/child-safety-policy" element={<ChildSafetyPolicy />} />
           <Route path="/photography-policy" element={<PhotographyPolicy />} />

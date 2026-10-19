@@ -111,8 +111,8 @@ export default function AfterSchoolPrograms() {
         </div>
 
         <nav aria-label="Jump to a section" className="mx-auto max-w-[1400px] px-5 pb-10 md:px-10 md:pb-14">
-          <p className="font-body text-xs font-semibold uppercase tracking-wider text-ink/70">Jump to</p>
-          <ul className="mt-3 flex flex-wrap gap-2">
+          <p className="font-body text-center text-xs font-semibold uppercase tracking-wider text-ink/70">Jump to</p>
+          <ul className="mt-3 flex flex-wrap justify-center gap-2">
             {jumpLinks.map((link) => (
               <li key={link.href}>
                 <a
