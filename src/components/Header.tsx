@@ -23,11 +23,14 @@ const links = [
 // wordmark don't survive that background (and .gn-nav-link's acid hover is
 // invisible on it), so "onAcid" swaps the whole strip to the ink/paper pair
 // — the only one that clears AA against #FF4A00 at nav text size.
-export type HeaderTone = "onDark" | "onAcid"
+// "onLight" is the same ink-on-light treatment for the light-blue school heroes
+// and the paper-coloured parents hero, where the acid nav hover would vanish or
+// clash, so links underline instead.
+export type HeaderTone = "onDark" | "onAcid" | "onLight"
 
 export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) {
   const [open, setOpen] = useState(false)
-  const onAcid = tone === "onAcid"
+  const onAcid = tone !== "onDark"
 
   // Label and destination both follow the upcoming workshop's own state, so
   // pointing `upcomingWorkshopSlug` at the next program is the only edit
@@ -62,7 +65,11 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
             come from inheritance instead. */}
         <nav
           className={`hidden items-center gap-9 md:flex ${
-            onAcid ? "gn-nav-on-acid text-ink" : "text-white/85"
+            tone === "onLight"
+              ? "gn-nav-on-light text-ink"
+              : onAcid
+                ? "gn-nav-on-acid text-ink"
+                : "text-white/85"
           }`}
         >
           {links.map((link) =>

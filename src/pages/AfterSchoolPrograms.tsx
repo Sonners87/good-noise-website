@@ -6,7 +6,6 @@ import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
 import FacilitatorContact from "../components/FacilitatorContact"
 import Accordion from "../components/afterschool/Accordion"
-import ThemesGraphic from "../components/afterschool/ThemesGraphic"
 import Placeholder from "../components/afterschool/Placeholder"
 import { setLandingPageMeta, SITE_URL } from "../lib/pageMeta"
 import {
@@ -26,9 +25,9 @@ import {
   TESTIMONIALS_PLACEHOLDER,
   whoFor,
 } from "../content/afterSchool"
-import heroPhoto from "../assets/images/after-school-hero-group.webp"
+import heroPhoto from "../assets/images/after-school-drop-in.webp"
 import eightWeekPhoto from "../assets/images/after-school-eight-week.webp"
-import dropInPhoto from "../assets/images/after-school-drop-in.webp"
+import dropInPhoto from "../assets/images/after-school-hero-group.webp"
 import tailoredPhoto from "../assets/images/after-school-tailored.webp"
 import davePhoto from "../assets/images/after-school-meet-dave.webp"
 
@@ -77,65 +76,83 @@ export default function AfterSchoolPrograms() {
   return (
     <>
       {/* 1. Hero */}
-      <section className="bg-ink text-cream">
-        <Header />
+      <section className="bg-[var(--gn-pink)] text-ink">
+        <Header tone="onLight" />
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 pb-16 pt-10 md:grid-cols-2 md:gap-14 md:px-10 md:pb-24 md:pt-16">
           <div>
-            <span className="gn-eyebrow text-[var(--gn-acid)]">{hero.eyebrow}</span>
+            <span className="gn-eyebrow text-ink">{hero.eyebrow}</span>
             <h1 className="font-display mt-5 text-4xl leading-[0.98] sm:text-5xl md:text-6xl">
               {hero.headline}
             </h1>
-            <p className="mt-6 max-w-xl text-lg font-semibold leading-relaxed text-cream">{hero.subhead}</p>
-            <div className="mt-5 max-w-xl space-y-4 text-base leading-relaxed text-cream/80 md:text-lg">
-              {hero.intro.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
+            <p className="mt-6 max-w-xl text-lg font-semibold leading-relaxed">{hero.body}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <PillButton href="/contact" variant="acidOnDark">
+              <PillButton href="/contact" variant="onLight">
                 Ask a question
               </PillButton>
               {/* TODO(info-pack): becomes "Download the info pack" once the PDF exists. */}
-              <PillButton href={INFO_PACK_HREF} variant="outlineOnDark">
+              <PillButton href={INFO_PACK_HREF} variant="outline">
                 {INFO_PACK_LABEL}
               </PillButton>
             </div>
           </div>
-          <div className="gn-photo-frame">
-            <PhotoImage src={heroPhoto} alt={hero.photoAlt} aspect="aspect-[3/2]" objectPosition="center 40%" />
+          <div className="gn-photo-frame" style={{ boxShadow: "6px 6px 0 0 var(--gn-ink)" }}>
+            <PhotoImage src={heroPhoto} alt={hero.photoAlt} aspect="aspect-[3/2]" objectPosition="center 35%" />
           </div>
         </div>
+      </section>
 
-        <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-20">
-          <dl className="grid grid-cols-1 border-2 border-cream/40 sm:grid-cols-2 lg:grid-cols-4">
+      {/* 2. Intro, at a glance, outcomes + video */}
+      <section className="bg-cream text-ink">
+        <div className={sectionInner}>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-14">
+            <p className="text-xl font-semibold leading-snug md:text-2xl">{hero.subhead}</p>
+            <div className="space-y-4 text-base leading-relaxed text-ink/80 md:text-lg">
+              {hero.intro.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </div>
+
+          <dl className="mt-12 grid grid-cols-1 border-2 border-ink sm:grid-cols-2 lg:grid-cols-4">
             {hero.glance.map((item) => (
               <div
                 key={item.label}
-                className="border-b-2 border-cream/40 p-5 last:border-b-0 sm:border-r-2 sm:[&:nth-child(2n)]:border-r-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:border-b-0 lg:[&:nth-child(2n)]:border-r-2 lg:last:border-r-0"
+                className="border-b-2 border-ink p-5 last:border-b-0 sm:border-r-2 sm:[&:nth-child(2n)]:border-r-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:border-b-0 lg:[&:nth-child(2n)]:border-r-2 lg:last:border-r-0"
               >
-                <dt className="font-body text-xs font-semibold uppercase tracking-wider text-[var(--gn-pink)]">
+                <dt className="font-body text-xs font-semibold uppercase tracking-wider text-ink/60">
                   {item.label}
                 </dt>
                 <dd className="mt-2 text-base font-semibold leading-snug">{item.value}</dd>
               </div>
             ))}
           </dl>
-        </div>
-      </section>
 
-      {/* 2. Outcomes */}
-      <section className="bg-cream text-ink">
-        <div className={sectionInner}>
-          <h2 className={h2Class}>{outcomes.heading}</h2>
-          <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {outcomes.tiles.map((tile) => (
-              <li key={tile.word} className="gn-card-flat">
-                <h3 className="font-display text-xl">{tile.word}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink/80">{tile.line}</p>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 text-lg font-semibold">{outcomes.footnote}</p>
+          <div className="mt-20 grid grid-cols-1 items-start gap-12 md:grid-cols-2 md:gap-14">
+            <div>
+              <h2 className={h2Class}>{outcomes.heading}</h2>
+              <div className="mt-8 border-b-2 border-ink/20">
+                {outcomes.tiles.map((tile) => (
+                  <Accordion key={tile.word} summary={tile.word} summaryClassName="font-display text-2xl">
+                    <p className="max-w-md text-base leading-relaxed text-ink/80">{tile.line}</p>
+                  </Accordion>
+                ))}
+              </div>
+              <p className="mt-8 text-lg font-semibold">{outcomes.footnote}</p>
+            </div>
+            <figure className="mx-auto w-full max-w-[360px]">
+              <video
+                controls
+                playsInline
+                preload="none"
+                poster="/video/after-school-reel-poster.jpg"
+                aria-label={meetDave.videoLabel}
+                className="aspect-[9/16] w-full bg-black"
+              >
+                <source src="/video/after-school-reel.mp4" type="video/mp4" />
+              </video>
+              <figcaption className="mt-3 text-sm text-ink/70">{meetDave.videoLabel}</figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
@@ -143,27 +160,26 @@ export default function AfterSchoolPrograms() {
       <section className="bg-ink text-cream" id="programs">
         <div className={sectionInner}>
           <h2 className={h2Class}>{programs.heading}</h2>
-          <div className="mt-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-3">
             {programs.cards.map((card) => (
-              <article key={card.id} className="border-[3px] border-cream bg-ink">
+              <article key={card.id} className="flex flex-col border-[3px] border-cream bg-ink">
                 <PhotoImage
                   src={cardPhotos[card.id]}
                   alt={card.photoAlt}
                   aspect="aspect-[4/3]"
                   objectPosition={card.photoPosition}
                 />
-                <div className="p-5 md:p-6">
+                <div className="flex flex-1 flex-col p-5 md:p-6">
                   <h3 className="font-display text-2xl">{card.title}</h3>
-                  <p className="mt-3 text-base leading-relaxed text-cream/85">{card.oneLiner}</p>
-                  <Accordion tone="dark" className="mt-5" summary="See details">
+                  <p className="mt-3 mb-5 text-base leading-relaxed text-cream/85">{card.oneLiner}</p>
+                  <Accordion tone="dark" className="mt-auto pt-0" summary="See details">
                     {card.id === "eight-week" ? (
                       <div className="space-y-5">
                         <p className="text-base leading-relaxed text-cream/85">
                           Sessions follow three themes: <strong>Permission</strong>, <strong>Play</strong> and{" "}
                           <strong>Connection</strong>.
                         </p>
-                        <ThemesGraphic />
-                        <ol className="space-y-3">
+                                        <ol className="space-y-3">
                           {eightWeekSchedule.map((row) => (
                             <li key={row.week} className="border-t border-cream/20 pt-3 text-sm leading-relaxed">
                               <p className="font-semibold text-[var(--gn-pink)]">
@@ -212,29 +228,25 @@ export default function AfterSchoolPrograms() {
             {howItWorks.steps.map((step, i) => (
               <li key={step.title} className="border-2 border-cream/40 p-5">
                 <span className="font-display text-3xl text-[var(--gn-acid)]">{i + 1}</span>
-                <h3 className="font-display mt-2 text-xl">{step.title}</h3>
+                <h3 className="font-display mt-2 text-2xl md:text-3xl">{step.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-cream/80">{step.text}</p>
               </li>
             ))}
           </ol>
 
           <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {howItWorks.delivery.map((card) =>
-              card.featured ? (
-                <div
-                  key={card.title}
-                  className="border-[3px] border-cream bg-cream p-6 text-ink shadow-[6px_6px_0_0_var(--gn-pink)] md:p-8"
-                >
-                  <h3 className="font-display text-2xl md:text-3xl">{card.title}</h3>
-                  <p className="mt-4 text-base leading-relaxed md:text-lg">{card.text}</p>
-                </div>
-              ) : (
-                <div key={card.title} className="border-2 border-cream/40 p-6 md:p-8">
-                  <h3 className="font-display text-2xl md:text-3xl">{card.title}</h3>
-                  <p className="mt-4 text-base leading-relaxed text-cream/85 md:text-lg">{card.text}</p>
-                </div>
-              ),
-            )}
+            {howItWorks.delivery.map((card) => (
+              <div
+                key={card.title}
+                className="border-[3px] border-cream bg-cream p-6 text-ink md:p-8"
+                style={{
+                  boxShadow: `6px 6px 0 0 ${card.shadow === "orange" ? "var(--gn-acid)" : "var(--gn-pink)"}`,
+                }}
+              >
+                <h3 className="font-display text-xl md:text-2xl">{card.title}</h3>
+                <p className="mt-4 text-base leading-relaxed md:text-lg">{card.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -257,38 +269,19 @@ export default function AfterSchoolPrograms() {
         </div>
       </section>
 
-      {/* 7. Meet Dave, video, testimonials */}
+      {/* 7. Meet Dave, testimonials */}
       <section className="bg-ink text-cream">
         <div className={sectionInner}>
-          <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-14">
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
             <div>
               <h2 className={h2Class}>{meetDave.heading}</h2>
-              <PhotoImage
-                src={davePhoto}
-                alt={meetDave.photoAlt}
-                aspect="aspect-[4/3]"
-                objectPosition="center 30%"
-                className="mt-8"
-              />
               <p className="mt-6 max-w-lg text-base leading-relaxed text-cream/85 md:text-lg">{meetDave.text}</p>
               <FacilitatorContact tone="onDark" className="mt-5" />
               <Link to="/about" className="gn-btn-secondary mt-7 text-[13px]">
                 {meetDave.linkLabel} &rarr;
               </Link>
             </div>
-            <figure className="mx-auto w-full max-w-[360px]">
-              <video
-                controls
-                playsInline
-                preload="none"
-                poster="/video/after-school-reel-poster.jpg"
-                aria-label={meetDave.videoLabel}
-                className="aspect-[9/16] w-full bg-black"
-              >
-                <source src="/video/after-school-reel.mp4" type="video/mp4" />
-              </video>
-              <figcaption className="mt-3 text-sm text-cream/70">{meetDave.videoLabel}</figcaption>
-            </figure>
+            <PhotoImage src={davePhoto} alt={meetDave.photoAlt} aspect="aspect-[4/3]" objectPosition="center 30%" />
           </div>
 
           {testimonials.length > 0 ? (
@@ -330,20 +323,20 @@ export default function AfterSchoolPrograms() {
         </div>
       </section>
 
-      <section className="bg-ink text-cream">
-        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-          <h2 className={`${h2Class} max-w-3xl`}>{finalCta.heading}</h2>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/85 md:text-lg">{finalCta.text}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <PillButton href="/contact" variant="acidOnDark">
+      <section className="bg-[var(--gn-pink)] text-ink">
+        <div className="mx-auto max-w-[1400px] px-5 pb-24 pt-16 text-center md:px-10 md:pb-36 md:pt-24">
+          <h2 className={`${h2Class} mx-auto max-w-3xl`}>{finalCta.heading}</h2>
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed md:text-lg">{finalCta.text}</p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <PillButton href="/contact" variant="onLight">
               Ask a question
             </PillButton>
             {/* TODO(info-pack): becomes "Download the info pack" once the PDF exists. */}
-            <PillButton href={INFO_PACK_HREF} variant="outlineOnDark">
+            <PillButton href={INFO_PACK_HREF} variant="outline">
               {INFO_PACK_LABEL}
             </PillButton>
           </div>
-          <FacilitatorContact tone="onDark" className="mt-8" />
+          <FacilitatorContact className="mt-8 items-center text-ink/80" />
         </div>
       </section>
 

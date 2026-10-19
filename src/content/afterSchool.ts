@@ -11,6 +11,7 @@ export const INFO_PACK_HREF = "/contact"
 export const hero = {
   eyebrow: "After-school programs for councils, schools and youth organisations",
   headline: "Music's Better Shared. Especially After School.",
+  body: "We help young people in WA create original music through regular after school music programs. The result? Finding their tribe, getting out of their heads, and having a tonne of fun in the process.",
   subhead:
     "A weekly songwriting, jamming and recording program for young musicians in Perth. We travel to your venue, bring the plan and run every session (or show you how to).",
   intro: [
@@ -24,7 +25,7 @@ export const hero = {
     { label: "Who runs it", value: "Us, or us alongside your staff" },
   ],
   photoAlt:
-    "Dave Sonntag and a group of young musicians gathered in a jam room, holding guitars, a bass, saxophones and a microphone, smiling at the camera",
+    "Young musicians laughing together in a jam session, with saxophones, a microphone and lyric sheets in hand",
 }
 
 export const outcomes = {
@@ -38,27 +39,6 @@ export const outcomes = {
   ],
   footnote: "And fun. Lots of it.",
 }
-
-export const themes = [
-  {
-    name: "Permission",
-    line: "I'm allowed.",
-    body: ["Giving myself the green light.", "Getting out of my own head.", "No comparing.", "Mistakes are welcome."],
-    weeks: "Weeks 1–3",
-  },
-  {
-    name: "Play",
-    line: "So I try things.",
-    body: ["What's allowed once I've given myself permission.", "Experimenting, trusting my instincts, freedom."],
-    weeks: "Weeks 3–5",
-  },
-  {
-    name: "Connection",
-    line: "And this happens.",
-    body: ["The outcome of the first two.", "Connection to myself, my bandmates, and the audience."],
-    weeks: "Weeks 6–8",
-  },
-]
 
 export const eightWeekSchedule = [
   { week: "1", what: "Warm up together, first jam, pick a theme for the song, sketch some chords, start humming melodies", theme: "Permission" },
@@ -86,8 +66,9 @@ export const programs = {
       title: "Weekly Drop-In Sessions",
       oneLiner:
         "Ongoing weekly sessions young people can join any time. Each one stands on its own, so nobody falls behind if they miss a week or two. New participants welcomed each week.",
-      photoAlt: "Young musicians laughing together in a jam session, with saxophones, a microphone and lyric sheets in hand",
-      photoPosition: "center 35%",
+      photoAlt:
+        "Dave Sonntag and a group of young musicians gathered in a jam room, holding guitars, a bass, saxophones and a microphone, smiling at the camera",
+      photoPosition: "center 40%",
       details: [
         "Sessions can cover songwriting, lyric writing, dynamics, permission to create, self-compassion as a musician, performance prep, recording, mentoring and free jams.",
         "Some crowd favourites: the Worst Jam Ever, Lyric Circle, Cut-Up Lyrics, the 60-Second Jingle and the Conductor Game.",
@@ -119,9 +100,9 @@ export const whoFor = {
 }
 
 export const howItWorks = {
-  heading: "How it works",
+  heading: "How you can get onboard",
   steps: [
-    { title: "Planning call", text: "We talk through your young people, your space and what you're after." },
+    { title: "We talk", text: "We talk through your young people, your space and what you're after." },
     { title: "Lock it in", text: "We agree the program, dates, numbers and who runs it, and send through our paperwork." },
     { title: "We deliver", text: "We turn up and run every session." },
     { title: "We report back", text: "Attendance, feedback, photos (with consent) and the recording." },
@@ -130,12 +111,12 @@ export const howItWorks = {
     {
       title: "Hand it over to us",
       text: "We plan and run every session, supervise participants and handle sign-in and sign-out. Your team doesn't need to be in the room.",
-      featured: true,
+      shadow: "blue" as const,
     },
     {
       title: "Run it with us",
       text: "Your staff join in and learn the activities as we go. We're in it with you before we take off and leave you to it.",
-      featured: false,
+      shadow: "orange" as const,
     },
   ],
 }

@@ -475,16 +475,16 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
           </div>
         </section>
       ) : (
-        <section className="bg-brand">
-          <Header />
+        <section className="bg-[var(--gn-pink)]">
+          <Header tone="onLight" />
           <div
             className={`mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-14 md:px-10 md:py-20 ${
               heroImage ? "md:grid-cols-2" : ""
             }`}
           >
             <div>
-              <Eyebrow tone="onBlue">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
-              <h1 className="font-display max-w-2xl text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl">
+              <Eyebrow tone="onLight">{workshop.eyebrow ?? "Workshop"}</Eyebrow>
+              <h1 className="font-display max-w-2xl text-4xl leading-[1.05] text-ink sm:text-5xl md:text-6xl">
                 {workshop.title}
               </h1>
 
@@ -497,7 +497,7 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
               </div>
 
               {workshop.ageRangeNote && (
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/70">
                   {linkifyEmail(workshop.ageRangeNote)}
                 </p>
               )}
