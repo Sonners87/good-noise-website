@@ -33,6 +33,8 @@ const ROUTES = [
   "/school-holiday-music-camp-perth",
   "/after-school-programs",
   "/after-school-programs/safety",
+  "/after-school-programs/request",
+  "/after-school-programs/contact",
   "/for-parents",
   "/stay-in-touch",
   "/about",

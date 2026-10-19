@@ -69,7 +69,7 @@ export default function AfterSchoolSafety() {
           </ul>
 
           <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-            <PillButton href="/contact" variant="onLight">
+            <PillButton href="/after-school-programs/contact" variant="onLight">
               Ask a question
             </PillButton>
           </div>

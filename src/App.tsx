@@ -10,6 +10,8 @@ import HolidayCamps from "./pages/HolidayCamps"
 import SchoolHolidayMusicCamp from "./pages/SchoolHolidayMusicCamp"
 import AfterSchoolPrograms from "./pages/AfterSchoolPrograms"
 import AfterSchoolSafety from "./pages/AfterSchoolSafety"
+import AfterSchoolRequest from "./pages/AfterSchoolRequest"
+import AfterSchoolContact from "./pages/AfterSchoolContact"
 import ForParents from "./pages/ForParents"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -61,6 +63,8 @@ function App() {
           <Route path="/for-schools" element={<WorkshopDetail slug="in-school-songwriting" />} />
           <Route path="/after-school-programs" element={<AfterSchoolPrograms />} />
           <Route path="/after-school-programs/safety" element={<AfterSchoolSafety />} />
+          <Route path="/after-school-programs/request" element={<AfterSchoolRequest />} />
+          <Route path="/after-school-programs/contact" element={<AfterSchoolContact />} />
           <Route path="/for-parents" element={<ForParents />} />
           <Route path="/stay-in-touch" element={<StayInTouch />} />
           <Route path="/about" element={<About />} />

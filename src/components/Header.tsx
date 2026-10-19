@@ -18,6 +18,10 @@ const links = [
   { label: "Contact", href: "/contact" },
 ]
 
+// Desktop splits the same list either side of the centred logo.
+const leftLinks = links.slice(0, 4)
+const rightLinks = links.slice(4)
+
 // Every page put the nav on an ink/forest section until the participant
 // workshop pages moved to an --gn-acid hero. White nav links and a cream
 // wordmark don't survive that background (and .gn-nav-link's acid hover is
@@ -48,72 +52,42 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
     ? "/stay-in-touch"
     : `/workshops/${upcomingWorkshopSlug}`
 
+  const navColour =
+    tone === "onLight"
+      ? "gn-nav-on-light text-ink"
+      : onAcid
+        ? "gn-nav-on-acid text-ink"
+        : "text-white/85"
+
+  // Desktop: left group of links, centred logo, right group of links plus the
+  // CTA. Mobile: menu button, centred logo, CTA. text-white/85 lives on the
+  // <nav> rather than each link: .gn-nav-link sets color:currentColor
+  // (unlayered, so it beats a layered Tailwind text-* utility on the link
+  // itself) and only overrides colour on hover/focus.
+  const renderLink = (link: (typeof links)[number]) =>
+    link.href.startsWith("/#") ? (
+      <a key={link.label} href={link.href} className="gn-nav-link font-body font-semibold text-base">
+        {link.label}
+      </a>
+    ) : (
+      <Link key={link.label} to={link.href} className="gn-nav-link font-body font-semibold text-base">
+        {link.label}
+      </Link>
+    )
+
   return (
     <header className="relative z-20">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-5 md:px-10">
-        <a href="/#home" className="shrink-0">
-          <img
-            src={onAcid ? logoBlack : logo}
-            alt="Good Noise Project"
-            className="h-12 w-auto md:h-16"
-          />
-        </a>
-        {/* text-white/85 lives on <nav> rather than each link: .gn-nav-link
-            sets color:currentColor (unlayered, so it always wins over a
-            layered Tailwind text-* utility placed on the link itself) and
-            only overrides colour on hover/focus — the base colour has to
-            come from inheritance instead. */}
-        <nav
-          className={`hidden items-center gap-9 md:flex ${
-            tone === "onLight"
-              ? "gn-nav-on-light text-ink"
-              : onAcid
-                ? "gn-nav-on-acid text-ink"
-                : "text-white/85"
-          }`}
-        >
-          {links.map((link) =>
-            link.href.startsWith("/#") ? (
-              <a
-                key={link.label}
-                href={link.href}
-                className="gn-nav-link font-body font-semibold text-base"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.label}
-                to={link.href}
-                className="gn-nav-link font-body font-semibold text-base"
-              >
-                {link.label}
-              </Link>
-            ),
-          )}
-          <a
-            href={instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="gn-nav-link"
-          >
-            <InstagramIcon className="h-5 w-5" />
-          </a>
-        </nav>
-        <div className="flex items-center gap-3">
-          <Link
-            to={ctaHref}
-            className={`gn-btn-primary text-xs ${onAcid ? "gn-btn-on-acid" : ""}`}
-          >
-            {ctaLabel}
-          </Link>
+      <div className="mx-auto grid max-w-[1400px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-5 py-5 md:px-10">
+        <div className="flex items-center justify-start">
+          <nav className={`hidden items-center gap-9 md:flex ${navColour}`}>
+            {leftLinks.map(renderLink)}
+          </nav>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className={`flex h-12 w-12 flex-col items-center justify-center gap-1.5 border-2 md:hidden ${
+            className={`flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 border-2 md:hidden ${
               onAcid ? "border-ink" : "border-white"
             }`}
           >
@@ -129,6 +103,35 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
               className={`h-0.5 w-6 transition ${onAcid ? "bg-ink" : "bg-white"} ${open ? "-translate-y-2 -rotate-45" : ""}`}
             />
           </button>
+        </div>
+
+        <a href="/#home" className="justify-self-center">
+          <img
+            src={onAcid ? logoBlack : logo}
+            alt="Good Noise Project"
+            className="h-11 w-auto md:h-16"
+          />
+        </a>
+
+        <div className="flex items-center justify-end gap-9">
+          <nav className={`hidden items-center gap-9 md:flex ${navColour}`}>
+            {rightLinks.map(renderLink)}
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="gn-nav-link"
+            >
+              <InstagramIcon className="h-5 w-5" />
+            </a>
+          </nav>
+          <Link
+            to={ctaHref}
+            className={`gn-btn-primary px-3! py-2.5! text-[10px] md:px-6! md:py-[13px]! md:text-xs ${onAcid ? "gn-btn-on-acid" : ""}`}
+          >
+            {ctaLabel}
+          </Link>
         </div>
       </div>
 

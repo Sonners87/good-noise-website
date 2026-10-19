@@ -4,12 +4,14 @@
 
 export const INFO_PACK_LABEL = "Request the info pack"
 // TODO(info-pack): the info pack PDF (copy file Part C) doesn't exist yet.
-// Until it does, this goes to the contact page. When the PDF is published,
+// Until it does, this goes to the request form page. When the PDF is published,
 // point this at it and change the label to "Download the info pack".
-export const INFO_PACK_HREF = "/contact"
+export const INFO_PACK_HREF = "/after-school-programs/request"
+export const ASK_HREF = "/after-school-programs/contact"
 
 export const hero = {
-  eyebrow: "After-school programs for councils, schools and youth organisations",
+  eyebrow: "After-school programs",
+  audience: "For councils, schools and youth organisations",
   headline: "Music's Better Shared. Especially After School.",
   body: "We help young people in WA create original music through regular after school music programs. The result? Finding their tribe, getting out of their heads, and having a tonne of fun in the process.",
   subhead:

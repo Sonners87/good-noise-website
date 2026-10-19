@@ -9,6 +9,7 @@ import Accordion from "../components/afterschool/Accordion"
 import Placeholder from "../components/afterschool/Placeholder"
 import { setLandingPageMeta, SITE_URL } from "../lib/pageMeta"
 import {
+  ASK_HREF,
   INFO_PACK_HREF,
   INFO_PACK_LABEL,
   cost,
@@ -84,9 +85,10 @@ export default function AfterSchoolPrograms() {
             <h1 className="font-display mt-5 text-4xl leading-[0.98] sm:text-5xl md:text-6xl">
               {hero.headline}
             </h1>
-            <p className="mt-6 max-w-xl text-lg font-semibold leading-relaxed">{hero.body}</p>
+            <p className="font-body mt-5 text-sm font-semibold uppercase tracking-wider">{hero.audience}</p>
+            <p className="mt-3 max-w-xl text-lg font-semibold leading-relaxed">{hero.body}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <PillButton href="/contact" variant="onLight">
+              <PillButton href={ASK_HREF} variant="onLight">
                 Ask a question
               </PillButton>
               {/* TODO(info-pack): becomes "Download the info pack" once the PDF exists. */}
@@ -328,7 +330,7 @@ export default function AfterSchoolPrograms() {
           <h2 className={`${h2Class} mx-auto max-w-3xl`}>{finalCta.heading}</h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed md:text-lg">{finalCta.text}</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <PillButton href="/contact" variant="onLight">
+            <PillButton href={ASK_HREF} variant="onLight">
               Ask a question
             </PillButton>
             {/* TODO(info-pack): becomes "Download the info pack" once the PDF exists. */}
