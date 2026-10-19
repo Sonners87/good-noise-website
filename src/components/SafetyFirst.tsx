@@ -1,6 +1,6 @@
 import PhotoImage from "./PhotoImage"
 import concertFriends from "../assets/images/strip-concert-friends.webp"
-import drummer from "../assets/images/strip-drummer.webp"
+import jamSession from "../assets/images/hero-guitar-jam.webp"
 import busker from "../assets/images/strip-busker.webp"
 
 const pillars = [
@@ -13,8 +13,8 @@ const pillars = [
   {
     title: "No Hierarchy",
     body: "Nobody's here to perform, prove themselves, or hit a benchmark.",
-    photo: drummer,
-    alt: "A young drummer performing under green stage light",
+    photo: jamSession,
+    alt: "A Good Noise facilitator laughing as he plays acoustic guitar with young musicians on keyboard, guitar and electric guitar in a studio jam session",
   },
   {
     title: "No Pressure",
