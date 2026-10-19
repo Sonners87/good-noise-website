@@ -32,9 +32,18 @@ export default function ScrollToTop() {
   }, [location.key])
 
   useEffect(() => {
+    // Same-page and cross-page hash links (e.g. /photography-policy#who-owns-the-songs)
+    // jump to their anchor once the route has rendered.
+    if (location.hash) {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)))
+      if (target) {
+        target.scrollIntoView({ behavior: "instant" })
+        return
+      }
+    }
     const top = navigationType === "POP" ? (scrollPositions.get(location.key) ?? 0) : 0
     window.scrollTo({ top, behavior: "instant" })
-  }, [location.key, navigationType])
+  }, [location.key, location.hash, navigationType])
 
   return null
 }
