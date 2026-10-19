@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import PhotoImage from "./PhotoImage"
 import Eyebrow from "./Eyebrow"
 import { pillBaseStyles, pillSizeStyles, pillVariantStyles } from "./PillButton"
-import programsPhoto from "../assets/images/programs-laughing-group.webp"
+import programsPhoto from "../assets/images/after-school-hero-group.webp"
 
 export default function Programs() {
   return (
@@ -26,9 +26,9 @@ export default function Programs() {
         >
           <PhotoImage
             src={programsPhoto}
-            alt="A group of young musicians laughing and clapping together in a games room"
+            alt="Dave Sonntag and a group of young musicians gathered in a jam room, holding guitars, a bass, saxophones and a microphone, smiling at the camera"
             aspect="aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9]"
-            objectPosition="50% 35%"
+            objectPosition="50% 40%"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent transition group-hover:from-ink/95"

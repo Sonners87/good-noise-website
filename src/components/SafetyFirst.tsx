@@ -1,5 +1,5 @@
 import PhotoImage from "./PhotoImage"
-import dropIn from "../assets/images/after-school-drop-in.webp"
+import dropIn from "../assets/images/after-school-tailored.webp"
 import writing from "../assets/images/after-school-eight-week.webp"
 import jamSession from "../assets/images/hero-guitar-jam.webp"
 
@@ -8,7 +8,7 @@ const pillars = [
     title: "No Judgement",
     body: "We embrace mistakes — that's where the good stuff comes from.",
     photo: dropIn,
-    alt: "Young musicians laughing together in a jam session, with saxophones, a microphone and lyric sheets in hand",
+    alt: "Two young musicians talking beside a saxophone on a music stand and a blue electric guitar",
   },
   {
     title: "No Hierarchy",
