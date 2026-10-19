@@ -858,6 +858,19 @@ export default function WorkshopDetail({ slug: slugProp }: { slug?: string } = {
                 {workshop.directContact.phone}
               </a>
             </div>
+            {workshop.slug === "in-school-songwriting" && (
+              <p className="mx-auto mt-10 max-w-xl text-base leading-relaxed text-white/90 md:text-lg">
+                Running a program outside school hours for a council or youth
+                organisation? See our{" "}
+                <Link
+                  to="/after-school-programs"
+                  className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta"
+                >
+                  after-school programs
+                </Link>
+                .
+              </p>
+            )}
           </div>
         </section>
       )}

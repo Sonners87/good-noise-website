@@ -51,6 +51,14 @@ export default function Workshops() {
           </Link>{" "}
           page.
         </p>
+        <p className="mt-3 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+          Looking for a weekly program for a council, school or youth
+          organisation? See our{" "}
+          <Link to="/after-school-programs" className="font-semibold underline decoration-2 underline-offset-4 hover:text-terracotta">
+            after-school programs
+          </Link>
+          .
+        </p>
         {/* Links to the spring-program SEO page — hidden while it's paused. */}
         {SHOW_SPRING_2026_PROGRAM && (
         <p className="mt-3 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
