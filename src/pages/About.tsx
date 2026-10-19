@@ -6,7 +6,7 @@ import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
 import FacilitatorContact from "../components/FacilitatorContact"
 import StayInLoop from "../components/StayInLoop"
-import facilitatorPhoto from "../assets/images/facilitator-dave-red-jumper.webp"
+import facilitatorPhoto from "../assets/images/dave-bio.webp"
 
 const bioParagraphs = [
   "Music has been Dave Sonntag's saviour, his mate, his megaphone and his silo — a way to express, a way to vent, and above all, a way to connect. For thirty years as a drummer and twenty as a self-taught guitarist, vocalist and singer-songwriter, it's carried him as much as he's carried it: onto Triple J, onto the drum stool in front of thousands, and into a life built around creativity, connection and belonging. It introduced him to lifelong mates. It even introduced him to his wife.",
@@ -42,8 +42,9 @@ export default function About() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-20">
           <PhotoImage
             src={facilitatorPhoto}
-            alt="Dave Sonntag smiling, sitting on a rooftop ledge in Perth"
+            alt="Dave Sonntag smiling and gesturing as he talks to a group in a jam room, wearing a black Good Noise T-shirt"
             aspect="aspect-[4/5]"
+            objectPosition="center 25%"
           />
 
           <div>

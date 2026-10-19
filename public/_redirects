@@ -1,2 +1,7 @@
-/workshops/in-school-songwriting   /for-schools   301
+# In-school program is in draft (SHOW_FOR_SCHOOLS_PAGE). Temporary redirects to
+# the after-school page. When the page returns, restore the 301 below and drop
+# the /for-schools line:
+#   /workshops/in-school-songwriting   /for-schools   301
+/for-schools   /after-school-programs   302
+/workshops/in-school-songwriting   /after-school-programs   302
 /*    /index.html   200

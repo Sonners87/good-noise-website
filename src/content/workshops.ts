@@ -2,7 +2,7 @@
 // each workshop's own detail page both read from here — add a new object to
 // `workshops` for a new workshop rather than hardcoding copy into a page.
 
-import { SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "./featureFlags"
+import { SHOW_FOR_SCHOOLS_PAGE, SHOW_OCT_2026_CAMP, SHOW_SPRING_2026_PROGRAM } from "./featureFlags"
 
 export type WorkshopInfoRow = { label: string; value: string }
 export type WorkshopHighlight = { title?: string; body: string }
@@ -402,6 +402,7 @@ const allWorkshops: Record<string, Workshop> = {
 const hiddenSlugs = [
   ...(SHOW_OCT_2026_CAMP ? [] : ["songwriting-oct-2026"]),
   ...(SHOW_SPRING_2026_PROGRAM ? [] : ["2026-spring-holidays"]),
+  ...(SHOW_FOR_SCHOOLS_PAGE ? [] : ["in-school-songwriting"]),
 ]
 export const workshops: Record<string, Workshop> = Object.fromEntries(
   Object.entries(allWorkshops).filter(([slug]) => !hiddenSlugs.includes(slug)),
