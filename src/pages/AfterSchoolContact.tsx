@@ -30,7 +30,7 @@ export default function AfterSchoolContact() {
             messageRequired={true}
             messagePlaceholder="Who are the young people, roughly how many and what ages? Where would the program run, and when are you hoping to start?"
             submitLabel="Send enquiry"
-            successMessage="Thanks. We'll be in touch soon."
+            successMessage="Thanks! We'll get back to you in no time."
           />
         </div>
       </section>

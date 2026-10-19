@@ -6,7 +6,7 @@ import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
 import FacilitatorContact from "../components/FacilitatorContact"
 import Accordion from "../components/afterschool/Accordion"
-import Placeholder from "../components/afterschool/Placeholder"
+import TestimonialCarousel from "../components/afterschool/TestimonialCarousel"
 import { setLandingPageMeta, SITE_URL } from "../lib/pageMeta"
 import {
   ASK_HREF,
@@ -23,7 +23,6 @@ import {
   programs,
   safetySummary,
   testimonials,
-  TESTIMONIALS_PLACEHOLDER,
   whoFor,
 } from "../content/afterSchool"
 import heroPhoto from "../assets/images/after-school-drop-in.webp"
@@ -55,6 +54,15 @@ const structuredData = [
   },
 ]
 
+const jumpLinks = [
+  { label: "Who it's for", href: "#whos-it-for" },
+  { label: "What young people walk away with", href: "#outcomes" },
+  { label: "Formats", href: "#programs" },
+  { label: "Get onboard", href: "#get-onboard" },
+  { label: "The facilitator", href: "#facilitator" },
+  { label: "Cost + FAQs", href: "#cost-faqs" },
+]
+
 const sectionInner = "mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24"
 const h2Class = "font-display text-3xl leading-[1.02] sm:text-4xl md:text-5xl"
 
@@ -79,15 +87,15 @@ export default function AfterSchoolPrograms() {
       {/* 1. Hero */}
       <section className="bg-[var(--gn-pink)] text-ink">
         <Header tone="onLight" />
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 pb-16 pt-10 md:grid-cols-2 md:gap-14 md:px-10 md:pb-24 md:pt-16">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 pb-12 pt-8 md:grid-cols-2 md:gap-14 md:px-10 md:pb-14 md:pt-12">
           <div>
             <span className="gn-eyebrow text-ink">{hero.eyebrow}</span>
             <h1 className="font-display mt-5 text-4xl leading-[0.98] sm:text-5xl md:text-6xl">
               {hero.headline}
             </h1>
-            <p className="font-body mt-5 text-sm font-semibold uppercase tracking-wider">{hero.audience}</p>
-            <p className="mt-3 max-w-xl text-lg font-semibold leading-relaxed">{hero.body}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <p className="font-body mt-7 text-sm font-semibold uppercase tracking-wider">{hero.audience}</p>
+            <p className="mt-7 max-w-xl text-lg font-semibold leading-relaxed">{hero.body}</p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <PillButton href={ASK_HREF} variant="onLight">
                 Ask a question
               </PillButton>
@@ -101,9 +109,25 @@ export default function AfterSchoolPrograms() {
             <PhotoImage src={heroPhoto} alt={hero.photoAlt} aspect="aspect-[3/2]" objectPosition="center 35%" />
           </div>
         </div>
+
+        <nav aria-label="Jump to a section" className="mx-auto max-w-[1400px] px-5 pb-10 md:px-10 md:pb-14">
+          <p className="font-body text-xs font-semibold uppercase tracking-wider text-ink/70">Jump to</p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {jumpLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="font-body inline-block border-2 border-ink px-4 py-2 text-sm font-semibold transition hover:bg-ink hover:text-[var(--gn-pink)]"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </section>
 
-      {/* 2. Intro, at a glance, outcomes + video */}
+      {/* 2. Intro, who it's for, outcomes + video */}
       <section className="bg-cream text-ink">
         <div className={sectionInner}>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-14">
@@ -115,21 +139,19 @@ export default function AfterSchoolPrograms() {
             </div>
           </div>
 
-          <dl className="mt-12 grid grid-cols-1 border-2 border-ink sm:grid-cols-2 lg:grid-cols-4">
-            {hero.glance.map((item) => (
-              <div
-                key={item.label}
-                className="border-b-2 border-ink p-5 last:border-b-0 sm:border-r-2 sm:[&:nth-child(2n)]:border-r-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:border-b-0 lg:[&:nth-child(2n)]:border-r-2 lg:last:border-r-0"
-              >
-                <dt className="font-body text-xs font-semibold uppercase tracking-wider text-ink/60">
-                  {item.label}
-                </dt>
-                <dd className="mt-2 text-base font-semibold leading-snug">{item.value}</dd>
-              </div>
-            ))}
-          </dl>
+          <div id="whos-it-for" className="mt-14 scroll-mt-6">
+            <h2 className={h2Class}>{whoFor.heading}</h2>
+            <dl className="mt-8 grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
+              {whoFor.items.map((item) => (
+                <div key={item.label} className="border-t-2 border-ink pt-4">
+                  <dt className="font-body text-xs font-semibold uppercase tracking-wider text-ink/60">{item.label}</dt>
+                  <dd className="mt-2 text-base leading-relaxed md:text-lg">{item.text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
 
-          <div className="mt-20 grid grid-cols-1 items-start gap-12 md:grid-cols-2 md:gap-14">
+          <div id="outcomes" className="mt-20 grid scroll-mt-6 grid-cols-1 items-start gap-12 md:grid-cols-2 md:gap-14">
             <div>
               <h2 className={h2Class}>{outcomes.heading}</h2>
               <div className="mt-8 border-b-2 border-ink/20">
@@ -159,7 +181,7 @@ export default function AfterSchoolPrograms() {
       </section>
 
       {/* 3. Program options */}
-      <section className="bg-ink text-cream" id="programs">
+      <section className="bg-ink text-cream scroll-mt-6" id="programs">
         <div className={sectionInner}>
           <h2 className={h2Class}>{programs.heading}</h2>
           <div className="mt-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-3">
@@ -227,31 +249,16 @@ export default function AfterSchoolPrograms() {
         </div>
       </section>
 
-      {/* 4. Who it's for */}
-      <section className="bg-cream text-ink">
-        <div className={sectionInner}>
-          <h2 className={h2Class}>{whoFor.heading}</h2>
-          <dl className="mt-10 grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
-            {whoFor.items.map((item) => (
-              <div key={item.label} className="border-t-2 border-ink pt-4">
-                <dt className="font-body text-xs font-semibold uppercase tracking-wider text-ink/60">{item.label}</dt>
-                <dd className="mt-2 text-base leading-relaxed md:text-lg">{item.text}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
       {/* 5. How it works */}
-      <section className="bg-ink text-cream">
+      <section id="get-onboard" className="scroll-mt-6 bg-cream text-ink">
         <div className={sectionInner}>
           <h2 className={h2Class}>{howItWorks.heading}</h2>
           <ol className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {howItWorks.steps.map((step, i) => (
-              <li key={step.title} className="border-2 border-cream/40 p-5">
+              <li key={step.title} className="border-2 border-ink p-5">
                 <span className="font-display text-3xl text-[var(--gn-acid)]">{i + 1}</span>
                 <h3 className="font-display mt-2 text-2xl md:text-3xl">{step.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-cream/80">{step.text}</p>
+                <p className="mt-3 text-sm leading-relaxed text-ink/80">{step.text}</p>
               </li>
             ))}
           </ol>
@@ -260,7 +267,7 @@ export default function AfterSchoolPrograms() {
             {howItWorks.delivery.map((card) => (
               <div
                 key={card.title}
-                className="border-[3px] border-cream bg-cream p-6 text-ink md:p-8"
+                className="border-[3px] border-ink bg-cream p-6 text-ink md:p-8"
                 style={{
                   boxShadow: `6px 6px 0 0 ${card.shadow === "orange" ? "var(--gn-acid)" : "var(--gn-pink)"}`,
                 }}
@@ -274,12 +281,12 @@ export default function AfterSchoolPrograms() {
       </section>
 
       {/* 6. Safety summary */}
-      <section className="bg-cream text-ink">
+      <section className="bg-ink text-cream">
         <div className={sectionInner}>
           <h2 className={h2Class}>{safetySummary.heading}</h2>
           <ul className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
             {safetySummary.ticks.map((tick) => (
-              <li key={tick} className="flex items-start gap-3 border-2 border-ink p-4">
+              <li key={tick} className="flex items-start gap-3 border-2 border-cream/40 p-4">
                 <Tick className="mt-0.5 text-[var(--gn-acid)]" />
                 <span className="text-base leading-relaxed">{tick}</span>
               </li>
@@ -292,13 +299,13 @@ export default function AfterSchoolPrograms() {
       </section>
 
       {/* 7. Meet Dave, testimonials */}
-      <section className="bg-ink text-cream">
+      <section id="facilitator" className="scroll-mt-6 bg-cream text-ink">
         <div className={sectionInner}>
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
             <div>
               <h2 className={h2Class}>{meetDave.heading}</h2>
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-cream/85 md:text-lg">{meetDave.text}</p>
-              <FacilitatorContact tone="onDark" className="mt-5" />
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-ink/85 md:text-lg">{meetDave.text}</p>
+              <FacilitatorContact className="mt-5" />
               <Link to="/about" className="gn-btn-secondary mt-7 text-[13px]">
                 {meetDave.linkLabel} &rarr;
               </Link>
@@ -306,25 +313,16 @@ export default function AfterSchoolPrograms() {
             <PhotoImage src={davePhoto} alt={meetDave.photoAlt} aspect="aspect-[4/3]" objectPosition="center 30%" />
           </div>
 
-          {testimonials.length > 0 ? (
-            <ul className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-              {testimonials.map((t) => (
-                <li key={t.name} className="border-2 border-cream/40 p-6">
-                  <blockquote className="text-base leading-relaxed">“{t.quote}”</blockquote>
-                  <p className="mt-4 text-sm font-semibold">
-                    {t.name}, {t.role}, {t.organisation}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <Placeholder className="mt-14">{TESTIMONIALS_PLACEHOLDER}</Placeholder>
+          {testimonials.length > 0 && (
+            <div className="mt-16 border-t-2 border-ink pt-12 md:mt-20 md:pt-16">
+              <TestimonialCarousel items={testimonials} />
+            </div>
           )}
         </div>
       </section>
 
       {/* 8. Cost, FAQs, final CTA */}
-      <section className="bg-cream text-ink">
+      <section id="cost-faqs" className="scroll-mt-6 bg-ink text-cream">
         <div className={sectionInner}>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_2fr]">
             <div>
@@ -333,10 +331,10 @@ export default function AfterSchoolPrograms() {
             </div>
             <div>
               <h2 className={h2Class}>{faqs.heading}</h2>
-              <div className="mt-6 border-b-2 border-ink/20">
+              <div className="mt-6 border-b-2 border-cream/30">
                 {faqs.items.map((item) => (
-                  <Accordion key={item.q} summary={item.q} summaryClassName="text-lg">
-                    <p className="max-w-2xl text-base leading-relaxed text-ink/80">{item.a}</p>
+                  <Accordion key={item.q} tone="dark" summary={item.q} summaryClassName="text-lg">
+                    <p className="max-w-2xl text-base leading-relaxed text-cream/80">{item.a}</p>
                   </Accordion>
                 ))}
               </div>

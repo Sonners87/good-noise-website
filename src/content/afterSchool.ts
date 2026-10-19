@@ -20,12 +20,6 @@ export const hero = {
     "We're dedicated to making music and songwriting accessible for every young person in WA. Our after-school programs get young people writing, playing and recording original music together.",
     "We believe in the power of music to connect people, build self-compassion and inject a sense of play into their lives. We've seen it first-hand. We want your students or local youth to experience it too.",
   ],
-  glance: [
-    { label: "Ages", value: "Anywhere from 11 to 18" },
-    { label: "Formats", value: "8-week program, weekly drop-in sessions, or tailored to your needs" },
-    { label: "Where", value: "Your venue, anywhere in Perth" },
-    { label: "Who runs it", value: "Us, or us alongside your staff" },
-  ],
   photoAlt:
     "Young musicians laughing together in a jam session, with saxophones, a microphone and lyric sheets in hand",
 }
@@ -98,6 +92,8 @@ export const whoFor = {
     { label: "Experience", text: "Participants need some playing behind them. A few chords, a basic beat or being comfortable singing is plenty." },
     { label: "Instruments", text: "Participants bring their own where they can. If that's tricky, let us know and we'll sort something out." },
     { label: "Hosts", text: "Local councils and youth centres, schools (government, Catholic and independent), youth organisations and community groups." },
+    { label: "Where", text: "Your venue, anywhere in Perth." },
+    { label: "Who runs it", text: "Us, or us alongside your staff." },
   ],
 }
 
@@ -143,12 +139,31 @@ export const meetDave = {
   videoLabel: "A group of young musicians playing the song they wrote",
 }
 
-// Hidden on production until real quotes exist. Staff voices first. Each
-// quote needs a name, role and organisation.
-export type Testimonial = { quote: string; name: string; role: string; organisation: string }
-export const testimonials: Testimonial[] = []
-export const TESTIMONIALS_PLACEHOLDER =
-  "2–3 short quotes, staff voices first. Name, role and organisation. Hide this block until quotes exist"
+export type Testimonial = { quote: string; name: string; role: string }
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "I've had to actually think about what I'm playing. At school, I'm just given the music and it's a bit boring. So, here, I choose my own chords and we make our own song together. It's creative. It's more fun.",
+    name: "Zane",
+    role: "Good Noise Project participant",
+  },
+  {
+    quote:
+      "The best part was making a song from scratch and then listening back it. It takes creativity to think of that sort of thing.",
+    name: "Nathan",
+    role: "Good Noise Project participant",
+  },
+  {
+    quote: "It helps you work together with people, and I think it's really nice to have that skill.",
+    name: "Indie",
+    role: "Good Noise Project participant",
+  },
+  {
+    quote: "It gives people a place to connect, a place to get things wrong.",
+    name: "Luke",
+    role: "Good Noise Project facilitator",
+  },
+]
 
 export const cost = {
   heading: "Cost",

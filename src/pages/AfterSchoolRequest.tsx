@@ -30,7 +30,7 @@ export default function AfterSchoolRequest() {
             messageRequired={false}
             messagePlaceholder="Questions about programs, timing, age brackets, venues... ask them here."
             submitLabel="Request the info pack"
-            successMessage="Thanks. We'll get back to you with the info pack soon."
+            successMessage="Thanks! We'll get back to you in no time."
           />
         </div>
       </section>
