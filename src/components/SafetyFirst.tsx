@@ -1,26 +1,21 @@
 import PhotoImage from "./PhotoImage"
-import dropIn from "../assets/images/after-school-tailored.webp"
-import writing from "../assets/images/after-school-eight-week.webp"
-import jamSession from "../assets/images/hero-guitar-jam.webp"
+import { pillarPhotos } from "../content/pillarPhotos"
 
 const pillars = [
   {
     title: "No Judgement",
     body: "We embrace mistakes — that's where the good stuff comes from.",
-    photo: dropIn,
-    alt: "Two young musicians talking beside a saxophone on a music stand and a blue electric guitar",
+    photo: pillarPhotos.judgement,
   },
   {
     title: "No Hierarchy",
     body: "Nobody's here to perform, prove themselves, or hit a benchmark.",
-    photo: jamSession,
-    alt: "A Good Noise facilitator laughing as he plays acoustic guitar with young musicians on keyboard, guitar and electric guitar in a studio jam session",
+    photo: pillarPhotos.hierarchy,
   },
   {
     title: "No Pressure",
     body: "Share when you're ready — not a moment before.",
-    photo: writing,
-    alt: "Two young musicians sitting on a rug in a jam room, smiling as they write lyrics on sheets of paper",
+    photo: pillarPhotos.pressure,
   },
 ]
 
@@ -48,8 +43,8 @@ export default function SafetyFirst() {
             >
               <h3 className="font-display text-xl">{pillar.title}</h3>
               <PhotoImage
-                src={pillar.photo}
-                alt={pillar.alt}
+                src={pillar.photo.src}
+                alt={pillar.photo.alt}
                 aspect="aspect-[4/3]"
                 className="mt-6"
               />

@@ -14,17 +14,16 @@ import PillButton from "../components/PillButton"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setLandingPageMeta, SITE_URL } from "../lib/pageMeta"
 import { upcomingProgram } from "../data/upcomingProgram"
-import bandPracticePhoto from "../assets/images/hero-band-practice.webp"
+import { workshopCardPhotos } from "../content/workshopCardPhotos"
+import { pillarPhotos } from "../content/pillarPhotos"
 import facilitatorPhoto from "../assets/images/facilitator-dave.webp"
-import concertFriendsPhoto from "../assets/images/strip-concert-friends.webp"
-import drummerPhoto from "../assets/images/strip-drummer.webp"
-import buskerPhoto from "../assets/images/strip-busker.webp"
 import logoAsset from "../assets/logo/good-noise-logo.png"
 
 const PAGE_TITLE = "School Holiday Music Camp Perth | Ages 13–17 | Good Noise"
 const PAGE_DESCRIPTION =
   "Two-day school holiday music camps in Perth for ages 13–17. Write and jam an original song with a small group. Next: summer holidays 2026–27 — register your interest."
 const CANONICAL_PATH = "/school-holiday-music-camp-perth"
+const christmasJamPhoto = workshopCardPhotos["christmas-holidays-jam-program"]
 
 const whatHappens: { bold: string; rest: string }[] = [
   {
@@ -229,11 +228,11 @@ export default function SchoolHolidayMusicCamp() {
             </div>
 
             <PhotoImage
-              src={bandPracticePhoto}
-              alt="Two teenage musicians at a school holiday music camp in Perth, one playing electric guitar and singing into a microphone"
+              src={christmasJamPhoto.src}
+              alt={christmasJamPhoto.alt}
               aspect="aspect-[4/5]"
               className="border-2 border-ink"
-              objectPosition="center 25%"
+              objectPosition={christmasJamPhoto.objectPosition}
             />
           </div>
         </div>
@@ -413,20 +412,17 @@ export default function SchoolHolidayMusicCamp() {
               {
                 title: "No Judgement",
                 body: "We embrace mistakes — that's where the good stuff comes from.",
-                photo: concertFriendsPhoto,
-                alt: "A group of teenage girls laughing together in a crowd",
+                photo: pillarPhotos.judgement,
               },
               {
                 title: "No Hierarchy",
                 body: "Nobody's here to perform, prove themselves, or hit a benchmark.",
-                photo: drummerPhoto,
-                alt: "A young drummer performing under green stage light",
+                photo: pillarPhotos.hierarchy,
               },
               {
                 title: "No Pressure",
                 body: "Share when you're ready — not a moment before.",
-                photo: buskerPhoto,
-                alt: "A young woman singing into a microphone while playing acoustic guitar",
+                photo: pillarPhotos.pressure,
               },
             ].map((pillar) => (
               <div
@@ -435,8 +431,8 @@ export default function SchoolHolidayMusicCamp() {
               >
                 <h3 className="font-display text-xl">{pillar.title}</h3>
                 <PhotoImage
-                  src={pillar.photo}
-                  alt={pillar.alt}
+                  src={pillar.photo.src}
+                  alt={pillar.photo.alt}
                   aspect="aspect-[4/3]"
                   className="mt-6"
                 />
