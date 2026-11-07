@@ -225,7 +225,7 @@ export default function ProgramPage() {
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 items-center gap-10 md:mt-14 md:grid-cols-2 md:gap-14">
+          <div className="mx-auto mt-8 grid w-fit max-w-full grid-cols-1 items-center justify-items-center gap-10 md:mt-14 md:grid-cols-[22rem_22rem] md:justify-items-start md:gap-12">
             <div>
               <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
                 What to Bring
@@ -248,7 +248,7 @@ export default function ProgramPage() {
               image={p.media.images["what-to-bring"]}
               aspect="aspect-[4/5]"
               objectPosition="center 25%"
-              className="mx-auto w-full max-w-sm md:ml-auto md:mr-0"
+              className="mx-auto w-full max-w-sm md:max-w-none"
             />
           </div>
 
