@@ -242,13 +242,21 @@ export const northPerth: ProgramConfig = {
         file: "north-perth-intro.webp",
         alt: "Teenage musicians jamming together in a room full of instruments at Player 1 Music School, North Perth",
       },
+      "intro-side": {
+        file: "north-perth-intro-side.webp",
+        alt: "A smiling teenager with round glasses playing a pale blue bass guitar in front of a red velvet curtain",
+      },
       "schedule-day-1": {
         file: "north-perth-day-1.webp",
-        alt: "A group of teens writing lyrics and trying out chords together on day one",
+        alt: "Three teens sitting on the floor by a window, mapping out a song's verse, chorus and bridge on a big sheet of paper",
       },
       "schedule-day-2": {
         file: "north-perth-day-2.webp",
-        alt: "A young band running through their song with guitars, keys and a microphone",
+        alt: "Dave playing an acoustic guitar on the floor, surrounded by teens with guitars and bass working on their parts",
+      },
+      "what-to-bring": {
+        file: "north-perth-what-to-bring.webp",
+        alt: "A group of teen musos and two facilitators crowded together in the jam room with saxophones, bass, a microphone and a wall of guitars behind them",
       },
     },
     video: {

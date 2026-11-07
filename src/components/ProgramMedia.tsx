@@ -32,10 +32,12 @@ export function ProgramImage({
   image,
   aspect = "aspect-[16/9]",
   className = "",
+  objectPosition,
 }: {
   image: MediaImage
   aspect?: string
   className?: string
+  objectPosition?: string
 }) {
   const src = resolveAsset(image.file)
   if (!src) {
@@ -52,6 +54,7 @@ export function ProgramImage({
         alt={image.alt}
         loading="lazy"
         decoding="async"
+        style={objectPosition ? { objectPosition } : undefined}
         className="h-full w-full object-cover"
       />
     </div>
