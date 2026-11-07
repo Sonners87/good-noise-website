@@ -18,7 +18,7 @@ export const workshopCardPhotos: Record<
   // A different photo from the spring card's on purpose — the two programs
   // share a format and most of their copy, so the cards shouldn't also look
   // like the same listing posted twice.
-  "christmas-holidays-jam-program": {
+  "summer-holidays-2026-27": {
     src: jamRoomVocalistPhoto,
     alt: "A group of teenage musicians smiling in a jam room — a vocalist holding a microphone in front, two saxophonists behind",
     objectPosition: "center 30%",

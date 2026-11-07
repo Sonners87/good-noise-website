@@ -28,7 +28,7 @@ const PORT = 4173
 const ROUTES = [
   "/",
   "/workshops",
-  "/workshops/christmas-holidays-jam-program",
+  "/workshops/summer-holidays-2026-27",
   // "/for-schools" is in draft (SHOW_FOR_SCHOOLS_PAGE in src/content/featureFlags.ts).
   "/school-holiday-music-camp-perth",
   "/after-school-programs",

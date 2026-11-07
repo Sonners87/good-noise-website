@@ -215,84 +215,36 @@ const allWorkshops: Record<string, Workshop> = {
     },
   },
 
-  // The same two-day jam format as the spring program above, run again over
-  // the Christmas school holidays. Body copy below the hero is deliberately
-  // the spring program's, with the season wording adjusted — reviewed and
-  // chosen over a differentiated rewrite. That leaves the two pages near
-  // duplicates for search: expect one to be filtered out of results until
-  // the copy diverges. The hero (headline, lead) and the meta description
-  // are the parts that do differ.
-  //
-  // Evergreen slug (no year): this URL is reused for each summer run so links
-  // and search history accumulate on one page instead of resetting annually.
-  // Update the year in `title`/`shortTitle`/`metaDescription` each time.
-  //
-  // Dates, venue and price aren't locked in yet, so this entry carries a
-  // `registerInterest` block instead of a bookable ctaHref: the detail page
-  // renders the register-interest form in place of every Book CTA until those
-  // details exist. When they do, fill in the TBA rows, add the price row and
-  // refund policy back, and delete that block.
-  "christmas-holidays-jam-program": {
-    slug: "christmas-holidays-jam-program",
-    title: "2026 Christmas Holidays Jam Program",
-    shortTitle: "2026 Christmas Holidays Jam Program",
+  // Summer 2026–27 is a HUB, not a program page: /workshops/summer-holidays-2026-27
+  // is rendered by pages/SummerHolidaysHub.tsx (its own route, ahead of
+  // /workshops/:slug) and pushes visitors to the North Perth or Cockburn
+  // program page. This entry exists only so the homepage / Workshops / header
+  // cards have a title, teaser and "Who" row to read. Old URL
+  // /workshops/christmas-holidays-jam-program 301s here (public/_redirects).
+  "summer-holidays-2026-27": {
+    slug: "summer-holidays-2026-27",
+    title: "Summer Holidays 2026–27 Music Programs",
+    shortTitle: "Summer Holidays 2026–27 Music Programs",
     eyebrow: "CREATE | PLAY | EXPERIMENT",
-    heroHeadline: { before: "Start A ", highlight: "Band", after: "This Summer" },
-    heroLead:
-      "Two days of the summer break spent writing one song from nothing with a room full of other young musos. Dates and venue to be announced. Ages 13–17",
-    infoCardEyebrow: "What We Know So Far",
     metaDescription:
-      "A two-day music program in Perth for ages 13–17 over the December–January school holidays. Write an original song with a small group and jam it out as a band. Dates TBA.",
+      "Start a band these summer holidays. Two teen songwriting and jam programs in Perth — North Perth in December, Cockburn in January. Ages 13–17, max 12.",
     teaser:
-      "Two days of the summer break in Perth, writing and playing an original song with a small group of other 13–17 year olds. Dates and venue to be announced soon! Register your interest to hear them first.",
+      "Two summer programs for 13–17 year olds: North Perth in December, Cockburn in January. Write an original song with a small group — pick the one that suits you.",
     infoRows: [
-      { label: "When", value: "TBA" },
-      { label: "Time", value: "TBA" },
-      { label: "Where", value: "TBA" },
-      { label: "Who", value: "Ages 13-17" },
-      { label: "Group size", value: "8–12 musos" },
+      { label: "When", value: "Dec 2026 & Jan 2027" },
+      { label: "Where", value: "North Perth or Cockburn" },
+      { label: "Who", value: "Ages 13–17" },
+      { label: "Group size", value: "Max 12 musos" },
     ],
-    ctaLabel: "Register your interest",
-    ctaHref: "#register-interest",
-    introParagraphs: [
-      "Good Noise Project presents a two-day jam program in Perth these Christmas school holidays, set inside a room full of instruments begging to be picked up.",
-      "You'll join several other young musos in a safe space and jam out an original song together — lyrics, melody, harmonies, chords, the lot. There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band.",
-      "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might already be a gun on it and want to give something else a go — or try one you've never touched. Whether you're quiet or loud, confident or used to playing alone in your bedroom, everyone's on equal footing here. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something different.",
-    ],
-    whatToBring: [
-      "Your instrument (range of instruments available)",
-      "Water bottle",
-      "Packed lunch & snacks each day",
-      "Earplugs (if sensitive to noise)",
-    ],
-    highlightsHeading: "What happens over two days:",
+    ctaLabel: "Choose your program",
+    ctaHref: "/workshops/summer-holidays-2026-27",
+    introParagraphs: [],
+    highlightsHeading: "",
     highlights: [],
-    limitedSpotsHeading: "Kept Small On Purpose",
-    limitedSpotsNote:
-      "Spots are limited to a small group to ensure everyone feels comfortable, included and has their voice heard (if they want it to be!).",
-    ageRangeNote:
-      "Outside ages 13–17? Get in touch directly at dave@goodnoiseproject.com.au.",
     facilitatorHeading: "Who's Running It",
-    facilitatorBio:
-      "Running the show is Dave Sonntag — a multi-instrumentalist who's spent years on stages and in studios, and is dedicated to helping young people find their footing through music.",
+    facilitatorBio: "",
     facilitatorLinkLabel: "More about Dave",
     facilitatorLinkHref: "/about",
-    prerequisites:
-      "While we prefer each participant has prior music experience, exceptions can be made for those with a big interest in starting to play. We don't focus on music theory, but a willingness to learn about songwriting, composition and playing together is a must.",
-    scholarshipNote:
-      "We have a no-questions-asked scholarship policy to ensure our workshops are accessible to everyone who wants to participate. If the cost of the workshop presents a significant financial barrier, please reach out to dave@goodnoiseproject.com.au for a partial or full scholarship.",
-    scholarshipCallout: {
-      heading: "Cost shouldn't decide this.",
-      body: "If the cost is a stretch, email dave@goodnoiseproject.com.au and we'll sort a partial or full place. No questions asked, no awkwardness.",
-    },
-    registerInterest: {
-      badge: "Dates to be announced",
-      heading: "Get The Dates First",
-      body: "We're locking in dates and a venue for the summer break now. Leave your name and email and you'll have them the day they're confirmed — ahead of the public announcement, and before the rest of your holidays fill up.",
-      // Year-stamped even though the slug isn't: next summer's run reuses
-      // this page, and its registrations need to be a separate stream.
-      subscribeSource: "workshop-2026-christmas-holidays-register-interest",
-    },
   },
 
   "songwriting-oct-2026": {
@@ -412,14 +364,14 @@ export const workshops: Record<string, Workshop> = Object.fromEntries(
 // nearest camp.
 export const upcomingWorkshopSlug = SHOW_SPRING_2026_PROGRAM
   ? "2026-spring-holidays"
-  : "christmas-holidays-jam-program"
+  : "summer-holidays-2026-27"
 
 // Every program currently open for booking or registration, soonest first.
 // Read by the homepage "What's Coming Up" section and the Workshops pillar
 // page, so adding or retiring a program is one edit here rather than two.
 export const upcomingWorkshopSlugs = [
   "2026-spring-holidays",
-  "christmas-holidays-jam-program",
+  "summer-holidays-2026-27",
 ]
 
 // Shared by every place that renders a workshop's "Who's it for" line (the

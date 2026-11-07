@@ -23,7 +23,7 @@ const PAGE_TITLE = "School Holiday Music Camp Perth | Ages 13–17 | Good Noise"
 const PAGE_DESCRIPTION =
   "Two-day school holiday music camps in Perth for ages 13–17. Write and jam an original song with a small group. Next: summer holidays 2026–27 — register your interest."
 const CANONICAL_PATH = "/school-holiday-music-camp-perth"
-const christmasJamPhoto = workshopCardPhotos["christmas-holidays-jam-program"]
+const christmasJamPhoto = workshopCardPhotos["summer-holidays-2026-27"]
 
 const whatHappens: { bold: string; rest: string }[] = [
   {

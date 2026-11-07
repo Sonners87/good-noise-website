@@ -42,11 +42,19 @@ export default function ProgramCard({
       </div>
 
       <div className="border-b-2 border-ink px-6 py-6">
-        <span className="font-display text-6xl leading-none text-ink sm:text-7xl">
-          {price === null ? "TBA" : `$${price}`}
-        </span>
-        <p className="mt-2 font-body text-sm font-semibold text-ink/70">{priceLabel}</p>
-        <p className="mt-4 font-body text-base font-semibold leading-relaxed text-ink">
+        {price !== null && (
+          <>
+            <span className="font-display text-6xl leading-none text-ink sm:text-7xl">
+              ${price}
+            </span>
+            <p className="mt-2 font-body text-sm font-semibold text-ink/70">{priceLabel}</p>
+          </>
+        )}
+        <p
+          className={`font-body text-base font-semibold leading-relaxed text-ink ${
+            price !== null ? "mt-4" : ""
+          }`}
+        >
           {scholarshipNote}
         </p>
       </div>

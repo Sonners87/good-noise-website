@@ -45,7 +45,7 @@ const heroImages: Record<string, { src: string; alt: string; objectPosition?: st
 // listed here rather than checked slug-by-slug so a new run of the program
 // picks all of it up by being added to this array. Which colours it wears is
 // a separate question, answered by jamThemes below.
-const JAM_PROGRAM_SLUGS = ["2026-spring-holidays", "christmas-holidays-jam-program"]
+const JAM_PROGRAM_SLUGS = ["2026-spring-holidays"]
 
 /*
   The two colour treatments a jam program page can wear.

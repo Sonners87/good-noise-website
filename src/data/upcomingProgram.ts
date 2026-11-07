@@ -40,19 +40,19 @@ export type UpcomingProgram = {
 }
 
 export const upcomingProgram: UpcomingProgram = {
-  title: "2026 Christmas Holidays Jam Program",
+  title: "Summer Holidays 2026–27 Music Programs",
   price: null,
-  priceLabel: "for both days · price to be announced",
-  scholarshipNote: "Free and part-scholarships available — no questions asked.",
+  priceLabel: "two programs · North Perth & Cockburn",
+  scholarshipNote: "Cost a barrier? Get in touch for a chat — dave@goodnoiseproject.com.au",
   rows: [
-    { label: "When", value: "Summer holidays 2026–27\n(dates TBA)" },
-    { label: "Time", value: "TBA" },
-    { label: "Where", value: "Perth (venue TBA)" },
+    { label: "North Perth", value: "Mon 21 – Tue 22 Dec 2026" },
+    { label: "Cockburn", value: "Mon 11 – Wed 13 Jan 2027" },
+    { label: "Time", value: "9:30am – 2:30pm" },
     { label: "Who", value: "Ages 13–17" },
   ],
   ages: "13-17",
-  ctaLabel: "Register your interest",
-  ctaHref: "/workshops/christmas-holidays-jam-program#register-interest",
+  ctaLabel: "Choose your program",
+  ctaHref: "/workshops/summer-holidays-2026-27",
   event: null,
-  bookingUrl: "https://goodnoiseproject.com.au/workshops/christmas-holidays-jam-program",
+  bookingUrl: "https://goodnoiseproject.com.au/workshops/summer-holidays-2026-27",
 }

@@ -83,7 +83,9 @@ export default function Header({ tone = "onDark" }: { tone?: HeaderTone } = {}) 
   const upcoming = workshops[upcomingWorkshopSlug]
   const ctaLabel = upcoming.soldOut
     ? "Join Mailing List"
-    : upcoming.registerInterest
+    : upcoming.slug === "summer-holidays-2026-27"
+      ? "See Programs"
+      : upcoming.registerInterest
       ? "Register Interest"
       : "Book Now"
   const ctaHref = upcoming.soldOut
