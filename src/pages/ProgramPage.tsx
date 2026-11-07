@@ -70,7 +70,7 @@ export default function ProgramPage() {
       value: (
         <span className="flex flex-col items-end gap-1">
           <span className="font-bold text-ink">${p.priceDollars}</span>
-          <span className="text-[11px] text-ink/60">for both days</span>
+          <span className="text-xs text-ink/60 md:text-sm">for both days</span>
         </span>
       ),
     },
@@ -113,6 +113,7 @@ export default function ProgramPage() {
                 title={`Summer Holidays Jam Program (${p.place})`}
                 titleClassName="font-display text-3xl uppercase leading-[1.02] text-[var(--gn-acid)] sm:text-4xl"
                 className="gn-card !p-0"
+                size="large"
               />
               <p className="mt-5 text-center text-sm leading-relaxed text-ink/80 md:text-left">
                 {linkifyEmail(p.costNote)}

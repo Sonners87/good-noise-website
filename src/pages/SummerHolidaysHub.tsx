@@ -10,7 +10,7 @@ import PillButton from "../components/PillButton"
 import SubscribeForm from "../components/SubscribeForm"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setCanonical, setPageMeta } from "../lib/pageMeta"
-import facilitatorPhoto from "../assets/images/facilitator-dave-guitar.webp"
+import facilitatorPhoto from "../assets/images/dave-bio.webp"
 
 const HUB_PATH = "/workshops/summer-holidays-2026-27"
 const PAGE_TITLE = "Summer Holidays Music Program Perth 2026–27 | Good Noise Project"
@@ -148,9 +148,9 @@ export default function SummerHolidaysHub() {
         <div className="mx-auto grid w-fit max-w-full grid-cols-1 items-center justify-items-center gap-8 px-5 pt-16 pb-20 md:grid-cols-[23.5rem_22rem] md:justify-items-start md:gap-14 md:px-10 md:pt-28 md:pb-32">
           <PhotoImage
             src={facilitatorPhoto}
-            alt="Dave Sonntag, facilitator of the Good Noise Project school holiday programs in Perth"
+            alt="Dave Sonntag smiling and gesturing as he talks to a group in a jam room, wearing a black Good Noise T-shirt"
             aspect="aspect-[4/5]"
-            objectPosition="center top"
+            objectPosition="center 25%"
             className="mx-auto w-full max-w-sm md:max-w-none"
           />
           <div>

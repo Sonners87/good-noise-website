@@ -12,6 +12,8 @@ type WorkshopInfoCardProps = {
   ctaLabel?: string
   ctaHref?: string
   className?: string
+  /** "large" bumps the row text up to the page's body-copy size. */
+  size?: "default" | "large"
   /** Rendered inside the CTA footer, below the button — e.g. a short
       urgency note. Only shown alongside a CTA. */
   children?: ReactNode
@@ -24,8 +26,11 @@ export default function WorkshopInfoCard({
   ctaLabel,
   ctaHref,
   className = "",
+  size = "default",
   children,
 }: WorkshopInfoCardProps) {
+  const labelSize = size === "large" ? "text-sm md:text-base" : "text-xs"
+  const valueSize = size === "large" ? "text-base md:text-lg" : "text-sm"
   return (
     <div
       className={`flex flex-col overflow-hidden border-2 border-ink bg-cream ${className}`}
@@ -47,10 +52,10 @@ export default function WorkshopInfoCard({
             key={row.label}
             className={`flex items-start justify-between gap-4 ${i === rows.length - 1 ? "" : "border-b border-ink/15 pb-4"}`}
           >
-            <span className="shrink-0 font-body font-semibold text-xs tracking-wide text-ink/60">
+            <span className={`shrink-0 font-body font-semibold ${labelSize} tracking-wide text-ink/60`}>
               {row.label}
             </span>
-            <span className="whitespace-pre-line font-body font-semibold text-sm text-ink text-right">
+            <span className={`whitespace-pre-line font-body font-semibold ${valueSize} text-ink text-right`}>
               {row.value}
             </span>
           </div>
