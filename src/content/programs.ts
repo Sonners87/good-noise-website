@@ -244,7 +244,7 @@ export const northPerth: ProgramConfig = {
       },
       "intro-side": {
         file: "north-perth-intro-side.webp",
-        alt: "A smiling teenager with round glasses playing a pale blue bass guitar in front of a red velvet curtain",
+        alt: "A group of teen musos and two facilitators crowded together in the jam room with saxophones, bass, a microphone and a wall of guitars behind them",
       },
       "schedule-day-1": {
         file: "north-perth-day-1.webp",
@@ -256,7 +256,7 @@ export const northPerth: ProgramConfig = {
       },
       "what-to-bring": {
         file: "north-perth-what-to-bring.webp",
-        alt: "A group of teen musos and two facilitators crowded together in the jam room with saxophones, bass, a microphone and a wall of guitars behind them",
+        alt: "A smiling teenager with round glasses playing a pale blue bass guitar in front of a red velvet curtain",
       },
     },
     video: {

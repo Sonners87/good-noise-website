@@ -160,9 +160,8 @@ export default function ProgramPage() {
             </div>
             <ProgramImage
               image={p.media.images["intro-side"]}
-              aspect="aspect-[4/5]"
-              objectPosition="center 25%"
-              className="mx-auto w-full max-w-sm md:max-w-none"
+              aspect="aspect-[3/2]"
+              className="w-full"
             />
           </div>
           {/* Spare slot — left empty for now (may move up later). */}
@@ -236,8 +235,9 @@ export default function ProgramPage() {
             </ul>
             <ProgramImage
               image={p.media.images["what-to-bring"]}
-              aspect="aspect-[3/2]"
-              className="mt-10 max-w-3xl"
+              aspect="aspect-[4/5]"
+              objectPosition="center 25%"
+              className="mt-10 max-w-sm"
             />
           </div>
 
