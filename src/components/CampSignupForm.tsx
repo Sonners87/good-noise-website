@@ -39,6 +39,12 @@ const todayISODate = new Date().toISOString().slice(0, 10)
 type CampSignupFormProps = {
   campLabel: string
   stripeUrl: string
+  /** Program name used in the consent wording. Defaults to the spring program. */
+  programName?: string
+  /** Where "Cancellation and Refund Policy" links to. */
+  cancellationHref?: string
+  /** Wording for the length of the program, e.g. "two days". */
+  daysLabel?: string
 }
 
 // Collects participant/parent details, child-safety and media/song consent,
@@ -53,7 +59,13 @@ type CampSignupFormProps = {
 // checkboxes did — via native HTML `required`, not custom JS logic. The
 // support-needs screen is the only thing that diverts the flow instead of
 // blocking it.
-export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormProps) {
+export default function CampSignupForm({
+  campLabel,
+  stripeUrl,
+  programName = "2026 Spring Holidays Jam Program",
+  cancellationHref = "/workshops/2026-spring-holidays#cancellations",
+  daysLabel = "two days",
+}: CampSignupFormProps) {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(false)
   const [participantAddress, setParticipantAddress] = useState("")
@@ -350,7 +362,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         <div className="grid grid-cols-1 gap-3">
           <span className={labelClass}>
             Any support needs — sensory, learning, behavioural, or anything
-            else that would help us make the two days work for them?
+            else that would help us make the {daysLabel} work for them?
           </span>
           <RadioPillGroup
             name="supportNeeds"
@@ -476,7 +488,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         <div className="grid grid-cols-1 gap-3">
           <p className={noteClass}>
             I declare that I have read the information regarding Good Noise
-            Project's 2026 Spring Holidays Jam Program and have accurately
+            Project's {programName} and have accurately
             completed the registration form, including medical information.
           </p>
 
@@ -485,8 +497,8 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
           </p>
           <p className={noteClass}>
             I am aware that my child / children can freely elect to
-            participate in Good Noise Project's 2026 Spring Holidays Jam
-            Program activities and that any risk is voluntary.
+            participate in Good Noise Project's {programName}{" "}
+            activities and that any risk is voluntary.
           </p>
 
           <p className="font-body font-bold text-sm uppercase tracking-wide text-ink">
@@ -551,7 +563,7 @@ export default function CampSignupForm({ campLabel, stripeUrl }: CampSignupFormP
         <p className={noteClass}>
           See our{" "}
           <Link
-            to="/workshops/2026-spring-holidays#cancellations"
+            to={cancellationHref}
             target="_blank"
             rel="noopener noreferrer"
             className={linkClass}

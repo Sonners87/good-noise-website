@@ -21,6 +21,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://goodnoiseproject.com.au/workshops/summer-holidays-2026-27/north-perth</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://goodnoiseproject.com.au/after-school-programs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

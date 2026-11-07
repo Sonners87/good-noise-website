@@ -1,5 +1,5 @@
-// Receives the webhook Stripe sends after a payment on the Spring Holidays
-// Jam Program Payment Link completes, verifies it's genuinely from Stripe,
+// Receives the webhook Stripe sends after a payment on a program Payment Link
+// completes (Spring Holidays 2026, North Perth Dec 2026, ...), verifies it's genuinely from Stripe,
 // then sends the same confirmation shown on /booking-confirmed-2026-spring as an email
 // via Brevo. Keep this copy in sync with src/pages/BookingConfirmed.tsx.
 import { createHash } from "node:crypto"
@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 // half is the Pixel "Purchase" event fired from BookingConfirmed.tsx). Only
 // runs once both env vars are set in Netlify — until then this is a no-op,
 // same as the BREVO_PUSH_ENABLED gate in subscribe.js.
-async function sendMetaPurchaseEvent(session) {
+async function sendMetaPurchaseEvent(session, sourceUrl) {
   const pixelId = process.env.META_PIXEL_ID
   const accessToken = process.env.META_CONVERSIONS_API_ACCESS_TOKEN
   if (!pixelId || !accessToken) return
@@ -34,7 +34,7 @@ async function sendMetaPurchaseEvent(session) {
         event_id: session.id,
         event_time: Math.floor(Date.now() / 1000),
         action_source: "website",
-        event_source_url: "https://goodnoiseproject.com.au/booking-confirmed-2026-spring",
+        event_source_url: sourceUrl,
         user_data: {
           em: [hashedEmail],
         },
@@ -67,6 +67,70 @@ async function sendMetaPurchaseEvent(session) {
   }
 }
 
+const SITE = "https://goodnoiseproject.com.au"
+
+// Per-program confirmation emails, keyed by Stripe Payment Link ID (the
+// `plink_...` shown in the Stripe dashboard; Checkout sessions carry it as
+// session.payment_link). A payment on any link not listed here falls back to
+// the Spring Holidays email below, which is how it behaved before this table
+// existed. Keep copy in sync with src/content/programs.ts and
+// src/pages/ProgramConfirmed.tsx.
+function confirmationEmail({ programName, when, time, where, whatToBring, daysWord }) {
+  return `
+          <p>Hey there,</p>
+          <p>You're officially locked in for Good Noise Project's ${programName}! I'm so excited to have you on board.</p>
+          <h3>Here's What You Need to Know</h3>
+          <p><strong>When</strong><br>
+          ${when}<br>
+          ${time}</p>
+          <p><strong>Where</strong><br>
+          ${where}</p>
+          <p><strong>What to Bring Each Day</strong><br>
+          ${whatToBring.join("<br>\n          ")}</p>
+          <p>The ${daysWord} are all about fun, creativity and good vibes. There's no pressure — just ${daysWord} of jamming, creating music and finding some likeminded musos to make noise with.</p>
+          <p>I'll be in touch closer to the date with any last bits of info you need. In the meantime, if you've got questions, just reply to this email or reach me directly:</p>
+          <p>Dave Sonntag<br>
+          dave@goodnoiseproject.com.au<br>
+          0413 626 240</p>
+          <p>Can't wait to see you in the room.</p>
+          <p>Dave<br>
+          Good Noise Project<br>
+          +61 413 626 240<br>
+          dave@goodnoiseproject.com.au</p>
+        `
+}
+
+const SPRING_PROGRAM = {
+  sourceUrl: `${SITE}/booking-confirmed-2026-spring`,
+  subject: "You're in! Welcome to the band.",
+  html: null, // uses the original inline copy below
+}
+
+const PROGRAMS_BY_PAYMENT_LINK = {
+  // TODO: replace with the real North Perth Payment Link ID (plink_...).
+  plink_PLACEHOLDER_NORTH_PERTH: {
+    sourceUrl: `${SITE}/workshops/summer-holidays-2026-27/north-perth/confirmed`,
+    subject: "You're in! Welcome to the band.",
+    html: confirmationEmail({
+      programName: "North Perth Summer Holidays Jam Program",
+      when: "Mon 21 – Tue 22 Dec 2026",
+      time: "9:30am – 2:30pm each day",
+      where: "Player 1 Music School<br>\n          5 Woodville Lane, North Perth WA 6006",
+      whatToBring: [
+        "Your instrument (we've also got a range on hand)",
+        "A water bottle",
+        "Packed lunch &amp; snacks each day",
+        "Earplugs (if sensitive to noise)",
+      ],
+      daysWord: "two days",
+    }),
+  },
+}
+
+function programForSession(session) {
+  return PROGRAMS_BY_PAYMENT_LINK[session.payment_link] ?? SPRING_PROGRAM
+}
+
 export default async (req) => {
   const sig = req.headers.get("stripe-signature")
   const rawBody = await req.text()
@@ -96,7 +160,8 @@ export default async (req) => {
     return new Response("No email to send to", { status: 200 })
   }
 
-  await sendMetaPurchaseEvent(session)
+  const program = programForSession(session)
+  await sendMetaPurchaseEvent(session, program.sourceUrl)
 
   try {
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
@@ -112,8 +177,8 @@ export default async (req) => {
           email: "dave@goodnoiseproject.com.au",
         },
         to: [{ email: customerEmail, name: customerName }],
-        subject: "You're in! Welcome to the band.",
-        htmlContent: `
+        subject: program.subject,
+        htmlContent: program.html ?? `
           <p>Hey there,</p>
           <p>You're officially locked in for Good Noise Project's 2026 Spring Holidays Jam Program! I'm so excited to have you on board.</p>
           <h3>Here's What You Need to Know</h3>

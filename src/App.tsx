@@ -4,6 +4,9 @@ import Home from "./pages/Home"
 import Workshops from "./pages/Workshops"
 import WorkshopDetail from "./pages/WorkshopDetail"
 import SummerHolidaysHub from "./pages/SummerHolidaysHub"
+import ProgramPage from "./pages/ProgramPage"
+import ProgramBook from "./pages/ProgramBook"
+import ProgramConfirmed from "./pages/ProgramConfirmed"
 import Book from "./pages/Book"
 import BookingConfirmed from "./pages/BookingConfirmed"
 import BookingOctCamp from "./pages/BookingOctCamp"
@@ -34,6 +37,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/summer-holidays-2026-27" element={<SummerHolidaysHub />} />
+          <Route path="/workshops/summer-holidays-2026-27/:program" element={<ProgramPage />} />
+          <Route path="/workshops/summer-holidays-2026-27/:program/book" element={<ProgramBook />} />
+          <Route path="/workshops/summer-holidays-2026-27/:program/confirmed" element={<ProgramConfirmed />} />
           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
           {/* 2026 Spring Holidays program is paused — see
               SHOW_SPRING_2026_PROGRAM in content/featureFlags.ts. Flip it to
