@@ -77,6 +77,9 @@ export type ProgramConfig = {
   endISO: string
 
   costNote: string
+  /** First intro paragraph, shown as a large statement band (same treatment
+      as the hub's intro). `highlight` gets the highlight block. */
+  introLead: { before: string; highlight: string; after: string }
   introParagraphs: string[]
   scheduleHeading: string
   panels: ProgramPanel[]
@@ -171,8 +174,13 @@ export const northPerth: ProgramConfig = {
 
   costNote: "Cost a barrier? Feel free to get in touch for a chat — dave@goodnoiseproject.com.au",
 
+  introLead: {
+    before: "Good Noise Project presents a ",
+    highlight: "two-day jam program",
+    after:
+      " in North Perth these summer school holidays, set inside a room full of instruments begging to be picked up.",
+  },
   introParagraphs: [
-    "Good Noise Project presents a two-day jam program in North Perth these summer school holidays, set inside a room full of instruments begging to be picked up.",
     "You'll join several other young musos in a safe space and jam out an original song together — lyrics, melody, harmonies, chords, the lot — and you'll walk away with a rough recording of what you made. There's no judgement, no benchmarks, no performance marks — except that you have fun and make awesome connections with other music-lovers. Who knows, maybe you'll find yourself the members of your first band. You'll also leave with real songwriting tools to keep writing your own music, whether you want to write whole songs or play one part in a band.",
     "There's no need to be a pro at your instrument. You might've only just picked it up for the first time. You might already be a gun on it and want to give something else a go — or try one you've never touched. Whether you're quiet or loud, confident or used to playing alone in your bedroom, everyone's on equal footing here. All that matters is you bring good vibes, a sense of creativity, and maybe a little bit of courage to step out and do something different.",
   ],

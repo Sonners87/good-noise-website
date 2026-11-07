@@ -132,16 +132,25 @@ export default function ProgramPage() {
         </div>
       </section>
 
+      {/* Intro lead — statement band, same treatment as the hub's intro */}
+      <section className="bg-ink">
+        <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-10 md:py-24">
+          <p className="font-display mx-auto max-w-4xl text-center text-2xl leading-[1.5] text-[var(--gn-paper)] sm:text-3xl md:text-4xl md:leading-[1.45]">
+            {p.introLead.before}
+            <span className="gn-hl">{p.introLead.highlight}</span>
+            {p.introLead.after}
+          </p>
+        </div>
+      </section>
+
       {/* Intro */}
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-          <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[1fr_22rem] md:gap-14 lg:grid-cols-[1fr_26rem]">
+          <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-14">
             <div>
               <div className="max-w-2xl space-y-5 text-base leading-relaxed text-ink/80 md:text-lg">
-                {p.introParagraphs.map((paragraph, i) => (
-                  <p key={paragraph} className={i === 0 ? "font-bold text-ink" : undefined}>
-                    {paragraph}
-                  </p>
+                {p.introParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
               <div className="mt-6 max-w-2xl space-y-2 text-base leading-relaxed text-ink/80 md:text-lg">
@@ -216,28 +225,30 @@ export default function ProgramPage() {
             </div>
           </div>
 
-          <div>
-            <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
-              What to Bring
-            </h2>
-            <ul className="mt-8 max-w-md space-y-3">
-              {p.whatToBring.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 border-b border-ink/15 pb-3 font-body text-base text-ink/80 last:border-b-0 md:text-lg"
-                >
-                  <span className="mt-1 text-terracotta" aria-hidden="true">
-                    &#9679;
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+          <div className="mt-8 grid grid-cols-1 items-center gap-10 md:mt-14 md:grid-cols-2 md:gap-14">
+            <div>
+              <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
+                What to Bring
+              </h2>
+              <ul className="mt-8 max-w-md space-y-3">
+                {p.whatToBring.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 border-b border-ink/15 pb-3 font-body text-base text-ink/80 last:border-b-0 md:text-lg"
+                  >
+                    <span className="mt-1 text-terracotta" aria-hidden="true">
+                      &#9679;
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <ProgramImage
               image={p.media.images["what-to-bring"]}
               aspect="aspect-[4/5]"
               objectPosition="center 25%"
-              className="mt-10 max-w-sm"
+              className="mx-auto w-full max-w-sm md:ml-auto md:mr-0"
             />
           </div>
 
