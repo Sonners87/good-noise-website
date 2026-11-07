@@ -15,7 +15,7 @@ import NotFound from "./NotFound"
 import { programs, HUB_PATH, type ProgramConfig } from "../content/programs"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setLandingPageMeta, SITE_URL } from "../lib/pageMeta"
-import facilitatorPhoto from "../assets/images/facilitator-dave-red-jumper.webp"
+import facilitatorPhoto from "../assets/images/dave-bio.webp"
 
 function eventSchema(p: ProgramConfig) {
   return {
@@ -110,8 +110,8 @@ export default function ProgramPage() {
             <div>
               <WorkshopInfoCard
                 rows={infoRows}
-                title={`${p.place} Program`}
-                titleClassName="font-display text-4xl uppercase leading-[0.98] text-[var(--gn-acid)] sm:text-5xl"
+                title={`Summer Holidays Jam Program (${p.place})`}
+                titleClassName="font-display text-3xl uppercase leading-[1.02] text-[var(--gn-acid)] sm:text-4xl"
                 className="gn-card !p-0"
               />
               <p className="mt-5 text-center text-sm leading-relaxed text-ink/80 md:text-left">
@@ -225,7 +225,13 @@ export default function ProgramPage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-8 grid w-fit max-w-full grid-cols-1 items-center justify-items-center gap-10 md:mt-14 md:grid-cols-[22rem_22rem] md:justify-items-start md:gap-12">
+        </div>
+      </section>
+
+      {/* What to Bring — white band */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
+          <div className="mx-auto grid w-fit max-w-full grid-cols-1 items-center justify-items-center gap-10 md:grid-cols-[22rem_22rem] md:justify-items-start md:gap-12">
             <div>
               <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
                 What to Bring
@@ -252,6 +258,12 @@ export default function ProgramPage() {
             />
           </div>
 
+        </div>
+      </section>
+
+      {/* Video */}
+      <section className="bg-cream">
+        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
           <ProgramVideo video={p.media.video} className="mx-auto max-w-4xl" />
         </div>
       </section>
@@ -301,9 +313,9 @@ export default function ProgramPage() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-5 py-16 md:grid-cols-2 md:px-10 md:py-24">
           <PhotoImage
             src={facilitatorPhoto}
-            alt="Dave Sonntag, facilitator of the Good Noise Project school holiday jam program in Perth"
+            alt="Dave Sonntag smiling and gesturing as he talks to a group in a jam room, wearing a black Good Noise T-shirt"
             aspect="aspect-[4/5]"
-            objectPosition="center 20%"
+            objectPosition="center 25%"
           />
           <div>
             <h2 className="font-display text-4xl leading-[0.98] text-ink sm:text-5xl">
