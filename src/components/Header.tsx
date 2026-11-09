@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import logo from "../assets/logo/good-noise-logo.png"
-import logoBlack from "../assets/logo/good-noise-logo-black.svg"
+import logoBlack from "../assets/logo/good-noise-logo-black.png"
 import { workshops, upcomingWorkshopSlug } from "../content/workshops"
 import InstagramIcon from "./icons/InstagramIcon"
 

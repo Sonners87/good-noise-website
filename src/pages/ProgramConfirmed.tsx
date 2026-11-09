@@ -2,7 +2,7 @@
 // URL points here). Driven by the program's config; the same message goes out
 // as an email from netlify/functions/stripe-webhook.js — keep the two in sync.
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
@@ -103,6 +103,12 @@ export default function ProgramConfirmed() {
             </p>
             <p className="font-display mt-6 text-2xl text-terracotta">Dave</p>
             <p className="font-body text-sm text-ink/60">Good Noise Project</p>
+            <Link
+              to="/"
+              className="mt-8 inline-block font-semibold text-terracotta underline decoration-2 underline-offset-4 hover:text-ink"
+            >
+              &larr; Back to the homepage
+            </Link>
           </div>
         </div>
       </section>

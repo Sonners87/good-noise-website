@@ -78,39 +78,171 @@ const SITE = "https://goodnoiseproject.com.au"
 // the Spring Holidays email below, which is how it behaved before this table
 // existed. Keep copy in sync with src/content/programs.ts and
 // src/pages/ProgramConfirmed.tsx.
-function confirmationEmail({ programName, when, time, where, whatToExpect, whatToBring, daysWord }) {
+// Styled to match the participant emails sent from Brevo (dark logo band,
+// Impact headings, Verdana body, ruled details box). Inline styles + tables
+// so it holds up in Outlook/Gmail. Brevo merge tags ({{ mirror }},
+// {{ unsubscribe }}) aren't used: this is a one-off transactional email.
+const H3_STYLE =
+  "font-family:Impact,'Arial Narrow Bold',Arial,Helvetica,sans-serif; font-size:24px; line-height:1.2; color:#1F2D3D; margin:0; font-weight:normal;"
+const BODY_STYLE =
+  "font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; font-size:16px; line-height:1.5; color:#414141;"
+
+function emailSection(heading, bodyHtml) {
   return `
-          <div style="text-align:center;padding:16px 0 24px;background:#ffffff;">
-            <img src="${SITE}/email-logo.png" alt="Good Noise Project" width="240" style="width:240px;max-width:100%;height:auto;border:0;">
-          </div>
-          <p>Hey there!</p>
-          <p>You're officially locked in for Good Noise Project's ${programName}! We're so excited to have you on board.</p>
-          <h3>Here's What You Need to Know</h3>
-          <p><strong>When</strong><br>
-          ${when}<br>
-          ${time}</p>
-          <p><strong>Where</strong><br>
-          ${where}</p>
-          <h3>What to Expect</h3>
-          <p>${whatToExpect}</p>
-          <p>The ${daysWord} are all about fun, creativity and good vibes. There's no pressure — just ${daysWord} of jamming, creating music and finding some likeminded musos to make noise with.</p>
-          <h3>Please Pack Enough Food for the Day</h3>
-          <p><strong>Every participant needs to bring enough food for the whole day: lunch plus snacks.</strong> There's a small kitchen space at the venue where you can store and prepare your food.</p>
-          <p>Participants aren't permitted to go to the nearby grocery stores unless a parent or guardian has expressly given permission to Dave. If you'd like to give that permission, just reply to this email and let me know.</p>
-          <p><strong>What to Bring Each Day</strong></p>
-          <ul>
-          ${whatToBring.map((item) => `<li>${item}</li>`).join("\n          ")}
-          </ul>
-          <p>I'll be in touch closer to the date with any last bits of info you need. In the meantime, if you've got questions, just reply to this email or reach me directly:</p>
-          <p>Dave Sonntag<br>
-          dave@goodnoiseproject.com.au<br>
-          0413 626 240</p>
-          <p>Can't wait to see you there!</p>
-          <p>Dave<br>
-          Good Noise Project<br>
-          +61 413 626 240<br>
-          dave@goodnoiseproject.com.au</p>
-        `
+        <tr>
+          <td class="gnp-pad" style="padding:0 0 12px 0;">
+            <h3 class="gnp-h3" style="${H3_STYLE}">${heading}</h3>
+          </td>
+        </tr>
+        <tr>
+          <td class="gnp-body gnp-pad" style="${BODY_STYLE} padding:0 0 26px 0;">
+            ${bodyHtml}
+          </td>
+        </tr>`
+}
+
+function confirmationEmail({
+  programName,
+  when,
+  time,
+  where,
+  whereNote,
+  whatToExpect,
+  whatToBring,
+  daysWord,
+}) {
+  const bringList = whatToBring
+    .map((item, i) => `<li style="margin:0 0 ${i === whatToBring.length - 1 ? 0 : 12}px 0;">${item}</li>`)
+    .join("\n              ")
+
+  return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="x-apple-disable-message-reformatting" />
+<title>Good Noise Project</title>
+<style type="text/css">
+  body { margin:0; padding:0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; background-color:#ffffff; }
+  table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  img { border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; display:block; }
+  a { color:#14120f; text-decoration:underline; }
+  p { margin:0; }
+  @media only screen and (max-width:600px) {
+    .gnp-wrap { width:100% !important; }
+    .gnp-pad { padding-left:15px !important; padding-right:15px !important; }
+    .gnp-h2 { font-size:28px !important; }
+    .gnp-h3 { font-size:21px !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background-color:#ffffff;">
+
+<div style="display:none; font-size:1px; color:#ffffff; line-height:1px; max-height:0px; max-width:0px; opacity:0; overflow:hidden;">
+  You're in! Everything you need to know before the ${daysWord} &mdash; dates, address and what to bring.
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;">
+  <tr>
+    <td align="center" style="padding:0;">
+      <table role="presentation" class="gnp-wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px;">
+
+        <!-- HEADER / LOGO -->
+        <tr>
+          <td class="gnp-pad" style="padding:20px 0 40px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#14120f;">
+              <tr>
+                <td align="center" style="padding:25px 0;">
+                  <a href="${SITE}" target="_blank" style="text-decoration:none;">
+                    <img src="${SITE}/email-logo-cream.png" alt="Good Noise Project" width="140" style="width:140px; max-width:140px; height:auto; display:block; border:0;" />
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- TITLE -->
+        <tr>
+          <td align="center" class="gnp-pad" style="padding:0 0 30px 0;">
+            <h2 class="gnp-h2" style="font-family:Impact,'Arial Narrow Bold',Arial,Helvetica,sans-serif; font-size:32px; line-height:1.1; color:#414141; margin:0; font-weight:normal;">You're in! Welcome to the band.</h2>
+          </td>
+        </tr>
+
+        <!-- INTRO -->
+        <tr>
+          <td class="gnp-body gnp-pad" style="${BODY_STYLE} padding:0 0 10px 0;">
+            <p style="margin:0 0 16px 0;">Hey there!</p>
+            <p style="margin:0 0 16px 0;">You're officially locked in for Good Noise Project's ${programName}! We're so excited to have you on board.</p>
+            <p style="margin:0 0 16px 0;">Here's what you need to know:</p>
+          </td>
+        </tr>
+
+        <!-- KEY DETAILS BOX -->
+        <tr>
+          <td class="gnp-pad" style="padding:10px 0 30px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:2px solid #14120f; border-bottom:2px solid #14120f;">
+              <tr>
+                <td class="gnp-body" style="${BODY_STYLE} padding:20px 0;">
+                  <p style="margin:0 0 10px 0;">&#128197; <strong>${when}</strong></p>
+                  <p style="margin:0 0 10px 0;">&#9200; <strong>${time}</strong></p>
+                  <p style="margin:0 0 10px 0;">&#128205; ${where}${whereNote ? `<br />${whereNote}` : ""}</p>
+                  <p style="margin:0 0 10px 0;">&#128241; <strong>Dave's mobile</strong> <a href="tel:+61413626240" style="color:#14120f; text-decoration:underline;">0413 626 240</a></p>
+                  <p style="margin:0;">&#9993; <strong>Dave's email</strong> <a href="mailto:dave@goodnoiseproject.com.au" style="color:#14120f; text-decoration:underline;">dave@goodnoiseproject.com.au</a></p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+${emailSection(
+  "What to expect",
+  `<p style="margin:0 0 16px 0;">${whatToExpect}</p>
+            <p style="margin:0;">The ${daysWord} are all about fun, creativity and good vibes. There's no pressure &mdash; just ${daysWord} of jamming, creating music and finding some likeminded musos to make noise with.</p>`,
+)}
+${emailSection(
+  "What to bring each day",
+  `<ul style="margin:0; padding-left:22px;">
+              ${bringList}
+            </ul>`,
+)}
+${emailSection(
+  "Please pack enough food for the day",
+  `<p style="margin:0 0 16px 0;"><strong>Every participant needs to bring enough food for the whole day: lunch plus snacks.</strong> There's a small kitchen space at the venue where you can store and prepare your food.</p>
+            <p style="margin:0;">Participants aren't permitted to go to the nearby grocery stores unless a parent or guardian has expressly given permission to Dave. If you'd like to give that permission, just reply to this email and let me know.</p>`,
+)}
+
+        <!-- SIGN OFF -->
+        <tr>
+          <td class="gnp-pad" style="padding:0 0 30px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #dddddd;">
+              <tr>
+                <td class="gnp-body" style="${BODY_STYLE} padding:26px 0 0 0;">
+                  <p style="margin:0 0 16px 0;">I'll be in touch closer to the date with any last bits of info you need. In the meantime, if you've got questions, just reply to this email or reach me directly.</p>
+                  <p style="margin:0 0 16px 0;">Can't wait to see you there!</p>
+                  <p style="margin:0;">Dave</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td class="gnp-pad" style="padding:20px 0;">
+            <p style="margin:0; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:#000000; font-size:14px; line-height:1.5;">Dave Sonntag</p>
+            <p style="margin:0 0 10px 0; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:#000000; font-size:14px; line-height:1.5;"><strong>Good Noise Project</strong></p>
+            <p style="margin:0; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:#666666; font-size:14px; line-height:1.5;">+61 413 626 240</p>
+            <p style="margin:0; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:#666666; font-size:14px; line-height:1.5;">dave@goodnoiseproject.com.au</p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>`
 }
 
 const SPRING_PROGRAM = {
@@ -122,7 +254,7 @@ const SPRING_PROGRAM = {
 const WHAT_TO_BRING = [
   "Your instrument (we've also got a range on hand)",
   "Water bottle",
-  "<strong>Enough food for the day: packed lunch plus snacks</strong>",
+  "Enough food for the day: packed lunch plus snacks",
   "Earplugs (if sensitive to noise)",
 ]
 
@@ -136,7 +268,8 @@ const PROGRAMS_BY_PAYMENT_LINK = {
       programName: "Summer Holidays Jam Program (North Perth)",
       when: "Mon 21 – Tue 22 Dec 2026",
       time: "9:30am – 2:30pm each day",
-      where: "Player 1 Music School<br>\n          5 Woodville Lane, North Perth WA 6006<br>\n          (Note: Please don't confuse with <strong><em>Woodville Street</em></strong>)",
+      where: "Player 1 Music School, 5 Woodville Lane, North Perth WA 6006",
+      whereNote: "(Note: Please don't confuse with <strong><em>Woodville Street</em></strong>)",
       whatToExpect:
         "You'll join several other young musos in a safe space and jam out an original song together — lyrics, melody, harmonies, chords, the lot.",
       whatToBring: WHAT_TO_BRING,
@@ -153,7 +286,7 @@ const PROGRAMS_BY_PAYMENT_LINK = {
       programName: "Summer Holidays Jam Program (Cockburn)",
       when: "Mon 11 – Wed 13 Jan 2027",
       time: "9:30am – 2:30pm each day",
-      where: "Cockburn Youth Centre<br>\n          25 Wentworth Parade, Success WA 6164",
+      where: "Cockburn Youth Centre, 25 Wentworth Parade, Success WA 6164",
       whatToExpect:
         "You'll join several other young musos in a safe space and spend the first two days writing an original song together — lyrics, melody, harmonies, chords, the lot. Day three is recording day: you'll get an introduction to audio recording and see how a song is captured track by track, which will help with your own recording at home.",
       whatToBring: WHAT_TO_BRING,
