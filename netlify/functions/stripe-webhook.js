@@ -78,7 +78,7 @@ const SITE = "https://goodnoiseproject.com.au"
 // the Spring Holidays email below, which is how it behaved before this table
 // existed. Keep copy in sync with src/content/programs.ts and
 // src/pages/ProgramConfirmed.tsx.
-// Styled to match the participant emails sent from Brevo (dark logo band,
+// Styled to match the participant emails sent from Brevo (coloured logo,
 // Impact headings, Verdana body, ruled details box). Inline styles + tables
 // so it holds up in Outlook/Gmail. Brevo merge tags ({{ mirror }},
 // {{ unsubscribe }}) aren't used: this is a one-off transactional email.
@@ -102,6 +102,7 @@ function emailSection(heading, bodyHtml) {
 }
 
 function confirmationEmail({
+  logoColour,
   programName,
   when,
   time,
@@ -147,18 +148,12 @@ function confirmationEmail({
     <td align="center" style="padding:0;">
       <table role="presentation" class="gnp-wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px;">
 
-        <!-- HEADER / LOGO -->
+        <!-- HEADER / LOGO (coloured to match the program page) -->
         <tr>
-          <td class="gnp-pad" style="padding:20px 0 40px 0;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#14120f;">
-              <tr>
-                <td align="center" style="padding:25px 0;">
-                  <a href="${SITE}" target="_blank" style="text-decoration:none;">
-                    <img src="${SITE}/email-logo-cream.png" alt="Good Noise Project" width="140" style="width:140px; max-width:140px; height:auto; display:block; border:0;" />
-                  </a>
-                </td>
-              </tr>
-            </table>
+          <td align="center" class="gnp-pad" style="padding:30px 0 30px 0;">
+            <a href="${SITE}" target="_blank" style="text-decoration:none;">
+              <img src="${SITE}/email-logo-${logoColour}.png" alt="Good Noise Project" width="150" style="width:150px; max-width:150px; height:auto; display:block; border:0;" />
+            </a>
           </td>
         </tr>
 
@@ -265,6 +260,7 @@ const PROGRAMS_BY_PAYMENT_LINK = {
     brevoListId: 10,
     subject: "You're in! Welcome to the band.",
     html: confirmationEmail({
+      logoColour: "orange",
       programName: "Summer Holidays Jam Program (North Perth)",
       when: "Mon 21 – Tue 22 Dec 2026",
       time: "9:30am – 2:30pm each day",
@@ -283,6 +279,7 @@ const PROGRAMS_BY_PAYMENT_LINK = {
     brevoListId: 11,
     subject: "You're in! Welcome to the band.",
     html: confirmationEmail({
+      logoColour: "blue",
       programName: "Summer Holidays Jam Program (Cockburn)",
       when: "Mon 11 – Wed 13 Jan 2027",
       time: "9:30am – 2:30pm each day",
