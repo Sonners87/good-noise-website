@@ -61,6 +61,22 @@ export function ProgramImage({
   )
 }
 
+// A photo shown at its natural proportions with no frame of its own — for
+// images that already have a border/shadow baked in (confirmation pages).
+export function ProgramPhoto({ image, className = "" }: { image: MediaImage; className?: string }) {
+  const src = resolveAsset(image.file)
+  if (!src) return null
+  return (
+    <img
+      src={src}
+      alt={image.alt}
+      loading="lazy"
+      decoding="async"
+      className={`block h-auto w-full ${className}`}
+    />
+  )
+}
+
 export function ProgramVideo({ video, className = "" }: { video: MediaVideo; className?: string }) {
   const poster = resolveAsset(video.posterFile)
   const src = resolveAsset(video.file)

@@ -8,6 +8,7 @@ import Footer from "../components/Footer"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
 import NotFound from "./NotFound"
+import { ProgramPhoto } from "../components/ProgramMedia"
 import { programs } from "../content/programs"
 import { trackMetaEvent } from "../lib/metaPixel"
 import { markCheckoutStarted } from "../lib/bookingIntent"
@@ -54,8 +55,10 @@ export default function ProgramConfirmed() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-start md:gap-12">
-            <div>
+          {/* Two rows on desktop so the photo's top lines up with the "The two/three
+              days…" paragraph beside it, whatever height the list above ends up. */}
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-start md:gap-x-12 md:gap-y-8">
+            <div className="md:col-start-1 md:row-start-1">
               <h2 className="font-display text-2xl leading-[0.98] text-ink sm:text-3xl">
                 Here's What You Need to Know
               </h2>
@@ -75,20 +78,29 @@ export default function ProgramConfirmed() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-8 font-body text-base leading-relaxed text-ink/80 md:text-lg">
-                The {p.daysWord} are all about fun, creativity and good vibes. There's no pressure —
-                just {p.daysWord} of jamming, creating music and finding some likeminded musos to
-                make noise with.
-              </p>
             </div>
 
-            <WorkshopInfoCard
-              title="Event Details"
-              rows={[
-                { label: "When", value: `${p.dates}\n${p.time}` },
-                { label: "Where", value: p.venueLine },
-              ]}
-            />
+            <p className="font-body text-base leading-relaxed text-ink/80 md:col-start-1 md:row-start-2 md:text-lg">
+              The {p.daysWord} are all about fun, creativity and good vibes. There's no pressure —
+              just {p.daysWord} of jamming, creating music and finding some likeminded musos to
+              make noise with.
+            </p>
+
+            <div className="md:col-start-2 md:row-start-1">
+              <WorkshopInfoCard
+                title="Event Details"
+                rows={[
+                  { label: "When", value: `${p.dates}\n${p.time}` },
+                  { label: "Where", value: p.venueLine },
+                ]}
+              />
+            </div>
+
+            {p.confirmedImage && (
+              <div className="md:col-start-2 md:row-start-2">
+                <ProgramPhoto image={p.confirmedImage} />
+              </div>
+            )}
           </div>
 
           <div className="mt-16 max-w-xl border-t-2 border-ink/15 pt-10">

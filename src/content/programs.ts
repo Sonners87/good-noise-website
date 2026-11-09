@@ -94,6 +94,8 @@ export type ProgramConfig = {
   scheduleClosing: string[]
   /** Optional short callout after the schedule. */
   whyRecording?: { heading: string; lines: string[] }
+  /** Group photo (frame and shadow baked in) shown on the confirmation page. */
+  confirmedImage?: MediaImage
   whatToBring: string[]
   keptSmall: { heading: string; note: string }
   facilitatorHeading: string
@@ -249,6 +251,10 @@ export const northPerth: ProgramConfig = {
   keptSmall: {
     heading: "Kept Small On Purpose",
     note: "Spots are limited to a small group to ensure everyone feels comfortable, included and has their voice heard (if they want it to be!).",
+  },
+  confirmedImage: {
+    file: "north-perth-confirmed.webp",
+    alt: "A group of teen musos and two facilitators crowded together in the jam room with saxophones, bass and a microphone",
   },
   facilitatorHeading: "Who's Running It",
   faqs: sharedFaqs,
@@ -415,6 +421,10 @@ export const cockburn: ProgramConfig = {
 
   whatToBring: northPerth.whatToBring,
   keptSmall: northPerth.keptSmall,
+  confirmedImage: {
+    file: "cockburn-confirmed.webp",
+    alt: "A group of teen musos and two facilitators crowded together in the jam room with saxophones, bass and a microphone",
+  },
   facilitatorHeading: "Who's Running It",
   faqs: cockburnFaqs,
   crossLink: {
