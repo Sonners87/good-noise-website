@@ -97,30 +97,30 @@ export default function ProgramConfirmed() {
             </div>
 
             {p.confirmedImage && (
-              <div className="md:col-start-2 md:row-start-2">
+              <div className="md:col-start-2 md:row-span-2 md:row-start-2">
                 <ProgramPhoto image={p.confirmedImage} />
               </div>
             )}
-          </div>
 
-          <div className="mt-16 max-w-xl border-t-2 border-ink/15 pt-10">
-            <p className="font-body text-base leading-relaxed text-ink/80 md:text-lg">
-              I'll be in touch closer to the date with any last bits of info you need. In the
-              meantime, if you've got questions, just reply to your confirmation email or reach me
-              directly:
-            </p>
-            <FacilitatorContact className="mt-6" />
-            <p className="mt-8 font-body text-base leading-relaxed text-ink/80 md:text-lg">
-              Can't wait to see you there!
-            </p>
-            <p className="font-display mt-6 text-2xl text-terracotta">Dave</p>
-            <p className="font-body text-sm text-ink/60">Good Noise Project</p>
-            <Link
-              to="/"
-              className="mt-8 inline-block font-semibold text-terracotta underline decoration-2 underline-offset-4 hover:text-ink"
-            >
-              &larr; Back to the homepage
-            </Link>
+            <div className="mt-6 max-w-xl border-t-2 border-ink/15 pt-10 md:col-start-1 md:row-start-3 md:mt-8">
+              <p className="font-body text-base leading-relaxed text-ink/80 md:text-lg">
+                I'll be in touch closer to the date with any last bits of info you need. In the
+                meantime, if you've got questions, just reply to your confirmation email or reach me
+                directly:
+              </p>
+              <FacilitatorContact className="mt-6" />
+              <p className="mt-8 font-body text-base leading-relaxed text-ink/80 md:text-lg">
+                Can't wait to see you there!
+              </p>
+              <p className="font-display mt-6 text-2xl text-terracotta">Dave</p>
+              <p className="font-body text-sm text-ink/60">Good Noise Project</p>
+              <Link
+                to="/"
+                className="mt-8 inline-block font-semibold text-terracotta underline decoration-2 underline-offset-4 hover:text-ink"
+              >
+                &larr; Back to the homepage
+              </Link>
+            </div>
           </div>
         </div>
       </section>
