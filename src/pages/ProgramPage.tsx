@@ -4,7 +4,6 @@ import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import PillButton from "../components/PillButton"
 import PhotoImage from "../components/PhotoImage"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
@@ -70,14 +69,16 @@ export default function ProgramPage() {
       value: (
         <span className="flex flex-col items-end gap-1">
           <span className="font-bold text-ink">${p.priceDollars}</span>
-          <span className="text-xs text-ink/60 md:text-sm">for both days</span>
+          <span className="text-xs text-ink/60 md:text-sm">{p.priceNote}</span>
         </span>
       ),
     },
   ]
 
+  const blue = p.theme === "blue"
+
   return (
-    <div>
+    <div className={blue ? "gn-theme-blue" : undefined}>
       {/* Hero */}
       <section className="bg-[var(--gn-acid)]">
         <Header tone="onAcid" />
@@ -95,7 +96,10 @@ export default function ProgramPage() {
                 {p.subline}
               </p>
               <div className="mt-8 flex flex-col items-center gap-3 md:items-start">
-                <Link to={p.bookPath} className="gn-btn-primary gn-btn-on-acid text-sm">
+                <Link
+                  to={p.bookPath}
+                  className="gn-btn-primary gn-btn-on-acid !px-12 !py-5 !text-lg"
+                >
                   Book now &rarr;
                 </Link>
                 <Link
@@ -112,6 +116,7 @@ export default function ProgramPage() {
                 rows={infoRows}
                 title={`Summer Holidays Jam Program (${p.place})`}
                 titleClassName="font-display text-3xl uppercase leading-[1.02] text-[var(--gn-acid)] sm:text-4xl"
+                titleBarClassName={blue ? "bg-ink" : ""}
                 className="gn-card !p-0"
                 size="large"
               />
@@ -154,7 +159,12 @@ export default function ProgramPage() {
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-              <div className="mt-6 max-w-2xl space-y-2 text-base leading-relaxed text-ink/80 md:text-lg">
+              <div className="mt-8">
+                <Link to={p.bookPath} className="gn-btn-primary gn-btn-acid-on-ink text-sm">
+                  Book now &rarr;
+                </Link>
+              </div>
+              <div className="mt-8 max-w-2xl space-y-2 text-base leading-relaxed text-ink/80 md:text-lg">
                 <p>
                   <a
                     href="#faq"
@@ -186,7 +196,11 @@ export default function ProgramPage() {
             <h2 className="font-display max-w-3xl text-4xl leading-[0.98] text-ink sm:text-5xl">
               {p.scheduleHeading}
             </h2>
-            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div
+              className={`mt-8 grid grid-cols-1 gap-6 ${
+                p.panels.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+              }`}
+            >
               {p.panels.map((panel) => (
                 <div key={panel.day} className="gn-card-flat">
                   {panel.imageKey && p.media.images[panel.imageKey] && (
@@ -224,6 +238,26 @@ export default function ProgramPage() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+            {p.whyRecording && (
+              <div className="gn-card-flat mt-10 max-w-2xl">
+                <h3 className="font-display text-2xl uppercase leading-[0.98] text-ink sm:text-3xl">
+                  {p.whyRecording.heading}
+                </h3>
+                <ul className="mt-5 space-y-2">
+                  {p.whyRecording.lines.map((line) => (
+                    <li
+                      key={line}
+                      className="flex items-start gap-3 border-t border-ink/15 pt-2 text-sm leading-relaxed text-ink/80 md:text-base"
+                    >
+                      <span className="mt-1 text-terracotta" aria-hidden="true">
+                        &#9679;
+                      </span>
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
         </div>
@@ -262,12 +296,14 @@ export default function ProgramPage() {
         </div>
       </section>
 
-      {/* Video */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
-          <ProgramVideo video={p.media.video} className="mx-auto max-w-4xl" />
-        </div>
-      </section>
+      {/* Video — only when the program's config defines one */}
+      {p.media.video && (
+        <section className="bg-cream">
+          <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
+            <ProgramVideo video={p.media.video} className="mx-auto max-w-4xl" />
+          </div>
+        </section>
+      )}
 
       {/* Kept small + Book now */}
       <section className="bg-brand">
@@ -279,11 +315,11 @@ export default function ProgramPage() {
             {p.keptSmall.note}
           </p>
           <div className="mt-8 flex flex-col items-center gap-3">
-            <PillButton href={p.bookPath} variant="acidOnDark">
-              Book now
-            </PillButton>
+            <Link to={p.bookPath} className="gn-btn-primary gn-btn-acid-on-dark text-sm">
+              Book now &rarr;
+            </Link>
             <span className="font-body text-xs font-semibold text-white/70">
-              ${p.priceDollars} for both days · Max {p.maxGroup} musos
+              ${p.priceDollars} {p.priceNote} · Max {p.maxGroup} musos
             </span>
           </div>
         </div>
@@ -367,8 +403,25 @@ export default function ProgramPage() {
       <section id="cancellations" className="scroll-mt-24 bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 pb-16 md:px-10 md:pb-24">
           {p.refundPolicy ? (
-            <div className="max-w-md">
-              <WorkshopInfoCard title="Cancellations & Refunds" rows={p.refundPolicy} />
+            <div className="max-w-xl">
+              <h2 className="font-display text-3xl leading-[0.98] text-ink sm:text-4xl">
+                Cancellations &amp; Refunds
+              </h2>
+              <ul className="mt-6 space-y-3">
+                {p.refundPolicy.map((tier) => (
+                  <li
+                    key={tier.label}
+                    className="flex items-start gap-3 text-base leading-relaxed text-ink/80 md:text-lg"
+                  >
+                    <span className="mt-1 text-terracotta" aria-hidden="true">
+                      &#9679;
+                    </span>
+                    <span>
+                      {tier.label}: <strong className="font-semibold text-ink">{tier.value}</strong>
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ) : (
             <Placeholder kind="CHECK" className="max-w-xl">

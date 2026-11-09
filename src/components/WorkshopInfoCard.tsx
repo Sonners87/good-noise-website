@@ -8,6 +8,8 @@ type WorkshopInfoCardProps = {
   /** Overrides the default title styling entirely — e.g. to match another
       heading elsewhere on the page instead of this card's own default. */
   titleClassName?: string
+  /** Extra classes for the title bar itself (e.g. a fill colour). */
+  titleBarClassName?: string
   rows: InfoRow[]
   ctaLabel?: string
   ctaHref?: string
@@ -22,6 +24,7 @@ type WorkshopInfoCardProps = {
 export default function WorkshopInfoCard({
   title,
   titleClassName,
+  titleBarClassName = "",
   rows,
   ctaLabel,
   ctaHref,
@@ -36,7 +39,7 @@ export default function WorkshopInfoCard({
       className={`flex flex-col overflow-hidden border-2 border-ink bg-cream ${className}`}
     >
       {title && (
-        <div className="border-b-2 border-ink px-6 py-4 md:py-5">
+        <div className={`border-b-2 border-ink px-6 py-4 md:py-5 ${titleBarClassName}`}>
           {/* h2 (not span) so titleClassName="font-display" can pick up the
               h2.font-display global rule — that's what actually swaps the
               family to Anton with the right letter-spacing/size-adjust;

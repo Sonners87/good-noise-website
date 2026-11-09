@@ -30,6 +30,7 @@ const ROUTES = [
   "/workshops",
   "/workshops/summer-holidays-2026-27",
   "/workshops/summer-holidays-2026-27/north-perth",
+  "/workshops/summer-holidays-2026-27/cockburn",
   // "/for-schools" is in draft (SHOW_FOR_SCHOOLS_PAGE in src/content/featureFlags.ts).
   "/school-holiday-music-camp-perth",
   "/after-school-programs",

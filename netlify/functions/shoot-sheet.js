@@ -31,21 +31,30 @@ export default async (req) => {
       })
     }
     const forms = await formsResponse.json()
-    const campSignupForm = forms.find((form) => form.name === "camp-signup")
-    if (!campSignupForm) {
+    // "camp-signup" (spring) plus one form per summer program.
+    const SIGNUP_FORM_NAMES = [
+      "camp-signup",
+      "december-2026-signup-north-perth",
+      "january-2027-signup-cockburn",
+    ]
+    const campSignupForms = forms.filter((form) => SIGNUP_FORM_NAMES.includes(form.name))
+    if (campSignupForms.length === 0) {
       return new Response(JSON.stringify({ participants: [] }), { status: 200 })
     }
 
-    const submissionsResponse = await fetch(
-      `https://api.netlify.com/api/v1/forms/${campSignupForm.id}/submissions`,
-      { headers: { Authorization: `Bearer ${process.env.NETLIFY_FORMS_ACCESS_TOKEN}` } },
-    )
-    if (!submissionsResponse.ok) {
-      return new Response(JSON.stringify({ error: "Could not list submissions" }), {
-        status: submissionsResponse.status,
-      })
+    const submissions = []
+    for (const form of campSignupForms) {
+      const submissionsResponse = await fetch(
+        `https://api.netlify.com/api/v1/forms/${form.id}/submissions`,
+        { headers: { Authorization: `Bearer ${process.env.NETLIFY_FORMS_ACCESS_TOKEN}` } },
+      )
+      if (!submissionsResponse.ok) {
+        return new Response(JSON.stringify({ error: "Could not list submissions" }), {
+          status: submissionsResponse.status,
+        })
+      }
+      submissions.push(...(await submissionsResponse.json()))
     }
-    const submissions = await submissionsResponse.json()
 
     const participants = submissions.map((submission) => {
       const data = submission.data || {}

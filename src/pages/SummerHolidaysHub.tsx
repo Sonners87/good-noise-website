@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import PhotoImage from "../components/PhotoImage"
-import PillButton from "../components/PillButton"
 import SubscribeForm from "../components/SubscribeForm"
 import { linkifyEmail } from "../lib/linkifyEmail"
 import { setCanonical, setPageMeta } from "../lib/pageMeta"
@@ -25,6 +24,7 @@ const programs = [
     length: "2 days",
     line: "Two days of jamming and songwriting, with recording built in.",
     href: `${HUB_PATH}/north-perth`,
+    blue: false,
   },
   {
     place: "Cockburn",
@@ -33,6 +33,7 @@ const programs = [
     length: "3 days",
     line: "Two days writing, day three recording it track by track.",
     href: `${HUB_PATH}/cockburn`,
+    blue: true,
   },
 ]
 
@@ -106,10 +107,16 @@ export default function SummerHolidaysHub() {
                 <p className="mt-2 font-body text-sm font-semibold text-ink/70">{p.venue}</p>
                 <p className="mt-4 font-body text-lg font-bold text-ink">{p.dates}</p>
                 <p className="mt-3 flex-1 text-base leading-relaxed text-ink/80">{p.line}</p>
-                <PillButton href={p.href} variant="primary" className="mt-6 w-full">
-                  See program
-                  <span aria-hidden="true">&rarr;</span>
-                </PillButton>
+                {/* Button wears the program page's hero colour: orange for
+                    North Perth, blue for Cockburn. */}
+                <Link
+                  to={p.href}
+                  className={`gn-btn-primary gn-btn-acid-on-ink mt-6 w-full !py-4 text-center text-sm ${
+                    p.blue ? "gn-theme-blue" : ""
+                  }`}
+                >
+                  See program &rarr;
+                </Link>
               </div>
             ))}
           </div>

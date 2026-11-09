@@ -6,6 +6,7 @@ import { markCheckoutStarted } from "../lib/bookingIntent"
 import RadioPillGroup from "./form/RadioPillGroup"
 import ConsentCheckbox from "./form/ConsentCheckbox"
 import ConditionalReveal from "./form/ConditionalReveal"
+import ScaleRating from "./form/ScaleRating"
 
 const inputClass =
   "border-2 border-ink bg-cream px-4 py-3 text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-ink"
@@ -25,6 +26,62 @@ const yesNoOptions = [
   { value: "yes", label: "Yes" },
 ]
 
+// Coping checklist — asked only when a parent answers "yes" to support needs,
+// and only on the summer programs. Answers are for Dave's follow-up call;
+// nothing here approves or declines a booking automatically.
+const copingQuestions = [
+  {
+    name: "copingNoise",
+    short: "Loud, noisy environments",
+    question: "How well does your child cope in a loud, noisy environment?",
+    low: "Finds it very hard",
+    high: "Copes really well",
+  },
+  {
+    name: "copingSocial",
+    short: "Social environments",
+    question: "How well does your child cope in a social environment, around people they don't know?",
+    low: "Finds it very hard",
+    high: "Copes really well",
+  },
+  {
+    name: "copingUnstructured",
+    short: "Unstructured environments",
+    question: "How well does your child cope in an unstructured environment, where there's no set plan?",
+    low: "Finds it very hard",
+    high: "Copes really well",
+  },
+  {
+    name: "copingUnpredictable",
+    short: "Unpredictable environments",
+    question: "How well does your child cope in an unpredictable environment, where plans change?",
+    low: "Finds it very hard",
+    high: "Copes really well",
+  },
+  {
+    name: "copingEmotions",
+    short: "Managing emotions",
+    question: "How well does your child manage their emotions?",
+    low: "Finds it very hard",
+    high: "Manages really well",
+  },
+  {
+    name: "copingChallenge",
+    short: "Enjoys being challenged",
+    question: "How much does your child enjoy being challenged?",
+    low: "Not at all",
+    high: "Loves it",
+  },
+]
+
+const autismOptions = [
+  { value: "no", label: "No" },
+  { value: "level-1", label: "Level 1" },
+  { value: "level-2", label: "Level 2" },
+  { value: "level-3", label: "Level 3" },
+  { value: "unsure", label: "Not sure / prefer to talk about it" },
+]
+
 const travelOptions = [
   { value: "independent", label: "They'll travel independently" },
   {
@@ -38,6 +95,8 @@ const todayISODate = new Date().toISOString().slice(0, 10)
 
 type CampSignupFormProps = {
   campLabel: string
+  /** Netlify form name; must match a hidden form in index.html. */
+  formName?: string
   stripeUrl: string
   /** Program name used in the consent wording. Defaults to the spring program. */
   programName?: string
@@ -45,6 +104,10 @@ type CampSignupFormProps = {
   cancellationHref?: string
   /** Wording for the length of the program, e.g. "two days". */
   daysLabel?: string
+  /** Show the coping checklist when support needs are flagged (summer programs). */
+  copingChecklist?: boolean
+  /** Cancellation tiers shown under the "redirected to Stripe" note. */
+  refundPolicy?: { label: string; value: string }[]
 }
 
 // Collects participant/parent details, child-safety and media/song consent,
@@ -59,12 +122,33 @@ type CampSignupFormProps = {
 // checkboxes did — via native HTML `required`, not custom JS logic. The
 // support-needs screen is the only thing that diverts the flow instead of
 // blocking it.
+// One-glance summary for the support-needs flag email: each score, which
+// ones are under 5, and the autism level the parent chose.
+function copingSummary(formData: FormData): Record<string, string> {
+  const scores = copingQuestions.map((q) => ({
+    short: q.short,
+    value: Number(formData.get(q.name) ?? 0),
+  }))
+  const low = scores.filter((q) => q.value > 0 && q.value < 5)
+  const autism = autismOptions.find((o) => o.value === formData.get("autismLevel"))
+  return {
+    copingScores: scores.map((q) => `${q.short}: ${q.value}/10`).join("\n"),
+    copingLowScores: low.length
+      ? `${low.length} under 5 — ${low.map((q) => `${q.short} (${q.value})`).join(", ")}`
+      : "None under 5",
+    autismLevel: autism?.label ?? "",
+  }
+}
+
 export default function CampSignupForm({
   campLabel,
+  formName = "camp-signup",
   stripeUrl,
   programName = "2026 Spring Holidays Jam Program",
   cancellationHref = "/workshops/2026-spring-holidays#cancellations",
   daysLabel = "two days",
+  refundPolicy,
+  copingChecklist = false,
 }: CampSignupFormProps) {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(false)
@@ -77,6 +161,7 @@ export default function CampSignupForm({
   const [allergies, setAllergies] = useState("")
   const [medication, setMedication] = useState("")
   const [supportNeeds, setSupportNeeds] = useState<"yes" | "no" | "">("")
+  const [autismLevel, setAutismLevel] = useState("")
   const healthDisclosed = allergies === "yes" || medication === "yes" || supportNeeds === "yes"
 
   const [healthInfoConsent, setHealthInfoConsent] = useState(false)
@@ -114,6 +199,7 @@ export default function CampSignupForm({
           email: String(formData.get("email") ?? ""),
           phone: String(formData.get("phone") ?? ""),
           details: String(formData.get("supportNeedsDetails") ?? ""),
+          ...(copingChecklist ? copingSummary(formData) : {}),
         })
         setFlagged(true)
         setSubmitting(false)
@@ -144,11 +230,11 @@ export default function CampSignupForm({
   return (
     <form
       onSubmit={handleSubmit}
-      name="camp-signup"
+      name={formName}
       data-netlify="true"
       className="grid grid-cols-1 gap-6 border-2 border-ink bg-cream p-6 md:p-8"
     >
-      <input type="hidden" name="form-name" value="camp-signup" />
+      <input type="hidden" name="form-name" value={formName} />
       <input type="hidden" name="camp" value={campLabel} />
 
       {/* 1. MUSICIAN INFO */}
@@ -177,6 +263,18 @@ export default function CampSignupForm({
             />
           </label>
         </div>
+
+        <label className="flex flex-col gap-2">
+          <span className={labelClass}>Musician's Email Address</span>
+          <input
+            required
+            type="email"
+            name="musicianEmail"
+            inputMode="email"
+            autoComplete="off"
+            className={inputClass}
+          />
+        </label>
 
         <label className="flex flex-col gap-2">
           <span className={labelClass}>Birthday</span>
@@ -380,6 +478,42 @@ export default function CampSignupForm({
               placeholder="What should we know, and how can we best support them?"
             />
           </ConditionalReveal>
+          {copingChecklist && (
+            <ConditionalReveal show={supportNeeds === "yes"}>
+              <div className="mt-2 grid grid-cols-1 gap-6 border-t-2 border-ink/15 pt-6">
+                <div className="grid grid-cols-1 gap-2">
+                  <span className={sectionHeadingClass}>Coping checklist</span>
+                  <p className={noteClass}>
+                    To help us work out how best to support your child, and whether this program
+                    is the right fit, please rate each of these from 1 to 10. There are no right or
+                    wrong answers, and an honest answer helps us most. We'll be in touch to talk it
+                    through.
+                  </p>
+                </div>
+                {copingQuestions.map((q) => (
+                  <ScaleRating
+                    key={q.name}
+                    name={q.name}
+                    question={q.question}
+                    lowLabel={q.low}
+                    highLabel={q.high}
+                  />
+                ))}
+                <div className="grid grid-cols-1 gap-3">
+                  <span className="font-body text-sm font-semibold text-ink md:text-base">
+                    Is your child on the autism spectrum?
+                  </span>
+                  <RadioPillGroup
+                    name="autismLevel"
+                    options={autismOptions}
+                    value={autismLevel}
+                    onChange={setAutismLevel}
+                    columnsClassName="sm:grid-cols-2"
+                  />
+                </div>
+              </div>
+            </ConditionalReveal>
+          )}
         </div>
 
         <p className={noteClass}>
@@ -662,6 +796,22 @@ export default function CampSignupForm({
         <p className="-mt-2 text-center text-sm text-ink">
           You'll be redirected to Stripe to complete payment.
         </p>
+      )}
+
+      {refundPolicy && (
+        <div className="border-t-2 border-ink/15 pt-6 text-sm leading-relaxed text-ink/70">
+          <p className="font-semibold text-ink">Cancellations &amp; Refunds</p>
+          <ul className="mt-2 space-y-1">
+            {refundPolicy.map((tier) => (
+              <li key={tier.label} className="flex items-start gap-2">
+                <span aria-hidden="true">&#9679;</span>
+                <span>
+                  {tier.label}: <strong className="font-semibold text-ink">{tier.value}</strong>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </form>
   )

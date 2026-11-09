@@ -3,7 +3,7 @@
 // as an email from netlify/functions/stripe-webhook.js — keep the two in sync.
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import PageHero from "../components/PageHero"
+import Header from "../components/Header"
 import Footer from "../components/Footer"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
@@ -24,24 +24,33 @@ export default function ProgramConfirmed() {
     robots.content = "noindex"
     document.head.appendChild(robots)
     markCheckoutStarted()
-    const sessionId = new URLSearchParams(window.location.search).get("session_id") ?? undefined
-    trackMetaEvent("Purchase", { value: p.priceDollars, currency: "AUD" }, sessionId)
+    const params = new URLSearchParams(window.location.search)
+    const sessionId = params.get("session_id") ?? undefined
+    // Test purchases (Stripe redirect ending in ?test=1) must not count as
+    // real conversions in Meta.
+    if (params.get("test") !== "1") {
+      trackMetaEvent("Purchase", { value: p.priceDollars, currency: "AUD" }, sessionId)
+    }
     return () => robots.remove()
   }, [p])
 
   if (!p) return <NotFound />
 
   return (
-    <>
-      <PageHero>
-        <h1 className="font-display text-4xl leading-[0.98] text-white sm:text-5xl md:text-6xl">
-          You're in! Welcome to the band.
-        </h1>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
-          Hey there, you're officially locked in for Good Noise Project's {p.name}! I'm so excited
-          to have you on board.
-        </p>
-      </PageHero>
+    <div className={p.theme === "blue" ? "gn-theme-blue" : undefined}>
+      {/* Hero wears the program page's colour: orange for North Perth, blue for Cockburn. */}
+      <section className="bg-[var(--gn-acid)]">
+        <Header tone="onAcid" />
+        <div className="mx-auto max-w-[1400px] px-5 pb-16 pt-12 md:px-10 md:pb-24 md:pt-20">
+          <h1 className="font-display text-4xl leading-[0.98] text-ink sm:text-5xl md:text-6xl">
+            You're in! Welcome to the band.
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-ink/80 md:text-lg">
+            Hey there! You're officially locked in for Good Noise Project's Summer Holidays Jam Program ({p.place})! We're so
+            excited to have you on board.
+          </p>
+        </div>
+      </section>
 
       <section className="bg-cream">
         <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
@@ -50,9 +59,9 @@ export default function ProgramConfirmed() {
               <h2 className="font-display text-2xl leading-[0.98] text-ink sm:text-3xl">
                 Here's What You Need to Know
               </h2>
-              <h3 className="mt-9 font-body text-xs font-bold uppercase tracking-wide text-ink/60">
+              <h2 className="font-display mt-9 text-2xl leading-[0.98] text-ink sm:text-3xl">
                 What to Bring Each Day
-              </h3>
+              </h2>
               <ul className="mt-4 space-y-3">
                 {p.whatToBring.map((item) => (
                   <li
@@ -90,7 +99,7 @@ export default function ProgramConfirmed() {
             </p>
             <FacilitatorContact className="mt-6" />
             <p className="mt-8 font-body text-base leading-relaxed text-ink/80 md:text-lg">
-              Can't wait to see you in the room.
+              Can't wait to see you there!
             </p>
             <p className="font-display mt-6 text-2xl text-terracotta">Dave</p>
             <p className="font-body text-sm text-ink/60">Good Noise Project</p>
@@ -99,6 +108,6 @@ export default function ProgramConfirmed() {
       </section>
 
       <Footer />
-    </>
+    </div>
   )
 }

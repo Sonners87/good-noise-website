@@ -195,6 +195,28 @@ h2.font-display {
   text-underline-offset: 6px;
 }
 
+/* Page-level accent swap: every var(--gn-acid) inside becomes the blue. */
+.gn-theme-blue {
+  --gn-acid: var(--gn-pink);
+}
+
+/* Acid-filled button on an ink section — offset shadow and border in ink
+   (the mirror of .gn-btn-on-acid, which is ink on acid with paper trim). */
+.gn-btn-acid-on-ink {
+  background: var(--gn-acid);
+  color: var(--gn-ink);
+  border-color: var(--gn-ink);
+  box-shadow: 5px 5px 0 0 var(--gn-ink);
+}
+
+/* Acid-filled button on a dark section — paper border and offset shadow. */
+.gn-btn-acid-on-dark {
+  background: var(--gn-acid);
+  color: var(--gn-ink);
+  border-color: var(--gn-paper);
+  box-shadow: 5px 5px 0 0 var(--gn-paper);
+}
+
 .gn-btn-on-acid {
   background: var(--gn-ink);
   color: var(--gn-paper);

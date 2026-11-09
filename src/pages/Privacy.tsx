@@ -14,7 +14,7 @@ const collectedItems: { label: string; description: string; why: string }[] = [
   {
     label: "About the participant",
     description:
-      "name, date of birth, address, preferred instrument, and how they're getting to and from the venue.",
+      "name, email address, date of birth, address, preferred instrument, and how they're getting to and from the venue.",
     why: "to run the program, confirm eligibility, and know who's responsible for each young person at the start and end of each day.",
   },
   {
@@ -24,7 +24,7 @@ const collectedItems: { label: string; description: string; why: string }[] = [
   },
   {
     label: "Health information",
-    description: "allergies, medical conditions, medication carried, and any support needs.",
+    description: "allergies, medical conditions, medication carried, and any support needs — including, where support is needed, a short coping checklist and whether your child is on the autism spectrum.",
     why: "solely to keep your child safe and to make the two days work for them. This is sensitive information, we ask for your express consent to collect it, and it's seen only by Dave.",
   },
   {

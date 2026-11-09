@@ -83,10 +83,13 @@ export default function ProgramBook() {
         <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-start md:gap-12">
           <CampSignupForm
             campLabel={p.campLabel}
+            formName={p.formName}
+            copingChecklist
             stripeUrl={p.stripeUrl}
             programName={p.name}
             cancellationHref={`${p.path}#cancellations`}
             daysLabel={p.daysWord}
+            refundPolicy={p.refundPolicy}
           />
 
           <div className="border-2 border-ink bg-cream p-6 md:p-8">
@@ -111,7 +114,7 @@ export default function ProgramBook() {
                   <span className="font-display bg-terracotta px-4 py-2 text-xl text-white">
                     ${p.priceDollars}.00
                   </span>
-                  <span className="font-body text-xs text-ink/60">for both days</span>
+                  <span className="font-body text-xs text-ink/60">{p.priceNote}</span>
                 </div>
               </div>
             </div>
