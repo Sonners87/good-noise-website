@@ -12,8 +12,8 @@ export const HUB_PATH = "/workshops/summer-holidays-2026-27"
 
 /** Swap for the real Payment Link. While it contains "PLACEHOLDER" the booking
     page refuses to send anyone to Stripe (see ProgramBook.tsx). */
-export const NORTH_PERTH_STRIPE_URL = "https://book.stripe.com/bJe28rf0G2CsghEc0b3F604"
-export const COCKBURN_STRIPE_URL = "https://buy.stripe.com/aFa28r3hYa4U2qOc0b3F605"
+export const NORTH_PERTH_STRIPE_URL = "https://book.stripe.com/bJedR9f0G0uk2qOfcn3F607"
+export const COCKBURN_STRIPE_URL = "https://buy.stripe.com/cNi3cv3hYela9Tg1lx3F606"
 
 export type ProgramPanel = {
   day: string
@@ -188,7 +188,7 @@ export const northPerth: ProgramConfig = {
   },
   ageText: "Ages 13–17",
   maxGroup: 12,
-  priceDollars: 160,
+  priceDollars: 180,
   priceNote: "for both days",
   stripeUrl: NORTH_PERTH_STRIPE_URL,
   startISO: "2026-12-21T09:30:00+08:00",
@@ -268,7 +268,7 @@ export const northPerth: ProgramConfig = {
   meta: {
     title: "Teen Music Program North Perth – Summer Holidays Dec 2026 | Good Noise Project",
     description:
-      "Two days writing an original song and jamming as a band. Player 1 Music School, North Perth, 21–22 Dec 2026. Ages 13–17, max 12, $160.",
+      "Two days writing an original song and jamming as a band. Player 1 Music School, North Perth, 21–22 Dec 2026. Ages 13–17, max 12, $180.",
   },
   subscribeSource: "program-summer-2026-27-north-perth",
 
@@ -345,7 +345,7 @@ export const cockburn: ProgramConfig = {
   },
   ageText: "Ages 13–17",
   maxGroup: 12,
-  priceDollars: 240,
+  priceDollars: 260,
   priceNote: "for all three days",
   stripeUrl: COCKBURN_STRIPE_URL,
   startISO: "2027-01-11T09:30:00+08:00",
@@ -438,7 +438,7 @@ export const cockburn: ProgramConfig = {
     title:
       "Teen Jam Program Cockburn – Summer Holidays Jan 2027 | Good Noise Project",
     description:
-      "Three days writing an original song as a band, then recording it track by track. Cockburn Youth Centre, 11–13 Jan 2027. Ages 13–17, max 12, $240.",
+      "Three days writing an original song as a band, then recording it track by track. Cockburn Youth Centre, 11–13 Jan 2027. Ages 13–17, max 12, $260.",
   },
   subscribeSource: "program-summer-2026-27-cockburn",
 

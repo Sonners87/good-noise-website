@@ -292,6 +292,14 @@ const PROGRAMS_BY_PAYMENT_LINK = {
   },
 }
 
+// Current Payment Links (prices $180 North Perth / $260 Cockburn). The earlier
+// links above stay mapped in case anyone still holds one; remove them once
+// those links are deactivated in Stripe.
+PROGRAMS_BY_PAYMENT_LINK.plink_1Uaa2cDBlAJ3RHxBlodzQf48 =
+  PROGRAMS_BY_PAYMENT_LINK.plink_1UZ2U8DBlAJ3RHxBwZDpdnsD // North Perth
+PROGRAMS_BY_PAYMENT_LINK.plink_1UaZzZDBlAJ3RHxBAwRn3lfy =
+  PROGRAMS_BY_PAYMENT_LINK.plink_1UZ2VFDBlAJ3RHxBRBFGvHhk // Cockburn
+
 function programForSession(session) {
   return PROGRAMS_BY_PAYMENT_LINK[session.payment_link] ?? SPRING_PROGRAM
 }
