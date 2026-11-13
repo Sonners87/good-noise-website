@@ -143,7 +143,7 @@ export type Testimonial = { quote: string; name: string; role: string }
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "I've had to actually think about what I'm playing. At school, I'm just given the music and it's a bit boring. So, here, I choose my own chords and we make our own song together. It's creative. It's more fun.",
+      "At school, I'm just given the music and it's a bit boring. So, here, I choose my own chords and we make our own song together. It's creative. It's more fun.",
     name: "Zane",
     role: "Good Noise Project participant",
   },

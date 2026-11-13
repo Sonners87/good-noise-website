@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import { SHOW_SPRING_2026_PROGRAM } from "../content/featureFlags"
+import TestimonialCarousel from "./afterschool/TestimonialCarousel"
+import { testimonials } from "../content/afterSchool"
 
 export default function IntroSection() {
   return (
@@ -43,6 +45,12 @@ export default function IntroSection() {
           </p>
           )}
         </div>
+
+        {testimonials.length > 0 && (
+          <div className="mt-12 border-t-2 border-ink pt-10 md:mt-16 md:pt-14">
+            <TestimonialCarousel items={testimonials} />
+          </div>
+        )}
       </div>
     </section>
   )

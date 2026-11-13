@@ -8,6 +8,8 @@ import PhotoImage from "../components/PhotoImage"
 import WorkshopInfoCard from "../components/WorkshopInfoCard"
 import FacilitatorContact from "../components/FacilitatorContact"
 import SubscribeForm from "../components/SubscribeForm"
+import TestimonialCarousel from "../components/afterschool/TestimonialCarousel"
+import { testimonials } from "../content/afterSchool"
 import Placeholder from "../components/afterschool/Placeholder"
 import { ProgramImage, ProgramVideo } from "../components/ProgramMedia"
 import NotFound from "./NotFound"
@@ -148,6 +150,15 @@ export default function ProgramPage() {
           </p>
         </div>
       </section>
+
+      {/* Testimonials */}
+      {testimonials.length > 0 && (
+        <section className="bg-cream">
+          <div className="mx-auto max-w-[1400px] px-5 pt-16 md:px-10 md:pt-24">
+            <TestimonialCarousel items={testimonials} />
+          </div>
+        </section>
+      )}
 
       {/* Intro */}
       <section className="bg-cream">
